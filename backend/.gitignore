@@ -1,0 +1,19 @@
+/node_modules/
+npm-debug.log
+
+/build/
+
+# custom
+/.env
+
+/log/*
+!/log/.gitkeep
+
+/tmp/*
+!/tmp/.gitkeep
+
+# Dev database
+/db.sqlite*
+
+# DB Config
+/src/config/config.js

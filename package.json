@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "prettier": "prettier --write \"docs/**/*.{js,json,scss,md}\" README.md \"{frontend,backend}/src/**/*.{js,json,css,scss}\" \"{frontend,backend}/README.md\""
+  },
+  "devDependencies": {
+    "prettier": "1.14.2"
+  }
+}
