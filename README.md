@@ -15,7 +15,7 @@ yarn start
 4. Good job! Your frontend is running default at: `localhost:3000`
 
 
-### backed dev
+### backend dev
 1. go to the backed folder
 ```
 cd backend
