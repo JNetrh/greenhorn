@@ -4,12 +4,17 @@ import React from 'react';
 // import { PageFooter } from '../molecules/PageFooter';
 // import { TopNavBar } from '../molecules/TopNavBar';
 import { Layout } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+import AppMenu from '../molecules/AppMenu';
+import Logo from '../atoms/Logo';
+const { Header, Sider, Content } = Layout;
 
 
 export const PageWrapper = ({ children }) => (
   <Layout>
-    <Header>Header</Header>
+    <Header>
+      <Logo />
+      <AppMenu />
+    </Header>
     <Layout>
       <Sider>Sider</Sider>
       <Content>{children}</Content>
