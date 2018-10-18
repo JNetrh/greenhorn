@@ -8,22 +8,16 @@ import { Logo } from '../atoms/Logo';
 const FormWrapper = styled.div`
   border: 1px solid #488869;
   padding: 25px 20px ;
+  min-width: 300px;
+`;
+
+const PasswordTitle = styled.h1`
+  text-align: center;
 `;
 
 const LoginButton = styled(Button)`
     width: 100%;
-    margin:  20px 0px ;
 `;
-
-const centerText = {
-  textAlign: 'center',
-};
-
-const description = {
-  maxWidth: '450px',
-  textAlign: 'center',
-  // padding: '15px 20px',
-};
 
 const LogoWrapper = styled(Logo)`
     position: relative;
@@ -36,27 +30,24 @@ const LogoWrapper = styled(Logo)`
 
 const FormItem = Form.Item;
 
-class ResetPasswordForm extends Component {
+class PasswordForm extends Component {
   render() {
     return (
       <FormWrapper>
         <LogoWrapper />
         <Form onSubmit={this.handleSubmit} className="login-form">
-          <div>
-            <row>
-              <h1 style={centerText}>Zapomenuté heslo</h1>
-            </row>
-            <row>
-              <p style={description}>
-                Pokud jste zapomněl heslo od aplikace, vyplňte niže Váš email,
-                    na který Vám přijde odkaz na vygenerování nového emailu
-              </p>
-            </row>
-          </div>
+          <PasswordTitle>Nastavení hesla</PasswordTitle>
+          <p>Vaše heslo:</p>
           <FormItem>
-            <TextInput  iconType="user"  placeholder="Your email" />
+            <TextInput iconType="lock" placeholder="password" />
+          </FormItem>
+          <p>Znova vaše heslo:</p>
+          <FormItem>
+            <TextInput iconType="lock" type="password" placeholder="password" />
+          </FormItem>
+          <FormItem>
             <LoginButton type="primary" htmlType="submit" className="login-form-button">
-              Odeslat
+              Nastavit
             </LoginButton>
           </FormItem>
         </Form>
@@ -65,4 +56,4 @@ class ResetPasswordForm extends Component {
   }
 }
 
-export default ResetPasswordForm;
+export default PasswordForm;
