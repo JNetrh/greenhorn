@@ -10,15 +10,14 @@ import PageNotFound from './components/pages/PageNotFound.jsx';
 
 
 export const AppRoutes = () => (
-  <Switch>
-    <Route path="/login" exact component={LoginPage} />
-    <Route path="/login" exact component={LoginPage} />
-    <Route path="/resetpassword" exact component={ResetPasswordPage} />
-    <PageWrapper>
+  <PageWrapper>
+    <Switch>
+      <Route path="/login" exact component={LoginPage} />
+      <Route path="/resetpassword" exact component={ResetPasswordPage} />
       <Route path="/" exact strict component={HomePage} />
       <Route path="*" component={PageNotFound} />
-    </PageWrapper>
-  </Switch>
+    </Switch>
+  </PageWrapper>
 );
 
 

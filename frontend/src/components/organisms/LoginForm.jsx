@@ -46,7 +46,7 @@ class LoginForm extends Component {
               Log in
             </LoginButton>
             <Checkbox>Remember me</Checkbox>
-            <StyledLink to="/">Forgot password</StyledLink>
+            <StyledLink to="/resetpassword">Forgot password</StyledLink>
           </FormItem>
         </Form>
       </FormWrapper>
