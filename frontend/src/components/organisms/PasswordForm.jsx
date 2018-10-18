@@ -46,13 +46,8 @@ class PasswordForm extends Component {
               />
             </FormItem>
             <FormItem>
-              <Button
-                type="primary"
-                size="large"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Let's begin!
+              <Button type="primary" size="large" htmlType="submit">
+                Let&#39;s begin!
               </Button>
             </FormItem>
           </Form>

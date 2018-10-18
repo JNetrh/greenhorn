@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Checkbox } from 'antd';
+import { Form, Checkbox, Select } from 'antd';
 
 import TextInput from '../atoms/TextInput';
 import {
@@ -10,6 +10,20 @@ import {
 } from '../../styles/Login';
 
 const FormItem = Form.Item;
+const Option = Select.Option;
+
+const MailEndings = () => {
+  const MAIL_ENDINGS = ['@cngroup.dk', '@google.com'];
+  return (
+    <Select defaultValue={MAIL_ENDINGS[0]}>
+      {MAIL_ENDINGS.map(ending => (
+        <Option key={ending} value={ending}>
+          {ending}
+        </Option>
+      ))}
+    </Select>
+  );
+};
 
 class LoginForm extends Component {
   render() {
@@ -18,17 +32,23 @@ class LoginForm extends Component {
         <LogoWrapper />
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
-            <TextInput iconType="user" placeholder="Username" />
+            <TextInput
+              iconType="user"
+              placeholder="Email address"
+              tabIndex={1}
+              addonAfter={<MailEndings />}
+            />
           </FormItem>
           <FormItem>
-            <TextInput iconType="lock" type="password" placeholder="Username" />
+            <TextInput
+              tabIndex={2}
+              iconType="lock"
+              type="password"
+              placeholder="Password"
+            />
           </FormItem>
           <FormItem>
-            <LoginButton
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
+            <LoginButton type="primary" htmlType="submit">
               Log in
             </LoginButton>
             <Checkbox>Remember me</Checkbox>
