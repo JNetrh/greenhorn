@@ -43,7 +43,7 @@ class LoginForm extends Component {
           </FormItem>
           <FormItem>
             <LoginButton type="primary" htmlType="submit" className="login-form-button">
-              Log in
+              Log in to system
             </LoginButton>
             <Checkbox>Remember me</Checkbox>
             <StyledLink to="/">Forgot password</StyledLink>
