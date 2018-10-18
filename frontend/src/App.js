@@ -14,38 +14,11 @@ import privateRoutes from './routes/privateRoutes';
 import publicRoutes from './routes/publicRoutes';
 
 import './App.css';
-
-// import { AppRoutes } from './AppRoutes';
 import { configureStore } from './store/configureStore.js';
 
 const { store, persistor } = configureStore();
 
 class App extends Component {
-  // render() {
-  //   return (
-  //     <Provider store={store}>
-  //       <PersistGate loading={null} persistor={persistor}>
-  //         <BrowserRouter>
-  //           <ScrollToTop>
-  //             <AppRoutes />
-  //           </ScrollToTop>
-  //         </BrowserRouter>
-  //       </PersistGate>
-  //     </Provider>
-  //   );
-  // }
-
-
-
-
-
-
-
-
-
-
-
-
   render() {
     return (
       <Provider store={store}>
