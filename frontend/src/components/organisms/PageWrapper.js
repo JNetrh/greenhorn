@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import AppMenu from '../molecules/AppMenu';
+import SiderContent from '../molecules/SiderContent';
 import { Logo } from '../atoms/Logo';
 import styled from 'styled-components';
 
@@ -23,9 +24,9 @@ export const PageWrapper = ({ children }) => (
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        onBreakpoint={(broken) => { console.log(broken); }}
-        onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
-      >Sider</Sider>
+      >
+        <SiderContent />
+      </Sider>
       <Content>{children}</Content>
     </Layout>
   </Layout>
