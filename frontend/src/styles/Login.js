@@ -24,3 +24,10 @@ export const LogoWrapper = styled(Logo)`
 export const StyledLink = styled(Link)`
   float: right;
 `;
+
+export const Centered = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

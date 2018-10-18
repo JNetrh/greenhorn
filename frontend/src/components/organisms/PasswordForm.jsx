@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import styled from 'styled-components';
-import TextInput from '../atoms/TextInput';
 
 import logo from '../../static/greenhorn_logo_dark.svg';
+import Input from '../molecules/form/Input';
 
 const FormItem = Form.Item;
 
@@ -36,10 +36,10 @@ class PasswordForm extends Component {
           <p>First, please set up your password:</p>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
-              <TextInput iconType="lock" placeholder="New password" />
+              <Input iconType="lock" placeholder="New password" />
             </FormItem>
             <FormItem>
-              <TextInput
+              <Input
                 iconType="lock"
                 type="password"
                 placeholder="Repeat password"

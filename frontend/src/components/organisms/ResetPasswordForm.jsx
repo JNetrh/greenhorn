@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from 'antd';
-
-import TextInput from '../atoms/TextInput';
 import { FormWrapper, LogoWrapper, LoginButton } from '../../styles/Login';
+import Input from '../molecules/form/Input';
 
 const FormItem = Form.Item;
 
@@ -18,7 +17,7 @@ class ResetPasswordForm extends Component {
             sent to your email.
           </p>
           <FormItem>
-            <TextInput iconType="user" placeholder="Your email" />
+            <Input iconType="user" placeholder="Your email" />
             <LoginButton
               type="primary"
               htmlType="submit"

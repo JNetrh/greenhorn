@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { Input, Icon } from 'antd';
+import { Input as AntInput, Icon } from 'antd';
 
-class TextInput extends Component {
+class Input extends Component {
   render() {
-    const { iconType, placeholder, type, ...rest } = this.props;
+    const { iconType, placeholder, type, input, ...rest } = this.props;
     return (
-      <Input
+      <AntInput
         prefix={
           <Icon type={iconType || ''} style={{ color: 'rgba(0,0,0,.25)' }} />
         }
         placeholder={placeholder || ''}
         type={type}
-        {...rest}
+        {...{ ...input, ...rest }}
       />
     );
   }
 }
 
-export default TextInput;
+export default Input;
