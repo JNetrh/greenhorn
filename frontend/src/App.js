@@ -55,26 +55,25 @@ class App extends Component {
               <Switch>
 
                 {_.map(publicRoutes, (route, key) => {
-                  const { component, path } = route;
+                  const { Component, path } = route;
                   return (
                     <Route
                       exact
                       path={path}
                       key={key}
-                      render={(route) => <NoPageWrapper component={component} route={route} />}
+                      render={(route) => <NoPageWrapper route={route} ><Component /></NoPageWrapper>}
                     />
                   );
                 })}
 
                 {_.map(privateRoutes, (route, key) => {
-                  const { component, path } = route;
+                  const { Component, path } = route;
                   return (
                     <Route
                       exact
                       path={path}
                       key={key}
-                      render={(route) =>
-                        (<PageWrapper component={component} route={route} />)
+                      render={(route) => <PageWrapper route={route} ><Component /></PageWrapper>
                       }
                     />
                   );
