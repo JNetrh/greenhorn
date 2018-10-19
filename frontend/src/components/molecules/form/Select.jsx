@@ -5,7 +5,7 @@ const Option = AntSelect.Option;
 
 const Select = ({ options, input }) => {
   return (
-    <AntSelect defaultValue={options[0].value} {...input}>
+    <AntSelect {...input}>
       {options.map(({ value, label }) => (
         <Option key={value} value={value}>
           {label}

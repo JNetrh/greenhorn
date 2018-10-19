@@ -17,12 +17,13 @@ const FormItem = Form.Item;
 
 class LoginForm extends Component {
   render() {
-    const { handleSubmit, emailEndings } = this.props;
+    const { handleSubmit, emailEndings, onSubmit, auth } = this.props;
+    console.log(auth);
     return (
       <Centered>
         <FormWrapper>
           <LogoWrapper />
-          <Form onSubmit={handleSubmit(console.log)} className="login-form">
+          <Form onSubmit={handleSubmit(onSubmit)} className="login-form">
             <FormItem>
               <Field
                 name="email"

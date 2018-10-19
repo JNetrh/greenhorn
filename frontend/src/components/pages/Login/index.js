@@ -1,17 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { compose } from 'recompose';
 import Form from './Form';
+import { logIn } from '../../../services/Login/actions';
 
+//TODO data coming from backend
 const EMAIL_ENDINGS = [
-  { value: 'dk', label: '@cngroup.dk' },
-  { value: 'google', label: '@google.com' },
+  { value: '@cngroup.dk', label: '@cngroup.dk' },
+  { value: '@google.com', label: '@google.com' },
 ];
 
 const LoginPage = props => <Form emailEndings={EMAIL_ENDINGS} {...props} />;
 
-export default reduxForm({
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmit: payload => dispatch(logIn(payload)),
+  };
+};
+
+const redux = connect(
+  ({ auth }) => ({ auth }),
+  mapDispatchToProps,
+);
+
+const form = reduxForm({
   form: 'login',
   initialValues: {
     emailEnding: EMAIL_ENDINGS[0].value,
   },
-})(LoginPage);
+});
+
+export default compose(
+  redux,
+  form,
+)(LoginPage);
