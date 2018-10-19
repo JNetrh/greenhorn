@@ -8,6 +8,9 @@ export const FormWrapper = styled.div`
   border-radius: 4px;
   padding: 25px 20px;
 `;
+export const FormUserWrapper = styled.div`
+  padding: 35px 30px;
+`;
 
 export const LoginButton = styled(Button)`
   width: 100%;

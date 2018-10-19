@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import LoginForm from '../../../organisms/LoginForm';
-
-const RowWrapper = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import Centered from '../../../styles/Login';
 
 export default class LoginPage extends Component {
   render() {
     return (
-      <RowWrapper>
+      <Centered>
         <LoginForm />
-      </RowWrapper>
+      </Centered>
     );
   }
 }
