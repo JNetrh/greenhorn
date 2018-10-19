@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import ScrollToTop from 'react-router-scroll-top';
 
@@ -15,13 +15,13 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <ScrollToTop>
-              <AppRoutes />
-            </ScrollToTop>
-          </BrowserRouter>
-        </PersistGate>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <BrowserRouter>
+          <ScrollToTop>
+            <AppRoutes />
+          </ScrollToTop>
+        </BrowserRouter>
+        {/* </PersistGate> */}
       </Provider>
     );
   }
