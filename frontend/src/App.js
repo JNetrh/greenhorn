@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import ScrollToTop from 'react-router-scroll-top';
 
@@ -22,42 +22,47 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <ScrollToTop>
-              <Switch>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <BrowserRouter>
+          <ScrollToTop>
+            <Switch>
+              {_.map(publicRoutes, (route, key) => {
+                const { Component, path } = route;
+                return (
+                  <Route
+                    exact
+                    path={path}
+                    key={key}
+                    render={route => (
+                      <NoPageWrapper route={route}>
+                        <Component />
+                      </NoPageWrapper>
+                    )}
+                  />
+                );
+              })}
 
-                {_.map(publicRoutes, (route, key) => {
-                  const { Component, path } = route;
-                  return (
-                    <Route
-                      exact
-                      path={path}
-                      key={key}
-                      render={(route) => <NoPageWrapper route={route} ><Component /></NoPageWrapper>}
-                    />
-                  );
-                })}
+              {_.map(privateRoutes, (route, key) => {
+                const { Component, path } = route;
+                return (
+                  <Route
+                    exact
+                    path={path}
+                    key={key}
+                    render={route => (
+                      <PageWrapper route={route}>
+                        <Component />
+                      </PageWrapper>
+                    )}
+                  />
+                );
+              })}
 
-                {_.map(privateRoutes, (route, key) => {
-                  const { Component, path } = route;
-                  return (
-                    <Route
-                      exact
-                      path={path}
-                      key={key}
-                      render={(route) => <PageWrapper route={route} ><Component /></PageWrapper>
-                      }
-                    />
-                  );
-                })}
-
-
-                <Route component={PageNotFound} />
-              </Switch>
-            </ScrollToTop>
-          </BrowserRouter>
-        </PersistGate>
+              <Route component={PageNotFound} />
+            </Switch>
+          </ScrollToTop>
+        </BrowserRouter>
+        {/* </PersistGate> */}
       </Provider>
     );
   }
