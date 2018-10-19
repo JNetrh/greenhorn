@@ -1,4 +1,4 @@
-import LoginPage from '../components/pages/LoginPage';
+import LoginPage from '../components/pages/Login';
 import ResetPasswordPage from '../components/pages/ResetPasswordPage';
 export default {
   Home: {
