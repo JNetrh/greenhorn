@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import LoginForm from '../organisms/LoginForm';
+import LoginForm from '../../../organisms/LoginForm';
 
 const RowWrapper = styled.div`
   height: 100%;
@@ -8,8 +8,6 @@ const RowWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-
 
 export default class LoginPage extends Component {
   render() {
