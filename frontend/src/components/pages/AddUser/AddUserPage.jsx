@@ -8,10 +8,10 @@ export default class AddUserPage extends Component {
       <div className="App">
         <div>
           <Row>
-            <Col span={8}>
+            <Col lg={8} md={12}>
               <AddUserForm />
             </Col>
-            <Col span={8} offset={2}>
+            <Col lg={8} md={12} offset={2}>
               Assign templates to user section
             </Col>
           </Row>

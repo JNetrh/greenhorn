@@ -25,7 +25,7 @@ export const AppRoutes = () => (
       );
     })}
     {Object.keys(privateRoutes).map(key => {
-      const { Component, path } = privateRoutes[key];
+      const { Component, SideNavComponent, path } = privateRoutes[key];
       return (
         <Route
           exact
@@ -33,7 +33,7 @@ export const AppRoutes = () => (
           key={key}
           render={route => (
             <PageWrapper route={route}>
-              <Component />
+              <Component SideNav={<SideNavComponent />} />
             </PageWrapper>
           )}
         />

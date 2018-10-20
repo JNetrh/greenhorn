@@ -1,42 +1,42 @@
 import {
-  PRODUCT_LIST_FETCH_PRODUCTS,
-  PRODUCT_LIST_FETCH_PRODUCTS_SUCCESS,
-  PRODUCT_LIST_FETCH_PRODUCTS_FAILURE,
+  LIST_FETCH_USERS,
+  LIST_FETCH_USERS_SUCCESS,
+  LIST_FETCH_USERS_FAILURE,
 } from './actions';
 
 const initialState = {
-  products: null,
+  users: null,
   isLoading: false,
   error: null,
 };
 
-export const productListReducer = (state = initialState, action) => {
+export const UsersListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCT_LIST_FETCH_PRODUCTS:
+    case LIST_FETCH_USERS:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
 
-    case PRODUCT_LIST_FETCH_PRODUCTS_SUCCESS: {
-      const { products } = action.payload;
+    case LIST_FETCH_USERS_SUCCESS: {
+      const { users } = action.payload;
 
       return {
         ...state,
         isLoading: false,
         error: null,
-        products,
+        users,
       };
     }
 
-    case PRODUCT_LIST_FETCH_PRODUCTS_FAILURE: {
+    case LIST_FETCH_USERS_FAILURE: {
       const { error } = action.payload;
 
       return {
         ...state,
         isLoading: false,
-        products: null,
+        users: null,
         error,
       };
     }
@@ -48,9 +48,9 @@ export const productListReducer = (state = initialState, action) => {
 
 // - selectors - //
 
-export const getProducts = state => state.products || [];
+export const getUsers = state => state.users || [];
 
-export const getIsLoaded = state => state.products !== null;
+export const getIsLoaded = state => state.users !== null;
 
 export const getIsLoading = state => state.isLoading;
 

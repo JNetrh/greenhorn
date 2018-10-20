@@ -1,25 +1,17 @@
 import { message } from 'antd';
 
-export const SET_ACTIVE_USER = 'SET_ACTIVE_USER';
-
-export const setActiveUser = user => ({
-  type: SET_ACTIVE_USER,
-  user,
-});
+export const ADD_USER = 'ADD_USER';
 
 export const AddUser = payload => async (dispatch, getState, { api }) => {
-  const { email, emailEnding, password, rememberMe } = payload;
+  const { firstname, lastname, email } = payload;
   const loader = message.loading('Logginig in...');
   try {
-    const { data } = await api.post('auth/login', {
-      email: `${email}${emailEnding}`,
-      password,
-      rememberMe,
+    const { data } = await api.post('api/user/adduser', {
+      firstname: `${firstname}`,
+      lastname: `${lastname}`,
+      email: `${email}`,
     });
-    //TODO handle token on frontend
-    const { token, user } = data;
-    loader();
-    dispatch(setActiveUser(user));
+    // loader();
     message.success('Successfuly user add', 2);
   } catch (err) {
     if (err.response) {
