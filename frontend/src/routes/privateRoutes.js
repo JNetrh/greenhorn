@@ -1,5 +1,6 @@
 import HomePage from '../components/pages/HomePage';
 import Kaja from '../components/pages/Kaja';
+import AddUserPage from '../components/pages/AddUser/AddUserPage';
 export default {
   HomePage: {
     Component: HomePage,
@@ -8,5 +9,9 @@ export default {
   Kaja: {
     Component: Kaja,
     path: '/kaja',
+  },
+  AddEmployee: {
+    Component: AddUserPage,
+    path: '/adduser',
   },
 };
