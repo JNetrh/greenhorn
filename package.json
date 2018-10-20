@@ -4,6 +4,8 @@
     "prettier": "prettier --write \"docs/**/*.{js,json,scss,md}\" README.md \"{frontend,backend}/src/**/*.{js,json,css,scss}\" \"{frontend,backend}/README.md\""
   },
   "devDependencies": {
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "prettier": "^1.14.3"
   }
 }
