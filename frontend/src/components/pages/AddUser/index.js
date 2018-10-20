@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import AddUserForm from './AddUserForm';
+import Form from './Form';
 import { AddUser } from '../../../services/AddUser/actions';
 
-const AddUserPage = props => <AddUserForm {...props} />;
+const AddUserPage = props => <Form {...props} />;
 
 const mapDispatchToProps = dispatch => {
   return {

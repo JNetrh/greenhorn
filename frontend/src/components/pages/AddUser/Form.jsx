@@ -8,6 +8,17 @@ import Input from '../../molecules/form/Input';
 const FormItem = Form.Item;
 
 class AddUserForm extends Component {
+  state = {
+    loading: false,
+    iconLoading: false,
+  };
+  enterLoading = () => {
+    this.setState({ loading: true });
+  };
+
+  enterIconLoading = () => {
+    this.setState({ iconLoading: true });
+  };
   render() {
     const { handleSubmit, onSubmit } = this.props;
     return (
