@@ -18,21 +18,21 @@ const columns = [
 
 class Page extends Component {
   componentDidMount = () => {
-    const { startFetchEmployees } = this.props;
-    startFetchEmployees();
+    const { startFetchUsers } = this.props;
+    startFetchUsers();
   };
 
-  loader = message.loading('Fetching employees..');
+  loader = message.loading('Fetching users..');
 
   render() {
-    const { employees, isLoading } = this.props;
+    const { users, isLoading } = this.props;
     console.log(this.props);
     return (
       <div>
         {isLoading && this.loader()}
         <Table
           columns={columns}
-          dataSource={employees}
+          dataSource={users}
           scroll={{ x: 1500, y: 300 }}
         />
       </div>

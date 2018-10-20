@@ -1,6 +1,6 @@
 import { USERS } from '../auth/mockUsers';
 
-const addUserController = async (req, res) => {
+const userController = async (req, res) => {
   try {
     setTimeout(() => {
       return res.json({
@@ -13,4 +13,4 @@ const addUserController = async (req, res) => {
   }
 };
 
-export default addUserController;
+export default userController;

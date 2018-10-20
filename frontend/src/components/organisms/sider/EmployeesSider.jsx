@@ -3,7 +3,7 @@ import ListHeader from '../../atoms/ListHeader';
 import SideNavButton from '../../atoms/SideNavButton';
 
 export default class EmployeesSider extends Component {
-  clickEmployees = e => {
+  clickUsers = e => {
     console.log(e);
   };
 
@@ -11,9 +11,9 @@ export default class EmployeesSider extends Component {
     console.log(e);
   };
 
-  handleClickNewEmployee = () => {};
+  handleClickNewUser = () => {};
 
-  handleClickListEmployees = () => {};
+  handleClickListUsers = () => {};
 
   handleClickNewGroup = () => {};
 
@@ -22,18 +22,18 @@ export default class EmployeesSider extends Component {
   render() {
     return (
       <div>
-        <ListHeader onClick={this.clickEmployees}>Employees</ListHeader>
+        <ListHeader onClick={this.clickUsers}>Users</ListHeader>
         <SideNavButton
           text={'Add New'}
           icon={'user-add'}
-          onClick={this.handleClickNewEmployee}
+          onClick={this.handleClickNewUser}
         />
         <SideNavButton
           text={'List'}
           icon={'ordered-list'}
-          onClick={this.handleClickListEmployees}
+          onClick={this.handleClickListUsers}
         />
-        <ListHeader onClick={this.clickEmployees}>Groups</ListHeader>
+        <ListHeader onClick={this.clickUsers}>Groups</ListHeader>
         <SideNavButton
           text={'Add New'}
           icon={'usergroup-add'}

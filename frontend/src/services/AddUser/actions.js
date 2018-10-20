@@ -6,7 +6,7 @@ export const AddUser = payload => async (dispatch, getState, { api }) => {
   const { firstname, lastname, email } = payload;
   const loader = message.loading('Logginig in...');
   try {
-    const { data } = await api.post('api/employee/adduser', {
+    const { data } = await api.post('api/user/adduser', {
       firstname: `${firstname}`,
       lastname: `${lastname}`,
       email: `${email}`,
