@@ -26,7 +26,6 @@ class Page extends Component {
 
   render() {
     const { users, isLoading } = this.props;
-    console.log(this.props);
     return (
       <div>
         {isLoading && this.loader()}

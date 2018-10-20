@@ -16,16 +16,13 @@ export const fetchUsersFailure = error => ({
   payload: { error },
 });
 
-export const startFetchUsers = () => (dispatch, getState, { api }) => {
+export const startFetchUsers = () => async (dispatch, getState, { api }) => {
   dispatch(fetchUsers());
-  api
-    .get('user')
-    .then(({ data }) => {
-      console.log(data);
-      const { USERS } = data;
-      dispatch(fetchUsersSuccess(USERS));
-    })
-    .catch(() => {
-      dispatch(fetchUsersFailure('Error fetching users'));
-    });
+
+  try {
+    let res = await api.get('user');
+    await dispatch(fetchUsersSuccess(res.data.USERS));
+  } catch (error) {
+    dispatch(fetchUsersFailure('Error fetching users'));
+  }
 };

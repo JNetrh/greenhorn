@@ -9,8 +9,8 @@ class AppMenu extends Component {
   }
 
   clickMenu = ({ item, key, keyPath }) => {
-    const { _setActiveMenuItem } = this.props;
-    _setActiveMenuItem(keyPath);
+    const { setActiveMenuItem } = this.props;
+    setActiveMenuItem(keyPath);
   };
 
   render() {
@@ -24,9 +24,11 @@ class AppMenu extends Component {
         <Menu.Item key="1">
           <Link to="/">To be done</Link>
         </Menu.Item>
-        <Menu.Item key="2">Tasks</Menu.Item>
+        <Menu.Item key="2">
+          <Link to="/">Tasks</Link>
+        </Menu.Item>
         <Menu.Item key="3">
-          <Link to="/adduser">Employees</Link>
+          <Link to="/users/list">Employees</Link>
         </Menu.Item>
       </Menu>
     );

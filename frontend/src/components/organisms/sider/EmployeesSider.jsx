@@ -11,14 +11,6 @@ export default class EmployeesSider extends Component {
     console.log(e);
   };
 
-  handleClickNewUser = () => {};
-
-  handleClickListUsers = () => {};
-
-  handleClickNewGroup = () => {};
-
-  handleClickListGroups = () => {};
-
   render() {
     return (
       <div>
@@ -26,24 +18,16 @@ export default class EmployeesSider extends Component {
         <SideNavButton
           text={'Add New'}
           icon={'user-add'}
-          onClick={this.handleClickNewUser}
+          linkTo={'/users/addUser'}
         />
         <SideNavButton
           text={'List'}
           icon={'ordered-list'}
-          onClick={this.handleClickListUsers}
+          linkTo={'/users/list'}
         />
         <ListHeader onClick={this.clickUsers}>Groups</ListHeader>
-        <SideNavButton
-          text={'Add New'}
-          icon={'usergroup-add'}
-          onClick={this.handleClickNewGroup}
-        />
-        <SideNavButton
-          text={'List'}
-          icon={'ordered-list'}
-          onClick={this.handleClickListGroups}
-        />
+        <SideNavButton text={'Add New'} icon={'usergroup-add'} linkTo={'/'} />
+        <SideNavButton text={'List'} icon={'ordered-list'} linkTo={'/'} />
       </div>
     );
   }

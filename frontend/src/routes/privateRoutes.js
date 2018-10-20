@@ -9,18 +9,18 @@ import EmployeesSider from '../components/organisms/sider/EmployeesSider';
 export default {
   HomePage: {
     Component: HomePage,
-    SideNavComponent: EmployeesSider,
+    SideNavComponent: null,
     path: '/',
   },
   Kaja: {
     Component: Kaja,
-    SideNavComponent: EmployeesSider,
+    SideNavComponent: null,
     path: '/kaja',
   },
   AddUser: {
     Component: AddUserPage,
     SideNavComponent: EmployeesSider,
-    path: '/adduser',
+    path: '/users/adduser',
   },
   ListUser: {
     Component: ListUsers,

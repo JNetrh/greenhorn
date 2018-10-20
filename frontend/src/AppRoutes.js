@@ -33,7 +33,9 @@ export const AppRoutes = () => (
           key={key}
           render={route => (
             <PageWrapper route={route}>
-              <Component SideNav={<SideNavComponent />} />
+              <Component
+                SideNav={SideNavComponent ? <SideNavComponent /> : null}
+              />
             </PageWrapper>
           )}
         />
