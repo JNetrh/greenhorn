@@ -2,25 +2,45 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PageWrapper } from './components/organisms/PageWrapper';
-
-import HomePage from './components/pages/HomePage.jsx';
-import LoginPage from './components/pages/LoginPage.jsx';
-import ResetPasswordPage from './components/pages/ResetPasswordPage.jsx';
-import Password from './components/pages/PasswordPage.jsx';
+import { NoPageWrapper } from './components/organisms/NoPageWrapper';
 import PageNotFound from './components/pages/PageNotFound.jsx';
-
+import publicRoutes from './routes/publicRoutes';
+import privateRoutes from './routes/privateRoutes';
 
 export const AppRoutes = () => (
   <Switch>
-    <Route path="/login" exact component={LoginPage} />
-    <Route path="/login" exact component={LoginPage} />
-    <Route path="/resetpassword" exact component={ResetPasswordPage} />
-    <Route path="/password" exact component={Password} />
-    <PageWrapper>
-      <Route path="/" exact strict component={HomePage} />
-      <Route path="*" component={PageNotFound} />
-    </PageWrapper>
+    {Object.keys(publicRoutes).map(key => {
+      const { Component, path } = publicRoutes[key];
+      return (
+        <Route
+          exact
+          path={path}
+          key={key}
+          render={route => (
+            <NoPageWrapper route={route}>
+              <Component />
+            </NoPageWrapper>
+          )}
+        />
+      );
+    })}
+    {Object.keys(privateRoutes).map(key => {
+      const { Component, SideNavComponent, path } = privateRoutes[key];
+      return (
+        <Route
+          exact
+          path={path}
+          key={key}
+          render={route => (
+            <PageWrapper route={route}>
+              <Component
+                SideNav={SideNavComponent ? <SideNavComponent /> : null}
+              />
+            </PageWrapper>
+          )}
+        />
+      );
+    })}
+    <Route component={PageNotFound} />
   </Switch>
 );
-
-

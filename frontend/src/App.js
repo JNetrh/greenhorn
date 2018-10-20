@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import ScrollToTop from 'react-router-scroll-top';
 
+import { BrowserRouter } from 'react-router-dom';
+
 import './App.css';
-
-import { AppRoutes } from './AppRoutes';
 import { configureStore } from './store/configureStore.js';
+import { AppRoutes } from './AppRoutes';
 
-const { store, persistor } = configureStore();
+const { store } = configureStore();
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <ScrollToTop>
-              <AppRoutes />
-            </ScrollToTop>
-          </BrowserRouter>
-        </PersistGate>
+        <BrowserRouter>
+          <ScrollToTop>
+            <AppRoutes />
+          </ScrollToTop>
+        </BrowserRouter>
       </Provider>
     );
   }
