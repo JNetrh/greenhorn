@@ -1,7 +1,12 @@
 import HomePage from '../components/pages/HomePage';
+import Kaja from '../components/pages/Kaja';
 export default {
-  Profile: {
+  HomePage: {
     Component: HomePage,
     path: '/',
+  },
+  Kaja: {
+    Component: Kaja,
+    path: '/kaja',
   },
 };
