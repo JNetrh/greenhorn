@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, message } from 'antd';
 
 const columns = [
   { title: 'Name', width: 100, dataIndex: 'name', key: 'name' },
@@ -22,15 +22,20 @@ class Page extends Component {
     startFetchEmployees();
   };
 
+  loader = message.loading('Fetching employees..');
+
   render() {
-    const { employees } = this.props;
+    const { employees, isLoading } = this.props;
     console.log(this.props);
     return (
-      <Table
-        columns={columns}
-        dataSource={employees}
-        scroll={{ x: 1500, y: 300 }}
-      />
+      <div>
+        {isLoading && this.loader()}
+        <Table
+          columns={columns}
+          dataSource={employees}
+          scroll={{ x: 1500, y: 300 }}
+        />
+      </div>
     );
   }
 }
