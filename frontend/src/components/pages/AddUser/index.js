@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import Form from './Form';
+import Form from '../../organisms/AddUserForm';
 import { AddUser } from '../../../services/AddUser/actions';
+
+const AddUserPage = props => <Form {...props} />;
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -12,16 +14,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 const redux = connect(
-  ({ auth }) => ({ auth }),
+  ({ addUser }) => ({ addUser }),
   mapDispatchToProps,
 );
 
 const form = reduxForm({
-  form: 'login',
-  initialValues: {
-    emailEnding: EMAIL_ENDINGS[0].value,
-  },
-});
+  form: 'adduser',
+})(form);
 
 export default compose(
   redux,

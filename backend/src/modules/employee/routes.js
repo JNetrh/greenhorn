@@ -4,6 +4,6 @@ import { Router } from 'express';
 import addUserController from './addUserController';
 
 const router = expressAsyncAwait(Router());
-router.post('/', addUserController);
+router.post('/adduser', addUserController);
 
 export default router;
