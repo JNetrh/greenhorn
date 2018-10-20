@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'antd';
-import Input from '../molecules/form/Input';
-import { FormUserWrapper } from '../../styles/Login';
+import { Field } from 'redux-form';
+
+import { FormWrapper } from '../../../styles/Login';
+import Input from '../../molecules/form/Input';
+
 const FormItem = Form.Item;
 
 class AddUserForm extends Component {
@@ -17,26 +20,45 @@ class AddUserForm extends Component {
     this.setState({ iconLoading: true });
   };
   render() {
+    const { handleSubmit, onSubmit } = this.props;
     return (
-      <FormUserWrapper>
+      <FormWrapper>
         <h2>Add user</h2>
         <p>
           First step to add user is to fill his or her first name and last name.
           Then please add email.
         </p>
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <FormItem label="First name">
-            <Input placeholder="First name" />
+            <Field
+              name="firstName"
+              component={Input}
+              tabIndex={1}
+              placeholder="First name"
+            />
+
+            {/* <Input placeholder="" /> */}
           </FormItem>
           <FormItem label="Last name">
-            <Input placeholder="Last name" />
+            <Field
+              name="lastName"
+              component={Input}
+              tabIndex={2}
+              placeholder="Last name"
+            />
           </FormItem>
           <FormItem label="Email">
-            <Input placeholder="email" />
+            <Field
+              name="email"
+              component={Input}
+              tabIndex={3}
+              placeholder="email"
+            />
           </FormItem>
           <FormItem>
             <Button
               type="primary"
+              htmlType="submit"
               loading={this.state.iconLoading}
               onClick={this.enterIconLoading}
             >
@@ -44,7 +66,7 @@ class AddUserForm extends Component {
             </Button>
           </FormItem>
         </Form>
-      </FormUserWrapper>
+      </FormWrapper>
     );
   }
 }

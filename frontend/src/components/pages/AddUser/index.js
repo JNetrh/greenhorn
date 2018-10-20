@@ -5,6 +5,8 @@ import { compose } from 'recompose';
 import Form from './Form';
 import { AddUser } from '../../../services/AddUser/actions';
 
+const AddUserPage = props => <Form {...props} />;
+
 const mapDispatchToProps = dispatch => {
   return {
     onSubmit: payload => dispatch(AddUser(payload)),
@@ -12,15 +14,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 const redux = connect(
-  ({ auth }) => ({ auth }),
+  ({ addUser }) => ({ addUser }),
   mapDispatchToProps,
 );
 
 const form = reduxForm({
-  form: 'login',
-  initialValues: {
-    emailEnding: EMAIL_ENDINGS[0].value,
-  },
+  form: 'adduser',
 });
 
 export default compose(

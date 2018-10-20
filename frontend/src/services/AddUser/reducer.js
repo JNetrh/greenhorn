@@ -1,17 +1,19 @@
-import { SET_ACTIVE_USER } from './actions';
+import { ADD_USER } from './actions';
 
 const initialState = {
-  user: null,
-  isLogged: false,
+  firstname: null,
+  lastname: null,
+  email: null,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const AddUserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ACTIVE_USER:
+    case ADD_USER:
       return {
         ...state,
-        user: action.user,
-        isLogged: true,
+        firstname: action.firstname,
+        lastname: action.lastname,
+        email: action.email,
       };
     default:
       return state;
