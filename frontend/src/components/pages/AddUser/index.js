@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import Form from '../../organisms/AddUserForm';
+import AddUserForm from './AddUserForm';
 import { AddUser } from '../../../services/AddUser/actions';
 
-const AddUserPage = props => <Form {...props} />;
+const AddUserPage = props => <AddUserForm {...props} />;
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -20,7 +20,7 @@ const redux = connect(
 
 const form = reduxForm({
   form: 'adduser',
-})(form);
+});
 
 export default compose(
   redux,

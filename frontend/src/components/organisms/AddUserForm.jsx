@@ -19,54 +19,52 @@ class AddUserForm extends Component {
     this.setState({ iconLoading: true });
   };
   render() {
-    const { handleSubmit, onSubmit } = this.props;
-    return (
-      <FormUserWrapper>
-        <h2>Add user</h2>
-        <p>
-          First step to add user is to fill his or her first name and last name.
-          Then please add email.
-        </p>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <FormItem label="First name">
-            <Field
-              name="firstName"
-              component={Input}
-              tabIndex={1}
-              placeholder="First name"
-            />
+    return null;
+    // <FormUserWrapper>
+    //   <h2>Add user</h2>
+    //   <p>
+    //     First step to add user is to fill his or her first name and last name.
+    //     Then please add email.
+    //   </p>
+    //   <Form onSubmit={this.handleSubmit}>
+    //     <FormItem label="First name">
+    //       <Field
+    //         name="firstName"
+    //         component={Input}
+    //         tabIndex={1}
+    //         placeholder="First name"
+    //       />
 
-            {/* <Input placeholder="" /> */}
-          </FormItem>
-          <FormItem label="Last name">
-            <Field
-              name="lastName"
-              component={Input}
-              tabIndex={2}
-              placeholder="Last name"
-            />
-          </FormItem>
-          <FormItem label="Email">
-            <Field
-              name="email"
-              component={Input}
-              tabIndex={3}
-              placeholder="email"
-            />
-          </FormItem>
-          <FormItem>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={this.state.iconLoading}
-              onClick={this.enterIconLoading}
-            >
-              Submit
-            </Button>
-          </FormItem>
-        </Form>
-      </FormUserWrapper>
-    );
+    //       {/* <Input placeholder="" /> */}
+    //     </FormItem>
+    //     <FormItem label="Last name">
+    //       <Field
+    //         name="lastName"
+    //         component={Input}
+    //         tabIndex={2}
+    //         placeholder="Last name"
+    //       />
+    //     </FormItem>
+    //     <FormItem label="Email">
+    //       <Field
+    //         name="email"
+    //         component={Input}
+    //         tabIndex={3}
+    //         placeholder="email"
+    //       />
+    //     </FormItem>
+    //     <FormItem>
+    //       <Button
+    //         type="primary"
+    //         htmlType="submit"
+    //         loading={this.state.iconLoading}
+    //         onClick={this.enterIconLoading}
+    //       >
+    //         Submit
+    //       </Button>
+    //     </FormItem>
+    //   </Form>
+    // </FormUserWrapper>
   }
 }
 
