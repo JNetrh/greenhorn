@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Devider } from 'antd/lib/divider';
 import ListHeader from '../../atoms/ListHeader';
 import SideNavButton from '../../atoms/SideNavButton';
 
@@ -12,14 +11,39 @@ export default class EmployeesSider extends Component {
     console.log(e);
   };
 
+  handleClickNewEmployee = () => {};
+
+  handleClickListEmployees = () => {};
+
+  handleClickNewGroup = () => {};
+
+  handleClickListGroups = () => {};
+
   render() {
     return (
       <div>
         <ListHeader onClick={this.clickEmployees}>Employees</ListHeader>
-        {/* <Devider /> */}
-        <SideNavButton />
+        <SideNavButton
+          text={'Add New'}
+          icon={'user-add'}
+          onClick={this.handleClickNewEmployee}
+        />
+        <SideNavButton
+          text={'List'}
+          icon={'ordered-list'}
+          onClick={this.handleClickListEmployees}
+        />
         <ListHeader onClick={this.clickEmployees}>Groups</ListHeader>
-        {/* <Devider /> */}
+        <SideNavButton
+          text={'Add New'}
+          icon={'usergroup-add'}
+          onClick={this.handleClickNewGroup}
+        />
+        <SideNavButton
+          text={'List'}
+          icon={'ordered-list'}
+          onClick={this.handleClickListGroups}
+        />
       </div>
     );
   }

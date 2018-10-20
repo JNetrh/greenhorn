@@ -1,42 +1,42 @@
 import {
-  PRODUCT_LIST_FETCH_PRODUCTS,
-  PRODUCT_LIST_FETCH_PRODUCTS_SUCCESS,
-  PRODUCT_LIST_FETCH_PRODUCTS_FAILURE,
+  LIST_FETCH_EMPLOYEES,
+  LIST_FETCH_EMPLOYEES_SUCCESS,
+  LIST_FETCH_EMPLOYEES_FAILURE,
 } from './actions';
 
 const initialState = {
-  products: null,
+  employees: null,
   isLoading: false,
   error: null,
 };
 
-export const productListReducer = (state = initialState, action) => {
+export const EmployeesListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCT_LIST_FETCH_PRODUCTS:
+    case LIST_FETCH_EMPLOYEES:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
 
-    case PRODUCT_LIST_FETCH_PRODUCTS_SUCCESS: {
-      const { products } = action.payload;
+    case LIST_FETCH_EMPLOYEES_SUCCESS: {
+      const { employees } = action.payload;
 
       return {
         ...state,
         isLoading: false,
         error: null,
-        products,
+        employees,
       };
     }
 
-    case PRODUCT_LIST_FETCH_PRODUCTS_FAILURE: {
+    case LIST_FETCH_EMPLOYEES_FAILURE: {
       const { error } = action.payload;
 
       return {
         ...state,
         isLoading: false,
-        products: null,
+        employees: null,
         error,
       };
     }
@@ -48,9 +48,9 @@ export const productListReducer = (state = initialState, action) => {
 
 // - selectors - //
 
-export const getProducts = state => state.products || [];
+export const getEmployees = state => state.employees || [];
 
-export const getIsLoaded = state => state.products !== null;
+export const getIsLoaded = state => state.employees !== null;
 
 export const getIsLoading = state => state.isLoading;
 
