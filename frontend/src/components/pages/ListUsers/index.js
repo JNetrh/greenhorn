@@ -13,7 +13,6 @@ import {
 const ListUsersPage = props => <Page {...props} />;
 
 const mapStateToProps = storeState => {
-  console.log(storeState);
   return {
     users: getUsers(storeState.listUsers),
     isLoading: getIsLoading(storeState.listUsers),

@@ -9,14 +9,15 @@ class AppMenu extends Component {
   }
 
   clickMenu = ({ item, key, keyPath }) => {
-    this.setState({ selectedKeys: keyPath });
+    const { _setActiveMenuItem } = this.props;
+    _setActiveMenuItem(keyPath);
   };
 
   render() {
     return (
       <Menu
         mode="horizontal"
-        selectedKeys={this.state.selectedKeys}
+        selectedKeys={this.props.activeMenu}
         style={{ lineHeight: '64px' }}
         onClick={this.clickMenu}
       >

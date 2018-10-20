@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import AppMenu from '../molecules/AppMenu';
+import AppMenu from '../molecules/Menu';
 import { Logo } from '../atoms/Logo';
 import styled from 'styled-components';
 
