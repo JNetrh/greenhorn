@@ -1,23 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 
-export default function AppMenu() {
-  return (
-    <Menu
-      mode="horizontal"
-      defaultSelectedKeys={['2']}
-      style={{ lineHeight: '64px' }}
-    >
-      <Menu.Item key="1" Link to="/">
-        <span>To be done</span>
-        <Link to="/" />
-      </Menu.Item>
-      <Menu.Item key="2">Tasks</Menu.Item>
-      <Menu.Item key="3">
-        <span>Employees</span>
-        <Link to="/adduser" />
-      </Menu.Item>
-    </Menu>
-  );
+class AppMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedKeys: ['2'] };
+  }
+
+  clickMenu = ({ item, key, keyPath }) => {
+    this.setState({ selectedKeys: keyPath });
+  };
+
+  render() {
+    return (
+      <Menu
+        mode="horizontal"
+        selectedKeys={this.state.selectedKeys}
+        style={{ lineHeight: '64px' }}
+        onClick={this.clickMenu}
+      >
+        <Menu.Item key="1">
+          <Link to="/">To be done</Link>
+        </Menu.Item>
+        <Menu.Item key="2">Tasks</Menu.Item>
+        <Menu.Item key="3">
+          <Link to="/adduser">Employees</Link>
+        </Menu.Item>
+      </Menu>
+    );
+  }
 }
+
+export default AppMenu;
