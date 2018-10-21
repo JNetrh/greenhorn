@@ -9,6 +9,6 @@ const router = Router();
 router.use('/api/products', productRoutes);
 router.use('/api/auth', authRoutes);
 router.use('/api/user', user);
-router.use('/api/tasks', user);
+router.use('/api/tasks', tasks);
 
 export default router;

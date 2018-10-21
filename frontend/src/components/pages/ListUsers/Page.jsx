@@ -24,16 +24,12 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <div>
-        {!isLoading && (
-          <Table
-            columns={columns}
-            dataSource={users}
-            scroll={{ x: 1500, y: 300 }}
-            rowKey={({ id }) => id}
-          />
-        )}
-      </div>
+      <Table
+        loading={isLoading}
+        columns={columns}
+        dataSource={users}
+        scroll={{ x: 1500, y: 300 }}
+      />
     );
   }
 }
