@@ -20,7 +20,7 @@ export default {
   AddUser: {
     Component: AddUserPage,
     SideNavComponent: EmployeesSider,
-    path: '/users/adduser',
+    path: '/users/add',
   },
   ListUser: {
     Component: ListUsers,

@@ -31,9 +31,10 @@ class AddUserForm extends Component {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormItem label="First name">
             <Field
-              name="firstName"
+              name="name"
               component={Input}
               tabIndex={1}
+              iconType="user"
               placeholder="First name"
             />
 
@@ -41,9 +42,10 @@ class AddUserForm extends Component {
           </FormItem>
           <FormItem label="Last name">
             <Field
-              name="lastName"
+              name="surname"
               component={Input}
               tabIndex={2}
+              iconType="user"
               placeholder="Last name"
             />
           </FormItem>
@@ -52,6 +54,7 @@ class AddUserForm extends Component {
               name="email"
               component={Input}
               tabIndex={3}
+              iconType="mail"
               placeholder="email"
             />
           </FormItem>

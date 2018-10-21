@@ -18,7 +18,7 @@ export default class EmployeesSider extends Component {
         <SideNavButton
           text={'Add New'}
           icon={'user-add'}
-          linkTo={'/users/addUser'}
+          linkTo={'/users/add'}
         />
         <SideNavButton
           text={'List'}

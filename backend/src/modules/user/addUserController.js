@@ -8,9 +8,9 @@ const getUserByEmail = async email => {
 
 const addUserController = async (req, res) => {
   console.log(req.body);
-  const { firstname, lastname, email } = req.body;
+  const { name, surname, email } = req.body;
   try {
-    if (!firstname || !lastname || !email) {
+    if (!name || !surname || !email) {
       return res
         .status(400)
         .json({ msg: 'Please provide all mandatory parameter.' });
@@ -21,8 +21,8 @@ const addUserController = async (req, res) => {
     // }
     console.log(process.env.SECRET);
     return res.json({
-      firstname,
-      lastname,
+      name,
+      surname,
       email,
     });
   } catch (err) {
