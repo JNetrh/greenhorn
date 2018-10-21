@@ -25,15 +25,12 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <div>
-        {!isLoading && (
-          <Table
-            columns={columns}
-            dataSource={users}
-            scroll={{ x: 1500, y: 300 }}
-          />
-        )}
-      </div>
+      <Table
+        isLoading={isLoading}
+        columns={columns}
+        dataSource={users}
+        scroll={{ x: 1500, y: 300 }}
+      />
     );
   }
 }

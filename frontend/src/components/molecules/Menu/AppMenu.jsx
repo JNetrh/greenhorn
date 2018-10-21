@@ -25,7 +25,7 @@ class AppMenu extends Component {
           <Link to="/">To be done</Link>
         </Menu.Item>
         <Menu.Item key="2">
-          <Link to="/">Tasks</Link>
+          <Link to="/tasks/list">Tasks</Link>
         </Menu.Item>
         <Menu.Item key="3">
           <Link to="/users/list">Employees</Link>

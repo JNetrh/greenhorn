@@ -3,6 +3,7 @@ import HomePage from '../components/pages/HomePage';
 import Kaja from '../components/pages/Kaja';
 import AddUserPage from '../components/pages/AddUser';
 import ListUsers from '../components/pages/ListUsers';
+import ListTasks from '../components/pages/ListTasks';
 
 /* -- sider -- */
 import EmployeesSider from '../components/organisms/sider/EmployeesSider';
@@ -26,5 +27,10 @@ export default {
     Component: ListUsers,
     SideNavComponent: EmployeesSider,
     path: '/users/list',
+  },
+  ListTasks: {
+    Component: ListTasks,
+    SideNavComponent: null,
+    path: '/tasks/list',
   },
 };
