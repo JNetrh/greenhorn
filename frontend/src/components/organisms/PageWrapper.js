@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import AppMenu from '../molecules/Menu';
+import AppMenu from '../organisms/AppMenu';
 import { Logo } from '../atoms/Logo';
 import styled from 'styled-components';
+import SideMenu from './SideMenu';
 
 const LogoWrapper = styled(Logo)`
   margin: -5px 20px 0 20px;
@@ -13,8 +14,7 @@ const { Header, Sider, Content } = Layout;
 
 export class PageWrapper extends Component {
   render() {
-    const { children } = this.props;
-    const { SideNav } = children.props;
+    const { children, SideNav } = this.props;
     return (
       <Layout>
         <Header>
@@ -22,9 +22,11 @@ export class PageWrapper extends Component {
           <AppMenu />
         </Header>
         <Layout>
-          <Sider breakpoint="lg" collapsedWidth="0">
-            {SideNav}
-          </Sider>
+          {SideNav && (
+            <Sider breakpoint="lg" collapsedWidth="0">
+              <SideMenu structure={SideNav} />
+            </Sider>
+          )}
           <Content>{children}</Content>
         </Layout>
       </Layout>
