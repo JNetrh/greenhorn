@@ -1,6 +1,6 @@
 const { getToken } = require('./tokenHandling');
 // const bcrypt = require('bcryptjs');
-import { USERS } from './mockUsers';
+import { USERS } from '../../mockups/mockUsers';
 
 const getUserByEmail = async email => {
   //TODO find in DB

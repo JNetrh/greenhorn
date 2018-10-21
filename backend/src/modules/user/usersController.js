@@ -1,4 +1,4 @@
-import { USERS } from '../auth/mockUsers';
+import { USERS } from '../../mockups/mockUsers';
 
 const userController = async (req, res) => {
   try {

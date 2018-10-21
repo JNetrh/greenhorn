@@ -6,11 +6,12 @@ export const AddUser = payload => async (dispatch, getState, { api }) => {
   const { firstname, lastname, email } = payload;
   const loader = message.loading('Logginig in...');
   try {
-    const { data } = await api.post('api/user/adduser', {
+    const { data } = await api.post('user/add', {
       firstname: `${firstname}`,
       lastname: `${lastname}`,
       email: `${email}`,
     });
+    console.log(data);
     // loader();
     message.success('Successfuly user add', 2);
   } catch (err) {
