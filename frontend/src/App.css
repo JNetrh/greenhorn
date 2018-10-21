@@ -9,3 +9,8 @@
 .ant-menu-item {
   font-weight: bold;
 }
+
+.ant-menu a {
+  color: inherit;
+  text-decoration: none;
+}

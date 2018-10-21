@@ -1,36 +1,19 @@
 /* -- page content -- */
 import HomePage from '../components/pages/HomePage';
 import Kaja from '../components/pages/Kaja';
-import AddUserPage from '../components/pages/AddUser';
-import ListUsers from '../components/pages/ListUsers';
-import ListTasks from '../components/pages/ListTasks';
 
-/* -- sider -- */
-import EmployeesSider from '../components/organisms/sider/EmployeesSider';
-export default {
-  HomePage: {
+import UserRoutes from './users';
+import TaskRoutes from './tasks';
+
+export default [
+  {
     Component: HomePage,
-    SideNavComponent: null,
     path: '/',
   },
-  Kaja: {
+  {
     Component: Kaja,
-    SideNavComponent: null,
     path: '/kaja',
   },
-  AddUser: {
-    Component: AddUserPage,
-    SideNavComponent: EmployeesSider,
-    path: '/users/add',
-  },
-  ListUser: {
-    Component: ListUsers,
-    SideNavComponent: EmployeesSider,
-    path: '/users/list',
-  },
-  ListTasks: {
-    Component: ListTasks,
-    SideNavComponent: null,
-    path: '/tasks/list',
-  },
-};
+  ...UserRoutes,
+  ...TaskRoutes,
+];

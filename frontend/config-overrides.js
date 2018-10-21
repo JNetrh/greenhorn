@@ -27,6 +27,8 @@ module.exports = function override(config, env) {
       '@layout-sider-background': '#eaebec', // color of sider
       '@layout-header-background': 'white', // color of header
       '@layout-header-padding': '0 50px 0 0', // layout header padding
+      '@item-active-bg': '#f3f3f3',
+      '@table-row-hover-bg': '#f3f3f3',
     },
     javascriptEnabled: true,
   })(config, env);

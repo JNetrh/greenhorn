@@ -18,6 +18,7 @@ export const logIn = payload => async (dispatch, getState, { api }) => {
     });
     //TODO handle token on frontend
     const { token, user } = data;
+    console.log(token);
     loader();
     dispatch(setActiveUser(user));
     message.success('Successfuly logged in', 2);
