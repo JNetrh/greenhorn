@@ -3,6 +3,8 @@ import HomePage from '../components/pages/HomePage';
 import Kaja from '../components/pages/Kaja';
 
 import UserRoutes from './users';
+import TaskRoutes from './tasks';
+
 export default [
   {
     Component: HomePage,
@@ -13,4 +15,5 @@ export default [
     path: '/kaja',
   },
   ...UserRoutes,
+  ...TaskRoutes,
 ];
