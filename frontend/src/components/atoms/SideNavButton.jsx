@@ -30,6 +30,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const setBackground = props => {
+  console.log(props);
   const { linkTo, activeSubMenu } = props;
   if (activeSubMenu.indexOf(linkTo) > -1) {
     return '#eeeeee';
@@ -38,7 +39,6 @@ const setBackground = props => {
 };
 class SideNavButton extends Component {
   onClick = () => {
-    console.log(this.props);
     const { linkTo, setActiveSubMenuItem } = this.props;
     setActiveSubMenuItem([linkTo]);
   };

@@ -1,4 +1,4 @@
-import { USERS } from '../auth/mockUsers';
+import { USERS } from '../../mockups/mockUsers';
 
 const getUserByEmail = async email => {
   //TODO find in DB

@@ -23,6 +23,7 @@ export const activeMenuReducer = (state = initialState, action) => {
       return { ...state, activeMenu };
     }
     case SET_ACTIVE_SUB_MENU_ITEM: {
+      console.log(action);
       const { activeSubMenu } = action.payload;
       return { ...state, activeSubMenu };
     }
