@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Logo } from './../components/atoms/Logo';
 import { Button } from 'antd';
 import styled from 'styled-components';
 
@@ -16,7 +15,7 @@ export const LoginButton = styled(Button)`
   width: 100%;
 `;
 
-export const LogoWrapper = styled(Logo)`
+export const LogoWrapper = styled.div`
   position: relative;
   top: -45px;
   background-color: white;
