@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 import logo from '../../static/greenhorn_logo_dark.svg';
 import Input from '../molecules/form/Input';
-
-const FormItem = Form.Item;
+import { FormWrapper, FormItem } from '../../styles/Login';
 
 const LogoWrapper = styled.div`
   margin: 0 0 60px 0;
@@ -16,10 +15,6 @@ const LogoWrapper = styled.div`
   }
 `;
 
-const FormWrapper = styled.div`
-  width: 450px;
-  max-width: 100%;
-`;
 class PasswordForm extends Component {
   render() {
     return (

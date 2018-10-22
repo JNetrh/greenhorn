@@ -1,5 +1,6 @@
 import LoginPage from '../components/pages/Login';
 import ResetPasswordPage from '../components/pages/ResetPasswordPage';
+import HelloPage from '../components/pages/HelloPage';
 
 export default [
   {
@@ -9,5 +10,9 @@ export default [
   {
     Component: ResetPasswordPage,
     path: '/password',
+  },
+  {
+    Component: HelloPage,
+    path: '/hello',
   },
 ];

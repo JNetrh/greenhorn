@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ResetPasswordForm from '../organisms/ResetPasswordForm';
+import Form from '../organisms/HelloForm';
 import { Centered } from '../../styles/Login';
 
-export default class LoginPage extends Component {
+export default class PasswordPage extends Component {
   render() {
     return (
       <Centered>
-        <ResetPasswordForm />
+        <Form />
       </Centered>
     );
   }

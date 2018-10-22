@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { Field } from 'redux-form';
 
-import { FormWrapper } from '../../../styles/Login';
 import Input from '../../molecules/form/Input';
+import { PageFormWrapper } from '../../../styles/Forms';
 
 const FormItem = Form.Item;
 
@@ -22,7 +22,7 @@ class AddUserForm extends Component {
   render() {
     const { handleSubmit, onSubmit } = this.props;
     return (
-      <FormWrapper>
+      <PageFormWrapper>
         <h2>Add user</h2>
         <p>
           First step to add user is to fill his or her first name and last name.
@@ -69,7 +69,7 @@ class AddUserForm extends Component {
             </Button>
           </FormItem>
         </Form>
-      </FormWrapper>
+      </PageFormWrapper>
     );
   }
 }
