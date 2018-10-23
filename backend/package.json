@@ -13,6 +13,7 @@
     "postbuild": "nodetouch tmp/restart.txt",
     "prettier": "cd ..; yarn prettier"
   },
+  "engines" : { "node" : ">=8.12.0" },
   "dependencies": {
     "axios": "0.18.0",
     "backpack-core": "^0.7.0",
