@@ -4,7 +4,7 @@ import { Table, Button, message } from 'antd';
 const columns = [
   { title: 'Name', width: 100, dataIndex: 'name', key: 'name' },
   { title: 'Surname', dataIndex: 'surname', key: 'surname' },
-  { title: 'Email', dataIndex: 'email', key: 'email' },
+  { title: 'Email', dataIndex: 'email', key: 'email2' },
   {
     title: 'Action',
     key: 'operation',
