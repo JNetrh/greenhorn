@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {Form, Select, Input, Button} from 'antd';
-import  Page from './Kaja/Page'
+import Buttons from './Buttons'
 
 class Kaja extends Component {
+
+
+    ahojClick = e =>{
+        console.log(e)
+    }
+
+
   render() {
     return (
-      <Page />
+      <div className="container">
+        <h1> Employee information </h1>
+        <HorizontalFormLayout />
+        <Buttons  text2={'ahoj'} />
+      </div>
     );
   }
 }
 export default Kaja;
 
-class Buttons extends Component {
-  render(){
-    return (<div>
-      <Button type="primary">Add Employee</Button>
-    </div>);
-  }
-}
 
 const FormItem = Form.Item;
 
@@ -40,6 +44,10 @@ class HorizontalFormLayout extends React.Component {
       labelCol: { span: 3 },
       wrapperCol: { span: 5 },
     } : null;
+
+    let x = false
+
+    this.state.formLayout === 'horizontal' ? console.log(x + '1') : console.log(x + '2')
     
     return (
       <div>
@@ -63,6 +71,7 @@ class HorizontalFormLayout extends React.Component {
             <Input placeholder="input Email Adress" />
           </FormItem>
         </Form>
+        
       </div>
     );
   }
