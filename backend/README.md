@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node.js v6.11 or later
+- Node.js v8.9.4 or later
 - `yarn` (`npm install --global yarn`)
 
 ## Install

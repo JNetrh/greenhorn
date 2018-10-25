@@ -11,9 +11,9 @@
     "build": "backpack build",
     "build:watch": "nodemon --watch ./src --exec 'npm run build'",
     "postbuild": "nodetouch tmp/restart.txt",
-    "prettier": "cd ..; yarn prettier"
+    "prettier": "cd ..; yarn prettier",
+    "db": "node sequelize.js"
   },
-  "engines" : { "node" : ">=8.12.0" },
   "dependencies": {
     "axios": "0.18.0",
     "backpack-core": "^0.7.0",
@@ -25,7 +25,10 @@
     "express-async-await": "1.1.0",
     "jsonwebtoken": "^8.3.0",
     "log4js": "1.1.1",
-    "nodemailer": "^4.6.8"
+    "mysql2": "^1.6.1",
+    "nodemailer": "^4.6.8",
+    "sequelize": "^4.41.0",
+    "sequelize-cli": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "1.18.4",
