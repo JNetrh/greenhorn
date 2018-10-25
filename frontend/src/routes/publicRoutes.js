@@ -1,6 +1,7 @@
 import LoginPage from '../components/pages/Login';
 import ResetPasswordPage from '../components/pages/ResetPasswordPage';
 import HelloPage from '../components/pages/HelloPage';
+import EmailTemplate from '../components/pages/EmailTemplate';
 
 export default [
   {
@@ -14,5 +15,9 @@ export default [
   {
     Component: HelloPage,
     path: '/hello',
+  },
+  {
+    Component: EmailTemplate,
+    path: '/email',
   },
 ];
