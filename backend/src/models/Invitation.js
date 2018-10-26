@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Invitation = sequelize.define("Invitation", {
-    token: DataTypes.STRING
+  var Invitation = sequelize.define('Invitation', {
+    token: DataTypes.STRING,
   });
 
   Invitation.associate = models => {

@@ -1,15 +1,15 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
-const db = {};
+const DataTypes = require('sequelize/lib/data-types');
+const basename = path.basename(__filename);
 
-console.log(config);
+const db = {};
 
 const sequelize = new Sequelize(
   config.database,
@@ -18,16 +18,15 @@ const sequelize = new Sequelize(
   { host: config.host, dialect: 'mysql' }
 );
 
-fs.readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
-    );
-  })
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-  });
+const modelModules = fs
+  .readdirSync(__dirname)
+  .filter(fileName => fileName !== basename)
+  .map(fileName => require('./' + fileName));
+
+modelModules.forEach(modelModule => {
+  const model = modelModule(sequelize, DataTypes);
+  db[model.name] = model;
+});
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
