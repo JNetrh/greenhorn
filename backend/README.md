@@ -13,9 +13,13 @@ yarn install
 
 ## Run Local Dev Server
 
+Rename `.env.example` to `.env` and fill it with database config (and SMTP if neccessary)
+
 ```sh
 yarn dev
 ```
+
+This should create table and associations, too.
 
 ## Run Local Production Server
 
