@@ -24,8 +24,10 @@ cd backend
 ```
 yarn
 ```
-3. start the project
+3. Rename `.env.example` to `.env` and fill it with database config (and SMTP if neccessary)
+4. start the project
 ```
 yarn dev
 ```
-4. Good job! Your backend is running default at: `localhost:3030`
+(this step should aslo create neccessary database and tables)
+5. Good job! Your backend is running default at: `localhost:3030`
