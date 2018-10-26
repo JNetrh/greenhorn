@@ -21,7 +21,7 @@ class PageWrapper extends Component {
           <Header />
           <Layout>
             {SideNav && (
-              <Sider breakpoint="lg">
+              <Sider breakpoint="lg" collapsedWidth={0}>
                 <SideMenu structure={SideNav} />
               </Sider>
             )}

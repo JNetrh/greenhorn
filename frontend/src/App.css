@@ -14,3 +14,14 @@
   color: inherit;
   text-decoration: none;
 }
+
+.ant-table {
+  white-space: nowrap;
+}
+
+.ant-layout .ant-layout-sider-zero-width-trigger {
+  color: black;
+  z-index: 1;
+  top: 34px;
+  background: rgba(0, 0, 0, 0.1);
+}

@@ -25,7 +25,12 @@ class Page extends Component {
     const { users, isLoading } = this.props;
     return (
       <div style={{ background: 'white' }}>
-        <Table loading={isLoading} columns={columns} dataSource={users} />
+        <Table
+          loading={isLoading}
+          columns={columns}
+          dataSource={users}
+          scroll={{ x: true }}
+        />
       </div>
     );
   }

@@ -13,6 +13,15 @@ export const stripPassword = user => {
   return rest;
 };
 
+export const createUserWithHashedPwd = async ({ password, ...user }) => {
+  const hashedPwd = await bcrypt.hash(password, 8);
+  const createdUser = await User.create({
+    ...user,
+    password: hashedPwd,
+  });
+  return stripPassword(createdUser);
+};
+
 const addUserController = async (req, res) => {
   const { name, surname, email, password } = req.body;
   try {
@@ -28,18 +37,16 @@ const addUserController = async (req, res) => {
         .json({ msg: `User with email "${email}" already exists.` });
     }
 
-    const hashedPwd = await bcrypt.hash(password, 8);
-
-    const createdUser = await User.create({
+    const createdUser = await createUserWithHashedPwd({
       name,
       surname,
       email,
-      password: hashedPwd,
+      password,
     });
 
     await createInvitation(createdUser.id);
 
-    return res.json(stripPassword(createdUser));
+    return res.json(createdUser);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);

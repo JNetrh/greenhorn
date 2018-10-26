@@ -4,6 +4,7 @@ import breakpoints from '../../../styles/breakpoints';
 export const MenuStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
+  flex: 1;
   .burger {
     display: none;
     flex: 1;
