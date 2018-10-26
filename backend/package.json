@@ -11,8 +11,7 @@
     "build": "backpack build",
     "build:watch": "nodemon --watch ./src --exec 'npm run build'",
     "postbuild": "nodetouch tmp/restart.txt",
-    "prettier": "cd ..; yarn prettier",
-    "db": "node sequelize.js"
+    "prettier": "cd ..; yarn prettier"
   },
   "dependencies": {
     "axios": "0.18.0",

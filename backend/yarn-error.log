@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/rostaklein/.nvm/versions/node/v8.9.4/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js add cooke-parser
+  /Users/rostaklein/.nvm/versions/node/v8.9.4/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js start
 
 PATH: 
   /Users/rostaklein/.nvm/versions/node/v8.9.4/bin:/Users/rostaklein/Applications/apache-maven-3.5.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/opt/X11/bin
@@ -14,17 +14,13 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/cooke-parser: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:65656:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:134675:22)
-      at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:135658:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:135578:12)
-      at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)
+  SyntaxError: /Users/rostaklein/Documents/coding/greenhorn/backend/package.json: Unexpected token } in JSON at position 443
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:109:13
+      at <anonymous>
 
 npm manifest: 
   {
@@ -41,13 +37,13 @@ npm manifest:
       "build:watch": "nodemon --watch ./src --exec 'npm run build'",
       "postbuild": "nodetouch tmp/restart.txt",
       "prettier": "cd ..; yarn prettier",
-      "db": "node sequelize.js"
     },
     "dependencies": {
       "axios": "0.18.0",
       "backpack-core": "^0.7.0",
       "bcryptjs": "^2.4.3",
       "body-parser": "1.18.3",
+      "cookie-parser": "^1.4.3",
       "cors": "^2.8.4",
       "dotenv": "^6.1.0",
       "express": "^4.15.2",
@@ -1189,6 +1185,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.6.0.tgz#51b537a8c43e0f04dec1993bffcdd504e758ac20"
     dependencies:
       safe-buffer "~5.1.1"
+  
+  cookie-parser@^1.4.3:
+    version "1.4.3"
+    resolved "https://registry.yarnpkg.com/cookie-parser/-/cookie-parser-1.4.3.tgz#0fe31fa19d000b95f4aadf1f53fdc2b8a203baa5"
+    dependencies:
+      cookie "0.3.1"
+      cookie-signature "1.0.6"
   
   cookie-signature@1.0.6:
     version "1.0.6"

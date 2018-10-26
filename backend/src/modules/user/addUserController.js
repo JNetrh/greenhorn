@@ -1,5 +1,5 @@
 import { User } from '../../models/';
-import { createInvitation } from './InvitationController';
+import { createInvitation } from './invitationController';
 import bcrypt from 'bcryptjs';
 
 export const getUserByEmail = async email => {

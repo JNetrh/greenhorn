@@ -1,5 +1,8 @@
 import models from './models';
-import { createUserWithHashedPwd } from './modules/user/addUserController';
+import {
+  createUserWithHashedPwd,
+  getUserByEmail,
+} from './modules/user/addUserController';
 
 const TEST_USER = {
   name: 'John',
@@ -10,7 +13,12 @@ const TEST_USER = {
 
 const initDb = async () => {
   await models.sequelize.sync();
-  await createUserWithHashedPwd(TEST_USER);
+
+  //create user
+  const user = await getUserByEmail(TEST_USER.email);
+  if (!user) {
+    await createUserWithHashedPwd(TEST_USER);
+  }
 };
 
 export default initDb;
