@@ -1,5 +1,5 @@
-import { User, Invitation } from '../../models/';
-import createInvitation from './createInvitation';
+import { User } from '../../models/';
+import { createInvitation } from './InvitationController';
 
 const getUserByEmail = async email => {
   //TODO find in DB
@@ -28,7 +28,7 @@ const addUserController = async (req, res) => {
       email,
     });
 
-    const invitation = await createInvitation(createdUser.id);
+    await createInvitation(createdUser.id);
 
     return res.json(createdUser);
   } catch (err) {

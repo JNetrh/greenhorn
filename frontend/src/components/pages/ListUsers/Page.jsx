@@ -24,12 +24,9 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <Table
-        loading={isLoading}
-        columns={columns}
-        dataSource={users}
-        scroll={{ x: 1500, y: 300 }}
-      />
+      <div style={{ background: 'white' }}>
+        <Table loading={isLoading} columns={columns} dataSource={users} />
+      </div>
     );
   }
 }

@@ -5,12 +5,8 @@ export const getHelloUser = invitationToken => async (
   getState,
   { api },
 ) => {
-  const loader = message.loading('Loading user...');
   try {
     const { data } = await api.get(`/user/byinvitation/${invitationToken}`);
-    loader();
-    console.log(data);
-    message.success('User loaded', 2);
     return data;
   } catch (err) {
     console.log(err);
@@ -18,10 +14,10 @@ export const getHelloUser = invitationToken => async (
       const {
         data: { msg },
       } = err.response;
-      await loader();
-      message.error(msg, 2);
+      const error = msg || 'Token validation failed.';
+      message.error(error, 2);
       return {
-        msg,
+        error,
       };
     }
   }

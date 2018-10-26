@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Invitation.associate = models => {
     models.User.hasMany(models.Invitation);
+    models.Invitation.belongsTo(models.User);
   };
 
   return Invitation;
