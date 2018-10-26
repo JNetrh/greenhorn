@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import { addUser } from '../actions';
 
-export const AddUser = ({ name, surname, email }) => async (
+export const AddUser = ({ name, surname, email, password }) => async (
   dispatch,
   getState,
   { api },
@@ -12,6 +12,7 @@ export const AddUser = ({ name, surname, email }) => async (
       name,
       surname,
       email,
+      password,
     });
     loader();
     dispatch(addUser(data));

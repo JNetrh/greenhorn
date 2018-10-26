@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { PageWrapper } from './components/organisms/PageWrapper';
+import PageWrapper from './components/organisms/PageWrapper';
 import { NoPageWrapper } from './components/organisms/NoPageWrapper';
 import PageNotFound from './components/pages/PageNotFound.jsx';
 import publicRoutes from './routes/publicRoutes';

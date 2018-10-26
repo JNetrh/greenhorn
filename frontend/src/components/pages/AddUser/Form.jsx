@@ -47,6 +47,16 @@ class AddUserForm extends Component {
               placeholder="email"
             />
           </FormItem>
+          <FormItem label="Password (will not be here)">
+            <Field
+              type="password"
+              name="password"
+              component={Input}
+              tabIndex={4}
+              iconType="lock"
+              placeholder="password"
+            />
+          </FormItem>
           <FormItem>
             <Button
               type="primary"

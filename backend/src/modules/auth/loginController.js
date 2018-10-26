@@ -1,12 +1,6 @@
-const { getToken } = require('./tokenHandling');
-// const bcrypt = require('bcryptjs');
-import { USERS } from '../../mockups/mockUsers';
-
-const getUserByEmail = async email => {
-  //TODO find in DB
-  const user = USERS.find(user => user.email === email);
-  return user;
-};
+import bcrypt from 'bcryptjs';
+import { getUserByEmail, stripPassword } from '../user/addUserController';
+import { getToken } from './tokenHandling';
 
 const LoginController = async (req, res) => {
   console.log(req.body);
@@ -25,11 +19,8 @@ const LoginController = async (req, res) => {
     // if (!user.isActive) {
     //   return res.status(401).json({ msg: 'This account is disabled.' });
     // }
-    console.log(process.env.SECRET);
 
-    //TODO check password
-    // const verified = await bcrypt.compare(password, user.pwd);
-    const verified = true;
+    const verified = await bcrypt.compare(password, user.password);
 
     if (!verified) {
       return res.status(400).json({ msg: 'Bad password' });
@@ -38,7 +29,7 @@ const LoginController = async (req, res) => {
     const token = getToken(user.id, rememberMe ? '7d' : undefined);
 
     return res.json({
-      user,
+      user: stripPassword(user),
       token,
     });
   } catch (err) {

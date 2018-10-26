@@ -1,4 +1,6 @@
 import { message } from 'antd';
+import Cookies from 'js-cookie';
+import history from '../../history';
 
 export const SET_ACTIVE_USER = 'SET_ACTIVE_USER';
 
@@ -16,12 +18,12 @@ export const logIn = payload => async (dispatch, getState, { api }) => {
       password,
       rememberMe,
     });
-    //TODO handle token on frontend
     const { token, user } = data;
-    console.log(token);
+    Cookies.set('auth-token', token);
     loader();
     dispatch(setActiveUser(user));
     message.success('Successfuly logged in', 2);
+    history.push('/');
   } catch (err) {
     if (err.response) {
       const {
@@ -31,5 +33,15 @@ export const logIn = payload => async (dispatch, getState, { api }) => {
       message.error(msg, 2);
     }
     console.log(err);
+  }
+};
+
+export const checkLoggedUser = () => async (dispatch, getState, { api }) => {
+  try {
+    const { data } = await api.get('auth/me');
+    dispatch(setActiveUser(data));
+  } catch (err) {
+    console.log(err);
+    history.push('/login');
   }
 };

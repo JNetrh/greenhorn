@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import SideMenu from './SideMenu';
 import Header from './Header';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { checkLoggedUser } from '../../services/Login/actions';
+import NoAuthOverlay from '../molecules/NoAuthOverlay';
 
 const { Sider, Content } = Layout;
 
-export class PageWrapper extends Component {
+class PageWrapper extends Component {
+  componentDidMount() {
+    this.props.checkLoggedUser();
+  }
   render() {
-    const { children, SideNav } = this.props;
+    const { children, SideNav, user } = this.props;
     return (
       <Layout>
-        <Header />
-        <Layout>
-          {SideNav && (
-            <Sider breakpoint="lg">
-              <SideMenu structure={SideNav} />
-            </Sider>
-          )}
-          <Content>{children}</Content>
-        </Layout>
+        <React.Fragment>
+          <Header />
+          <Layout>
+            {SideNav && (
+              <Sider breakpoint="lg">
+                <SideMenu structure={SideNav} />
+              </Sider>
+            )}
+            <Content>{children}</Content>
+          </Layout>
+        </React.Fragment>
+        <NoAuthOverlay isActive={!user} />
       </Layout>
     );
   }
 }
+
+const mapStateToProps = ({ auth: { user } }) => ({ user });
+
+export default connect(
+  mapStateToProps,
+  dispatch => bindActionCreators({ checkLoggedUser }, dispatch),
+)(PageWrapper);

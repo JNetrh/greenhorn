@@ -16,7 +16,6 @@ import Logo from '../../atoms/Logo';
 class LoginForm extends Component {
   render() {
     const { handleSubmit, emailEndings, onSubmit, auth } = this.props;
-    console.log(auth);
     return (
       <Centered>
         <FormWrapper>
