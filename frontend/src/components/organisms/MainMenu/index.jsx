@@ -1,15 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { Menu, Icon } from 'antd';
+import { Menu, Dropdown, Icon } from 'antd';
 import { MenuStyle, LogoWrapper } from './style';
 import logo from '../../../static/greenhorn_logo_dark.svg';
+import { logOut } from '../../../services/Logout/actions';
 
 const MENU_ITEMS = [
   { title: 'To be done', to: '/' },
   { title: 'Tasks', to: '/tasks/list' },
   { title: 'Employees', to: '/users/list' },
 ];
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 class MainMenu extends React.Component {
   constructor(props) {
@@ -22,6 +25,9 @@ class MainMenu extends React.Component {
     this.setState({
       isOpened: !this.state.isOpened,
     });
+  };
+  Logout = () => {
+    logOut();
   };
   render() {
     const {
@@ -54,6 +60,28 @@ class MainMenu extends React.Component {
                 <Link to={to}>{title}</Link>
               </Menu.Item>
             ))}
+
+            <SubMenu
+              title={
+                <span className="submenu-title-wrapper">
+                  <Icon type="user" />
+                  <b>Account</b>
+                </span>
+              }
+              style={{ float: 'right' }}
+            >
+              <MenuItemGroup title="Your account">
+                <Menu.Item key="">
+                  <Link to="">Profile</Link>
+                </Menu.Item>
+                <Menu.Item key="changepwd">
+                  <Link to="">Change password</Link>
+                </Menu.Item>
+                <Menu.Item key="logout" onClick={this.Logout}>
+                  Logout
+                </Menu.Item>
+              </MenuItemGroup>
+            </SubMenu>
           </Menu>
         </div>
       </MenuStyle>
