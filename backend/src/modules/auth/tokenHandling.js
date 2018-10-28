@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-const getToken = (userId, expiresIn = '12h') =>
+export const getToken = (userId, expiresIn = '12h') =>
   jwt.sign({ userId }, process.env.SECRET, {
     expiresIn,
   });
 
-const verifyToken = async (req, res, next) => {
-  const token = req.headers['x-access-token'] || req.cookies.token;
+export const verifyToken = async (req, res, next) => {
+  const token = req.headers['x-access-token'] || req.cookies['auth-token'];
+
   if (!token) return res.status(401).send({ msg: 'No token provided.' });
 
   try {
@@ -19,9 +20,4 @@ const verifyToken = async (req, res, next) => {
     }
     return res.status(401).send({ msg: 'Token not valid.' });
   }
-};
-
-module.exports = {
-  getToken,
-  verifyToken,
 };

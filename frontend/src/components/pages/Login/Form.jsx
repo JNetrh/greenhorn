@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
-import { Form } from 'antd';
+import { Form, Button } from 'antd';
 import { Field } from 'redux-form';
 
 import {
   FormWrapper,
-  LoginButton,
-  LogoWrapper,
   StyledLink,
   Centered,
+  FormItem,
 } from '../../../styles/Login';
 import Select from '../../molecules/form/Select';
 import Input from '../../molecules/form/Input';
 import Checkbox from '../../molecules/form/Checkbox';
-
-const FormItem = Form.Item;
+import Logo from '../../atoms/Logo';
 
 class LoginForm extends Component {
   render() {
     const { handleSubmit, emailEndings, onSubmit, auth } = this.props;
-    console.log(auth);
     return (
       <Centered>
         <FormWrapper>
-          <LogoWrapper />
+          <Logo />
           <Form onSubmit={handleSubmit(onSubmit)} className="login-form">
             <FormItem>
               <Field
@@ -50,15 +47,19 @@ class LoginForm extends Component {
                 placeholder="Password"
               />
             </FormItem>
-            <FormItem>
-              <LoginButton type="primary" htmlType="submit">
+            <FormItem style={{ margin: '0 0 20px 0' }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ width: '100%' }}
+              >
                 Log in
-              </LoginButton>
-              <Field name="rememberMe" component={Checkbox}>
-                Remember me
-              </Field>
-              <StyledLink to="/resetpassword">Forgot password</StyledLink>
+              </Button>
             </FormItem>
+            <Field name="rememberMe" component={Checkbox}>
+              Remember me
+            </Field>
+            <StyledLink to="/password">Forgot password</StyledLink>
           </Form>
         </FormWrapper>
       </Centered>

@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import ScrollToTop from 'react-router-scroll-top';
 
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import history from './history';
 
 import './App.css';
 import { configureStore } from './store/configureStore.js';
@@ -15,11 +16,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <Router history={history}>
           <ScrollToTop>
             <AppRoutes />
           </ScrollToTop>
-        </BrowserRouter>
+        </Router>
       </Provider>
     );
   }

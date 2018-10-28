@@ -1,33 +1,42 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import AppMenu from '../molecules/Menu';
-import { Logo } from '../atoms/Logo';
-import styled from 'styled-components';
+import SideMenu from './SideMenu';
+import Header from './Header';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { checkLoggedUser } from '../../services/Login/actions';
+import NoAuthOverlay from '../molecules/NoAuthOverlay';
 
-const LogoWrapper = styled(Logo)`
-  margin: -5px 20px 0 20px;
-  float: left;
-  width: 10rem;
-`;
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
-export class PageWrapper extends Component {
+class PageWrapper extends Component {
+  componentDidMount() {
+    this.props.checkLoggedUser();
+  }
   render() {
-    const { children } = this.props;
-    const { SideNav } = children.props;
+    const { children, SideNav, user } = this.props;
     return (
       <Layout>
-        <Header>
-          <LogoWrapper />
-          <AppMenu />
-        </Header>
-        <Layout>
-          <Sider breakpoint="lg" collapsedWidth="0">
-            {SideNav}
-          </Sider>
-          <Content>{children}</Content>
-        </Layout>
+        <React.Fragment>
+          <Header />
+          <Layout>
+            {SideNav && (
+              <Sider breakpoint="lg" collapsedWidth={0}>
+                <SideMenu structure={SideNav} />
+              </Sider>
+            )}
+            <Content>{children}</Content>
+          </Layout>
+        </React.Fragment>
+        <NoAuthOverlay isActive={!user} />
       </Layout>
     );
   }
 }
+
+const mapStateToProps = ({ auth: { user } }) => ({ user });
+
+export default connect(
+  mapStateToProps,
+  dispatch => bindActionCreators({ checkLoggedUser }, dispatch),
+)(PageWrapper);

@@ -4,9 +4,9 @@ import { reducer as formReducer } from 'redux-form';
 import storage from 'redux-persist/lib/storage';
 
 import { authReducer } from '../services/Login/reducer';
-import { AddUserReducer } from '../services/AddUser/reducer';
-import { UsersListReducer } from '../services/ListUsers/reducer';
+import { UsersListReducer } from '../services/Users/reducer';
 import { activeMenuReducer } from '../services/Menu/reducer';
+import { tasksReducer } from '../services/Tasks/reducer';
 
 const persistConfig = {
   key: 'root',
@@ -17,8 +17,8 @@ export const createRootReducer = () => {
   const rootReducer = combineReducers({
     form: formReducer,
     auth: authReducer,
-    addUser: AddUserReducer,
-    listUsers: UsersListReducer,
+    users: UsersListReducer,
+    tasks: tasksReducer,
     menu: activeMenuReducer,
   });
 

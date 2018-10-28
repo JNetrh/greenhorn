@@ -2,27 +2,16 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { Field } from 'redux-form';
 
-import { FormWrapper } from '../../../styles/Login';
 import Input from '../../molecules/form/Input';
+import { PageFormWrapper } from '../../../styles/Forms';
 
 const FormItem = Form.Item;
 
 class AddUserForm extends Component {
-  state = {
-    loading: false,
-    iconLoading: false,
-  };
-  enterLoading = () => {
-    this.setState({ loading: true });
-  };
-
-  enterIconLoading = () => {
-    this.setState({ iconLoading: true });
-  };
   render() {
     const { handleSubmit, onSubmit } = this.props;
     return (
-      <FormWrapper>
+      <PageFormWrapper>
         <h2>Add user</h2>
         <p>
           First step to add user is to fill his or her first name and last name.
@@ -31,9 +20,10 @@ class AddUserForm extends Component {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormItem label="First name">
             <Field
-              name="firstName"
+              name="name"
               component={Input}
               tabIndex={1}
+              iconType="user"
               placeholder="First name"
             />
 
@@ -41,9 +31,10 @@ class AddUserForm extends Component {
           </FormItem>
           <FormItem label="Last name">
             <Field
-              name="lastName"
+              name="surname"
               component={Input}
               tabIndex={2}
+              iconType="user"
               placeholder="Last name"
             />
           </FormItem>
@@ -52,21 +43,31 @@ class AddUserForm extends Component {
               name="email"
               component={Input}
               tabIndex={3}
+              iconType="mail"
               placeholder="email"
+            />
+          </FormItem>
+          <FormItem label="Password (will not be here)">
+            <Field
+              type="password"
+              name="password"
+              component={Input}
+              tabIndex={4}
+              iconType="lock"
+              placeholder="password"
             />
           </FormItem>
           <FormItem>
             <Button
               type="primary"
               htmlType="submit"
-              loading={this.state.iconLoading}
               onClick={this.enterIconLoading}
             >
               Submit
             </Button>
           </FormItem>
         </Form>
-      </FormWrapper>
+      </PageFormWrapper>
     );
   }
 }

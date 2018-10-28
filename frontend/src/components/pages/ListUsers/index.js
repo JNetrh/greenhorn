@@ -2,22 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import Page from './Page';
-import { startFetchUsers } from '../../../services/ListUsers/actions';
+import { startFetchUsers } from '../../../services/Users/api/list';
 import {
   getUsers,
   getIsLoading,
   getIsLoaded,
   getIsError,
-} from '../../../services/ListUsers/reducer';
+} from '../../../services/Users/reducer';
 
 const ListUsersPage = props => <Page {...props} />;
 
-const mapStateToProps = storeState => {
+const mapStateToProps = ({ users }) => {
   return {
-    users: getUsers(storeState.listUsers),
-    isLoading: getIsLoading(storeState.listUsers),
-    isLoaded: getIsLoaded(storeState.listUsers),
-    isError: getIsError(storeState.listUsers),
+    users: getUsers(users),
+    isLoading: getIsLoading(users),
+    isLoaded: getIsLoaded(users),
+    isError: getIsError(users),
+    fetched: users.fetched,
   };
 };
 

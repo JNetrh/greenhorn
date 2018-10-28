@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import Form from './Form';
-import { AddUser } from '../../../services/AddUser/actions';
+import { AddUser } from '../../../services/Users/api/add';
 
 const AddUserPage = props => <Form {...props} />;
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const redux = connect(
-  ({ addUser }) => ({ addUser }),
+  null,
   mapDispatchToProps,
 );
 

@@ -1,13 +1,18 @@
 import LoginPage from '../components/pages/Login';
 import ResetPasswordPage from '../components/pages/ResetPasswordPage';
+import Hello from '../components/pages/Hello';
 
-export default {
-  Login: {
+export default [
+  {
     Component: LoginPage,
     path: '/login',
   },
-  Password: {
+  {
     Component: ResetPasswordPage,
     path: '/password',
   },
-};
+  {
+    Component: Hello,
+    path: '/hello/:token',
+  },
+];

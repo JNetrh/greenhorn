@@ -1,10 +1,9 @@
-import { USERS } from '../auth/mockUsers';
+import { User } from '../../models';
 
 const userController = async (req, res) => {
   try {
-    return res.json({
-      USERS,
-    });
+    const allUsers = await User.findAll();
+    return res.json(allUsers);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);

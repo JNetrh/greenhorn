@@ -1,38 +1,35 @@
 import React, { Component } from 'react';
-import { Table, Button, message } from 'antd';
+import { Table, Button } from 'antd';
+
+const RowActions = () => <Button type="primary">Action</Button>;
 
 const columns = [
-  { title: 'Name', width: 100, dataIndex: 'name', key: 'name' },
-  { title: 'Surname', dataIndex: 'surname', key: 'surname' },
-  { title: 'Email', dataIndex: 'email', key: 'email2' },
+  { title: 'Name', width: 100, dataIndex: 'name' },
+  { title: 'Surname', dataIndex: 'surname' },
+  { title: 'Email', dataIndex: 'email' },
   {
     title: 'Action',
-    key: 'operation',
     fixed: 'right',
     width: 100,
-    render: () => {
-      return <Button type="primary">Action</Button>;
-    },
+    render: RowActions,
   },
 ];
 
 class Page extends Component {
   componentDidMount = () => {
-    const { startFetchUsers } = this.props;
-    startFetchUsers();
+    const { startFetchUsers, fetched } = this.props;
+    !fetched && startFetchUsers();
   };
-
-  loader = message.loading('Fetching users..');
 
   render() {
     const { users, isLoading } = this.props;
     return (
-      <div>
-        {isLoading && this.loader()}
+      <div style={{ background: 'white' }}>
         <Table
+          loading={isLoading}
           columns={columns}
           dataSource={users}
-          scroll={{ x: 1500, y: 300 }}
+          scroll={{ x: true }}
         />
       </div>
     );

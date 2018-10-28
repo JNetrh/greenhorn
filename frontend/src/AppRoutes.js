@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { PageWrapper } from './components/organisms/PageWrapper';
+import PageWrapper from './components/organisms/PageWrapper';
 import { NoPageWrapper } from './components/organisms/NoPageWrapper';
 import PageNotFound from './components/pages/PageNotFound.jsx';
 import publicRoutes from './routes/publicRoutes';
@@ -9,38 +9,34 @@ import privateRoutes from './routes/privateRoutes';
 
 export const AppRoutes = () => (
   <Switch>
-    {Object.keys(publicRoutes).map(key => {
-      const { Component, path } = publicRoutes[key];
-      return (
-        <Route
-          exact
-          path={path}
-          key={key}
-          render={route => (
+    {publicRoutes.map(({ Component, path }) => (
+      <Route
+        exact
+        path={path}
+        key={path}
+        render={function(route) {
+          return (
             <NoPageWrapper route={route}>
               <Component />
             </NoPageWrapper>
-          )}
-        />
-      );
-    })}
-    {Object.keys(privateRoutes).map(key => {
-      const { Component, SideNavComponent, path } = privateRoutes[key];
-      return (
-        <Route
-          exact
-          path={path}
-          key={key}
-          render={route => (
-            <PageWrapper route={route}>
-              <Component
-                SideNav={SideNavComponent ? <SideNavComponent /> : null}
-              />
+          );
+        }}
+      />
+    ))}
+    {privateRoutes.map(({ Component, SideNav, path }) => (
+      <Route
+        exact
+        path={path}
+        key={path}
+        render={function(route) {
+          return (
+            <PageWrapper {...{ SideNav, route }}>
+              <Component />
             </PageWrapper>
-          )}
-        />
-      );
-    })}
+          );
+        }}
+      />
+    ))}
     <Route component={PageNotFound} />
   </Switch>
 );

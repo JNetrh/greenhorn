@@ -1,30 +1,52 @@
-import { USERS } from '../auth/mockUsers';
+import { User } from '../../models/';
+import { createInvitation } from './invitationController';
+import bcrypt from 'bcryptjs';
 
-const getUserByEmail = async email => {
+export const getUserByEmail = async email => {
   //TODO find in DB
-  const user = USERS.find(user => user.email === email);
+  const user = User.findOne({ where: { email } });
   return user;
 };
 
+export const stripPassword = user => {
+  const { password, ...rest } = user.toJSON();
+  return rest;
+};
+
+export const createUserWithHashedPwd = async ({ password, ...user }) => {
+  const hashedPwd = await bcrypt.hash(password, 8);
+  const createdUser = await User.create({
+    ...user,
+    password: hashedPwd,
+  });
+  return stripPassword(createdUser);
+};
+
 const addUserController = async (req, res) => {
-  console.log(req.body);
-  const { firstname, lastname, email } = req.body;
+  const { name, surname, email, password } = req.body;
   try {
-    if (!firstname || !lastname || !email) {
+    if (!name || !surname || !email || !password) {
       return res
         .status(400)
-        .json({ msg: 'Please provide all mandatory parameter.' });
+        .json({ msg: 'Please provide all mandatory fields.' });
     }
-    // const user = await getUserByEmail(email);
-    // if (user) {
-    //   return res.status(404).json({ msg: `User already exists: ${email}` });
-    // }
-    console.log(process.env.SECRET);
-    return res.json({
-      firstname,
-      lastname,
+    const user = await getUserByEmail(email);
+    if (user) {
+      return res
+        .status(404)
+        .json({ msg: `User with email "${email}" already exists.` });
+    }
+
+    const createdUser = await createUserWithHashedPwd({
+      name,
+      surname,
       email,
+      password,
     });
+
+    await createInvitation(createdUser.id);
+
+    return res.json(createdUser);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
