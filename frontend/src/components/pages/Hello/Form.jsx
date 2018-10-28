@@ -65,7 +65,11 @@ class HelloForm extends Component {
                   <p>First, please set up your password:</p>
                   <Form onSubmit={this.handleSubmit} className="login-form">
                     <FormItem>
-                      <Input iconType="lock" placeholder="New password" />
+                      <Input 
+                        iconType="lock"
+                        type="password"
+                        placeholder="New password"
+                        />
                     </FormItem>
                     <FormItem>
                       <Input
