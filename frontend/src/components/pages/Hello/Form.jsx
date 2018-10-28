@@ -3,6 +3,7 @@ import { Form, Button, Spin } from 'antd';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Field } from 'redux-form';
 
 import logo from '../../../static/greenhorn_logo_dark.svg';
 import Input from '../../molecules/form/Input';
@@ -27,13 +28,18 @@ class HelloForm extends Component {
       error: null,
     };
   }
-  async componentDidMount() {
+
+  getInvitationToken = () => {
     const {
       match: {
         params: { token },
       },
-      getHelloUser,
     } = this.props;
+    return token;
+  };
+  async componentDidMount() {
+    const { getHelloUser } = this.props,
+      token = this.getInvitationToken();
 
     const { User, error } = await getHelloUser(token);
     this.setState({
@@ -42,8 +48,15 @@ class HelloForm extends Component {
       error,
     });
   }
+  handleSubmitWithToken = payload => {
+    this.props.onSubmit({
+      ...payload,
+      invitationToken: this.getInvitationToken(),
+    });
+  };
   render() {
     const { isLoading, user, error } = this.state;
+    const { handleSubmit, onSubmit } = this.props;
     return (
       <Centered>
         <div>
@@ -63,16 +76,23 @@ class HelloForm extends Component {
                     Greenhorn will try to guide you through your needs.{' '}
                   </p>
                   <p>First, please set up your password:</p>
-                  <Form onSubmit={this.handleSubmit} className="login-form">
+                  <Form
+                    onSubmit={handleSubmit(this.handleSubmitWithToken)}
+                    className="login-form"
+                  >
                     <FormItem>
-                      <Input 
+                      <Field
+                        component={Input}
+                        name="password"
                         iconType="lock"
                         type="password"
                         placeholder="New password"
-                        />
+                      />
                     </FormItem>
                     <FormItem>
-                      <Input
+                      <Field
+                        component={Input}
+                        name="passwordRepeat"
                         iconType="lock"
                         type="password"
                         placeholder="Repeat password"
