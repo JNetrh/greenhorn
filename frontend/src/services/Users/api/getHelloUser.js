@@ -6,7 +6,7 @@ export const getHelloUser = invitationToken => async (
   { api },
 ) => {
   try {
-    const { data } = await api.get(`/user/byinvitation/${invitationToken}`);
+    const { data } = await api.get(`/auth/byinvitation/${invitationToken}`);
     return data;
   } catch (err) {
     console.log(err);

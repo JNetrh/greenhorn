@@ -43,12 +43,14 @@ export const submitHello = ({
 }) => async (dispatch, getState, { api }) => {
   const loader = message.loading();
   try {
-    const { data } = await api.put(`user/activate/${invitationToken}`, {
+    const { data } = await api.put(`auth/activate/${invitationToken}`, {
       password,
       passwordRepeat,
     });
+    const { user, token } = data;
+    Cookies.set('auth-token', token);
     loader();
-    dispatch(setActiveUser(data));
+    dispatch(setActiveUser(user));
     message.success('Successfuly logged in', 2);
     history.push('/');
   } catch (err) {
@@ -65,8 +67,13 @@ export const submitHello = ({
 
 export const checkLoggedUser = () => async (dispatch, getState, { api }) => {
   try {
-    const { data } = await api.get('auth/me');
-    dispatch(setActiveUser(data));
+    const {
+      auth: { user },
+    } = getState();
+    if (!user) {
+      const { data } = await api.get('auth/me');
+      dispatch(setActiveUser(data));
+    }
   } catch (err) {
     console.log(err);
     history.push('/login');

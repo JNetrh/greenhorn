@@ -1,7 +1,8 @@
 import { Invitation, User } from '../../models';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { stripPassword } from './addUserController';
+import { stripPassword } from '../user/addUserController';
+import { getToken } from './tokenHandling';
 
 const activateUserController = async (req, res) => {
   const { password, passwordRepeat } = req.body;
@@ -41,7 +42,8 @@ const activateUserController = async (req, res) => {
       }
     );
     const activatedUser = await User.findById(invitation.UserId);
-    return res.json(stripPassword(activatedUser));
+    const authToken = getToken(invitation.UserId);
+    return res.json({ user: stripPassword(activatedUser), token: authToken });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Activate User internal Error ' });
