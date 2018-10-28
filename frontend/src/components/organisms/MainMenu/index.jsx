@@ -75,7 +75,7 @@ class MainMenu extends React.Component {
                   <Link to="">Profile</Link>
                 </Menu.Item>
                 <Menu.Item key="changepwd">
-                  <Link to="/ChangePwd">Change password</Link>
+                  <Link to="/changepassword">Change password</Link>
                 </Menu.Item>
                 <Menu.Item key="logout" onClick={this.Logout}>
                   Logout

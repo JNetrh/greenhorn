@@ -17,7 +17,7 @@ export default [
   },
   {
     Component: ChangePwd,
-    path: '/ChangePwd',
+    path: '/changepassword',
   },
   ...UserRoutes,
   ...TaskRoutes,
