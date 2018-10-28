@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { Menu, Dropdown, Icon } from 'antd';
+import { Menu, Icon } from 'antd';
 import { MenuStyle, LogoWrapper } from './style';
 import logo from '../../../static/greenhorn_logo_dark.svg';
 import { logOut } from '../../../services/Logout/actions';
@@ -75,7 +75,7 @@ class MainMenu extends React.Component {
                   <Link to="">Profile</Link>
                 </Menu.Item>
                 <Menu.Item key="changepwd">
-                  <Link to="">Change password</Link>
+                  <Link to="/ChangePwd">Change password</Link>
                 </Menu.Item>
                 <Menu.Item key="logout" onClick={this.Logout}>
                   Logout
