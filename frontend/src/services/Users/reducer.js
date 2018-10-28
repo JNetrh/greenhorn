@@ -3,6 +3,7 @@ import {
   LIST_FETCH_USERS_SUCCESS,
   LIST_FETCH_USERS_FAILURE,
   ADD_NEW_USER,
+  CHANGE_PWD_USER,
 } from './actions';
 
 const initialState = {
@@ -48,6 +49,15 @@ export const UsersListReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...state.users, user],
+      };
+    }
+
+    case CHANGE_PWD_USER: {
+      const { currentPassword, newPassword, newPasswordCheck } = action.payload;
+      console.log('Changing', currentPassword, 'to', newPassword);
+      return {
+        ...state,
+        isLoading: false,
       };
     }
 

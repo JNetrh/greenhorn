@@ -31,7 +31,8 @@ class ChangePwd extends Component {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormItem label="Current password">
               <Field
-                name="currentpwd"
+                name="currentPassword"
+                type="password"
                 component={Input}
                 tabIndex={1}
                 iconType="lock"
@@ -40,7 +41,8 @@ class ChangePwd extends Component {
             </FormItem>
             <FormItem label="New password">
               <Field
-                name="newpwd"
+                name="newPassword"
+                type="password"
                 component={Input}
                 tabIndex={2}
                 iconType="lock"
@@ -49,8 +51,8 @@ class ChangePwd extends Component {
             </FormItem>
             <FormItem label="New password again">
               <Field
-                type="newpwdcheck"
-                name="password"
+                type="password"
+                name="newPasswordCheck"
                 component={Input}
                 tabIndex={4}
                 iconType="lock"

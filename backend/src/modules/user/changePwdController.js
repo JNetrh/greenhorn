@@ -21,7 +21,9 @@ export const changeUserPwd = async (req, res) => {
       newPasswordCheck
     );
     if (!verifiedNewPassword) {
-      res.status(400).json({ msg: 'Your new password is same as old one!' });
+      res.status(400).json({
+        msg: `Your new password is same as old one!`,
+      });
     }
     const hashedPwd = await bcrypt.hash(newPassword, 8);
 
