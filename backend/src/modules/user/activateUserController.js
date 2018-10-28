@@ -1,12 +1,7 @@
 import { Invitation, User } from '../../models';
-import loginController from '../auth/loginController';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-export const getUserByEmail = async email => {
-    //TODO find in DB
-    const user = User.findOne({ where: { email } });
-    return user;
-  };
 
   export const stripPassword = user => {
     const { password, ...rest } = user.toJSON();
@@ -22,11 +17,23 @@ export const getUserByEmail = async email => {
         id: invitation.UserId,
       },
     });
-    return stripPassword(acivatedUser);
+    return stripPassword(activatedUser);
   };
   
-  const activateUserController = async (req, res) => {
-    const { password, passwordRepeat } = req.body;
+  const activateUserController = async (req, res) => {   
+  const { password, passwordRepeat } = req.body;
+  const { token } = req.params;
+  const verified = jwt.verify(token, process.env.SECRET);
+
+  if (!verified) {
+    res.status(401).json({ msg: 'Token not valid' });
+  }
+  const invitation = await Invitation.findById(verified.invitationId, {
+    include: [User],
+  });
+  if (!invitation) {
+    res.status(404).json({ msg: 'This invitation does not exist.' });
+  }
     try {
       if (password !== passwordRepeat) {
         return res
@@ -38,16 +45,15 @@ export const getUserByEmail = async email => {
           .status(400)
           .json({ msg: 'Please enter both password and password repeated' });
       }
-  
-      const acivatedUser = await activateUserWithHashedPwd({
-        password
-      });
-
-  
-      await activateUser(acivatedUser.id);     
-      loginController (password, email);
-  
-
+        const hashedPwd = await bcrypt.hash(password, 8);
+        const activatedUser = await User.update({
+          password: hashedPwd,  
+        }, 
+        {where: {
+          id: invitation.UserId,
+        },}
+      );
+      return res.json('Bombs away');
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Activate User internal Error ' });

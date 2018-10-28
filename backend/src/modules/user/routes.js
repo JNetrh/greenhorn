@@ -12,10 +12,7 @@ router.get('/', usersController);
 router.post('/', addUserController);
 router.get('/byinvitation/:token', getUserByInvitationToken);
 
-router.put('/activate',activateUserController);
-
-router.get('/test',test);
-router.put('/test',test);
+router.put('/activate/:token',activateUserController);
 
 
 export default router;
