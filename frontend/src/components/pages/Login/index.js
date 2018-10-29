@@ -6,7 +6,7 @@ import Form from './Form';
 import { logIn } from '../../../services/Auth/actions';
 
 //TODO data coming from backend
-const EMAIL_ENDINGS = [
+export const EMAIL_ENDINGS = [
   { value: '@cngroup.dk', label: '@cngroup.dk' },
   { value: '@google.com', label: '@google.com' },
 ];

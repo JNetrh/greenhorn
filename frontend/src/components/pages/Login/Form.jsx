@@ -12,10 +12,11 @@ import Select from '../../molecules/form/Select';
 import Input from '../../molecules/form/Input';
 import Checkbox from '../../molecules/form/Checkbox';
 import Logo from '../../atoms/Logo';
+import { EMAIL_ENDINGS } from '.';
 
 class LoginForm extends Component {
   render() {
-    const { handleSubmit, emailEndings, onSubmit, auth } = this.props;
+    const { handleSubmit, onSubmit, auth } = this.props;
     return (
       <Centered>
         <FormWrapper>
@@ -32,7 +33,7 @@ class LoginForm extends Component {
                   <Field
                     name="emailEnding"
                     component={Select}
-                    options={emailEndings}
+                    options={EMAIL_ENDINGS}
                   />
                 }
               />
