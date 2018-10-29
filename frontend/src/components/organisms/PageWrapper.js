@@ -4,7 +4,7 @@ import SideMenu from './SideMenu';
 import Header from './Header';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { checkLoggedUser } from '../../services/Login/actions';
+import { checkLoggedUser } from '../../services/Auth/actions';
 import NoAuthOverlay from '../molecules/NoAuthOverlay';
 
 const { Sider, Content } = Layout;

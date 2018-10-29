@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { Menu, Icon } from 'antd';
 import { MenuStyle, LogoWrapper } from './style';
 import logo from '../../../static/greenhorn_logo_dark.svg';
-import { logOut } from '../../../services/Logout/actions';
+import { logOut } from '../../../services/Auth/actions';
 
 const MENU_ITEMS = [
   { title: 'To be done', to: '/' },

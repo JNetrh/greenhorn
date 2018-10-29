@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'antd';
+import { connect } from 'react-redux';
+
 import { FormWrapper } from '../../styles/Login';
 import Input from '../molecules/form/Input';
 import Logo from '../atoms/Logo';
+import { forgotPassword } from '../../services/Auth/actions';
 
 const FormItem = Form.Item;
 
 class ResetPasswordForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+    };
+  }
+  handleSubmit = async e => {
+    e.preventDefault();
+    const done = await this.props.onSubmit(this.state.email);
+    if (done) {
+      this.setState({
+        email: '',
+      });
+    }
+  };
   render() {
     return (
       <FormWrapper>
@@ -18,7 +36,12 @@ class ResetPasswordForm extends Component {
             Please fill in your email, click send and follow the instructions
             sent to your email.
           </p>
-          <Input iconType="user" placeholder="Your email" />
+          <Input
+            iconType="user"
+            placeholder="Your email"
+            value={this.state.email}
+            onChange={e => this.setState({ email: e.target.value })}
+          />
           <FormItem style={{ margin: '20px 0 0 0' }}>
             <Button
               type="primary"
@@ -37,4 +60,7 @@ class ResetPasswordForm extends Component {
   }
 }
 
-export default ResetPasswordForm;
+export default connect(
+  null,
+  dispatch => ({ onSubmit: email => dispatch(forgotPassword({ email })) }),
+)(ResetPasswordForm);

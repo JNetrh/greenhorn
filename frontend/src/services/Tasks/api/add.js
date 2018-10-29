@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import { addTask } from '../actions';
+import getErrorMessage from '../../../helpers/getErrorMessage';
 
 export const AddTask = ({ id, name, description }) => async (
   dispatch,
@@ -18,11 +19,8 @@ export const AddTask = ({ id, name, description }) => async (
     message.success('Task added', 2);
   } catch (err) {
     if (err.response) {
-      const {
-        data: { msg },
-      } = err.response;
+      message.error(getErrorMessage(err), 2);
       await loader();
-      message.error(msg, 2);
     }
     console.log(err);
   }

@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import getErrorMessage from '../../../helpers/getErrorMessage';
 
 export const getHelloUser = invitationToken => async (
   dispatch,
@@ -11,10 +12,7 @@ export const getHelloUser = invitationToken => async (
   } catch (err) {
     console.log(err);
     if (err.response) {
-      const {
-        data: { msg },
-      } = err.response;
-      const error = msg || 'Token validation failed.';
+      const error = getErrorMessage(err) || 'Token validation failed.';
       message.error(error, 2);
       return {
         error,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import Form from './Form';
-import { logIn } from '../../../services/Login/actions';
+import { logIn } from '../../../services/Auth/actions';
 
 //TODO data coming from backend
 const EMAIL_ENDINGS = [

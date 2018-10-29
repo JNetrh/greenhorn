@@ -1,6 +1,7 @@
 import { message } from 'antd';
 import Cookies from 'js-cookie';
 import history from '../../history';
+import getErrorMessage from '../../helpers/getErrorMessage';
 
 export const SET_ACTIVE_USER = 'SET_ACTIVE_USER';
 
@@ -26,14 +27,17 @@ export const logIn = payload => async (dispatch, getState, { api }) => {
     history.push('/');
   } catch (err) {
     if (err.response) {
-      const {
-        data: { msg },
-      } = err.response;
+      message.error(getErrorMessage(err), 2);
       await loader();
-      message.error(msg, 2);
     }
     console.log(err);
   }
+};
+
+export const logOut = () => {
+  Cookies.remove('auth-token');
+  // message.success('Successfuly logged out', 2);
+  history.push('/login');
 };
 
 export const submitHello = ({
@@ -55,11 +59,8 @@ export const submitHello = ({
     history.push('/');
   } catch (err) {
     if (err.response) {
-      const {
-        data: { msg },
-      } = err.response;
       await loader();
-      message.error(msg, 2);
+      message.error(getErrorMessage(err), 2);
     }
     console.log(err);
   }
@@ -77,5 +78,23 @@ export const checkLoggedUser = () => async (dispatch, getState, { api }) => {
   } catch (err) {
     console.log(err);
     history.push('/login');
+  }
+};
+
+export const forgotPassword = ({ email }) => async (
+  dispatch,
+  getState,
+  { api },
+) => {
+  try {
+    const {
+      data: { msg },
+    } = await api.post('auth/forgotpwd', { email });
+    message.success(msg, 4);
+    return true;
+    // dispatch(setActiveUser(data));
+  } catch (err) {
+    message.error(getErrorMessage(err), 2);
+    // history.push('/login');
   }
 };

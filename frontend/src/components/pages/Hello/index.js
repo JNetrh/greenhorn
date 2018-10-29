@@ -3,7 +3,7 @@ import Form from './Form';
 import { getHelloUser } from '../../../services/Users/api/getHelloUser';
 import { compose } from 'recompose';
 import { reduxForm } from 'redux-form';
-import { submitHello } from '../../../services/Login/actions';
+import { submitHello } from '../../../services/Auth/actions';
 
 const mapDispatchToProps = dispatch => {
   return {
