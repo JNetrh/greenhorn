@@ -4,8 +4,7 @@ dotenv.config();
 const path = require('path');
 const fs = require('fs');
 const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const config = require('../config/config.js');
 const DataTypes = require('sequelize/lib/data-types');
 const basename = path.basename(__filename);
 
