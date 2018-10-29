@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import Form from './Form';
 import { AddUser } from '../../../services/Users/api/add';
+import validate from './validate';
 
 const AddUserPage = props => <Form {...props} />;
 
@@ -20,9 +21,8 @@ const redux = connect(
 
 const form = reduxForm({
   form: 'adduser',
+  validate,
 });
-
-
 
 export default compose(
   redux,
