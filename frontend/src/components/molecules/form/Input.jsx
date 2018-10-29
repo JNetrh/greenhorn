@@ -3,30 +3,29 @@ import { Input as AntInput, Form, Icon } from 'antd';
 
 const FormItem = Form.Item;
 class Input extends Component {
-  render() {
-    const {
-      iconType,
-      placeholder,
-      type,
-      input,
-      meta: { touched, error, warning },
-      ...rest
-    } = this.props;
-    const errorMessage = touched &&
-        error && {
+  getMessages = () => {
+    const { meta } = this.props;
+    if (meta && meta.touched) {
+      const { error, warning } = meta;
+      if (error) {
+        return {
           validateStatus: 'error',
           help: error,
-        },
-      warningMessage = touched &&
-        warning && {
+        };
+      }
+      if (warning) {
+        return {
           validateStatus: 'warning',
           help: warning,
         };
+      }
+    }
+  };
+  render() {
+    const { iconType, placeholder, type, input, ...rest } = this.props;
+
     return (
-      <FormItem
-        {...{ ...errorMessage, ...warningMessage }}
-        style={{ margin: 0 }}
-      >
+      <FormItem {...this.getMessages()} style={{ margin: 0 }}>
         <AntInput
           prefix={
             <Icon type={iconType || ''} style={{ color: 'rgba(0,0,0,.25)' }} />
