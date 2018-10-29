@@ -34,10 +34,11 @@ export const logIn = payload => async (dispatch, getState, { api }) => {
   }
 };
 
-export const logOut = () => {
+export const logOut = () => dispatch => {
   Cookies.remove('auth-token');
-  // message.success('Successfuly logged out', 2);
   history.push('/login');
+  dispatch(setActiveUser(null));
+  // message.success('Successfuly logged out', 2);
 };
 
 export const submitHello = ({

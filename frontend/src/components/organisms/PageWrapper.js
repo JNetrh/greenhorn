@@ -16,7 +16,7 @@ class PageWrapper extends Component {
   render() {
     const { children, SideNav, user } = this.props;
     return (
-      <Layout>
+      <Layout style={{ minHeight: '100vh' }}>
         <React.Fragment>
           <Header />
           <Layout>

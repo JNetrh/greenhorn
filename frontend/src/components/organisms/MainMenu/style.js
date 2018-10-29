@@ -5,12 +5,16 @@ export const MenuStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex: 1;
+  position: relative;
   .burger {
     display: none;
     flex: 1;
   }
   .menu-cont {
     flex: 1;
+  }
+  .ant-menu-horizontal {
+    border: none;
   }
   @media (max-width: ${breakpoints.sm}) {
     .menu-cont {

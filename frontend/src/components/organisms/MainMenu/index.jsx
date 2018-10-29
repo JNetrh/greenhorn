@@ -4,15 +4,13 @@ import { withRouter } from 'react-router';
 import { Menu, Icon } from 'antd';
 import { MenuStyle, LogoWrapper } from './style';
 import logo from '../../../static/greenhorn_logo_dark.svg';
-import { logOut } from '../../../services/Auth/actions';
+import AccountMenu from '../AccountMenu';
 
 const MENU_ITEMS = [
   { title: 'To be done', to: '/' },
   { title: 'Tasks', to: '/tasks/list' },
   { title: 'Employees', to: '/users/list' },
 ];
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 class MainMenu extends React.Component {
   constructor(props) {
@@ -25,9 +23,6 @@ class MainMenu extends React.Component {
     this.setState({
       isOpened: !this.state.isOpened,
     });
-  };
-  Logout = () => {
-    logOut();
   };
   render() {
     const {
@@ -43,45 +38,26 @@ class MainMenu extends React.Component {
     const { isOpened } = this.state;
     return (
       <MenuStyle isOpened={isOpened}>
-        <LogoWrapper>
-          <img src={logo} alt="Greenhorn logo" />
-        </LogoWrapper>
+        <Link to="/">
+          <LogoWrapper>
+            <img src={logo} alt="Greenhorn logo" />
+          </LogoWrapper>
+        </Link>
         <div className="burger" onClick={this.toggleOpen}>
           <Icon type={`menu-${isOpened ? 'unfold' : 'fold'}`} />
         </div>
+        <AccountMenu />
         <div className="menu-cont">
           <Menu
             mode="horizontal"
             selectedKeys={selectedKeys}
-            style={{ lineHeight: '61px', flex: 1 }}
+            style={{ lineHeight: '57px', flex: 1 }}
           >
             {MENU_ITEMS.map(({ title, to }) => (
               <Menu.Item key={to}>
                 <Link to={to}>{title}</Link>
               </Menu.Item>
             ))}
-
-            <SubMenu
-              title={
-                <span className="submenu-title-wrapper">
-                  <Icon type="user" />
-                  <b>Account</b>
-                </span>
-              }
-              style={{ float: 'right' }}
-            >
-              <MenuItemGroup title="Your account">
-                <Menu.Item key="">
-                  <Link to="">Profile</Link>
-                </Menu.Item>
-                <Menu.Item key="changepwd">
-                  <Link to="/changepassword">Change password</Link>
-                </Menu.Item>
-                <Menu.Item key="logout" onClick={this.Logout}>
-                  Logout
-                </Menu.Item>
-              </MenuItemGroup>
-            </SubMenu>
           </Menu>
         </div>
       </MenuStyle>

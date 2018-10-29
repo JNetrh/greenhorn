@@ -25,7 +25,7 @@ export const changeUserPwd = async (req, res) => {
       },
       {
         where: {
-          id: user.UserId,
+          id: req.userId,
         },
       }
     );

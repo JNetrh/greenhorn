@@ -2,6 +2,13 @@
   height: 100%;
 }
 
+html,
+body {
+  width: 100%;
+  height: auto !important;
+  min-height: 100%;
+}
+
 .ant-layout {
   height: 100%;
 }
@@ -24,4 +31,13 @@
   z-index: 1;
   top: 34px;
   background: rgba(0, 0, 0, 0.1);
+}
+
+.ant-form .ant-form-item {
+  margin-bottom: 0;
+}
+
+.ant-form .ant-form-item-label {
+  line-height: initial;
+  margin: 8px 0 4px 0;
 }
