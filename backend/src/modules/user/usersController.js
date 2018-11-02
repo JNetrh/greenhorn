@@ -1,4 +1,5 @@
 import { User } from '../../models';
+import { stripPassword } from '../user/addUserController';
 
 export const userController = async (req, res) => {
   try {
@@ -17,7 +18,7 @@ export const userDetailController = async(req, res) =>{
     if (!userById) {
       res.status(404).json({ msg: 'This user does not exist' });
     }
-    return res.json(userById);
+    return res.json(stripPassword(userById));
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
