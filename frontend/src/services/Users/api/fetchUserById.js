@@ -1,12 +1,12 @@
 import { message } from 'antd';
 import getErrorMessage from '../../../helpers/getErrorMessage';
+import api from '../../../api';
 
-export const getUser = id => async (dispatch, getState, { api }) => {
+export const fetchUserById = async id => {
   try {
-    const { data } = await api.get(`/user/${id}`);
+    const { data } = await api.get(`user/${id}`);
     return data;
   } catch (err) {
-    console.log(err);
     if (err.response) {
       const error = getErrorMessage(err) || 'User not found';
       message.error(error, 2);
@@ -14,5 +14,7 @@ export const getUser = id => async (dispatch, getState, { api }) => {
         error,
       };
     }
+
+    return { error: 'Fetch failed' };
   }
 };

@@ -15,15 +15,10 @@ const FormWrapper = styled.div`
 
 class UserDetail extends Component {
   confirm = e => {
-    const { startDeleteUser } = this.props;
-    startDeleteUser('test@cngroup.dk');
+    const { startDeleteUser, user } = this.props;
+    console.log(user);
+    startDeleteUser(user);
   };
-
-  componentDidMount() {
-    // const { fetchUser } = this.props;
-    console.log(this.props.match.params.id);
-    // fetchUser(2)
-  }
 
   render() {
     const { handleSubmit, onSubmit } = this.props;
