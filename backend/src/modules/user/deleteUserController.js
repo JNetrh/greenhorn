@@ -1,33 +1,32 @@
 import { User } from '../../models/';
 
-export const getUserByEmail = async email => {
+export const getUserById = async id => {
   //TODO find in DB
-  const user = User.findOne({ where: { email } });
+  const user = User.findOne({ where: { id } });
   return user;
 };
 
-export const deleteUser = async email => {
-  const deleted = await User.destroy({ where: { email: email } });
+export const deleteUserById = async id => {
+  const deleted = await User.destroy({ where: { id: id } });
   return deleted;
 };
 
 const deleteUserController = async (req, res) => {
-  const { email } = req.body;
-
+  const { id } = req.params;
+  console.log('id:', id);
   try {
-    if (!email) {
+    if (!id) {
       return res
         .status(400)
         .json({ msg: 'Please provide all mandatory fields.' });
     }
-    const user = await getUserByEmail(email);
+    const user = await getUserById(id);
     if (!user) {
       return res
         .status(404)
-        .json({ msg: `User with email "${email}" does not exists.` });
+        .json({ msg: `User with id "${id}" does not exists.` });
     }
-    console.log(user);
-    const deletedUser = await deleteUser(email);
+    const deletedUser = await deleteUserById(id);
 
     return res.json(deletedUser);
   } catch (err) {
