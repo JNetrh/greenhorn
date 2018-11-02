@@ -5,9 +5,9 @@ import addUserController from './addUserController';
 import deleteUserController from './deleteUserController';
 import { changeUserPwd } from './changePwdController';
 import { verifyToken } from './../auth/tokenHandling';
-import  {userController} from './usersController';
-import {userDetailController} from './usersController';
-import {userUpdateController} from './usersController';
+import { userController } from './usersController';
+import { userDetailController } from './usersController';
+import { userUpdateController } from './usersController';
 
 const router = expressAsyncAwait(Router());
 router.get('/', userController);
