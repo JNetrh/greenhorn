@@ -21,6 +21,8 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "dotenv": "^6.1.0",
+    "ejs": "^2.6.1",
+    "email-templates": "^5.0.2",
     "express": "^4.15.2",
     "express-async-await": "1.1.0",
     "file-system": "^2.2.2",
@@ -28,6 +30,7 @@
     "log4js": "1.1.1",
     "mysql2": "^1.6.1",
     "nodemailer": "^4.6.8",
+    "path": "^0.12.7",
     "sequelize": "^4.41.0",
     "sequelize-cli": "^5.2.0"
   },
