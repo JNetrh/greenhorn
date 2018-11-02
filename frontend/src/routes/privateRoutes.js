@@ -22,7 +22,7 @@ export default [
   },
   {
     Component: UserDetail,
-    path: '/userdetail',
+    path: '/user/:id',
   },
   ...UserRoutes,
   ...TaskRoutes,

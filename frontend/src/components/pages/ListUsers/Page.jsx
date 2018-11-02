@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'antd';
+import { Link } from 'react-router-dom';
 
-const RowActions = () => <Button type="primary">Action</Button>;
+const RowActions = ({ id }) => (
+  <Link to={`/user/${id}`}>
+    <Button type="primary">Detail</Button>
+  </Link>
+);
 
 const columns = [
   { title: 'Name', width: 100, dataIndex: 'name' },

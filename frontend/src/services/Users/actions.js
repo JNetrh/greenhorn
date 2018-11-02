@@ -4,6 +4,9 @@ export const LIST_FETCH_USERS_FAILURE = 'LIST_FETCH_USERS_FAILURE';
 export const ADD_NEW_USER = 'ADD_NEW_USER';
 export const CHANGE_PWD_USER = 'CHANGE_PWD_USER';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const DELETE_USER = 'DELETE_USER';
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 
 export const fetchUsers = () => ({
   type: LIST_FETCH_USERS,
@@ -32,4 +35,19 @@ export const changePwdUser = user => ({
 export const getUser = id => ({
   type: GET_USER_BY_ID,
   payload: { id },
+});
+
+export const deteleUser = user => ({
+  type: DELETE_USER,
+  payload: { user },
+});
+
+export const deteleUserSuccess = user => ({
+  type: DELETE_USER_SUCCESS,
+  payload: { user },
+});
+
+export const deteleUserFailure = error => ({
+  type: DELETE_USER_FAILURE,
+  payload: { error },
 });

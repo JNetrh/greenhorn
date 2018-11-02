@@ -14,12 +14,20 @@ const FormWrapper = styled.div`
 `;
 
 class UserDetail extends Component {
+  confirm = e => {
+    const { startDeleteUser } = this.props;
+    startDeleteUser('test@cngroup.dk');
+  };
+
+  componentDidMount() {
+    // const { fetchUser } = this.props;
+    console.log(this.props.match.params.id);
+    // fetchUser(2)
+  }
+
   render() {
     const { handleSubmit, onSubmit } = this.props;
-    function confirm(e) {
-      console.log(e);
-      message.success('Click on Yes');
-    }
+
     return (
       <PageFormWrapper>
         <h2>User detail</h2>
@@ -63,27 +71,20 @@ class UserDetail extends Component {
               <Button
                 type="primary"
                 htmlType="submit"
-                onClick={this.enterIconLoading}
                 style={{ marginRight: '10px' }}
               >
                 Save
               </Button>
               <Popconfirm
-                title="Are you sure delete this task?"
+                title="Are you sure delete this user?"
                 icon={
                   <Icon type="question-circle-o" style={{ color: 'red' }} />
                 }
-                onConfirm={confirm}
+                onConfirm={this.confirm}
                 okText="Yes"
                 cancelText="No"
               >
-                <Button
-                  type="danger"
-                  htmlType="delete"
-                  onClick={this.enterIconLoading}
-                >
-                  Delete
-                </Button>
+                <Button type="danger">Delete</Button>
               </Popconfirm>
             </FormItem>
           </Form>
