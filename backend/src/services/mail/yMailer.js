@@ -1,9 +1,23 @@
+'use strict';
 const nodemailer = require('nodemailer');
-const Email = require('email-templates');
-const path = require('path');
 const dotenv = require('dotenv');
+const Email = require('email-templates');
+// const HelloMailSender = require('./HelloMailSender');
 
 dotenv.config();
+
+// const options = {
+//   host: process.env.SMTP_HOST,
+//   port: process.env.SMTP_PORT,
+//   secure: process.env.SMTP_SECURE,
+//   auth: {
+//     user: process.env.SMTP_USERNAME,
+//     pass: process.env.SMTP_PASSWORD,
+//   },
+//   tls: {
+//     rejectUnauthorized: false,
+//   },
+// };
 
 const options = {
   host: 'smtp.jakub-netrh.cz',
@@ -17,39 +31,57 @@ const options = {
     rejectUnauthorized: false,
   },
 };
-console.log(options);
 
-const email = new Email({
-  message: {
-    from: process.env.SMTP_EMAIL,
-  },
-  // uncomment below to send emails in development/test env:
-  send: true,
-  transport: nodemailer.createTransport(options),
-  views: {
-    options: {
-      extension: 'ejs',
-    },
-  },
-});
-
-email
-  .send({
-    template: 'helloToken',
+const mailer = async ({ template, to, tokenUrl, name }) => {
+  const transport = await nodemailer.createTransport(options);
+  const email = new Email({
     message: {
-      to: 'netrh.j@seznam.cz',
-      subject: 'Welcome in greenhorn app',
-      name: 'jakub',
-      username: 'jakub',
-      token: 'localhost:3000',
+      from: 'email@jakub-netrh.cz',
     },
-    locals: {
-      to: 'netrh.j@seznam.cz',
-      subject: 'Welcome in greenhorn app',
-      name: 'jakub',
-      username: 'jakub',
-      token: 'localhost:3000',
+    // uncomment below to send emails in development/test env:
+    send: true,
+    transport: transport,
+    views: {
+      options: {
+        extension: 'ejs',
+      },
     },
-  })
-  .then(console.log)
-  .catch(console.error);
+  });
+
+  try {
+    return await email.send({
+      template: template,
+      message: {
+        to: to,
+        subject: 'Welcome in greenhorn app',
+        name: name,
+        username: 'jakub',
+        token: TokenUrl,
+      },
+      locals: {
+        to: to,
+        subject: 'Welcome in greenhorn app',
+        name: name,
+        username: 'jakub',
+        token: tokenUrl,
+      },
+    });
+  } catch (error) {
+    return error;
+  }
+};
+
+// const helloMail = async (email, name, tokenUrl) => {
+//   try {
+//     const mailTransport = await nodemailer.createTransport(options);
+//     const helloMail = new HelloMailSender(mailTransport);
+//     return await helloMail.send(email, name, tokenUrl);
+//   } catch (error) {
+//     console.log(error);
+//     return { error };
+//   }
+// };
+
+module.exports = {
+  mailer,
+};
