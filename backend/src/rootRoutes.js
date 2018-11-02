@@ -15,6 +15,6 @@ router.use('/api/products', productRoutes);
 router.use('/api/auth', authRoutes);
 router.use('/api/user', user);
 router.use('/api/tasks', tasks);
-router.use('/api/groups', groups);
+router.use('/api/group', groups);
 
 export default router;

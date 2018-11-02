@@ -18,12 +18,12 @@ const FormWrapper = styled.div`
 
 class AddGroupForm extends Component {
   render() {
-    // const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit, onSubmit } = this.props;
     return (
       <PageFormWrapper>
         <h2>Add group</h2>
         <FormWrapper>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <FormItem label="Group name">
               <Field
                 name="name"
