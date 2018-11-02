@@ -8,7 +8,6 @@ import { verifyToken } from './../auth/tokenHandling';
 import  {userController} from './usersController';
 import {userDetailController} from './usersController';
 import {userUpdateController} from './usersController';
-import { userController } from './usersController';
 
 const router = expressAsyncAwait(Router());
 router.get('/', userController);
