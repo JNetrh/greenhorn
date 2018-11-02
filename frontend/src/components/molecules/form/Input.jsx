@@ -1,34 +1,17 @@
 import React, { Component } from 'react';
-import { Input as AntInput, Form, Icon } from 'antd';
+import { Input as AntInput, Icon } from 'antd';
+import FormItem from './FormItem';
 
-const FormItem = Form.Item;
 class Input extends Component {
-  getMessages = () => {
-    const { meta } = this.props;
-    if (meta && meta.touched) {
-      const { error, warning } = meta;
-      if (error) {
-        return {
-          validateStatus: 'error',
-          help: error,
-        };
-      }
-      if (warning) {
-        return {
-          validateStatus: 'warning',
-          help: warning,
-        };
-      }
-    }
-  };
   render() {
     const { iconType, placeholder, type, input, ...rest } = this.props;
-
     return (
-      <FormItem {...this.getMessages()} style={{ margin: 0 }}>
+      <FormItem {...this.props}>
         <AntInput
           prefix={
-            <Icon type={iconType || ''} style={{ color: 'rgba(0,0,0,.25)' }} />
+            iconType && (
+              <Icon type={iconType} style={{ color: 'rgba(0,0,0,.25)' }} />
+            )
           }
           placeholder={placeholder || ''}
           type={type}

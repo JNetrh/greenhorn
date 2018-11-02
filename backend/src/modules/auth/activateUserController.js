@@ -6,7 +6,7 @@ import { getToken } from './tokenHandling';
 
 const activateUserController = async (req, res) => {
   const { password, passwordRepeat } = req.body;
-  console.log(password, passwordRepeat);
+
   const { token } = req.params;
   try {
     const verified = jwt.verify(token, process.env.SECRET);
@@ -42,7 +42,10 @@ const activateUserController = async (req, res) => {
       }
     );
     const activatedUser = await User.findById(invitation.UserId);
-    const authToken = getToken(invitation.UserId);
+    const authToken = getToken({
+      userId: activatedUser.id,
+      role: activatedUser.role,
+    });
     return res.json({ user: stripPassword(activatedUser), token: authToken });
   } catch (err) {
     console.log(err);

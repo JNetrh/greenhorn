@@ -4,6 +4,6 @@ import { Router } from 'express';
 import addGroupController from './addGroupController';
 
 const router = expressAsyncAwait(Router());
-router.post('/add', addGroupController);
+router.post('/', addGroupController);
 
 export default router;

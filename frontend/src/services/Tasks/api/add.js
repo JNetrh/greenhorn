@@ -2,17 +2,19 @@ import { message } from 'antd';
 import { addTask } from '../actions';
 import getErrorMessage from '../../../helpers/getErrorMessage';
 
-export const AddTask = ({ id, name, description }) => async (
-  dispatch,
-  getState,
-  { api },
-) => {
+export const AddTask = ({
+  title,
+  description,
+  estimatedTime,
+  severity,
+}) => async (dispatch, getState, { api }) => {
   const loader = message.loading('Adding task');
   try {
     const { data } = await api.post('/task', {
-      id,
-      name,
+      title,
       description,
+      estimatedTime,
+      severity,
     });
     loader();
     dispatch(addTask(data));
