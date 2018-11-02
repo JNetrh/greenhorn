@@ -25,7 +25,7 @@ const options = {
   secure: true,
   auth: {
     user: 'email@jakub-netrh.cz',
-    pass: 'ff92af89',
+    pass: '',
   },
   tls: {
     rejectUnauthorized: false,
@@ -47,25 +47,28 @@ const mailer = async ({ template, to, tokenUrl, name }) => {
       },
     },
   });
-
   try {
-    return await email.send({
-      template: template,
-      message: {
-        to: to,
-        subject: 'Welcome in greenhorn app',
-        name: name,
-        username: 'jakub',
-        token: TokenUrl,
-      },
-      locals: {
-        to: to,
-        subject: 'Welcome in greenhorn app',
-        name: name,
-        username: 'jakub',
-        token: tokenUrl,
-      },
-    });
+    email
+      .send({
+        template: template,
+        message: {
+          to: to,
+          subject: 'Welcome in greenhorn app',
+          name: name,
+          username: 'jakub',
+          token: TokenUrl,
+        },
+        locals: {
+          to: to,
+          subject: 'Welcome in greenhorn app',
+          name: name,
+          username: 'jakub',
+          token: tokenUrl,
+        },
+      })
+      .then(e => {
+        return e;
+      });
   } catch (error) {
     return error;
   }

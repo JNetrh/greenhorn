@@ -1,4 +1,4 @@
-import { mailer } from '../../services/mail/yMailer';
+import { mailer } from '../../services/mail/mailer';
 
 export const mailController = async (req, res) => {
   // let xxx = ;
