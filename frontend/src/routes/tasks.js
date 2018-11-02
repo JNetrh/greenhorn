@@ -1,4 +1,5 @@
 import ListTasks from '../components/pages/ListTasks';
+import AddTask from '../components/pages/AddTask';
 import mapRouteObject from '../helpers/mapRouteObject';
 
 const TasksRoutesObject = {
@@ -9,7 +10,7 @@ const TasksRoutesObject = {
       add: {
         title: 'Add Task',
         icon: 'plus',
-        Component: () => 'will be done',
+        Component: AddTask,
       },
       list: {
         title: 'List',
