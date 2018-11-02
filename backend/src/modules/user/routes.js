@@ -3,12 +3,14 @@ import { Router } from 'express';
 
 import addUserController from './addUserController';
 import deleteUserController from './deleteUserController';
-import usersController from './usersController';
 import { changeUserPwd } from './changePwdController';
 import { verifyToken } from './../auth/tokenHandling';
+import  {userController} from './usersController';
+import {userDetailController} from './usersController';
 
 const router = expressAsyncAwait(Router());
-router.get('/', usersController);
+router.get('/', userController);
+router.get('/:id', userDetailController);
 router.post('/', addUserController);
 router.delete('/', deleteUserController);
 router.post('/changepwd', verifyToken, changeUserPwd);
