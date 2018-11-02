@@ -1,8 +1,9 @@
-import { TASKS } from '../../mockups/mockTasks';
+import { Task } from '../../models';
 
 const listTaskController = async (req, res) => {
   try {
-    return res.json(TASKS);
+    const allTasks = await Task.findAll();
+    return res.json(allTasks);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
