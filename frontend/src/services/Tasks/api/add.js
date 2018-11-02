@@ -10,13 +10,14 @@ export const AddTask = ({
 }) => async (dispatch, getState, { api }) => {
   const loader = message.loading('Adding task');
   try {
-    const { data } = await api.post('/task', {
+    const { data } = await api.post('tasks/add', {
       title,
       description,
       estimatedTime,
       severity,
     });
     loader();
+    console.log(data);
     dispatch(addTask(data));
     message.success('Task added', 2);
   } catch (err) {
