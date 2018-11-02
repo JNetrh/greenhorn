@@ -2,6 +2,7 @@ import models from './models';
 import {
   createUserWithHashedPwd,
   getUserByEmail,
+  ROLES,
 } from './modules/user/addUserController';
 
 const TEST_USER = {
@@ -9,6 +10,7 @@ const TEST_USER = {
   surname: 'Doe',
   email: 'test@cngroup.dk',
   password: 'test',
+  role: ROLES[2],
 };
 
 const initDb = async () => {
