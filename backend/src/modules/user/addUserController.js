@@ -2,6 +2,8 @@ import { User } from '../../models/';
 import { createInvitation } from './invitationController';
 import bcrypt from 'bcryptjs';
 
+export const ROLES = ['user', 'taskowner', 'hr'];
+
 export const getUserByEmail = async email => {
   //TODO find in DB
   const user = User.findOne({ where: { email } });
@@ -18,6 +20,7 @@ export const createUserWithHashedPwd = async ({ password, ...user }) => {
   const createdUser = await User.create({
     ...user,
     password: hashedPwd,
+    role: user.role || ROLES[0], //TODO assign a correct role
   });
   return stripPassword(createdUser);
 };

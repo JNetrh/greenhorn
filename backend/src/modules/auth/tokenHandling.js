@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-export const getToken = (userId, expiresIn = '12h') =>
-  jwt.sign({ userId }, process.env.SECRET, {
+export const getToken = ({ userId, role }, expiresIn = '12h') =>
+  jwt.sign({ userId, role }, process.env.SECRET, {
     expiresIn,
   });
 
@@ -11,8 +11,9 @@ export const verifyToken = async (req, res, next) => {
   if (!token) return res.status(401).send({ msg: 'No token provided.' });
 
   try {
-    const verified = jwt.verify(token, process.env.SECRET);
-    req.userId = verified.userId;
+    const { userId, role } = jwt.verify(token, process.env.SECRET);
+    req.userId = userId;
+    req.role = role;
     next();
   } catch (err) {
     if (err.name === 'TokenExpiredError') {

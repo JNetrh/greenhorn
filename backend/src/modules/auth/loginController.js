@@ -3,7 +3,6 @@ import { getUserByEmail, stripPassword } from '../user/addUserController';
 import { getToken } from './tokenHandling';
 
 const LoginController = async (req, res) => {
-  console.log(req.body);
   const { email, password, rememberMe } = req.body;
   if (!email || !password) {
     return res
@@ -26,7 +25,10 @@ const LoginController = async (req, res) => {
       return res.status(400).json({ msg: 'Bad password' });
     }
 
-    const token = getToken(user.id, rememberMe ? '7d' : undefined);
+    const token = getToken(
+      { userId: user.id, role: user.role },
+      rememberMe ? '7d' : undefined
+    );
 
     return res.json({
       user: stripPassword(user),
