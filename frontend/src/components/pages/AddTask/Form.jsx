@@ -14,12 +14,9 @@ const FormWrapper = styled.div`
     margin-top: 20px;
   }
 `;
-const SEVERITY_OPTIONS = [{value: "a", label: "High"},{value: "b", label: "Medium"},{value: "c", label: "Low"}];
+export const SEVERITY_OPTIONS = [{value: "a", label: "High"},{value: "b", label: "Medium"},{value: "c", label: "Low"}];
 const Option = Select.Option;
-const selectAfter = (
-  <Select defaultValue="days" style={{ width: 80 }}>
-  </Select>
-);
+
 
 class AddTaskForm extends Component {
   render() {
@@ -45,6 +42,8 @@ class AddTaskForm extends Component {
             {/* <Input placeholder="" /> */}
             
           </FormItem>
+          <Row gutter={20}>
+              <Col sm={12}>
           <FormItem label="Estimated time">
             <Field
               name="estimatedTime"
@@ -56,15 +55,20 @@ class AddTaskForm extends Component {
             />
             
           </FormItem>
-          
+          </Col>
+              <Col sm={12}>
           <FormItem label = "Severity"> 
           <Field       
               name="severity"
               component={Select}
               tabIndex={3}
               options={SEVERITY_OPTIONS}
+              
+            
                   />
           </FormItem>
+          </Col>
+            </Row>
           <FormItem>
             <Button
               type="primary"
