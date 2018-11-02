@@ -39,7 +39,7 @@ const mailer = (async ({ template, to, tokenUrl, name }) => {
     },
     // uncomment below to send emails in development/test env:
     send: true,
-    transport: nodemailer.createTransport(options),
+    transport: transporter,
     views: {
       options: {
         extension: 'ejs',
@@ -48,7 +48,7 @@ const mailer = (async ({ template, to, tokenUrl, name }) => {
   });
   return async () => {
     try {
-      await email.send({
+      return await email.send({
         template: template,
         message: {
           to: to,
@@ -65,7 +65,6 @@ const mailer = (async ({ template, to, tokenUrl, name }) => {
           token: tokenUrl,
         },
       });
-      return { status: true };
     } catch (error) {
       return error;
     }
