@@ -4,6 +4,10 @@ import {
   LIST_FETCH_USERS_FAILURE,
   ADD_NEW_USER,
   CHANGE_PWD_USER,
+  GET_USER_BY_ID,
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
 } from './actions';
 
 const initialState = {
@@ -58,6 +62,39 @@ export const UsersListReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+    }
+
+    case GET_USER_BY_ID: {
+      const { id } = action.payload;
+      console.log(id);
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+
+    case DELETE_USER:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+
+    case DELETE_USER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+      };
+    }
+
+    case DELETE_USER_FAILURE: {
+      const { error } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        error,
       };
     }
 
