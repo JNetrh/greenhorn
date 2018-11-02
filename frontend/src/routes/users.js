@@ -1,6 +1,7 @@
 import AddUserPage from '../components/pages/AddUser';
 import ListUsers from '../components/pages/ListUsers';
 import mapRouteObject from '../helpers/mapRouteObject';
+import AddGroupForm from '../components/pages/AddGroup';
 
 const EmployeesRoutes = {
   users: {
@@ -26,7 +27,7 @@ const EmployeesRoutes = {
       add: {
         title: 'Add Group',
         icon: 'usergroup-add',
-        Component: () => 'will be done', //TODO
+        Component: AddGroupForm,
       },
       list: {
         title: 'List',
