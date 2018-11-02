@@ -1,6 +1,10 @@
 import { User } from '../../models';
 import { stripPassword } from '../user/addUserController';
-import bcrypt from 'bcryptjs';
+
+export const getUserByEmail = async email => {
+  const user = User.findOne({ where: { email } });
+  return user;
+};
 
 export const userController = async (req, res) => {
   try {
@@ -28,24 +32,26 @@ export const userDetailController = async(req, res) =>{
 };
 
 export const userUpdateController = async(req, res) =>{
-  const { id, name, surname, email, createdAt, updatedAt, RoleId, Password } = req.body;
+  const { id, name, surname, email } = req.body;
   const { UserId } = req.params;
   try {
-  if ( !id || !name || !surname || !email || !createdAt || !updatedAt || !RoleId|| !Password) {
+  if ( !id || !name || !surname || !email) {
     return res
       .status(400)
       .json({ msg: 'Provide all user attributes' });
   }
   const user = await User.findById(UserId);
-  const hashedPwd = await bcrypt.hash(Password, 8);
+  const emailIsNotUniqe = await getUserByEmail(email);
+    if (emailIsNotUniqe) {
+      return res
+        .status(404)
+        .json({ msg: `User with email ->${email}<- allready exists.` });
+    }
   await User.update(
     {
-      Password: hashedPwd,
       name,
       surname,
       email,
-      createdAt,
-      updatedAt,
     },
     {
       where: {
@@ -53,7 +59,8 @@ export const userUpdateController = async(req, res) =>{
       },
     }
   );
-  return res.json({user: stripPassword(user)});
+  const userUpdated = await User.findById(UserId);
+  return res.status(200).json({userUpdated: stripPassword(userUpdated)});
  } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Update User internal Error ' });
