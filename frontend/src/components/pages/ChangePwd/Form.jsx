@@ -48,6 +48,7 @@ class ChangePwd extends Component {
                   tabIndex={2}
                   iconType="lock"
                   placeholder="New password"
+                  s
                 />
               </FormItem>
               <FormItem label="New password again">
@@ -61,11 +62,7 @@ class ChangePwd extends Component {
                 />
               </FormItem>
               <FormItem>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  onClick={this.enterIconLoading}
-                >
+                <Button type="primary" htmlType="submit">
                   Submit change
                 </Button>
               </FormItem>
