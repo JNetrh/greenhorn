@@ -28,7 +28,7 @@ export const tasksReducer = (state = initialState, action) => {
         isLoading: false,
         fetched: true,
         error: null,
-        tasks: [...state.tasks, ...tasks],
+        tasks,
       };
     }
     case LIST_TASKS_FAILURE: {

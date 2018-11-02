@@ -5,7 +5,17 @@ const RowActions = () => <Button type="primary">Action</Button>;
 
 const columns = [
   { title: 'Id', fixed: 'left', dataIndex: 'id', key: 'id' },
-  { title: 'Name', dataIndex: 'name', key: 'name' },
+  { title: 'Name', dataIndex: 'title', key: 'name' },
+  {
+    title: 'estimated time',
+    dataIndex: 'estimatedTime',
+    key: 'estimatedTime',
+  },
+  {
+    title: 'severity',
+    dataIndex: 'severity',
+    key: 'severity',
+  },
   {
     title: 'description',
     dataIndex: 'description',
@@ -21,11 +31,12 @@ const columns = [
 class TasksPage extends Component {
   componentDidMount = () => {
     const { startListTasks, fetched } = this.props;
-    !fetched && startListTasks();
+    startListTasks();
   };
 
   render() {
     const { tasks, isLoading } = this.props;
+    console.log(tasks);
     return (
       <Table
         loading={isLoading}

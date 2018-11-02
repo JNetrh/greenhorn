@@ -14,9 +14,12 @@ const FormWrapper = styled.div`
     margin-top: 20px;
   }
 `;
-export const SEVERITY_OPTIONS = [{value: "a", label: "High"},{value: "b", label: "Medium"},{value: "c", label: "Low"}];
+export const SEVERITY_OPTIONS = [
+  { value: 'a', label: 'High' },
+  { value: 'b', label: 'Medium' },
+  { value: 'c', label: 'Low' },
+];
 const Option = Select.Option;
-
 
 class AddTaskForm extends Component {
   render() {
@@ -25,62 +28,58 @@ class AddTaskForm extends Component {
       <PageFormWrapper>
         <h2>Add task</h2>
         <p>
-          First step to add task is to fill its title and estimated time when it should be finished.
-          Then please choose its severity.
+          First step to add task is to fill its title and estimated time when it
+          should be finished. Then please choose its severity.
         </p>
-      <FormWrapper>
-        <Form>
+        <FormWrapper>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <FormItem label="Title">
-            <Field
-              name="title"
-              component={Input}
-              tabIndex={1}
-              iconType="book"
-              placeholder="Title"
-            />
+              <Field
+                name="title"
+                component={Input}
+                tabIndex={1}
+                iconType="book"
+                placeholder="Title"
+              />
 
-            {/* <Input placeholder="" /> */}
-            
-          </FormItem>
-          <Row gutter={20}>
+              {/* <Input placeholder="" /> */}
+            </FormItem>
+            <Row gutter={20}>
               <Col sm={12}>
-          <FormItem label="Estimated time">
-            <Field
-              name="estimatedTime"
-              component={Input}
-              tabIndex={2}
-              iconType="calendar"
-              placeholder="Estimated time"
-              addonAfter="days"
-            />
-            
-          </FormItem>
-          </Col>
-              <Col sm={12}>
-          <FormItem label = "Severity"> 
-          <Field       
-              name="severity"
-              component={Select}
-              tabIndex={3}
-              options={SEVERITY_OPTIONS}
-              
-            
+                <FormItem label="Estimated time">
+                  <Field
+                    name="estimatedTime"
+                    component={Input}
+                    tabIndex={2}
+                    iconType="calendar"
+                    placeholder="Estimated time"
+                    addonAfter="days"
                   />
-          </FormItem>
-          </Col>
+                </FormItem>
+              </Col>
+              <Col sm={12}>
+                <FormItem label="Severity">
+                  <Field
+                    name="severity"
+                    component={Select}
+                    tabIndex={3}
+                    options={SEVERITY_OPTIONS}
+                  />
+                </FormItem>
+              </Col>
             </Row>
-          <FormItem>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={this.enterIconLoading}
-            >
-              Create task
-            </Button>
-          </FormItem>
-        </Form>
-      </FormWrapper>
-    </PageFormWrapper>
+            <FormItem>
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={this.enterIconLoading}
+              >
+                Create task
+              </Button>
+            </FormItem>
+          </Form>
+        </FormWrapper>
+      </PageFormWrapper>
     );
   }
 }

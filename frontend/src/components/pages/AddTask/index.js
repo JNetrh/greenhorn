@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import Form, { SEVERITY_OPTIONS } from './Form';
-import { AddUser } from '../../../services/Users/api/add';
+import { AddTask } from '../../../services/Tasks/api/add';
 import validate from './validate';
 
-
 const mapDispatchToProps = dispatch => {
-  return {
-    //onSubmit: payload => dispatch(AddUser(payload)),
-  };
+  return { onSubmit: payload => dispatch(AddTask(payload)) };
 };
 
 const redux = connect(
@@ -20,7 +17,7 @@ const redux = connect(
 
 const form = reduxForm({
   form: 'addtask',
-  initialValues: {severity: SEVERITY_OPTIONS[0].value},
+  initialValues: { severity: SEVERITY_OPTIONS[0].value },
   validate,
 });
 
