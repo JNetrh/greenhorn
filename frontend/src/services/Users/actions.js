@@ -7,6 +7,9 @@ export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const DELETE_USER = 'DELETE_USER';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
+export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
 export const fetchUsers = () => ({
   type: LIST_FETCH_USERS,
@@ -49,5 +52,20 @@ export const deteleUserSuccess = user => ({
 
 export const deteleUserFailure = error => ({
   type: DELETE_USER_FAILURE,
+  payload: { error },
+});
+
+export const updateUser = user => ({
+  type: UPDATE_USER,
+  payload: { user },
+});
+
+export const updateUserSuccess = user => ({
+  type: UPDATE_USER_SUCCESS,
+  payload: { user },
+});
+
+export const updateUserFailure = error => ({
+  type: UPDATE_USER_FAILURE,
   payload: { error },
 });

@@ -1,5 +1,6 @@
 // import { message } from 'antd';
 import { deteleUser, deteleUserSuccess, deteleUserFailure } from '../actions';
+import history from '../../../history';
 
 export const startDeleteUser = user => async (dispatch, getState, { api }) => {
   dispatch(deteleUser());
@@ -7,6 +8,7 @@ export const startDeleteUser = user => async (dispatch, getState, { api }) => {
   try {
     const { data } = await api.delete(`user/${user.id}`);
     await dispatch(deteleUserSuccess(data));
+    history.push('/users/list');
   } catch (error) {
     dispatch(deteleUserFailure('error deleting user'));
   }

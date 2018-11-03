@@ -14,10 +14,10 @@ const FormWrapper = styled.div`
 `;
 
 class UserDetail extends Component {
-  confirm = e => {
+  confirm = async () => {
     const { startDeleteUser, user } = this.props;
     console.log(user);
-    startDeleteUser(user);
+    await startDeleteUser(user);
   };
 
   render() {
