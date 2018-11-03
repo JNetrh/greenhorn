@@ -5,7 +5,7 @@ const RowActions = () => <Button type="primary">Action</Button>;
 
 const columns = [
   { title: 'Id', fixed: 'left', dataIndex: 'id', key: 'id' },
-  { title: 'Name', dataIndex: 'title', key: 'name' },
+  { title: 'Name', dataIndex: 'title', key: 'title' },
   {
     title: 'estimated time',
     dataIndex: 'estimatedTime',
@@ -23,7 +23,7 @@ const columns = [
   },
   {
     title: 'Action',
-    key: 'operation',
+    key: 4,
     render: RowActions,
   },
 ];
@@ -41,7 +41,10 @@ class TasksPage extends Component {
       <Table
         loading={isLoading}
         columns={columns}
-        dataSource={tasks}
+        dataSource={tasks.map((task, i) => {
+          task['key'] = i;
+          return task;
+        })}
         scroll={{ x: 1500, y: 300 }}
       />
     );
