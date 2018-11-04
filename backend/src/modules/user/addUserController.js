@@ -1,5 +1,5 @@
 import { User } from '../../models/';
-import { createInvitation } from './invitationController';
+import { createInvitation } from '../../services/invitation/invitationController';
 import bcrypt from 'bcryptjs';
 
 export const ROLES = ['user', 'taskowner', 'hr'];
