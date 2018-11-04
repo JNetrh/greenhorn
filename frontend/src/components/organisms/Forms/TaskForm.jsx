@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Row, Col, Popconfirm, Icon, message } from 'antd';
+import { Form, Button, Row, Col } from 'antd';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
@@ -22,16 +22,6 @@ export const SEVERITY_OPTIONS = [
 const Option = Select.Option;
 
 class AddTaskForm extends Component {
-  confirm = async () => {
-    const chacker = this.props.hasOwnProperty('startDeleteTask');
-    if (chacker) {
-      const { startDeleteTask, task } = this.props;
-      await startDeleteTask(task);
-    } else {
-      message.error('detele function not defined')();
-    }
-  };
-
   render() {
     const { handleSubmit, onSubmit, type } = this.props;
     return (
@@ -78,30 +68,8 @@ class AddTaskForm extends Component {
                 </FormItem>
               </Col>
             </Row>
-            {type === 'edit' && (
-              <FormItem>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ marginRight: '10px' }}
-                >
-                  Save
-                </Button>
-                <Popconfirm
-                  title="Are you sure delete this user?"
-                  icon={
-                    <Icon type="question-circle-o" style={{ color: 'red' }} />
-                  }
-                  onConfirm={this.confirm}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button type="danger">Delete</Button>
-                </Popconfirm>
-              </FormItem>
-            )}
-            {type === 'create' && (
-              <FormItem>
+            <FormItem>
+              {type === 'create' && (
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -109,8 +77,9 @@ class AddTaskForm extends Component {
                 >
                   Create task
                 </Button>
-              </FormItem>
-            )}
+              )}
+              {type === 'edit' &&}
+            </FormItem>
           </Form>
         </FormWrapper>
       </PageFormWrapper>
