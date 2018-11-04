@@ -46,7 +46,7 @@ class EditTaskPage extends Component {
       submitError,
       submitSuccess,
     } = this.state;
-    const { TaskForm, startDeleteTask, ...rest } = this.props;
+    const { TaskForm, ...rest } = this.props;
 
     if (isFetchLoading) {
       return <div>Loading...</div>;
@@ -57,18 +57,13 @@ class EditTaskPage extends Component {
     }
 
     return (
-      <div>
-        {submitError && <div>Error: {submitError}</div>}
-        {submitSuccess && <div>Task saved</div>}
-        <TaskForm
-          initialValues={task}
-          onSubmit={this.submitForm}
-          isSubmitLoading={isSubmitLoading}
-          task={task}
-          startDeleteTask={startDeleteTask}
-          {...rest}
-        />
-      </div>
+      <TaskForm
+        initialValues={task}
+        onSubmit={this.submitForm}
+        isSubmitLoading={isSubmitLoading}
+        item={task}
+        {...rest}
+      />
     );
   }
 }

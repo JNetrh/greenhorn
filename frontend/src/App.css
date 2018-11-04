@@ -45,3 +45,7 @@ body {
   line-height: initial;
   margin: 8px 0 4px 0;
 }
+
+.ant-dropdown {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+}

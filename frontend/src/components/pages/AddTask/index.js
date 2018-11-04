@@ -1,16 +1,19 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import TaskForm, { SEVERITY_OPTIONS } from '../../organisms/Forms/TaskForm';
 import { AddTask } from '../../../services/Tasks/api/add';
 import validate from '../../../helpers/Validators/validateTaskForm';
+import Form from './view';
+
+export const SEVERITY_OPTIONS = [
+  { value: 'high', label: 'High' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'low', label: 'Low' },
+];
 
 const mapDispatchToProps = dispatch => {
   return { onSubmit: payload => dispatch(AddTask(payload)) };
 };
-
-const Form = props => <TaskForm {...props} type="create" />;
 
 const redux = connect(
   null,

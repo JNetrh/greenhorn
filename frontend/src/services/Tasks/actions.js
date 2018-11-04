@@ -1,41 +1,35 @@
-export const LIST_TASKS = 'LIST_TASKS';
-export const LIST_TASKS_SUCCESS = 'LIST_TASKS_SUCCESS';
-export const LIST_TASKS_FAILURE = 'LIST_TASKS_FAILURE';
-export const ADD_NEW_TASK = 'ADD_NEW_TASK';
-export const DELETE_TASK = 'DELETE_TASK';
-export const DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCCESS';
-export const DELETE_TASK_FAILURE = 'DELETE_TASK_FAILURE';
+export const TASKS_LIST = 'TASKS_LIST';
+export const TASKS_LIST_SUCC = 'TASKS_LIST_SUCC';
+export const TASKS_LIST_FAIL = 'TASKS_LIST_FAIL';
+export const TASKS_ADD = 'TASKS_ADD';
+export const TASKS_UPDATE = 'TASKS_UPDATE';
+export const TASKS_DELETE = 'TASKS_DELETE';
 
 export const listTasks = () => ({
-  type: LIST_TASKS,
+  type: TASKS_LIST,
 });
 
 export const listTasksSuccess = tasks => ({
-  type: LIST_TASKS_SUCCESS,
+  type: TASKS_LIST_SUCC,
   payload: { tasks },
 });
 
 export const listTasksFailure = error => ({
-  type: LIST_TASKS_FAILURE,
+  type: TASKS_LIST_FAIL,
   payload: { error },
 });
 
 export const addTask = task => ({
-  type: ADD_NEW_TASK,
+  type: TASKS_ADD,
+  payload: { task },
+});
+
+export const updateTask = task => ({
+  type: TASKS_UPDATE,
   payload: { task },
 });
 
 export const deleteTask = task => ({
-  type: DELETE_TASK,
+  type: TASKS_DELETE,
   payload: { task },
-});
-
-export const deleteTaskSuccess = task => ({
-  type: DELETE_TASK_SUCCESS,
-  payload: { task },
-});
-
-export const deteleTaskFailure = error => ({
-  type: DELETE_TASK_FAILURE,
-  payload: { error },
 });

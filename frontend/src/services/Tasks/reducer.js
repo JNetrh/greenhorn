@@ -1,11 +1,10 @@
 import {
-  LIST_TASKS,
-  LIST_TASKS_SUCCESS,
-  LIST_TASKS_FAILURE,
-  ADD_NEW_TASK,
-  DELETE_TASK,
-  DELETE_TASK_SUCCESS,
-  DELETE_TASK_FAILURE,
+  TASKS_LIST,
+  TASKS_LIST_SUCC,
+  TASKS_LIST_FAIL,
+  TASKS_ADD,
+  TASKS_DELETE,
+  TASKS_UPDATE,
 } from './actions';
 
 const initialState = {
@@ -17,14 +16,14 @@ const initialState = {
 
 export const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LIST_TASKS:
+    case TASKS_LIST:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
 
-    case LIST_TASKS_SUCCESS: {
+    case TASKS_LIST_SUCC: {
       const { tasks } = action.payload;
       return {
         ...state,
@@ -34,7 +33,7 @@ export const tasksReducer = (state = initialState, action) => {
         tasks,
       };
     }
-    case LIST_TASKS_FAILURE: {
+    case TASKS_LIST_FAIL: {
       const { error } = action.payload;
       return {
         isLoading: false,
@@ -43,34 +42,25 @@ export const tasksReducer = (state = initialState, action) => {
         tasks: [],
       };
     }
-    case ADD_NEW_TASK: {
+    case TASKS_ADD: {
       const { task } = action.payload;
       return {
+        ...state,
         tasks: [...state.tasks, task],
       };
     }
-
-    case DELETE_TASK:
+    case TASKS_UPDATE: {
+      const { task } = action.payload;
       return {
         ...state,
-        isLoading: true,
-        error: null,
-      };
-
-    case DELETE_TASK_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
+        tasks: state.tasks.map(curr => (curr.id === task.id ? task : curr)),
       };
     }
-
-    case DELETE_TASK_FAILURE: {
-      const { error } = action.payload;
+    case TASKS_DELETE: {
+      const { task } = action.payload;
       return {
         ...state,
-        isLoading: false,
-        error,
+        tasks: state.tasks.filter(({ id }) => task.id !== id),
       };
     }
     default:
