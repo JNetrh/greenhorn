@@ -3,8 +3,8 @@ import ListUsers from '../components/pages/ListUsers';
 import mapRouteObject from '../helpers/mapRouteObject';
 import AddGroupForm from '../components/pages/AddGroup';
 
-const EmployeesRoutes = {
-  users: {
+export const UserRoutesSideNav = {
+  user: {
     icon: 'user',
     title: 'Users',
     sub: {
@@ -20,7 +20,7 @@ const EmployeesRoutes = {
       },
     },
   },
-  groups: {
+  group: {
     icon: 'team',
     title: 'Groups',
     sub: {
@@ -38,6 +38,6 @@ const EmployeesRoutes = {
   },
 };
 
-const UserRoutes = mapRouteObject(EmployeesRoutes);
+const UserRoutes = mapRouteObject(UserRoutesSideNav);
 
 export default UserRoutes;

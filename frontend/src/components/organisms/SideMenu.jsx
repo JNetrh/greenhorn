@@ -19,6 +19,7 @@ class SideMenu extends Component {
       structure,
     } = this.props;
     const defaultOpenKey = pathname.split('/').filter(i => i.length)[0];
+    console.log(defaultOpenKey);
     return (
       <Menu
         mode="inline"

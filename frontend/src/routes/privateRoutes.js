@@ -5,8 +5,8 @@ import ChangePwd from '../components/pages/ChangePwd';
 import UserDetail from '../components/pages/UserDetail';
 import TaskDetail from '../components/pages/TaskDetail';
 
-import UserRoutes from './users';
-import TaskRoutes from './tasks';
+import UserRoutes, { UserRoutesSideNav } from './users';
+import TaskRoutes, { TasksRoutesSideNav } from './tasks';
 
 export default [
   {
@@ -21,14 +21,16 @@ export default [
     Component: ChangePwd,
     path: '/changepassword',
   },
+  ...UserRoutes,
   {
     Component: UserDetail,
     path: '/user/:id',
+    SideNav: UserRoutesSideNav,
   },
+  ...TaskRoutes,
   {
     Component: TaskDetail,
     path: '/task/:id',
+    SideNav: TasksRoutesSideNav,
   },
-  ...UserRoutes,
-  ...TaskRoutes,
 ];
