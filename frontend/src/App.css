@@ -26,6 +26,10 @@ body {
   white-space: nowrap;
 }
 
+.ant-table-row {
+  cursor: pointer;
+}
+
 .ant-layout .ant-layout-sider-zero-width-trigger {
   color: black;
   z-index: 1;

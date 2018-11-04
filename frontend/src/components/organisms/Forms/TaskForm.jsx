@@ -22,13 +22,8 @@ export const SEVERITY_OPTIONS = [
 
 class AddTaskForm extends Component {
   confirm = async () => {
-    const chacker = this.props.hasOwnProperty('startDeleteTask');
-    if (chacker) {
-      const { startDeleteTask, task } = this.props;
-      await startDeleteTask(task);
-    } else {
-      message.error('detele function not defined')();
-    }
+    const { startDeleteTask, task } = this.props;
+    await startDeleteTask(task);
   };
 
   render() {
@@ -101,11 +96,7 @@ class AddTaskForm extends Component {
             )}
             {type === 'create' && (
               <FormItem>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  onClick={this.enterIconLoading}
-                >
+                <Button type="primary" htmlType="submit">
                   Create task
                 </Button>
               </FormItem>
