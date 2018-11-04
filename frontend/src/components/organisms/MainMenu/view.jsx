@@ -1,18 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 import { Menu, Icon } from 'antd';
 import { MenuStyle, LogoWrapper } from './style';
 import logo from '../../../static/greenhorn_logo_dark.svg';
 import AccountMenu from '../AccountMenu';
 
-const MENU_ITEMS = [
-  { title: 'To be done', to: '/' },
-  { title: 'Tasks', to: '/task/list' },
-  { title: 'Employees', to: '/user/list' },
-];
-
-class MainMenu extends React.Component {
+class MainMenuView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,14 +17,28 @@ class MainMenu extends React.Component {
       isOpened: !this.state.isOpened,
     });
   };
+
+  getAllowedMenuItems = () => {
+    const { menuItems, userRole } = this.props;
+    return menuItems.filter(item => {
+      if (item.roles) {
+        if (item.roles.includes(userRole)) {
+          return true;
+        }
+        return false;
+      }
+      return true;
+    });
+  };
   render() {
     const {
       location: { pathname },
+      menuItems,
     } = this.props;
     const path = pathname.split('/').filter(i => i.length)[0];
-    const selectedKeys = MENU_ITEMS.filter(({ to }) => to.includes(path)).map(
-      ({ to }) => to,
-    );
+    const selectedKeys = menuItems
+      .filter(({ to }) => to.includes(path))
+      .map(({ to }) => to);
     if (!selectedKeys.length) {
       selectedKeys.push('/');
     }
@@ -53,7 +60,7 @@ class MainMenu extends React.Component {
             selectedKeys={selectedKeys}
             style={{ lineHeight: '57px', flex: 1 }}
           >
-            {MENU_ITEMS.map(({ title, to }) => (
+            {this.getAllowedMenuItems().map(({ title, to }) => (
               <Menu.Item key={to}>
                 <Link to={to}>{title}</Link>
               </Menu.Item>
@@ -65,4 +72,4 @@ class MainMenu extends React.Component {
   }
 }
 
-export default withRouter(MainMenu);
+export default MainMenuView;
