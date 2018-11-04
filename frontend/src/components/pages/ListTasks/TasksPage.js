@@ -4,9 +4,10 @@ import Table from '../../molecules/Table';
 const columns = [
   { title: 'Name', dataIndex: 'title', key: 'title' },
   {
-    title: 'estimated time',
+    title: 'Estimated Time',
     dataIndex: 'estimatedTime',
     key: 'estimatedTime',
+    render: text => `${text} days`,
     width: 150,
   },
   {

@@ -7,7 +7,6 @@ import { FormWrapper } from '../atoms/FormWrapper';
 export class CreateEditForm extends Component {
   confirmDelete = () => {
     const { deleteItem, item } = this.props;
-    console.log('Deleting item', item);
     deleteItem(item);
   };
 
@@ -19,6 +18,7 @@ export class CreateEditForm extends Component {
       children,
       itemName,
       itemDescription,
+      pristine,
     } = this.props;
     return (
       <PageFormWrapper>
@@ -36,8 +36,9 @@ export class CreateEditForm extends Component {
                   htmlType="submit"
                   icon="save"
                   style={{ marginRight: '10px' }}
+                  disabled={pristine}
                 >
-                  Save
+                  Save changes
                 </Button>
                 <Popconfirm
                   title={`Do you really want to delete this ${itemName}?`}

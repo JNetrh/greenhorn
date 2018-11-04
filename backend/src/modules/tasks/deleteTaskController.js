@@ -6,13 +6,12 @@ export const getTaskById = async id => {
 };
 
 export const deleteTaskById = async id => {
-  const deleted = await Task.destroy({ where: { id: id } });
+  const deleted = await Task.destroy({ where: { id } });
   return deleted;
 };
 
 const deleteTaskController = async (req, res) => {
   const { id } = req.params;
-  console.log('id:', id);
   try {
     if (!id) {
       return res
