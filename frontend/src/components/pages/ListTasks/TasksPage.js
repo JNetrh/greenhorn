@@ -35,7 +35,7 @@ const columns = [
 
 class TasksPage extends Component {
   componentDidMount = () => {
-    const { startListTasks, fetched } = this.props;
+    const { startListTasks } = this.props;
     startListTasks();
   };
 

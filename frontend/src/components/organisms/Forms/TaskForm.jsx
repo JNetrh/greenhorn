@@ -15,11 +15,10 @@ const FormWrapper = styled.div`
   }
 `;
 export const SEVERITY_OPTIONS = [
-  { value: 'a', label: 'High' },
-  { value: 'b', label: 'Medium' },
-  { value: 'c', label: 'Low' },
+  { value: 'high', label: 'High' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'low', label: 'Low' },
 ];
-const Option = Select.Option;
 
 class AddTaskForm extends Component {
   confirm = async () => {

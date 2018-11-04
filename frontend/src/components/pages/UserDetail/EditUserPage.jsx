@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { fetchUserById } from '../../../services/Users/api/fetchUserById.js';
+import { deleteUser, updateUser } from '../../../services/Users/actions.js';
 
 class EditUserPage extends Component {
   state = {
@@ -17,7 +18,7 @@ class EditUserPage extends Component {
 
   fetchUser() {
     const { id } = this.props.match.params;
-    console.log('id', id);
+
     fetchUserById(id)
       .then(user =>
         this.setState({
@@ -33,8 +34,9 @@ class EditUserPage extends Component {
       }));
   }
 
-  submitForm = (/* redux-form data */) => {
+  submitForm = formValues => {
     const { id } = this.props.match.params;
+    this.props.updateUser({ ...formValues, id });
     //submit...then.catch(() => setState)
   };
 
@@ -47,7 +49,7 @@ class EditUserPage extends Component {
       submitError,
       submitSuccess,
     } = this.state;
-    const { UserForm, startDeleteUser } = this.props;
+    const { UserForm, deleteUser } = this.props;
 
     if (isFetchLoading) {
       return <div>Loading...</div>;
@@ -66,7 +68,7 @@ class EditUserPage extends Component {
           onSubmit={this.submitForm}
           isSubmitLoading={isSubmitLoading}
           user={user}
-          startDeleteUser={startDeleteUser}
+          onDeleteClick={deleteUser}
         />
       </div>
     );

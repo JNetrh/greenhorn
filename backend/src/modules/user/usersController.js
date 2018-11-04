@@ -16,7 +16,7 @@ export const userController = async (req, res) => {
   }
 };
 
-export const userDetailController = async(req, res) =>{
+export const userDetailController = async (req, res) => {
   try {
     const { id } = req.params;
     const userById = await User.findById(id);
@@ -28,42 +28,40 @@ export const userDetailController = async(req, res) =>{
     console.log(err);
     return res.status(500).json(err);
   }
-
 };
 
-export const userUpdateController = async(req, res) =>{
-  const { id, name, surname, email } = req.body;
+export const userUpdateController = async (req, res) => {
+  const { name, surname, email } = req.body;
   const { UserId } = req.params;
   try {
-  if ( !id || !name || !surname || !email) {
-    return res
-      .status(400)
-      .json({ msg: 'Provide all user attributes' });
-  }
-  const user = await User.findById(UserId);
-  const emailIsNotUniqe = await getUserByEmail(email);
-    if (emailIsNotUniqe) {
-      return res
-        .status(404)
-        .json({ msg: `User with email ->${email}<- allready exists.` });
+    if (!UserId || !name || !surname || !email) {
+      return res.status(400).json({ msg: 'Provide all user attributes' });
     }
-  await User.update(
-    {
-      name,
-      surname,
-      email,
-    },
-    {
-      where: {
-        id: user.id,
+    const oldUser = await User.findById(UserId);
+    if (email !== oldUser.email) {
+      const someoneElseWithSameEmail = await getUserByEmail(email);
+      if (someoneElseWithSameEmail) {
+        return res
+          .status(404)
+          .json({ msg: `User with email "${email}" already exists.` });
+      }
+    }
+    await User.update(
+      {
+        name,
+        surname,
+        email,
       },
-    }
-  );
-  const userUpdated = await User.findById(UserId);
-  return res.status(200).json({userUpdated: stripPassword(userUpdated)});
- } catch (err) {
+      {
+        where: {
+          id: UserId,
+        },
+      }
+    );
+    const userUpdated = await User.findById(UserId);
+    return res.status(200).json(stripPassword(userUpdated));
+  } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Update User internal Error ' });
-  } 
-}
-
+  }
+};

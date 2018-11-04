@@ -16,7 +16,7 @@ import { EMAIL_ENDINGS } from '.';
 
 class LoginForm extends Component {
   render() {
-    const { handleSubmit, onSubmit, auth } = this.props;
+    const { handleSubmit, onSubmit } = this.props;
     return (
       <Centered>
         <FormWrapper>

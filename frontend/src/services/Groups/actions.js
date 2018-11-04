@@ -17,10 +17,7 @@ export const fetchGroupsFailure = error => ({
   payload: { error },
 });
 
-export const addGroup = group => (
-  console.log(group),
-  {
-    type: GROUPS_ADD,
-    payload: { group },
-  }
-);
+export const addGroup = group => ({
+  type: GROUPS_ADD,
+  payload: { group },
+});

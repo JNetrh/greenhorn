@@ -20,7 +20,7 @@ export const AddUser = ({
     });
     loader();
     dispatch(addUser(data));
-    history.push('/users/list');
+    history.push('/user/list');
     message.success('User added', 2);
   } catch (err) {
     if (err.response) {
