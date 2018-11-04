@@ -33,5 +33,5 @@ export const assignUserToGroup = async (req, res) => {
     include: [Group],
   });
 
-  res.json(assignedGroups);
+  return res.json(assignedGroups);
 };
