@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'antd';
+import { Link } from 'react-router-dom';
 
-const RowActions = () => <Button type="primary">Action</Button>;
+const RowActions = ({ id }) => (
+  <Link to={`/task/${id}`}>
+    <Button type="primary">Detail</Button>
+  </Link>
+);
 
 const columns = [
   { title: 'Id', fixed: 'left', dataIndex: 'id', key: 'id' },
@@ -36,7 +41,6 @@ class TasksPage extends Component {
 
   render() {
     const { tasks, isLoading } = this.props;
-    console.log(tasks);
     return (
       <Table
         loading={isLoading}

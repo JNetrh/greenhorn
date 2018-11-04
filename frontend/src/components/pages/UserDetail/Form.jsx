@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Row, Col, Popconfirm, message, Icon } from 'antd';
+import { Form, Button, Row, Col, Popconfirm, Icon } from 'antd';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
@@ -16,7 +16,6 @@ const FormWrapper = styled.div`
 class UserDetail extends Component {
   confirm = async () => {
     const { startDeleteUser, user } = this.props;
-    console.log(user);
     await startDeleteUser(user);
   };
 
@@ -25,7 +24,7 @@ class UserDetail extends Component {
 
     return (
       <PageFormWrapper>
-        <h2>User detail</h2>
+        <h2>Task detail</h2>
         <FormWrapper>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Row gutter={20}>

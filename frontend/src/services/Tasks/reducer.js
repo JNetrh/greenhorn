@@ -3,6 +3,9 @@ import {
   LIST_TASKS_SUCCESS,
   LIST_TASKS_FAILURE,
   ADD_NEW_TASK,
+  DELETE_TASK,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE,
 } from './actions';
 
 const initialState = {
@@ -44,6 +47,30 @@ export const tasksReducer = (state = initialState, action) => {
       const { task } = action.payload;
       return {
         tasks: [...state.tasks, task],
+      };
+    }
+
+    case DELETE_TASK:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+
+    case DELETE_TASK_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+      };
+    }
+
+    case DELETE_TASK_FAILURE: {
+      const { error } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        error,
       };
     }
     default:
