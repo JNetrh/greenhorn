@@ -8,7 +8,7 @@ export const ChangePwdUser = ({
 }) => async (dispatch, getState, { api }) => {
   const loader = message.loading('Changing user password');
   try {
-    await api.post('/user/changepwd/', {
+    await api.post('/auth/changepwd', {
       currentPassword,
       newPassword,
       newPasswordCheck,

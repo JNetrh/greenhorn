@@ -9,7 +9,7 @@ export const getUserByEmail = async email => {
 export const userController = async (req, res) => {
   try {
     const allUsers = await User.findAll();
-    return res.json(allUsers);
+    return res.json(allUsers.map(stripPassword));
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);

@@ -5,7 +5,7 @@ import getErrorMessage from '../../../helpers/getErrorMessage';
 export const startUpdateTask = task => async (dispatch, getState, { api }) => {
   const loader = message.loading('Updating task...');
   try {
-    const { data } = await api.put(`task/${task.id}`);
+    const { data } = await api.put(`task/${task.id}`, task);
     await dispatch(updateTask(data));
     message.success('Task updated');
   } catch (error) {
