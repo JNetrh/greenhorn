@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import logo from '../../static/greenhorn_logo_dark.svg';
 
 const ErrorWrapper = styled.div`
   position: fixed;

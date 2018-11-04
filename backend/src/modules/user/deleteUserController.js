@@ -13,7 +13,6 @@ export const deleteUserById = async id => {
 
 const deleteUserController = async (req, res) => {
   const { id } = req.params;
-  console.log('id:', id);
   try {
     if (!id) {
       return res
@@ -26,9 +25,9 @@ const deleteUserController = async (req, res) => {
         .status(404)
         .json({ msg: `User with id "${id}" does not exists.` });
     }
-    const deletedUser = await deleteUserById(id);
+    await deleteUserById(id);
 
-    return res.json(deletedUser);
+    return res.json(user);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);

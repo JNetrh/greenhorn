@@ -8,8 +8,8 @@ import AccountMenu from '../AccountMenu';
 
 const MENU_ITEMS = [
   { title: 'To be done', to: '/' },
-  { title: 'Tasks', to: '/tasks/list' },
-  { title: 'Employees', to: '/users/list' },
+  { title: 'Tasks', to: '/task/list' },
+  { title: 'Employees', to: '/user/list' },
 ];
 
 class MainMenu extends React.Component {

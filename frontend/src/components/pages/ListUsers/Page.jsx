@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
-import { Link } from 'react-router-dom';
-
-const RowActions = ({ id }) => (
-  <Link to={`/user/${id}`}>
-    <Button type="primary">Detail</Button>
-  </Link>
-);
+import Table from '../../molecules/Table';
 
 const columns = [
   { title: 'Name', width: 100, dataIndex: 'name' },
   { title: 'Surname', dataIndex: 'surname' },
   { title: 'Email', dataIndex: 'email' },
-  {
-    title: 'Action',
-    fixed: 'right',
-    width: 100,
-    render: RowActions,
-  },
 ];
 
 class Page extends Component {
@@ -29,14 +16,12 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <div style={{ background: 'white' }}>
-        <Table
-          loading={isLoading}
-          columns={columns}
-          dataSource={users}
-          scroll={{ x: true }}
-        />
-      </div>
+      <Table
+        loading={isLoading}
+        columns={columns}
+        dataSource={users}
+        rowLink={({ id }) => `/user/${id}`}
+      />
     );
   }
 }

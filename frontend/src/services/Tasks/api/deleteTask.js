@@ -7,7 +7,7 @@ export const startDeleteTask = task => async (dispatch, getState, { api }) => {
   try {
     const { data } = await api.delete(`task/${task.id}`);
     await dispatch(deleteTaskSuccess(data));
-    history.push('/tasks/list');
+    history.push('/task/list');
   } catch (error) {
     dispatch(deteleTaskFailure('error deleting task'));
   }

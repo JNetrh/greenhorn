@@ -1,41 +1,30 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
-import { Link } from 'react-router-dom';
-
-const RowActions = ({ id }) => (
-  <Link to={`/task/${id}`}>
-    <Button type="primary">Detail</Button>
-  </Link>
-);
+import Table from '../../molecules/Table';
 
 const columns = [
-  { title: 'Id', fixed: 'left', dataIndex: 'id', key: 'id' },
   { title: 'Name', dataIndex: 'title', key: 'title' },
   {
     title: 'estimated time',
     dataIndex: 'estimatedTime',
     key: 'estimatedTime',
+    width: 150,
   },
   {
     title: 'severity',
     dataIndex: 'severity',
     key: 'severity',
+    width: 150,
   },
   {
     title: 'description',
     dataIndex: 'description',
     key: 'description',
   },
-  {
-    title: 'Action',
-    key: 4,
-    render: RowActions,
-  },
 ];
 
 class TasksPage extends Component {
   componentDidMount = () => {
-    const { startListTasks, fetched } = this.props;
+    const { startListTasks } = this.props;
     startListTasks();
   };
 
@@ -49,7 +38,7 @@ class TasksPage extends Component {
           task['key'] = i;
           return task;
         })}
-        scroll={{ x: 1500, y: 300 }}
+        rowLink={({ id }) => `/task/${id}`}
       />
     );
   }

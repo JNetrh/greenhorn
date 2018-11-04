@@ -17,17 +17,19 @@ class PageWrapper extends Component {
     const { children, SideNav, user } = this.props;
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <React.Fragment>
-          <Header />
-          <Layout>
-            {SideNav && (
-              <Sider breakpoint="lg" collapsedWidth={0}>
-                <SideMenu structure={SideNav} />
-              </Sider>
-            )}
-            <Content>{children}</Content>
-          </Layout>
-        </React.Fragment>
+        {user && (
+          <React.Fragment>
+            <Header />
+            <Layout>
+              {SideNav && (
+                <Sider breakpoint="lg" collapsedWidth={0}>
+                  <SideMenu structure={SideNav} />
+                </Sider>
+              )}
+              <Content>{children}</Content>
+            </Layout>
+          </React.Fragment>
+        )}
         <NoAuthOverlay isActive={!user} />
       </Layout>
     );

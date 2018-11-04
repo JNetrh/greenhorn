@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Row, Col } from 'antd';
+import { Form, Button, Row, Col, Popconfirm, Icon } from 'antd';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
@@ -15,13 +15,17 @@ const FormWrapper = styled.div`
   }
 `;
 export const SEVERITY_OPTIONS = [
-  { value: 'a', label: 'High' },
-  { value: 'b', label: 'Medium' },
-  { value: 'c', label: 'Low' },
+  { value: 'high', label: 'High' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'low', label: 'Low' },
 ];
-const Option = Select.Option;
 
 class AddTaskForm extends Component {
+  confirm = async () => {
+    const { startDeleteTask, task } = this.props;
+    await startDeleteTask(task);
+  };
+
   render() {
     const { handleSubmit, onSubmit, type } = this.props;
     return (
@@ -68,18 +72,35 @@ class AddTaskForm extends Component {
                 </FormItem>
               </Col>
             </Row>
-            <FormItem>
-              {type === 'create' && (
+            {type === 'edit' && (
+              <FormItem>
                 <Button
                   type="primary"
                   htmlType="submit"
-                  onClick={this.enterIconLoading}
+                  style={{ marginRight: '10px' }}
                 >
+                  Save
+                </Button>
+                <Popconfirm
+                  title="Are you sure delete this user?"
+                  icon={
+                    <Icon type="question-circle-o" style={{ color: 'red' }} />
+                  }
+                  onConfirm={this.confirm}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button type="danger">Delete</Button>
+                </Popconfirm>
+              </FormItem>
+            )}
+            {type === 'create' && (
+              <FormItem>
+                <Button type="primary" htmlType="submit">
                   Create task
                 </Button>
-              )}
-              {type === 'edit' &&}
-            </FormItem>
+              </FormItem>
+            )}
           </Form>
         </FormWrapper>
       </PageFormWrapper>

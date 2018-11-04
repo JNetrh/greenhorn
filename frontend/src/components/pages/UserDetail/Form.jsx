@@ -14,9 +14,9 @@ const FormWrapper = styled.div`
 `;
 
 class UserDetail extends Component {
-  confirm = async () => {
-    const { startDeleteUser, user } = this.props;
-    await startDeleteUser(user);
+  confirmDelete = () => {
+    const { onDeleteClick, user } = this.props;
+    onDeleteClick(user);
   };
 
   render() {
@@ -24,7 +24,7 @@ class UserDetail extends Component {
 
     return (
       <PageFormWrapper>
-        <h2>Task detail</h2>
+        <h2>User detail</h2>
         <FormWrapper>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Row gutter={20}>
@@ -67,14 +67,14 @@ class UserDetail extends Component {
                 htmlType="submit"
                 style={{ marginRight: '10px' }}
               >
-                Save
+                Save changes
               </Button>
               <Popconfirm
                 title="Are you sure delete this user?"
                 icon={
                   <Icon type="question-circle-o" style={{ color: 'red' }} />
                 }
-                onConfirm={this.confirm}
+                onConfirm={this.confirmDelete}
                 okText="Yes"
                 cancelText="No"
               >
