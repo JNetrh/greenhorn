@@ -21,35 +21,43 @@ export const createUserWithHashedPwd = async ({ password, ...user }) => {
   return stripPassword(createdUser);
 };
 
-const addUserController = async (req, res) => {
-  const { name, surname, email, password } = req.body;
-  try {
-    if (!name || !surname || !email || !password) {
-      return res
-        .status(400)
-        .json({ msg: 'Please provide all mandatory fields.' });
+export const addUser = async user => {
+  return new Promise(async (resolve, reject) => {
+    const { name, surname, email, password } = user.body;
+    try {
+      if (!name || !surname || !email || !password) {
+        reject({
+          error: { msg: 'Please provide all mandatory fields.' },
+          status: 400,
+        });
+      }
+      const user = await getUserByEmail(email);
+      if (user) {
+        reject({
+          error: { msg: `User with email "${email}" already exists.` },
+          status: 400,
+        });
+      }
+
+      const createdUser = await createUserWithHashedPwd({
+        name,
+        surname,
+        email,
+        password,
+      });
+
+      await createInvitation(createdUser.id);
+
+      resolve(createdUser);
+    } catch (err) {
+      console.log(err);
+      reject({ error: error, status: 500 });
     }
-    const user = await getUserByEmail(email);
-    if (user) {
-      return res
-        .status(404)
-        .json({ msg: `User with email "${email}" already exists.` });
-    }
-
-    const createdUser = await createUserWithHashedPwd({
-      name,
-      surname,
-      email,
-      password,
-    });
-
-    await createInvitation(createdUser.id);
-
-    return res.json(createdUser);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
+  });
 };
 
-export default addUserController;
+export const addUserController = async (req, res) => {
+  addUser(req)
+    .then(user => res.json(user))
+    .catch(err => res.status(err.status).json(err.error));
+};
