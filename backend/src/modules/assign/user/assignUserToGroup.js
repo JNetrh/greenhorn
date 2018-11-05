@@ -31,11 +31,11 @@ export const assignUserToGroup = async (req, res) => {
 
     await user.addGroups(groups);
 
-    const assignedGroups = await User.findByPk(userId, {
-      include: [Group],
-    });
-
     await asignTasksFromGroups(assignedGroups);
+
+    const assignedGroups = await User.findByPk(userId, {
+      include: [Group, AssignedTask],
+    });
 
     return res.json(assignedGroups);
   } catch (error) {
