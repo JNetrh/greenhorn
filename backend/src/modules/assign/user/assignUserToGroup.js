@@ -1,4 +1,5 @@
-import { User, Group } from '../../../models';
+import { User, Group, Task, AssignedTask } from '../../../models';
+import { stripPassword } from '../../../services/password/stripPassword';
 
 const findGroupsById = async groupIds => {
   return await Group.findAll({
@@ -34,12 +35,45 @@ export const assignUserToGroup = async (req, res) => {
       include: [Group],
     });
 
+    // await asignTasksFromGroups(assignedGroups);
+
+    await createAssignment();
+
     return res.json(assignedGroups);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
 
 // -- HELPERS -- //
 
-const asignTasksFromGroups = async (user, groups) => {};
+const createAssignment = async () => {
+  const user = await User.findByPk(1);
+  const task = await Task.findByPk(1);
+
+  console.log(Object.keys(task.addAssignedTask));
+  await task.addAssignedTask();
+};
+
+const asignTasksFromGroups = async user => {
+  const tasks = await Task.findAll({
+    where: {
+      groupId: user.Groups.map(e => e.id),
+    },
+  });
+  // console.log(tasks);
+  // console.log(Task.prototype);
+  // console.log(AssignedTask.prototype);
+  console.log(User.prototype);
+  // const tasks = [];
+  // return await user.addAssignedTask(tasks[0]);
+  AssignedTask.create({
+    title,
+    estimatedTime,
+    severity,
+    description,
+    createdBy: req.userId,
+  });
+  return;
+};

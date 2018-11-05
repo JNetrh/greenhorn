@@ -1,6 +1,7 @@
 import { User } from '../../models/';
 import { createInvitation } from '../../services/invitation/invitationController';
 import bcrypt from 'bcryptjs';
+import { stripPassword } from '../../services/password/stripPassword';
 
 export const ROLES = ['user', 'taskowner', 'hr'];
 
@@ -8,11 +9,6 @@ export const getUserByEmail = async email => {
   //TODO find in DB
   const user = User.findOne({ where: { email } });
   return user;
-};
-
-export const stripPassword = user => {
-  const { password, ...rest } = user.toJSON();
-  return rest;
 };
 
 export const createUserWithHashedPwd = async ({ password, ...user }) => {
