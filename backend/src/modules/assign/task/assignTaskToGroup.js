@@ -12,18 +12,31 @@ export const assignTaskToGroup = async (req, res) => {
       },
     });
 
-    await checkConditions(group, taskIds, tasks).catch(err =>
-      res.status(err.status).json(err.error)
-    );
+    await checkConditions(group, taskIds, tasks);
 
-    await updateGroupTasks(group, taskIds).catch(err =>
-      res.status(500).json(err)
-    );
+    await updateGroupTasks(group, taskIds);
+    /**
+     * TODO: když ten task odstraním, už ve skupině nebude, ale assignutý z dřívějška
+     * u nějakého usera být může. Musím projet databázi a zajistit, aby ten task, pokud nemá
+     * skupinu nebyl u nikoho přiřazen.
+     * Stejně tak nově přiřazený task do skupiny se musí přiřadit všem uživatelům.
+     *
+     * poznámka: dala by se vymyslet api andpoint na přeřazení tasku mezi skupinami. Protože po vymyzání tasku ze skupiny se
+     *           nyní smaže odevšad. Takže na tomto endpoinntu by se pouze přeřadil task mezi skupinami a nemusely by se mazat
+     *           data z tabulky assigned Task a Workflow
+     *
+     * poznámka2: pokud půjde task přiřadit ručně, měl by být z tohoto mazání vyjmut. Prostě by měl jít smazat
+     *            pouze zase jen ručně. Ať je nebo není v nějaké skupině
+     */
 
     const groupTasks = await Group.findByPk(groupId, { include: [Task] });
 
     return res.json(groupTasks);
   } catch (error) {
+    console.error(error);
+    if (Object.hasOwnProperty('status', error)) {
+      return res.status(err.status).json(err.error);
+    }
     return res.status(500).json(error);
   }
 };
