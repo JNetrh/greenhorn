@@ -1,4 +1,5 @@
-import { User, Group } from '../../../models';
+import { User, Group, Task, AssignedTask } from '../../../models';
+import { stripPassword } from '../../../services/password/stripPassword';
 
 const findGroupsById = async groupIds => {
   return await Group.findAll({
@@ -11,27 +12,66 @@ const findGroupsById = async groupIds => {
 export const assignUserToGroup = async (req, res) => {
   const { userId, groupIds } = req.body;
 
-  if (!Array.isArray(groupIds)) {
-    return res.status(400).json({ msg: 'group ids needs to be an array' });
+  try {
+    if (!Array.isArray(groupIds)) {
+      return res.status(400).json({ msg: 'group ids needs to be an array' });
+    }
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    const groups = await findGroupsById(groupIds);
+
+    if (!groups) {
+      return res.status(400).json({ msg: 'Groups fetch failed' });
+    }
+
+    await user.addGroups(groups);
+
+    await asignTasksFromGroups(assignedGroups);
+
+    const assignedGroups = await User.findByPk(userId, {
+      include: [Group, AssignedTask],
+    });
+
+    return res.json(assignedGroups);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
   }
+};
 
-  const user = await User.findByPk(userId);
+// -- HELPERS -- //
 
-  if (!user) {
-    return res.status(400).json({ msg: 'User not found' });
-  }
-
-  const groups = await findGroupsById(groupIds);
-
-  if (!groups) {
-    return res.status(400).json({ msg: 'Group not found' });
-  }
-
-  await user.addGroups(groups);
-
-  const assignedGroups = await User.findByPk(userId, {
-    include: [Group],
+const asignTasksFromGroups = async user => {
+  const tasks = await Task.findAll({
+    where: {
+      groupId: user.Groups.map(e => e.id),
+    },
   });
 
-  return res.json(assignedGroups);
+  const assignedTasksToCreate = tasks.map(task => {
+    Date.prototype.addDays = function(days) {
+      var date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+    };
+
+    let until = new Date();
+
+    until = until.addDays(task.estimatedTime);
+
+    console.log(until);
+    return {
+      until,
+      TaskId: task.id,
+      UserId: user.id,
+    };
+  });
+
+  await AssignedTask.bulkCreate(assignedTasksToCreate);
+  return;
 };

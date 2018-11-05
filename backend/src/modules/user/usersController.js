@@ -1,5 +1,5 @@
 import { User } from '../../models';
-import { stripPassword } from '../user/addUserController';
+import { stripPassword } from '../../services/password/stripPassword';
 
 export const getUserByEmail = async email => {
   const user = User.findOne({ where: { email } });

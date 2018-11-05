@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
-import { getUserByEmail, stripPassword } from '../user/addUserController';
+import { getUserByEmail } from '../user/addUserController';
+import { stripPassword } from '../../services/password/stripPassword';
 import { getToken } from './tokenHandling';
 
 const LoginController = async (req, res) => {
