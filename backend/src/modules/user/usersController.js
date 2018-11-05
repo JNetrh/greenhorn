@@ -31,7 +31,7 @@ export const userDetailController = async (req, res) => {
 };
 
 export const userUpdateController = async (req, res) => {
-  const { name, surname, email } = req.body;
+  const { name, surname, email, role } = req.body;
   const { UserId } = req.params;
   try {
     if (!UserId || !name || !surname || !email) {
@@ -51,6 +51,7 @@ export const userUpdateController = async (req, res) => {
         name,
         surname,
         email,
+        role,
       },
       {
         where: {

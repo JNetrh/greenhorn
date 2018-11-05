@@ -56,7 +56,7 @@ export const GroupsListReducer = (state = initialState, action) => {
       const { group } = action.payload;
       return {
         ...state,
-        group: state.groups.map(curr => (curr.id === group.id ? group : curr)),
+        groups: state.groups.map(curr => (curr.id === group.id ? group : curr)),
       };
     }
 

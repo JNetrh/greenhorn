@@ -16,13 +16,13 @@ export const createUserWithHashedPwd = async ({ password, ...user }) => {
   const createdUser = await User.create({
     ...user,
     password: hashedPwd,
-    role: user.role || ROLES[0], //TODO assign a correct role
+    role: user.role || ROLES[0],
   });
   return stripPassword(createdUser);
 };
 
 const addUserController = async (req, res) => {
-  const { name, surname, email, password } = req.body;
+  const { name, surname, email, password, role } = req.body;
   try {
     if (!name || !surname || !email || !password) {
       return res
@@ -41,6 +41,7 @@ const addUserController = async (req, res) => {
       surname,
       email,
       password,
+      role,
     });
 
     await createInvitation(createdUser.id);

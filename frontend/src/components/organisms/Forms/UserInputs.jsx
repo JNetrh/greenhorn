@@ -2,6 +2,11 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import { FormItemWithLabel } from '../../atoms/FormItemWithLabel';
 import Input from '../../molecules/form/Input';
+import Select from '../../molecules/form/Select';
+
+export const ROLES = ['user', 'taskowner', 'hr'];
+
+const RoleOptions = ROLES.map(role => ({ label: role, value: role }));
 
 export const UserInputs = () => (
   <div>
@@ -11,7 +16,6 @@ export const UserInputs = () => (
           label="First name"
           name="name"
           component={Input}
-          tabIndex={1}
           iconType="user"
           placeholder="First name"
         />
@@ -21,19 +25,30 @@ export const UserInputs = () => (
           label="Last name"
           name="surname"
           component={Input}
-          tabIndex={2}
           iconType="user"
           placeholder="Last name"
         />
       </Col>
     </Row>
-    <FormItemWithLabel
-      label="Email"
-      name="email"
-      component={Input}
-      tabIndex={3}
-      iconType="mail"
-      placeholder="email"
-    />
+    <Row gutter={20}>
+      <Col sm={16}>
+        <FormItemWithLabel
+          label="Email"
+          name="email"
+          component={Input}
+          iconType="mail"
+          placeholder="email"
+        />
+      </Col>
+      <Col sm={8}>
+        <FormItemWithLabel
+          label="Role"
+          name="role"
+          component={Select}
+          options={RoleOptions}
+          iconType="lock"
+        />
+      </Col>
+    </Row>
   </div>
 );
