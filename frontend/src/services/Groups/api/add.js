@@ -17,7 +17,7 @@ export const AddGroup = ({ name, description }) => async (
     });
     loader();
     dispatch(addGroup(data));
-    history.push('/groups/list');
+    history.push('/group/list');
     message.success('Group added', 2);
   } catch (err) {
     if (err.response) {

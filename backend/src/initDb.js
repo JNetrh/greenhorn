@@ -5,7 +5,6 @@ import {
   ROLES,
 } from './modules/user/addUserController';
 
-const isDev = process.env.NODE_ENV === 'development';
 const TEST_USER = {
   name: 'John',
   surname: 'Doe',
@@ -16,11 +15,8 @@ const TEST_USER = {
 
 const initDb = async () => {
   // models.sequelize.afterSync(e => console.log('E:', e));
-  await models.sequelize.sync({
-    alter: isDev,
-  });
+  await models.sequelize.sync();
 
-  isDev && console.log('Development mode, altering tables.');
   console.log(
     'Synced models:',
     Object.keys(models.sequelize.models).join(', ')
