@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from '../../molecules/Table';
+import { getLongDate, getFromNow } from '../../../helpers/dateFormat';
 
 const columns = [
   { title: 'Name', dataIndex: 'title', key: 'title' },
@@ -21,12 +22,24 @@ const columns = [
     dataIndex: 'description',
     key: 'description',
   },
+  {
+    title: 'Created At',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: date => getLongDate(date),
+  },
+  {
+    title: 'Last Update',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+    render: date => getFromNow(date),
+  },
 ];
 
 class TasksPage extends Component {
   componentDidMount = () => {
-    const { startListTasks } = this.props;
-    startListTasks();
+    const { startListTasks, fetched } = this.props;
+    !fetched && startListTasks();
   };
 
   render() {

@@ -1,4 +1,4 @@
-import { Task } from '../../models';
+import { Task, User } from '../../models';
 
 export const listTasksController = async (req, res) => {
   try {
@@ -13,11 +13,12 @@ export const listTasksController = async (req, res) => {
 export const taskDetailController = async (req, res) => {
   try {
     const { id } = req.params;
-    const taskById = await Task.findById(id);
+    const taskById = await Task.findById(id, {
+      include: [{ model: User, as: 'createdBy' }],
+    });
     if (!taskById) {
       res.status(404).json({ msg: 'This task does not exist' });
     }
-    console.log(taskById);
     return res.json(taskById);
   } catch (err) {
     console.log(err);

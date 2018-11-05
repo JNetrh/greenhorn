@@ -9,6 +9,7 @@ const ListGroupsPage = props => <Page {...props} />;
 const mapStateToProps = ({ groups }) => {
   return {
     groups: groups.groups || [],
+    fetched: groups.fetched,
     isLoading: groups.isLoading,
   };
 };
