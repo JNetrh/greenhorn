@@ -3,6 +3,8 @@ import {
   GROUPS_FETCH_SUCC,
   GROUPS_FETCH_FAIL,
   GROUPS_ADD,
+  GROUPS_DELETE,
+  GROUPS_UPDATE,
 } from './actions';
 
 const initialState = {
@@ -28,7 +30,7 @@ export const GroupsListReducer = (state = initialState, action) => {
         isLoading: false,
         fetched: true,
         error: null,
-        groups: [...state.groups, ...groups],
+        groups,
       };
     }
 
@@ -47,6 +49,22 @@ export const GroupsListReducer = (state = initialState, action) => {
       return {
         ...state,
         groups: [...state.groups, group],
+      };
+    }
+
+    case GROUPS_UPDATE: {
+      const { group } = action.payload;
+      return {
+        ...state,
+        group: state.groups.map(curr => (curr.id === group.id ? group : curr)),
+      };
+    }
+
+    case GROUPS_DELETE: {
+      const { group } = action.payload;
+      return {
+        ...state,
+        groups: state.groups.filter(({ id }) => group.id !== id),
       };
     }
 

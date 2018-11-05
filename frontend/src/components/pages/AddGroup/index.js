@@ -1,12 +1,9 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import Form from './Form';
 import validate from './validate';
 import { AddGroup } from '../../../services/Groups/api/add';
-
-const AddGroupPage = props => <Form {...props} />;
+import Form from './view';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -27,4 +24,4 @@ const form = reduxForm({
 export default compose(
   redux,
   form,
-)(AddGroupPage);
+)(Form);

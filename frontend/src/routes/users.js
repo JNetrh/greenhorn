@@ -2,6 +2,7 @@ import AddUserPage from '../components/pages/AddUser';
 import ListUsers from '../components/pages/ListUsers';
 import mapRouteObject from '../helpers/mapRouteObject';
 import AddGroupForm from '../components/pages/AddGroup';
+import ListGroups from '../components/pages/ListGroups';
 
 export const UserRoutesSideNav = {
   user: {
@@ -32,7 +33,7 @@ export const UserRoutesSideNav = {
       list: {
         title: 'List',
         icon: 'ordered-list',
-        Component: () => 'will be done', //TODO
+        Component: ListGroups, //TODO
       },
     },
   },

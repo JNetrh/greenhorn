@@ -7,6 +7,7 @@ import TaskDetail from '../components/pages/TaskDetail';
 
 import UserRoutes, { UserRoutesSideNav } from './users';
 import TaskRoutes, { TasksRoutesSideNav } from './tasks';
+import GroupDetail from '../components/pages/GroupDetail';
 
 export default [
   {
@@ -25,6 +26,11 @@ export default [
   {
     Component: UserDetail,
     path: '/user/:id',
+    SideNav: UserRoutesSideNav,
+  },
+  {
+    Component: GroupDetail,
+    path: '/group/:id',
     SideNav: UserRoutesSideNav,
   },
   ...TaskRoutes,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spin } from 'antd';
 
 class DetailPage extends Component {
   state = {
@@ -25,7 +26,7 @@ class DetailPage extends Component {
     const { Form } = this.props;
 
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <Spin spinning style={{ padding: 40 }} />;
     }
 
     return (
