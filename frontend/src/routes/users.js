@@ -2,9 +2,10 @@ import AddUserPage from '../components/pages/AddUser';
 import ListUsers from '../components/pages/ListUsers';
 import mapRouteObject from '../helpers/mapRouteObject';
 import AddGroupForm from '../components/pages/AddGroup';
+import ListGroups from '../components/pages/ListGroups';
 
-const EmployeesRoutes = {
-  users: {
+export const UserRoutesSideNav = {
+  user: {
     icon: 'user',
     title: 'Users',
     sub: {
@@ -20,7 +21,7 @@ const EmployeesRoutes = {
       },
     },
   },
-  groups: {
+  group: {
     icon: 'team',
     title: 'Groups',
     sub: {
@@ -32,12 +33,12 @@ const EmployeesRoutes = {
       list: {
         title: 'List',
         icon: 'ordered-list',
-        Component: () => 'will be done', //TODO
+        Component: ListGroups, //TODO
       },
     },
   },
 };
 
-const UserRoutes = mapRouteObject(EmployeesRoutes);
+const UserRoutes = mapRouteObject(UserRoutesSideNav);
 
 export default UserRoutes;

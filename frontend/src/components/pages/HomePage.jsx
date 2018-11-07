@@ -5,7 +5,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <Row>
-        <Col span={8}>{/* <h1>To be done</h1> */}</Col>
+        <Col>{null}</Col>
       </Row>
     );
   }

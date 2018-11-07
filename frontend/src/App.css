@@ -26,6 +26,10 @@ body {
   white-space: nowrap;
 }
 
+.ant-table-row {
+  cursor: pointer;
+}
+
 .ant-layout .ant-layout-sider-zero-width-trigger {
   color: black;
   z-index: 1;
@@ -40,4 +44,8 @@ body {
 .ant-form .ant-form-item-label {
   line-height: initial;
   margin: 8px 0 4px 0;
+}
+
+.ant-dropdown {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
 }

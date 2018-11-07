@@ -56,7 +56,7 @@ class HelloForm extends Component {
   };
   render() {
     const { isLoading, user, error } = this.state;
-    const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <Centered>
         <div>

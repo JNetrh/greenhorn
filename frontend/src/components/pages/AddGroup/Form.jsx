@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Row, Col } from 'antd';
+import { Form, Button } from 'antd';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
@@ -18,12 +18,12 @@ const FormWrapper = styled.div`
 
 class AddGroupForm extends Component {
   render() {
-    // const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit, onSubmit } = this.props;
     return (
       <PageFormWrapper>
         <h2>Add group</h2>
         <FormWrapper>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <FormItem label="Group name">
               <Field
                 name="name"

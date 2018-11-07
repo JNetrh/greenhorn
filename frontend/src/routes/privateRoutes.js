@@ -3,9 +3,11 @@ import HomePage from '../components/pages/HomePage';
 import Kaja from '../components/pages/Kaja';
 import ChangePwd from '../components/pages/ChangePwd';
 import UserDetail from '../components/pages/UserDetail';
+import TaskDetail from '../components/pages/TaskDetail';
 
-import UserRoutes from './users';
-import TaskRoutes from './tasks';
+import UserRoutes, { UserRoutesSideNav } from './users';
+import TaskRoutes, { TasksRoutesSideNav } from './tasks';
+import GroupDetail from '../components/pages/GroupDetail';
 
 export default [
   {
@@ -20,10 +22,21 @@ export default [
     Component: ChangePwd,
     path: '/changepassword',
   },
+  ...UserRoutes,
   {
     Component: UserDetail,
     path: '/user/:id',
+    SideNav: UserRoutesSideNav,
   },
-  ...UserRoutes,
+  {
+    Component: GroupDetail,
+    path: '/group/:id',
+    SideNav: UserRoutesSideNav,
+  },
   ...TaskRoutes,
+  {
+    Component: TaskDetail,
+    path: '/task/:id',
+    SideNav: TasksRoutesSideNav,
+  },
 ];

@@ -14,13 +14,21 @@ const TEST_USER = {
 };
 
 const initDb = async () => {
+  // models.sequelize.afterSync(e => console.log('E:', e));
   await models.sequelize.sync();
 
-  //create user
+  console.log(
+    'Synced models:',
+    Object.keys(models.sequelize.models).join(', ')
+  );
+
   const user = await getUserByEmail(TEST_USER.email);
   if (!user) {
     await createUserWithHashedPwd(TEST_USER);
+    console.log('Created a test user.');
   }
+
+  models.sequelize.options.logging = console.log;
 };
 
 export default initDb;

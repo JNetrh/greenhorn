@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'antd';
-
-const RowActions = () => <Button type="primary">Action</Button>;
+import Table from '../../molecules/Table';
+import { getLongDate, getFromNow } from '../../../helpers/dateFormat';
 
 const columns = [
-  { title: 'Id', fixed: 'left', dataIndex: 'id', key: 'id' },
-  { title: 'Name', dataIndex: 'name', key: 'name' },
+  { title: 'Name', dataIndex: 'title', key: 'title' },
+  {
+    title: 'Estimated Time',
+    dataIndex: 'estimatedTime',
+    key: 'estimatedTime',
+    render: text => `${text} days`,
+    width: 150,
+  },
+  {
+    title: 'severity',
+    dataIndex: 'severity',
+    key: 'severity',
+    width: 150,
+  },
   {
     title: 'description',
     dataIndex: 'description',
     key: 'description',
   },
   {
-    title: 'Action',
-    key: 'operation',
-    render: RowActions,
+    title: 'Created At',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: date => getLongDate(date),
+  },
+  {
+    title: 'Last Update',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+    render: date => getFromNow(date),
   },
 ];
 
@@ -30,8 +48,11 @@ class TasksPage extends Component {
       <Table
         loading={isLoading}
         columns={columns}
-        dataSource={tasks}
-        scroll={{ x: 1500, y: 300 }}
+        dataSource={tasks.map((task, i) => {
+          task['key'] = i;
+          return task;
+        })}
+        rowLink={({ id }) => `/task/${id}`}
       />
     );
   }

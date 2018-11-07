@@ -1,27 +1,27 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
-import Form from './Form';
+import validate from './validate';
+import { AddGroup } from '../../../services/Groups/api/add';
+import Form from './view';
 
-const AddGroupPage = props => <Form {...props} />;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmit: payload => dispatch(AddGroup(payload)),
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onSubmit: payload => dispatch(AddUser(payload)),
-//   };
-// };
-
-// const redux = connect(
-//   null,
-//   // mapDispatchToProps,
-// );
+const redux = connect(
+  null,
+  mapDispatchToProps,
+);
 
 const form = reduxForm({
   form: 'addgroup',
+  validate,
 });
 
 export default compose(
-  // redux,
+  redux,
   form,
-)(AddGroupPage);
+)(Form);

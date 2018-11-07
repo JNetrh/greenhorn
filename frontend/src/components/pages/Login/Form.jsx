@@ -8,15 +8,13 @@ import {
   Centered,
   FormItem,
 } from '../../../styles/Login';
-import Select from '../../molecules/form/Select';
 import Input from '../../molecules/form/Input';
 import Checkbox from '../../molecules/form/Checkbox';
 import Logo from '../../atoms/Logo';
-import { EMAIL_ENDINGS } from '.';
 
 class LoginForm extends Component {
   render() {
-    const { handleSubmit, onSubmit, auth } = this.props;
+    const { handleSubmit, onSubmit } = this.props;
     return (
       <Centered>
         <FormWrapper>
@@ -29,13 +27,6 @@ class LoginForm extends Component {
                 iconType="user"
                 placeholder="Email address"
                 tabIndex={1}
-                addonAfter={
-                  <Field
-                    name="emailEnding"
-                    component={Select}
-                    options={EMAIL_ENDINGS}
-                  />
-                }
               />
             </FormItem>
             <FormItem>

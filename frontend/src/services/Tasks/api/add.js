@@ -10,7 +10,7 @@ export const AddTask = ({
 }) => async (dispatch, getState, { api }) => {
   const loader = message.loading('Adding task');
   try {
-    const { data } = await api.post('/task', {
+    const { data } = await api.post('task', {
       title,
       description,
       estimatedTime,

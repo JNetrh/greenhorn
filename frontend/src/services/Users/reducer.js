@@ -1,13 +1,10 @@
 import {
-  LIST_FETCH_USERS,
-  LIST_FETCH_USERS_SUCCESS,
-  LIST_FETCH_USERS_FAILURE,
-  ADD_NEW_USER,
-  CHANGE_PWD_USER,
-  GET_USER_BY_ID,
-  DELETE_USER,
-  DELETE_USER_SUCCESS,
-  DELETE_USER_FAILURE,
+  USERS_LIST_FETCH,
+  USERS_LIST_FETCH_SUCC,
+  USERS_LIST_FETCH_FAIL,
+  USERS_ADD,
+  USERS_DELETE,
+  USERS_UPDATE,
 } from './actions';
 
 const initialState = {
@@ -19,14 +16,14 @@ const initialState = {
 
 export const UsersListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LIST_FETCH_USERS:
+    case USERS_LIST_FETCH:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
 
-    case LIST_FETCH_USERS_SUCCESS: {
+    case USERS_LIST_FETCH_SUCC: {
       const { users } = action.payload;
       return {
         ...state,
@@ -37,7 +34,7 @@ export const UsersListReducer = (state = initialState, action) => {
       };
     }
 
-    case LIST_FETCH_USERS_FAILURE: {
+    case USERS_LIST_FETCH_FAIL: {
       const { error } = action.payload;
       return {
         ...state,
@@ -47,54 +44,27 @@ export const UsersListReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_NEW_USER: {
+    case USERS_ADD: {
       const { user } = action.payload;
-      console.log('Adding', user, 'to', state.users);
       return {
         ...state,
         users: [...state.users, user],
       };
     }
 
-    case CHANGE_PWD_USER: {
-      const { currentPassword, newPassword, newPasswordCheck } = action.payload;
-      console.log('Changing', currentPassword, 'to', newPassword);
+    case USERS_DELETE: {
+      const { user } = action.payload;
       return {
         ...state,
-        isLoading: false,
+        users: state.users.filter(({ id }) => id !== user.id),
       };
     }
 
-    case GET_USER_BY_ID: {
-      const { id } = action.payload;
-      console.log(id);
+    case USERS_UPDATE: {
+      const { user } = action.payload;
       return {
         ...state,
-        isLoading: false,
-      };
-    }
-
-    case DELETE_USER:
-      return {
-        ...state,
-        isLoading: true,
-        error: null,
-      };
-
-    case DELETE_USER_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-      };
-    }
-
-    case DELETE_USER_FAILURE: {
-      const { error } = action.payload;
-      return {
-        ...state,
-        isLoading: false,
-        error,
+        users: state.users.map(curr => (curr.id === user.id ? user : curr)),
       };
     }
 

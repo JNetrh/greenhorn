@@ -1,53 +1,35 @@
-export const LIST_FETCH_USERS = 'LIST_FETCH_USERS';
-export const LIST_FETCH_USERS_SUCCESS = 'LIST_FETCH_USERS_SUCCESS';
-export const LIST_FETCH_USERS_FAILURE = 'LIST_FETCH_USERS_FAILURE';
-export const ADD_NEW_USER = 'ADD_NEW_USER';
-export const CHANGE_PWD_USER = 'CHANGE_PWD_USER';
-export const GET_USER_BY_ID = 'GET_USER_BY_ID';
-export const DELETE_USER = 'DELETE_USER';
-export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
-export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
+export const USERS_LIST_FETCH = 'USER_LIST_FETCH';
+export const USERS_LIST_FETCH_SUCC = 'USERS_LIST_FETCH_SUCC';
+export const USERS_LIST_FETCH_FAIL = 'USERS_LIST_FETCH_FAIL';
+export const USERS_ADD = 'USERS_ADD';
+export const USERS_DELETE = 'USERS_DELETE';
+export const USERS_UPDATE = 'USERS_UPDATE';
 
 export const fetchUsers = () => ({
-  type: LIST_FETCH_USERS,
+  type: USERS_LIST_FETCH,
 });
 
 export const fetchUsersSuccess = users => ({
-  type: LIST_FETCH_USERS_SUCCESS,
+  type: USERS_LIST_FETCH_SUCC,
   payload: { users },
 });
 
 export const fetchUsersFailure = error => ({
-  type: LIST_FETCH_USERS_FAILURE,
+  type: USERS_LIST_FETCH_FAIL,
   payload: { error },
 });
 
 export const addUser = user => ({
-  type: ADD_NEW_USER,
+  type: USERS_ADD,
   payload: { user },
 });
 
-export const changePwdUser = user => ({
-  type: CHANGE_PWD_USER,
+export const deleteUser = user => ({
+  type: USERS_DELETE,
   payload: { user },
 });
 
-export const getUser = id => ({
-  type: GET_USER_BY_ID,
-  payload: { id },
-});
-
-export const deteleUser = user => ({
-  type: DELETE_USER,
+export const updateUser = user => ({
+  type: USERS_UPDATE,
   payload: { user },
-});
-
-export const deteleUserSuccess = user => ({
-  type: DELETE_USER_SUCCESS,
-  payload: { user },
-});
-
-export const deteleUserFailure = error => ({
-  type: DELETE_USER_FAILURE,
-  payload: { error },
 });

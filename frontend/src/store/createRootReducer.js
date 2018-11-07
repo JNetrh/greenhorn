@@ -5,8 +5,9 @@ import storage from 'redux-persist/lib/storage';
 
 import { authReducer } from '../services/Auth/reducer';
 import { UsersListReducer } from '../services/Users/reducer';
-import { activeMenuReducer } from '../services/Menu/reducer';
+// import { activeMenuReducer } from '../services/Menu/reducer';
 import { tasksReducer } from '../services/Tasks/reducer';
+import { GroupsListReducer } from '../services/Groups/reducer';
 
 const persistConfig = {
   key: 'root',
@@ -18,8 +19,9 @@ export const createRootReducer = () => {
     form: formReducer,
     auth: authReducer,
     users: UsersListReducer,
+    groups: GroupsListReducer,
     tasks: tasksReducer,
-    menu: activeMenuReducer,
+    // menu: activeMenuReducer,
   });
 
   return persistReducer(persistConfig, rootReducer);

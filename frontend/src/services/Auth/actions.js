@@ -11,11 +11,11 @@ export const setActiveUser = user => ({
 });
 
 export const logIn = payload => async (dispatch, getState, { api }) => {
-  const { email, emailEnding, password, rememberMe } = payload;
+  const { email, password, rememberMe } = payload;
   const loader = message.loading('Logginig in...');
   try {
     const { data } = await api.post('auth/login', {
-      email: `${email}${emailEnding}`,
+      email: `${email}`,
       password,
       rememberMe,
     });

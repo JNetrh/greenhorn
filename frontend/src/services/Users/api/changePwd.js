@@ -1,5 +1,4 @@
 import { message } from 'antd';
-import { changePwdUser } from '../actions';
 import getErrorMessage from '../../../helpers/getErrorMessage';
 
 export const ChangePwdUser = ({
@@ -8,16 +7,13 @@ export const ChangePwdUser = ({
   newPasswordCheck,
 }) => async (dispatch, getState, { api }) => {
   const loader = message.loading('Changing user password');
-  console.log(currentPassword, newPassword, newPasswordCheck);
   try {
-    const { data } = await api.post('/user/changepwd/', {
+    await api.post('/auth/changepwd', {
       currentPassword,
       newPassword,
       newPasswordCheck,
     });
     loader();
-
-    dispatch(changePwdUser(data));
     message.success('User password changed', 2);
   } catch (err) {
     if (err.response) {

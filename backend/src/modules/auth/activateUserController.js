@@ -1,7 +1,7 @@
 import { Invitation, User } from '../../models';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { stripPassword } from '../user/addUserController';
+import { stripPassword } from '../../services/password/stripPassword';
 import { getToken } from './tokenHandling';
 
 const activateUserController = async (req, res) => {
