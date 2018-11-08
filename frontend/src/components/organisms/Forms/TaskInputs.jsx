@@ -37,5 +37,16 @@ export const TaskInputs = () => (
         />
       </Col>
     </Row>
+    <Row gutter={20}>
+      <Col sm={12}>
+        <FormItemWithLabel
+          label="Assign to group"
+          name="group"
+          component={Select}
+          tabIndex={3}
+          options={SEVERITY_OPTIONS}
+        />
+      </Col>
+    </Row>
   </div>
 );
