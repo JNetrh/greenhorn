@@ -5,6 +5,10 @@ import { PageFormWrapper } from '../../styles/Forms';
 import { FormWrapper } from '../atoms/FormWrapper';
 
 export class CreateEditForm extends Component {
+  componentDidMount() {
+    const { onLoad } = this.props;
+    onLoad & onLoad();
+  }
   confirmDelete = () => {
     const { deleteItem, item } = this.props;
     deleteItem(item);
