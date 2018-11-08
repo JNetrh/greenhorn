@@ -11,7 +11,7 @@ export const deleteUserById = async id => {
   return deleted;
 };
 
-const deleteUserController = async (req, res) => {
+export const deleteUserController = async (req, res) => {
   const { id } = req.params;
   try {
     if (!id) {
@@ -33,5 +33,3 @@ const deleteUserController = async (req, res) => {
     return res.status(500).json(err);
   }
 };
-
-export default deleteUserController;
