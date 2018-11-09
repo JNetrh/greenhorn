@@ -1,7 +1,7 @@
 import { Task } from '../../models/';
 
 const addTasksController = async (req, res) => {
-  const { title, estimatedTime, severity, description } = req.body;
+  const { title, estimatedTime, severity, description, GroupId } = req.body;
   try {
     if (!title || !estimatedTime || !severity) {
       return res
@@ -14,6 +14,7 @@ const addTasksController = async (req, res) => {
       estimatedTime,
       severity,
       description,
+      GroupId,
       createdById: req.userId,
     });
 
