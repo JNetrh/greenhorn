@@ -3,6 +3,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { AddTask } from '../../../services/Tasks/api/add';
+import { startFetchGroups } from '../../../services/Groups/api/list';
 import validate from '../../../helpers/Validators/validateTaskForm';
 import TaskPage from '../../organisms/TaskPage';
 import { startFetchGroups } from '../../../services/Groups/api/list';
@@ -14,6 +15,7 @@ export const SEVERITY_OPTIONS = [
   { value: 'low', label: 'Low' },
 ];
 
+<<<<<<< HEAD
 const ListGroups = props => <Form {...props} />;
 
 const TaskForm = reduxForm({
@@ -39,9 +41,19 @@ const mapDispatchToProps = dispatch => {
     onSubmit: payload => dispatch(AddTask(payload)),
   };
 };
+=======
+const mapDispatchToProps = dispatch => ({
+  onSubmit: payload => dispatch(AddTask(payload)),
+  onLoad: payload => dispatch(startFetchGroups(payload)),
+});
+
+const mapStateToProps = ({ groups }) => ({
+  groups,
+});
+>>>>>>> 3b5c253f98a0d977501f3dc369f61f01c51a721c
 
 const redux = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

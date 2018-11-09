@@ -22,7 +22,7 @@ const Form = props => {
           {getFromNow(updatedAt)}
         </InfoLabel>
       </LabelLine>
-      <TaskInputs />
+      <TaskInputs {...props} />
     </CreateEditForm>
   );
 };
