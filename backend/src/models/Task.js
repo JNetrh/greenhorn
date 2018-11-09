@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Task.associate = ({ Task, AssignedTask, Group, User }) => {
-    Task.belongsTo(User, { as: 'createdBy' });
+    Task.belongsTo(User, { as: 'createdById' });
     Task.hasMany(AssignedTask);
     Group.hasMany(Task);
   };

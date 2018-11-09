@@ -1,7 +1,8 @@
-import { Task } from '../../models/';
+import { Task, Group } from '../../models/';
 
 const addTasksController = async (req, res) => {
-  const { title, estimatedTime, severity, description } = req.body;
+  const { title, estimatedTime, severity, description, GroupId } = req.body;
+
   try {
     if (!title || !estimatedTime || !severity) {
       return res
@@ -9,14 +10,18 @@ const addTasksController = async (req, res) => {
         .json({ msg: 'Please provide all mandatory fields.' });
     }
 
+    if (GroupId != null) {
+      GroupId == null;
+    }
+
     const createTask = await Task.create({
       title,
       estimatedTime,
       severity,
       description,
+      GroupId,
       createdById: req.userId,
     });
-
     return res.json(createTask);
   } catch (err) {
     console.log(err);
