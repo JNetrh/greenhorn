@@ -1,7 +1,7 @@
 import { Task } from '../../models';
 
 export const taskUpdateController = async (req, res) => {
-  const { title, estimatedTime, severity, description } = req.body;
+  const { title, estimatedTime, severity, description, GroupId } = req.body;
   const { id } = req.params;
   try {
     if (!title || !estimatedTime || !severity) {
@@ -19,6 +19,7 @@ export const taskUpdateController = async (req, res) => {
         estimatedTime,
         severity,
         description,
+        GroupId,
       },
       {
         where: {
