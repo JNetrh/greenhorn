@@ -10,7 +10,7 @@ const Form = props => (
   should be finished. Then please choose its severity."
     {...props}
   >
-    <TaskInputs {...props} />
+    <TaskInputs />
   </CreateEditForm>
 );
 
