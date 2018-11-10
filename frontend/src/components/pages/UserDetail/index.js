@@ -31,8 +31,9 @@ const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch(startFetchGroups(payload)),
 });
 
-const mapStateToProps = ({ groups }) => ({
+const mapStateToProps = ({ groups, auth }) => ({
   groups,
+  auth,
 });
 
 const redux = connect(

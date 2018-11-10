@@ -7,17 +7,23 @@ import Select from '../../molecules/form/Select';
 export const ROLES = ['user', 'taskowner', 'hr'];
 
 const padding = {
-  padding: '10px',
+  padding: '10px 0px 5px 0px',
 };
 
 const RoleOptions = ROLES.map(role => ({ label: role, value: role }));
-const GroupData = [];
 
-export const UserInputs = ({ groups }) => {
-  const Data = groups.groups.map(({ id, name }) => ({
-    label: name,
-    value: id,
+export const UserInputs = ({ groups, auth }) => {
+  const data = groups.groups.map(({ id, name }) => ({
+    key: id,
+    title: name,
   }));
+  const userData = auth.user.Groups.map(({ id, name }) => ({
+    key: id,
+    title: name,
+  }));
+
+  console.log('userdata ', userData);
+  console.log('data ', data);
   return (
     <div>
       <Row gutter={20}>
@@ -64,15 +70,15 @@ export const UserInputs = ({ groups }) => {
         <Col>
           <p style={padding}>Select group which will be assign to user: </p>
           <Transfer
-            dataSource={GroupData}
+            dataSource={data}
             listStyle={{
               width: 227,
               height: 300,
             }}
             titles={['All groups', 'Picked groups']}
-            //targetKeys={this.state.targetKeys}
+            targetKeys={this.userData}
             onChange={this.handleChange}
-            render={this.renderItem}
+            render={item => item.title}
           />
         </Col>
       </Row>
