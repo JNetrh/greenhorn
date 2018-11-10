@@ -4,16 +4,18 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router';
 import Form from './Form';
+import validate from '../../../helpers/Validators/validateTaskForm';
 import DetailPage from '../../organisms/DetailPage';
 import { startDeleteUser } from '../../../services/Users/api/delete';
 import { startUpdateUser } from '../../../services/Users/api/update';
 import { fetchUserById } from '../../../services/Users/api/fetchUserById';
 
-const UserDetail = props => <Form {...props} />;
+// const UserDetail = props => <Form {...props} />;
 
 const UserForm = reduxForm({
   form: 'userDetail',
-})(UserDetail);
+  validate,
+})(Form);
 
 const EditUser = props => (
   <DetailPage
