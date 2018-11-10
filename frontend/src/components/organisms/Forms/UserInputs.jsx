@@ -1,12 +1,17 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Transfer } from 'antd';
 import { FormItemWithLabel } from '../../atoms/FormItemWithLabel';
 import Input from '../../molecules/form/Input';
 import Select from '../../molecules/form/Select';
 
 export const ROLES = ['user', 'taskowner', 'hr'];
 
+const padding = {
+  padding: '0px 10px',
+};
+
 const RoleOptions = ROLES.map(role => ({ label: role, value: role }));
+const mockData = [];
 
 export const UserInputs = () => (
   <div>
@@ -47,6 +52,22 @@ export const UserInputs = () => (
           component={Select}
           options={RoleOptions}
           iconType="lock"
+        />
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <p style={padding}>Select group which will be assign to user: </p>
+        <Transfer
+          dataSource={mockData}
+          listStyle={{
+            width: 227,
+            height: 300,
+          }}
+          titles={['All groups', 'Picked groups']}
+          //targetKeys={this.state.targetKeys}
+          onChange={this.handleChange}
+          render={this.renderItem}
         />
       </Col>
     </Row>
