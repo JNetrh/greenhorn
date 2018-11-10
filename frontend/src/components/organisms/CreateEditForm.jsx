@@ -5,6 +5,9 @@ import { PageFormWrapper } from '../../styles/Forms';
 import { FormWrapper } from '../atoms/FormWrapper';
 
 export class CreateEditForm extends Component {
+  state = {
+    targetKeys: [],
+  };
   componentDidMount() {
     const { onLoad } = this.props;
     onLoad && onLoad();

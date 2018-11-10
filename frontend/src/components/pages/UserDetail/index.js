@@ -9,8 +9,7 @@ import DetailPage from '../../organisms/DetailPage';
 import { startDeleteUser } from '../../../services/Users/api/delete';
 import { startUpdateUser } from '../../../services/Users/api/update';
 import { fetchUserById } from '../../../services/Users/api/fetchUserById';
-
-// const UserDetail = props => <Form {...props} />;
+import { startFetchGroups } from '../../../services/Groups/api/list';
 
 const UserForm = reduxForm({
   form: 'userDetail',
@@ -29,10 +28,16 @@ const EditUser = props => (
 const mapDispatchToProps = dispatch => ({
   deleteItem: user => dispatch(startDeleteUser(user)),
   onSubmit: user => dispatch(startUpdateUser(user)),
+  onLoad: payload => dispatch(startFetchGroups(payload)),
+});
+
+const mapStateToProps = ({ groups, auth }) => ({
+  groups,
+  auth,
 });
 
 const redux = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
