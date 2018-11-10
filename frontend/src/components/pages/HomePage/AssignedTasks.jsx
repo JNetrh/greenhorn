@@ -43,7 +43,7 @@ export class AssignedTasks extends Component {
           task['key'] = i;
           return task;
         })}
-        rowLink={({ id }) => `/task/${id}`}
+        rowLink={({ id }) => `/submit/${id}`}
       />
     );
   }

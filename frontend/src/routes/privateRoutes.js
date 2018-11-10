@@ -3,6 +3,7 @@ import HomePage from '../components/pages/HomePage';
 import ChangePwd from '../components/pages/ChangePwd';
 import UserDetail from '../components/pages/UserDetail';
 import TaskDetail from '../components/pages/TaskDetail';
+import Submit from '../components/pages/Submit';
 
 import UserRoutes, { UserRoutesSideNav } from './users';
 import TaskRoutes, { TasksRoutesSideNav } from './tasks';
@@ -12,6 +13,10 @@ export default [
   {
     Component: HomePage,
     path: '/',
+  },
+  {
+    Component: Submit,
+    path: '/submit/:id',
   },
   {
     Component: ChangePwd,
