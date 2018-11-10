@@ -13,7 +13,7 @@ export const startListAssignedTasks = () => async (
   try {
     message.loading('Loading yours assigned tasks')();
     dispatch(listAssignedTasks());
-    const { data } = await api.get('task');
+    const { data } = await api.get('assignedTask');
     dispatch(listAssignedTasksSuccess(data));
   } catch (error) {
     message.error('Loading assigned tasks failed')();
