@@ -17,11 +17,11 @@ router.use('/api/auth', authRoutes);
 
 router.use('*', verifyToken);
 router.use('/api/task', tasks);
+router.use('/api/assignedTask', assignedTask);
 
 router.use('*', checkIfHr);
 router.use('/api/user', user);
 router.use('/api/group', groups);
 router.use('/api/assign', assign);
-router.use('/api/assignedTask', assignedTask);
 
 export default router;
