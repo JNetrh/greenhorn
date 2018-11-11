@@ -1,10 +1,10 @@
 import { Task } from '../../models';
 
 export const taskUpdateController = async (req, res) => {
-  const { title, estimatedTime, severity, description } = req.body;
+  const { title, description, estimatedTime, severity} = req.body;
   const { id } = req.params;
   try {
-    if (!title || !estimatedTime || !severity) {
+    if (!title || !description || !estimatedTime || !severity) {
       return res
         .status(400)
         .json({ msg: 'Please provide all required attributes' });
@@ -16,9 +16,9 @@ export const taskUpdateController = async (req, res) => {
     await Task.update(
       {
         title,
+        description,
         estimatedTime,
         severity,
-        description,
       },
       {
         where: {

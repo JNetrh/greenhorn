@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormItemWithLabel } from '../../atoms/FormItemWithLabel';
 import Input from '../../molecules/form/Input';
+import TextArea from '../../molecules/form/TextArea';
 import Select from '../../molecules/form/Select';
 import { Row, Col } from 'antd';
 import { SEVERITY_OPTIONS } from '../../pages/AddTask';
@@ -14,6 +15,14 @@ export const TaskInputs = () => (
       tabIndex={1}
       iconType="book"
       placeholder="Title"
+    />
+    <FormItemWithLabel
+      label="Task description"
+      name="description"
+      component={TextArea}
+      placeholder="Add a short description of this task if neccessary"
+      minRows={2}
+      autosize
     />
     <Row gutter={20}>
       <Col sm={12}>
