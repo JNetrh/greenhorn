@@ -14,8 +14,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = ({ groups }) => ({
+  groups,
+});
+
 const redux = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

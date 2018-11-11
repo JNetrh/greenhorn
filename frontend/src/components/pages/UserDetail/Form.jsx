@@ -4,7 +4,7 @@ import { UserInputs } from '../../organisms/Forms/UserInputs';
 
 const Form = props => (
   <CreateEditForm type="edit" itemName="user" {...props}>
-    <UserInputs />
+    <UserInputs {...props} />
   </CreateEditForm>
 );
 
