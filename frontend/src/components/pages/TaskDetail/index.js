@@ -9,6 +9,7 @@ import validate from '../../../helpers/Validators/validateTaskForm';
 import { fetchTaskById } from '../../../services/Tasks/api/fetchTaskById.js';
 import view from './view';
 import DetailPage from '../../organisms/DetailPage';
+import { startFetchGroups } from '../../../services/Groups/api/list';
 
 const TaskForm = reduxForm({
   form: 'taskDetail',
@@ -27,10 +28,15 @@ const EditTaskPage = props => (
 const mapDispatchToProps = dispatch => ({
   deleteItem: item => dispatch(startDeleteTask(item)),
   onSubmit: item => dispatch(startUpdateTask(item)),
+  onLoad: payload => dispatch(startFetchGroups(payload)),
+});
+
+const mapStateToProps = ({ groups }) => ({
+  groups,
 });
 
 const redux = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
