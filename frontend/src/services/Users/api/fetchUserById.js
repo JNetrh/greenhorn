@@ -4,8 +4,15 @@ import api from '../../../api';
 
 export const fetchUserById = async id => {
   try {
-    const { data } = await api.get(`user/${id}`);
-    return data;
+    const {
+      data: { Groups, ...rest },
+    } = await api.get(`user/${id}`);
+
+    const groups = Groups.map(({ id }) => id);
+    return {
+      groups,
+      ...rest,
+    };
   } catch (err) {
     if (err.response) {
       const error = getErrorMessage(err) || 'User not found';

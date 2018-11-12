@@ -1,28 +1,19 @@
 import React from 'react';
-import { Row, Col, Transfer } from 'antd';
+import { Row, Col } from 'antd';
 import { FormItemWithLabel } from '../../atoms/FormItemWithLabel';
 import Input from '../../molecules/form/Input';
 import Select from '../../molecules/form/Select';
+import Transfer from '../../molecules/form/Transfer';
 
 export const ROLES = ['user', 'taskowner', 'hr'];
 
-const padding = {
-  padding: '10px 0px 5px 0px',
-};
-
 const RoleOptions = ROLES.map(role => ({ label: role, value: role }));
 
-export const UserInputs = ({ groups, auth }) => {
+export const UserInputs = ({ groups }) => {
   const data = groups.groups.map(({ id, name }) => ({
     key: id,
     title: name,
   }));
-  const userData = auth.user.Groups.map(({ id, name }) => ({
-    key: id,
-    title: name,
-  }));
-
-  console.log('userdata ', userData);
   console.log('data ', data);
   return (
     <div>
@@ -68,16 +59,18 @@ export const UserInputs = ({ groups, auth }) => {
       </Row>
       <Row>
         <Col>
-          <p style={padding}>Select group which will be assign to user: </p>
-          <Transfer
+          <FormItemWithLabel
+            label={'Select groups to be assigned with this user:'}
+            name={'groups'}
             dataSource={data}
-            listStyle={{
-              width: 227,
-              height: 300,
+            style={{
+              display: 'flex',
+              marginTop: 10,
             }}
+            isLoading={groups.isLoading}
+            component={Transfer}
+            listStyle={{ flex: 1, height: 300 }}
             titles={['All groups', 'Picked groups']}
-            targetKeys={this.userData}
-            onChange={this.handleChange}
             render={item => item.title}
           />
         </Col>
