@@ -1,9 +1,9 @@
 import expressAsyncAwait from 'express-async-await';
 import { Router } from 'express';
 
-import { assignUserToGroup } from './assignUserToGroup';
+import { listAssignedTasks } from './listAssignedTasks';
 
 const router = expressAsyncAwait(Router());
-router.post('/', assignUserToGroup);
+router.get('/', listAssignedTasks);
 
 export default router;

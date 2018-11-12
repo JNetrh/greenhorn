@@ -2,6 +2,7 @@ import { User } from '../../models/';
 import { createInvitation } from '../../services/invitation/invitationController';
 import bcrypt from 'bcryptjs';
 import { stripPassword } from '../../services/password/stripPassword';
+// import { updateUserGroupsAndAssignTasks } from '../assign/assignUserToGroup';
 
 export const ROLES = ['user', 'taskowner', 'hr'];
 
@@ -11,13 +12,18 @@ export const getUserByEmail = async email => {
   return user;
 };
 
-export const createUserWithHashedPwd = async ({ password, ...user }) => {
+export const createUserWithHashedPwd = async ({
+  password,
+  // groups,
+  ...user
+}) => {
   const hashedPwd = await bcrypt.hash(password, 8);
   const createdUser = await User.create({
     ...user,
     password: hashedPwd,
     role: user.role || ROLES[0],
   });
+  // await updateUserGroupsAndAssignTasks(createdUser.id, groups);
   return stripPassword(createdUser);
 };
 
@@ -51,7 +57,7 @@ export const addUser = async user => {
       resolve(createdUser);
     } catch (err) {
       console.log(err);
-      reject({ error: error, status: 500 });
+      reject({ error, status: 500 });
     }
   });
 };

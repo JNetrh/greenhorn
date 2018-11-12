@@ -57,7 +57,6 @@ export const TaskInputs = ({ groups }) => {
     label: name,
     value: id,
   }));
-  console.log(groupOptions, SEVERITY_OPTIONS);
   return (
     <div>
       <FormItemWithLabel
