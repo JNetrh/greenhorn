@@ -1,8 +1,8 @@
-import { AssignedTask, Task } from '../../models';
+import { AssignedTask, Task, TaskStatus } from '../../models';
 export const listAssignedTasks = async (req, res) => {
   const assignedTask = await AssignedTask.findAll({
     where: { UserId: req.userId },
-    include: [Task],
+    include: [Task, TaskStatus],
   });
   res.json(assignedTask);
 };
