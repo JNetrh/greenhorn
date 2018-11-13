@@ -2,6 +2,7 @@ import { User } from '../../models/';
 import { createInvitation } from '../../services/invitation/invitationController';
 import bcrypt from 'bcryptjs';
 import { stripPassword } from '../../services/password/stripPassword';
+import { addUserMail } from '../../services/mail/addUserMail';
 // import { updateUserGroupsAndAssignTasks } from '../assign/assignUserToGroup';
 
 export const ROLES = ['user', 'taskowner', 'hr'];
@@ -51,8 +52,15 @@ export const addUser = async user => {
         email,
         password,
       });
+      try {
+        const invitationWithToken = await createInvitation(createdUser.id);
+        console.log('invitationWithToken ', invitationWithToken);
 
-      await createInvitation(createdUser.id);
+        const invitationSent = addUserMail(createdUser, invitationWithToken);
+      } catch (err) {
+        console.log(err);
+        reject({ error, status: 500 });
+      }
 
       resolve(createdUser);
     } catch (err) {
