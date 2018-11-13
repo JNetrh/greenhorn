@@ -1,4 +1,4 @@
-import { User } from '../../models/';
+import { User, Notification } from '../../models/';
 import { createInvitation } from '../../services/invitation/invitationController';
 import bcrypt from 'bcryptjs';
 import { stripPassword } from '../../services/password/stripPassword';
@@ -30,9 +30,10 @@ export const createUserWithHashedPwd = async ({
 
 export const addUser = async user => {
   return new Promise(async (resolve, reject) => {
-    const { name, surname, email, password } = user.body;
+    const { name, surname, email } = user.body;
+    const password = '54b132aa3d0c68e31b4e65a70704ee24';
     try {
-      if (!name || !surname || !email || !password) {
+      if (!name || !surname || !email) {
         reject({
           error: { msg: 'Please provide all mandatory fields.' },
           status: 400,
@@ -56,7 +57,7 @@ export const addUser = async user => {
         const invitationWithToken = await createInvitation(createdUser.id);
         console.log('invitationWithToken ', invitationWithToken);
 
-        const invitationSent = addUserMail(createdUser, invitationWithToken);
+        await addUserMail(createdUser, invitationWithToken);
       } catch (err) {
         console.log(err);
         reject({ error, status: 500 });

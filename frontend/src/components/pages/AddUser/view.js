@@ -12,7 +12,7 @@ const Form = props => (
     {...props}
   >
     <UserInputs {...props} />
-    <FormItemWithLabel
+    {/* <FormItemWithLabel
       label="Password (will not be here)"
       type="password"
       name="password"
@@ -20,7 +20,7 @@ const Form = props => (
       tabIndex={4}
       iconType="lock"
       placeholder="password"
-    />
+    /> */}
   </CreateEditForm>
 );
 
