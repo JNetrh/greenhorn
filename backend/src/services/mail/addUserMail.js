@@ -12,9 +12,9 @@ export const addUserMail = async (createdUser, invitationToken) => {
       },
     };
     const mailRes = await sgMail.send(msg);
-    return res.json(mailRes);
+    return mailRes;
   } catch (error) {
     console.error(error);
-    return res.status(500).json(error);
+    return error;
   }
 };

@@ -56,7 +56,7 @@ export const addUser = async user => {
         const invitationWithToken = await createInvitation(createdUser.id);
         console.log('invitationWithToken ', invitationWithToken);
 
-        invitationSent = addUserMail(createdUser, invitationWithToken);
+        const invitationSent = addUserMail(createdUser, invitationWithToken);
       } catch (err) {
         console.log(err);
         reject({ error, status: 500 });
