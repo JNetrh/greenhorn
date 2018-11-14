@@ -7,6 +7,7 @@ import user from './modules/user/routes';
 import tasks from './modules/tasks/routes';
 import groups from './modules/groups/routes';
 import assign from './modules/assign/routes';
+import assignedTask from './modules/assignedTask/routes';
 import { verifyToken } from './modules/auth/tokenHandling';
 import { checkIfHr } from './modules/auth/checkIfHr';
 
@@ -16,6 +17,7 @@ router.use('/api/auth', authRoutes);
 
 router.use('*', verifyToken);
 router.use('/api/task', tasks);
+router.use('/api/assignedTask', assignedTask);
 
 router.use('*', checkIfHr);
 router.use('/api/user', user);

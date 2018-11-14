@@ -11,7 +11,7 @@ const Form = props => (
     itemDescription="First step to add user is to fill his or her first name and last name. Then please add email."
     {...props}
   >
-    <UserInputs />
+    <UserInputs {...props} />
     <FormItemWithLabel
       label="Password (will not be here)"
       type="password"

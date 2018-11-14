@@ -1,10 +1,10 @@
 /* -- page content -- */
 import HomePage from '../components/pages/HomePage';
-import Kaja from '../components/pages/Kaja';
 import ChangePwd from '../components/pages/ChangePwd';
 import MyAccount from '../components/pages/MyAccount';
 import UserDetail from '../components/pages/UserDetail';
 import TaskDetail from '../components/pages/TaskDetail';
+import Submit from '../components/pages/Submit';
 
 import UserRoutes, { UserRoutesSideNav } from './users';
 import TaskRoutes, { TasksRoutesSideNav } from './tasks';
@@ -16,8 +16,8 @@ export default [
     path: '/',
   },
   {
-    Component: Kaja,
-    path: '/kaja',
+    Component: Submit,
+    path: '/submit/:id',
   },
   {
     Component: MyAccount,
