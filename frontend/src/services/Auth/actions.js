@@ -4,10 +4,15 @@ import history from '../../history';
 import getErrorMessage from '../../helpers/getErrorMessage';
 
 export const SET_ACTIVE_USER = 'SET_ACTIVE_USER';
+export const USER_UPDATE = 'USER_UPDATE';
 
 export const setActiveUser = user => ({
   type: SET_ACTIVE_USER,
   user,
+});
+export const updateUser = ({name, surname}) => ({
+  type: USER_UPDATE,
+  payload: {name, surname},
 });
 
 export const logIn = payload => async (dispatch, getState, { api }) => {

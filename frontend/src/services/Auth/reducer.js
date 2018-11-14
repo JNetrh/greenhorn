@@ -1,4 +1,4 @@
-import { SET_ACTIVE_USER } from './actions';
+import { SET_ACTIVE_USER, USER_UPDATE } from './actions';
 
 const initialState = {
   user: null,
@@ -12,6 +12,15 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         user: action.user,
         isLogged: true,
+      };
+    case USER_UPDATE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.payload.name,
+          surname: action.payload.surname,
+        }
       };
     default:
       return state;

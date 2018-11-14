@@ -2,6 +2,7 @@
 import HomePage from '../components/pages/HomePage';
 import Kaja from '../components/pages/Kaja';
 import ChangePwd from '../components/pages/ChangePwd';
+import MyAccount from '../components/pages/MyAccount';
 import UserDetail from '../components/pages/UserDetail';
 import TaskDetail from '../components/pages/TaskDetail';
 
@@ -17,6 +18,10 @@ export default [
   {
     Component: Kaja,
     path: '/kaja',
+  },
+  {
+    Component: MyAccount,
+    path: '/myaccount',
   },
   {
     Component: ChangePwd,
