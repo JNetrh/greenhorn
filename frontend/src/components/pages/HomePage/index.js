@@ -9,7 +9,7 @@ const HomePage = props => <AssignedTasks {...props} />;
 
 const mapDispatchToProps = dispatch => {
   return {
-    startListAssignedTasks: () => dispatch(startListAssignedTasks()),
+    startListAssignedTasks: () => dispatch(startListAssignedTasks()),  
   };
 };
 

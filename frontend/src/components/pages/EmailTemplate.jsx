@@ -174,9 +174,9 @@ export default class EmailTemplate extends Component {
           <tr>
             <td valign="top" style={bodyStyle}>
               <p style={helloTextStyle}>
-                You have been granted access to the Greenhorn App. Please make
-                and affort and discover what Greenhorn app can bring to you. You
-                will find we can help you to get over your first steps in the
+                The access to the Greenhorn App have been granted to you. Please make
+                a little effort to discover how Greenhorn app can make your work life easier. You
+                will find out soon we can help you to get over your first steps in your
                 company.
               </p>
               <div style={logInButton}>
