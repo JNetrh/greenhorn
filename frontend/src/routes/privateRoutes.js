@@ -1,6 +1,7 @@
 /* -- page content -- */
 import HomePage from '../components/pages/HomePage';
 import ChangePwd from '../components/pages/ChangePwd';
+import MyAccount from '../components/pages/MyAccount';
 import UserDetail from '../components/pages/UserDetail';
 import TaskDetail from '../components/pages/TaskDetail';
 import Submit from '../components/pages/Submit';
@@ -17,6 +18,10 @@ export default [
   {
     Component: Submit,
     path: '/submit/:id',
+  },
+  {
+    Component: MyAccount,
+    path: '/myaccount',
   },
   {
     Component: ChangePwd,

@@ -7,11 +7,13 @@ import { userController } from './usersController';
 import { addUserWithGroupsController } from './addUserWithGroupsController';
 import { userDetailController } from './usersController';
 import { userUpdateController } from './usersController';
+import { editMyAccountController } from './editMyAccountController';
 
 const router = expressAsyncAwait(Router());
 router.get('/', userController);
 router.get('/:id', userDetailController);
 router.post('/', addUserController);
+router.put('/myaccount', editMyAccountController);
 router.post('/withGroups', addUserWithGroupsController);
 //TODO: delete all tasks from assigned tasks and workflow for deleted user
 router.delete('/:id', deleteUserController);

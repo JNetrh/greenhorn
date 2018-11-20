@@ -9,9 +9,12 @@ import { getUserByInvitationToken } from './getUserByInvitation';
 import { passwordChangeController } from './passwordChangeController';
 import ForgotPasswordController from './forgotPassword';
 
+
+
 const router = expressAsyncAwait(Router());
 router.post('/login', LoginController);
 router.post('/changepwd', verifyToken, passwordChangeController);
+
 router.get('/me', verifyToken, meController);
 router.get('/byinvitation/:token', getUserByInvitationToken);
 router.put('/activate/:token', activateUserController);
