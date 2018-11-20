@@ -1,9 +1,9 @@
 import expressAsyncAwait from 'express-async-await';
 import { Router } from 'express';
 
-import { mailController } from './mailController';
+import { newEmailUser } from './newUserMail';
 
 const router = expressAsyncAwait(Router());
-router.get('/', mailController);
+router.post('/', newEmailUser);
 
 export default router;

@@ -14,6 +14,7 @@
     "prettier": "cd ..; yarn prettier"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
     "axios": "0.18.0",
     "backpack-core": "^0.7.0",
     "bcryptjs": "^2.4.3",

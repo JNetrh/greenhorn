@@ -1,5 +1,11 @@
-import { User } from '../../models';
+import { User, Group, AssignedTask } from '../../models';
 import { stripPassword } from '../../services/password/stripPassword';
+import { updateUserGroupsAndAssignTasks } from '../assign/assignUserToGroup';
+
+const findUserById = userId =>
+  User.findByPk(userId, {
+    include: [Group, AssignedTask],
+  });
 
 export const getUserByEmail = async email => {
   const user = User.findOne({ where: { email } });
@@ -19,7 +25,7 @@ export const userController = async (req, res) => {
 export const userDetailController = async (req, res) => {
   try {
     const { id } = req.params;
-    const userById = await User.findById(id);
+    const userById = await findUserById(id);
     if (!userById) {
       res.status(404).json({ msg: 'This user does not exist' });
     }
@@ -31,13 +37,13 @@ export const userDetailController = async (req, res) => {
 };
 
 export const userUpdateController = async (req, res) => {
-  const { name, surname, email, role } = req.body;
+  const { name, surname, email, role, groups } = req.body;
   const { UserId } = req.params;
   try {
     if (!UserId || !name || !surname || !email) {
       return res.status(400).json({ msg: 'Provide all user attributes' });
     }
-    const oldUser = await User.findById(UserId);
+    const oldUser = await findUserById(UserId);
     if (email !== oldUser.email) {
       const someoneElseWithSameEmail = await getUserByEmail(email);
       if (someoneElseWithSameEmail) {
@@ -59,10 +65,14 @@ export const userUpdateController = async (req, res) => {
         },
       }
     );
-    const userUpdated = await User.findById(UserId);
+    await updateUserGroupsAndAssignTasks(UserId, groups);
+    const userUpdated = await findUserById(UserId);
     return res.status(200).json(stripPassword(userUpdated));
   } catch (err) {
     console.log(err);
+    if (err.status) {
+      return res.status(err.status).json({ msg: err.msg });
+    }
     return res.status(500).json({ msg: 'Update User internal Error ' });
   }
 };

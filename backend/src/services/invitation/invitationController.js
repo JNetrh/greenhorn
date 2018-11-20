@@ -16,5 +16,5 @@ export const createInvitation = async userId => {
       },
     }
   );
-  return invitationWithToken;
+  return invitationWithToken && token;
 };
