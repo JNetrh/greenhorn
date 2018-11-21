@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Upload, Icon, message } from 'antd';
-
+import { Upload, Icon, message, Button } from 'antd';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FormWrapper } from '../../atoms/FormWrapper';
+import { Container } from '../../atoms/Container';
+import breakpoints from '../../../styles/breakpoints';
 const Dragger = Upload.Dragger;
 
 const props = {
@@ -21,10 +24,34 @@ const props = {
   },
 };
 
+const ButtonWrapper = styled.div`
+  @media (min-width: ${breakpoints.md}) {
+    position: absolute;
+    top: 5px;
+    left: -120px;
+  }
+`;
 class SubmitPage extends Component {
   render() {
+    // const { task } = this.props;
     return (
-      <FormWrapper>
+      <Container style={{ marginTop: 20, position: 'relative' }}>
+        <ButtonWrapper>
+          <Link to="/">
+            <Button icon="arrow-left">Back</Button>
+          </Link>
+        </ButtonWrapper>
+        <h1>Great and long name</h1>
+        <h3>What to do:</h3>
+        <p>
+          In order to get your new notebook, you need to go through few steps.
+          First please contact Petr Klíč (petr@klic.com) so he can give you an
+          access and LDAP. Then please print out the papers and bring them to
+          the desk 2245D. After everything, please visit your manager, he will
+          tell you the next steps.
+        </p>
+        <h3>Until:</h3>
+        <p>25th September 2018</p>
         <Dragger {...props}>
           <p className="ant-upload-drag-icon">
             <Icon type="inbox" />
@@ -37,7 +64,7 @@ class SubmitPage extends Component {
             uploading company data or other band files
           </p>
         </Dragger>
-      </FormWrapper>
+      </Container>
     );
   }
 }

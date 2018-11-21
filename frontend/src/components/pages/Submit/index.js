@@ -1,7 +1,5 @@
-import React from 'react';
 // import { connect } from 'react-redux';
 // import { reduxForm } from 'redux-form';
-import { compose } from 'recompose';
 // import { withRouter } from 'react-router';
 // import { startDeleteTask } from '../../../services/Tasks/api/delete';
 // import { startUpdateTask } from '../../../services/Tasks/api/update';
@@ -24,8 +22,6 @@ import SubmitPage from './SubmitPage';
 //   />
 // );
 
-const SubmitTaskPage = props => <SubmitPage {...props} />;
-
 // const mapDispatchToProps = dispatch => ({
 //   deleteItem: item => dispatch(startDeleteTask(item)),
 //   onSubmit: item => dispatch(startUpdateTask(item)),
@@ -41,4 +37,4 @@ const SubmitTaskPage = props => <SubmitPage {...props} />;
 //   withRouter,
 // )(EditTaskPage);
 
-export default compose()(SubmitTaskPage);
+export default SubmitPage;
