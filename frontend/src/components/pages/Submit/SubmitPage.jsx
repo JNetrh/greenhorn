@@ -1,40 +1,13 @@
 import React, { Component } from 'react';
-import {
-  Upload,
-  Icon,
-  message,
-  Button,
-  Row,
-  Col,
-  Timeline,
-  Input,
-  Form,
-  Divider,
-} from 'antd';
+import { Icon, Button, Row, Col, Divider } from 'antd';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Container } from '../../atoms/Container';
 import breakpoints from '../../../styles/breakpoints';
 import { DocumentsList } from '../../organisms/DocumentsList';
-import TextArea from 'antd/lib/input/TextArea';
-const Dragger = Upload.Dragger;
-
-const props = {
-  name: 'file',
-  multiple: true,
-  action: '//jsonplaceholder.typicode.com/posts/',
-  onChange(info) {
-    const status = info.file.status;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
+import moment from 'moment';
+import { UploadDocumentsForm } from './UploadDocumentsForm';
+import { TaskTimeline } from './TaskTimeline';
 
 const ButtonWrapper = styled.div`
   margin-bottom: 10px;
@@ -63,9 +36,11 @@ const data = [
   },
 ];
 
+const now = moment();
+
 class SubmitPage extends Component {
   render() {
-    // const { task } = this.props;
+    const until = moment('2018-12-01');
     return (
       <Container style={{ marginTop: 20, position: 'relative' }}>
         <ButtonWrapper>
@@ -76,7 +51,8 @@ class SubmitPage extends Component {
         <h1>Great and long name</h1>
         <h3>Until:</h3>
         <p>
-          <Icon type="calendar-o" /> 25th September 2018
+          <Icon type="calendar-o" /> <b>due {until.from(now)}</b> - 25th
+          September 2018
         </p>
         <h3>What to do:</h3>
         <p>
@@ -93,36 +69,14 @@ class SubmitPage extends Component {
           </Col>
           <Col xs={24} sm={12}>
             <h3>Workflow:</h3>
-            <Timeline style={{ marginTop: 25 }}>
-              <Timeline.Item>Task XY assigned to you</Timeline.Item>
-              <Timeline.Item color="green">
-                25th of May - Submited 2 documents
-              </Timeline.Item>
-              <Timeline.Item color="red">
-                Task returned by Petr Klíč
-              </Timeline.Item>
-              <Timeline.Item>Task approved</Timeline.Item>
-            </Timeline>
+            <TaskTimeline />
           </Col>
         </Row>
         <Divider />
         <h3>Submit your documents:</h3>
         <Row gutter={45}>
           <Col xs={24} sm={12}>
-            <DocumentsList items={[]} />
-            <Dragger {...props}>
-              <p className="ant-upload-drag-icon">
-                <Icon type="inbox" />
-              </p>
-              <p className="ant-upload-text">Upload your documents here</p>
-              <p className="ant-upload-hint">
-                Click or drag file to this area to upload
-              </p>
-            </Dragger>
-            <Form.Item label={'Comment:'}>
-              <TextArea />
-            </Form.Item>
-            <Button type="primary">Submit</Button>
+            <UploadDocumentsForm />
           </Col>
         </Row>
       </Container>
