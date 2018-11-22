@@ -14,7 +14,10 @@ export const taskDetailController = async (req, res) => {
   try {
     const { id } = req.params;
     const taskById = await Task.findById(id, {
-      include: [{ model: User, as: 'createdBy' }],
+      include: [
+        { model: User, as: 'createdBy' },
+        { model: User, as: 'owners' },
+      ],
     });
     if (!taskById) {
       res.status(404).json({ msg: 'This task does not exist' });

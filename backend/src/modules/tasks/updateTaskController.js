@@ -1,7 +1,14 @@
-import { Task } from '../../models';
+import { Task, User } from '../../models';
 
 export const taskUpdateController = async (req, res) => {
-  const { title, estimatedTime, severity, description, GroupId } = req.body;
+  const {
+    title,
+    estimatedTime,
+    severity,
+    description,
+    GroupId,
+    owners,
+  } = req.body;
   const { id } = req.params;
   try {
     if (!title || !estimatedTime || !severity) {
@@ -13,7 +20,7 @@ export const taskUpdateController = async (req, res) => {
     if (!task) {
       return res.status(404).json({ msg: 'This task does not exist' });
     }
-    await Task.update(
+    const updated = await Task.update(
       {
         title,
         estimatedTime,
@@ -27,7 +34,7 @@ export const taskUpdateController = async (req, res) => {
         },
       }
     );
-    const updated = await Task.findById(id);
+    await task.setOwners(owners);
     return res.status(200).json(updated);
   } catch (err) {
     console.log(err);
