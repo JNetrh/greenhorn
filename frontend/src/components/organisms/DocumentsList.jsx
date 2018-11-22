@@ -1,11 +1,11 @@
 import React from 'react';
-import { List, Icon } from 'antd';
+import { List, Icon, Button } from 'antd';
 
 const DocumentListItem = item => (
   <List.Item
     actions={[
       <a href={item.url} key={item.url}>
-        <Icon type="save" /> download
+        <Button icon="save">download</Button>
       </a>,
     ]}
   >

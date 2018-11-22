@@ -8,6 +8,7 @@ import { DocumentsList } from '../../organisms/DocumentsList';
 import moment from 'moment';
 import { UploadDocumentsForm } from './UploadDocumentsForm';
 import { TaskTimeline } from './TaskTimeline';
+import { Helmet } from 'react-helmet';
 
 const ButtonWrapper = styled.div`
   margin-bottom: 10px;
@@ -43,6 +44,9 @@ class SubmitPage extends Component {
     const until = moment('2018-12-01');
     return (
       <Container style={{ marginTop: 20, position: 'relative' }}>
+        <Helmet>
+          <title>Great and long name</title>
+        </Helmet>
         <ButtonWrapper>
           <Link to="/">
             <Button icon="arrow-left">Back</Button>
