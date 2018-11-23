@@ -5,11 +5,16 @@ import TextArea from '../../molecules/form/TextArea';
 import Select from '../../molecules/form/Select';
 import { Row, Col } from 'antd';
 import { SEVERITY_OPTIONS } from '../../pages/AddTask';
+import Transfer from '../../molecules/form/Transfer';
 
-export const TaskInputs = ({ groups }) => {
+export const TaskInputs = ({ groups, users }) => {
   const groupOptions = groups.groups.map(({ id, name }) => ({
     label: name,
     value: id,
+  }));
+  const data = users.users.map(({ id, name, surname }) => ({
+    key: id,
+    title: `${name} ${surname}`,
   }));
   return (
     <div>
@@ -60,6 +65,20 @@ export const TaskInputs = ({ groups }) => {
           />
         </Col>
       </Row>
+      <FormItemWithLabel
+        label={'Assign task owners:'}
+        name={'owners'}
+        dataSource={data}
+        style={{
+          display: 'flex',
+          marginTop: 10,
+        }}
+        isLoading={groups.isLoading}
+        component={Transfer}
+        listStyle={{ flex: 1, height: 300 }}
+        titles={['All users', 'Task owners']}
+        render={item => item.title}
+      />
     </div>
   );
 };
