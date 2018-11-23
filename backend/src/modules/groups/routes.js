@@ -8,9 +8,11 @@ import {
   addGroupController,
   groupDeleteController,
 } from './groupsController';
+import { checkIfHr } from '../auth/checkIfHr';
 
 const router = expressAsyncAwait(Router());
 router.get('/', groupsController);
+router.use('*', checkIfHr);
 router.get('/:id', groupDetailController);
 router.post('/', addGroupController);
 router.put('/:id', groupUpdateController);

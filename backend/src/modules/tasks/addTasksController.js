@@ -24,8 +24,11 @@ const addTasksController = async (req, res) => {
       GroupId,
       createdById: req.userId,
     });
-    await createdTask.setOwners(owners);
-    const task = await Task.findByPk(task.id);
+    if (owners && owners.length) {
+      await createdTask.setOwners(owners);
+    }
+
+    const task = await Task.findByPk(createdTask.id);
     return res.json(task);
   } catch (err) {
     console.log(err);
