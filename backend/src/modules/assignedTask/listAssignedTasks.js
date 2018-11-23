@@ -8,7 +8,7 @@ export const listAssignedTasksController = async (req, res) => {
 };
 export const listAssignedTaskByIdController = async (req, res) => {
   const { id } = req.param;
-  const assignedTask = await AssignedTask.findByPk({
+  const assignedTask = await AssignedTask.findOne({
     where: { id: id },
     include: [Task],
   });
