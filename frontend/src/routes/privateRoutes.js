@@ -21,7 +21,7 @@ export default [
   },
   {
     Component: MyAccount,
-    path: '/myaccount',
+    path: '/me',
   },
   {
     Component: ChangePwd,
