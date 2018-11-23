@@ -1,9 +1,13 @@
 import expressAsyncAwait from 'express-async-await';
 import { Router } from 'express';
 
-import { listAssignedTasks } from './listAssignedTasks';
+import {
+  listAssignedTasksController,
+  listAssignedTaskByIdController,
+} from './listAssignedTasks';
 
 const router = expressAsyncAwait(Router());
-router.get('/', listAssignedTasks);
+router.get('/', listAssignedTasksController);
+router.get('/:id', listAssignedTaskByIdController);
 
 export default router;
