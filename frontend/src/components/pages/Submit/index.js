@@ -1,13 +1,19 @@
+import React from 'react';
 // import { connect } from 'react-redux';
 // import { reduxForm } from 'redux-form';
-// import { withRouter } from 'react-router';
+import { withRouter } from 'react-router';
+import { compose } from 'recompose';
 // import { startDeleteTask } from '../../../services/Tasks/api/delete';
 // import { startUpdateTask } from '../../../services/Tasks/api/update';
 // import validate from '../../../helpers/Validators/validateTaskForm';
-// import { fetchTaskById } from '../../../services/Tasks/api/fetchTaskById.js';
+import { fetchAssignedTaskById } from '../../../services/AssignedTasks/api/fetchAssignedTaskById';
 // import view from './view';
 // import DetailPage from '../../organisms/DetailPage';
 import SubmitPage from './SubmitPage';
+
+const EnrichedSubmitPage = props => (
+  <SubmitPage {...props} fetchAssignedTaskById={fetchAssignedTaskById} />
+);
 
 // const TaskForm = reduxForm({
 //   form: 'submitTask',
@@ -37,4 +43,4 @@ import SubmitPage from './SubmitPage';
 //   withRouter,
 // )(EditTaskPage);
 
-export default SubmitPage;
+export default compose(withRouter)(EnrichedSubmitPage);

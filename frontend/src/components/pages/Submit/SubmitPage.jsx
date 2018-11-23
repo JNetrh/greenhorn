@@ -40,6 +40,19 @@ const data = [
 const now = moment();
 
 class SubmitPage extends Component {
+  componentDidMount() {
+    this.fetchDetail();
+  }
+
+  async fetchDetail() {
+    const { id } = this.props.match.params;
+    const { fetchAssignedTaskById } = this.props;
+    const itemDetail = await fetchAssignedTaskById(id);
+    this.setState({
+      isLoading: false,
+      itemDetail,
+    });
+  }
   render() {
     const until = moment('2018-12-01');
     return (

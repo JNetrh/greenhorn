@@ -2,9 +2,10 @@ import { message } from 'antd';
 import getErrorMessage from '../../../helpers/getErrorMessage';
 import api from '../../../api';
 
-export const fetchGroupById = async id => {
+export const fetchAssignedTaskById = async id => {
   try {
     const { data } = await api.get(`assignedTask/${id}`);
+    console.log('fetchAssignedTaskById: ', data);
     return data;
   } catch (err) {
     if (err.response) {
