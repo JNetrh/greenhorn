@@ -30,7 +30,7 @@ export const UsersListReducer = (state = initialState, action) => {
         isLoading: false,
         fetched: true,
         error: null,
-        users: [...state.users, ...users],
+        users,
       };
     }
 
@@ -39,7 +39,7 @@ export const UsersListReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        users: null,
+        users: [],
         error,
       };
     }

@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { AddTask } from '../../../services/Tasks/api/add';
 import { startFetchGroups } from '../../../services/Groups/api/list';
+import { startFetchUsers } from '../../../services/Users/api/list';
 import validate from '../../../helpers/Validators/validateTaskForm';
 import Form from './view';
 
@@ -13,12 +14,16 @@ export const SEVERITY_OPTIONS = [
 ];
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => dispatch(AddTask(payload)),
-  onLoad: payload => dispatch(startFetchGroups(payload)),
+  onSubmit: payload => (console.log(payload), dispatch(AddTask(payload))),
+  onLoad: () => {
+    dispatch(startFetchGroups());
+    dispatch(startFetchUsers());
+  },
 });
 
-const mapStateToProps = ({ groups }) => ({
+const mapStateToProps = ({ groups, users }) => ({
   groups,
+  users,
 });
 
 const redux = connect(

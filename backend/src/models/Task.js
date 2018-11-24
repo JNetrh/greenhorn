@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     Task.belongsTo(User, { as: 'createdBy' });
     AssignedTask.belongsTo(Task);
     Group.hasMany(Task);
+    Task.belongsToMany(User, { through: 'TaskOwnership', as: 'owners' });
+    // User.belongsToMany(Task, { through: 'TaskOwnership' });
   };
 
   return Task;

@@ -17,6 +17,7 @@ const ErrorWrapper = styled.div`
 const ContentWrapper = styled.div`
   width: 600px;
   max-width: 100%;
+  padding: 0 20px;
   img {
     width: 200px;
     margin-bottom: 30px;
@@ -49,7 +50,7 @@ class ErrorMessage extends React.Component {
           <Button
             type="primary"
             onClick={() => this.setState({ catgif: this.getNewCatGifUrl() })}
-            style={{ marginRight: 20 }}
+            style={{ margin: '0 20px 10px 0' }}
           >
             <Icon type="reload" /> get a new cat gif
           </Button>

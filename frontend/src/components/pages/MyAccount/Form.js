@@ -19,31 +19,40 @@ const FormItem = Form.Item;
 
 class MyAccount extends Component {
   render() {
-    const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit, onSubmit, user, pristine } = this.props;
     return (
       <PageFormWrapper>
         <Centered>
           <CenteredForm>
             <h2>Edit your profile</h2>
-            
             <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormItemWithLabel
-          label="First name"
-          name="name"
-          component={Input}
-          iconType="user"
-          placeholder="First name"
-        />
-      
-        <FormItemWithLabel
-          label="Last name"
-          name="surname"
-          component={Input}
-          iconType="user"
-          placeholder="Last name"
-        />   
-          <FormItem>
-                <Button type="primary" htmlType="submit">
+              <FormItemWithLabel
+                label="First name"
+                name="name"
+                component={Input}
+                iconType="user"
+                placeholder="First name"
+              />
+              <FormItemWithLabel
+                label="Last name"
+                name="surname"
+                component={Input}
+                iconType="user"
+                placeholder="Last name"
+              />
+              <div style={{ marginTop: 10 }}>
+                <label>Your role:</label>
+                <div>
+                  <b>{user.role}</b>
+                </div>
+              </div>
+              <FormItem>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon="save"
+                  disabled={pristine}
+                >
                   Save changes
                 </Button>
               </FormItem>
@@ -56,4 +65,3 @@ class MyAccount extends Component {
 }
 
 export default MyAccount;
-
