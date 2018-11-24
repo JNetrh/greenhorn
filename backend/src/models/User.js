@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = ({ User, AssignedTask, Group, Workflow, Invitation }) => {
     User.hasMany(AssignedTask);
     User.hasMany(Invitation);
-    User.hasMany(Workflow, { as: 'submitedBy', foreignKey: 'SubmitedUserId' });
+    // User.hasMany(Workflow, { as: 'submitedBy', foreignKey: 'SubmitedUserId' });
     User.belongsToMany(Group, { through: 'UserGroup' });
     Group.belongsToMany(User, { through: 'UserGroup' });
   };

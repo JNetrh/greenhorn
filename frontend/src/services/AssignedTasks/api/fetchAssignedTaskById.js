@@ -5,7 +5,6 @@ import api from '../../../api';
 export const fetchAssignedTaskById = async id => {
   try {
     const { data } = await api.get(`assignedTask/${id}`);
-    console.log('fetchAssignedTaskById: ', data);
     return data;
   } catch (err) {
     if (err.response) {
