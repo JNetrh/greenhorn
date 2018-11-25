@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Table as AntTable, Button } from 'antd';
 import history from '../../history';
 import { TableFilters } from './TableFilters';
-import { substring } from '../../helpers/substring';
 
 const RowActions = () => <Button icon="edit">Edit</Button>;
 
@@ -58,10 +57,7 @@ class Table extends PureComponent {
         <div style={{ background: 'white' }}>
           <AntTable
             {...rest}
-            dataSource={filteredItems.map(item => ({
-              ...item,
-              description: substring(item.description, 50, true),
-            }))}
+            dataSource={filteredItems}
             rowKey={this.getRowKey}
             scroll={{ x: true }}
             size="middle"

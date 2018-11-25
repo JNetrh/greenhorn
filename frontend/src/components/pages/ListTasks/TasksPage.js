@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Table from '../../molecules/Table';
 import { getLongDate, getFromNow } from '../../../helpers/dateFormat';
-import { Filters } from './Filters';
-import { canUserEditTask } from '../../../services/Users/selectors';
+import { substring } from '../../../helpers/substring';
 
 const columns = [
   { title: 'Name', dataIndex: 'title', key: 'title' },
@@ -24,6 +23,7 @@ const columns = [
     title: 'description',
     dataIndex: 'description',
     key: 'description',
+    render: desc => substring(desc, 50, true),
   },
   {
     title: 'Created At',
