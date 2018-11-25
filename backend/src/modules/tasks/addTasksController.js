@@ -1,4 +1,5 @@
-import { Task, Group } from '../../models/';
+import { Task } from '../../models/';
+import { canUserEditTask } from './tasksController';
 
 const addTasksController = async (req, res) => {
   const {

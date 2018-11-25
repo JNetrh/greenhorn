@@ -14,6 +14,9 @@ export const canUserEditTask = (req, task) => {
     if (taskOwnersIds.includes(req.userId)) {
       return true;
     }
+    if (task.createdById === req.userId) {
+      return true;
+    }
   }
 };
 
@@ -21,11 +24,9 @@ export const isHrOrTaskOwner = (req, res, next) => {
   if (['hr', 'taskowner'].includes(req.role)) {
     next();
   } else {
-    return res
-      .status(401)
-      .send({
-        msg: 'Only HR and task owners can create, edit and delete tasks.',
-      });
+    return res.status(401).send({
+      msg: 'Only HR and task owners can create, edit and delete tasks.',
+    });
   }
 };
 

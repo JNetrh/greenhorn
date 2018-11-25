@@ -40,8 +40,32 @@ const data = [
 const now = moment();
 
 class SubmitPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchDetail();
+  }
+
+  async fetchDetail() {
+    const { id } = this.props.match.params;
+    const { fetchAssignedTaskById } = this.props;
+    const itemDetail = await fetchAssignedTaskById(id);
+    this.setState({
+      isLoading: false,
+      itemDetail,
+    });
+  }
   render() {
     const until = moment('2018-12-01');
+    const { itemDetail, isLoading } = this.state;
+    if (isLoading) {
+      return null;
+    }
     return (
       <Container style={{ marginTop: 20, position: 'relative' }}>
         <Helmet>
@@ -73,7 +97,7 @@ class SubmitPage extends Component {
           </Col>
           <Col xs={24} sm={12}>
             <h3>Workflow:</h3>
-            <TaskTimeline />
+            <TaskTimeline workflow={itemDetail.Workflows} />
           </Col>
         </Row>
         <Divider />

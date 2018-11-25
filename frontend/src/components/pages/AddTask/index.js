@@ -6,6 +6,7 @@ import { startFetchGroups } from '../../../services/Groups/api/list';
 import { startFetchUsers } from '../../../services/Users/api/list';
 import validate from '../../../helpers/Validators/validateTaskForm';
 import Form from './view';
+import { getTaskOwners } from '../../../services/Users/selectors';
 
 export const SEVERITY_OPTIONS = [
   { value: 'high', label: 'High' },
@@ -14,7 +15,7 @@ export const SEVERITY_OPTIONS = [
 ];
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => (console.log(payload), dispatch(AddTask(payload))),
+  onSubmit: payload => dispatch(AddTask(payload)),
   onLoad: () => {
     dispatch(startFetchGroups());
     dispatch(startFetchUsers());
@@ -23,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = ({ groups, users }) => ({
   groups,
-  users,
+  users: getTaskOwners(users.users),
+  canUserEdit: true,
 });
 
 const redux = connect(

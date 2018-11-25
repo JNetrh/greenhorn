@@ -22,7 +22,7 @@ export const taskUpdateController = async (req, res) => {
       return res.status(404).json({ msg: 'This task does not exist' });
     }
 
-    if (canUserEditTask(req, task)) {
+    if (!canUserEditTask(req, task)) {
       return res.status(401).json({
         msg: 'Cannot update this task. You are not one of the task owners.',
       });
@@ -42,7 +42,8 @@ export const taskUpdateController = async (req, res) => {
       }
     );
     await task.setOwners(owners);
-    return res.status(200).json(updated);
+    const updatedTaskWithDetails = await getTaskWithDetails(id);
+    return res.status(200).json(updatedTaskWithDetails);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Update task failed' });

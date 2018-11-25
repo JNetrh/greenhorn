@@ -1,4 +1,4 @@
-import { AssignedTask, Task } from '../../models';
+import { AssignedTask, Task, Workflow, TaskStatus, User } from '../../models';
 export const listAssignedTasksController = async (req, res) => {
   const assignedTask = await AssignedTask.findAll({
     where: { UserId: req.userId },
@@ -7,10 +7,18 @@ export const listAssignedTasksController = async (req, res) => {
   res.json(assignedTask);
 };
 export const listAssignedTaskByIdController = async (req, res) => {
-  const { id } = req.param;
-  const assignedTask = await AssignedTask.findByPk({
+  const { id } = req.params;
+  const assignedTask = await AssignedTask.findOne({
     where: { id: id },
-    include: [Task],
+    include: [
+      {
+        model: Workflow,
+        where: { AssignedTaskId: id },
+        include: [TaskStatus, { model: User, as: 'submittedBy' }],
+      },
+      Task,
+    ],
   });
+
   res.json(assignedTask);
 };

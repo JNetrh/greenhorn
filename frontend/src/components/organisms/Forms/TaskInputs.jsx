@@ -7,15 +7,20 @@ import { Row, Col } from 'antd';
 import { SEVERITY_OPTIONS } from '../../pages/AddTask';
 import Transfer from '../../molecules/form/Transfer';
 
-export const TaskInputs = ({ groups, users }) => {
+export const TaskInputs = ({ groups, users, canUserEdit }) => {
   const groupOptions = groups.groups.map(({ id, name }) => ({
     label: name,
     value: id,
   }));
-  const data = users.users.map(({ id, name, surname }) => ({
+  const data = users.map(({ id, name, surname, role }) => ({
     key: id,
-    title: `${name} ${surname}`,
+    title: (
+      <span>
+        {name} {surname} <i style={{ opacity: 0.5 }}>{role}</i>
+      </span>
+    ),
   }));
+  const disabled = !canUserEdit;
   return (
     <div>
       <FormItemWithLabel
@@ -24,6 +29,7 @@ export const TaskInputs = ({ groups, users }) => {
         component={Input}
         iconType="book"
         placeholder="Title"
+        disabled={disabled}
       />
       <FormItemWithLabel
         label="Task description"
@@ -32,6 +38,7 @@ export const TaskInputs = ({ groups, users }) => {
         placeholder="Add a short description of this task if neccessary"
         minRows={2}
         autosize
+        disabled={disabled}
       />
       <Row gutter={20}>
         <Col sm={12}>
@@ -42,6 +49,7 @@ export const TaskInputs = ({ groups, users }) => {
             iconType="calendar"
             placeholder="Estimated time"
             addonAfter="days"
+            disabled={disabled}
           />
         </Col>
         <Col sm={12}>
@@ -50,6 +58,7 @@ export const TaskInputs = ({ groups, users }) => {
             name="severity"
             component={Select}
             options={SEVERITY_OPTIONS}
+            disabled={disabled}
           />
         </Col>
       </Row>
@@ -60,7 +69,7 @@ export const TaskInputs = ({ groups, users }) => {
             name="GroupId"
             component={Select}
             isLoading={groups.isLoading}
-            disabled={groups.isLoading}
+            disabled={disabled}
             options={groupOptions}
           />
         </Col>
@@ -76,8 +85,9 @@ export const TaskInputs = ({ groups, users }) => {
         isLoading={groups.isLoading}
         component={Transfer}
         listStyle={{ flex: 1, height: 300 }}
-        titles={['All users', 'Task owners']}
+        titles={['Possible users', 'Task owners']}
         render={item => item.title}
+        disabled={disabled}
       />
     </div>
   );
