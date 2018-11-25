@@ -15,7 +15,7 @@ export const SEVERITY_OPTIONS = [
 ];
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => (console.log(payload), dispatch(AddTask(payload))),
+  onSubmit: payload => dispatch(AddTask(payload)),
   onLoad: () => {
     dispatch(startFetchGroups());
     dispatch(startFetchUsers());
@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = ({ groups, users }) => ({
   groups,
   users: getTaskOwners(users.users),
+  canUserEdit: true,
 });
 
 const redux = connect(

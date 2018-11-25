@@ -68,6 +68,7 @@ export class CreateEditForm extends Component {
       children,
       itemName,
       itemDescription,
+      canUserEdit,
     } = this.props;
     return (
       <PageFormWrapper>
@@ -75,18 +76,21 @@ export class CreateEditForm extends Component {
           {type === 'edit' ? 'Edit' : 'Add'} {itemName}
         </h2>
         <p>{itemDescription}</p>
-        <div
-          style={{
-            marginBottom: 20,
-            padding: '10px 20px',
-            background: 'rgba(0,0,0,0.05)',
-            display: 'inline-block',
-            fontSize: 12,
-          }}
-        >
-          <Icon type="exclamation-circle" /> You are not allowed to edit this
-          task. You are not one of the task owners, or HR person.
-        </div>
+        {!canUserEdit && (
+          <div
+            style={{
+              marginBottom: 20,
+              padding: '10px 20px',
+              background: 'rgba(0,0,0,0.05)',
+              display: 'inline-block',
+              fontSize: 12,
+            }}
+          >
+            <Icon type="exclamation-circle" /> You are not allowed to edit this
+            task. You are not one of the task owners, or HR person.
+          </div>
+        )}
+
         <FormWrapper>
           <Form onSubmit={handleSubmit(onSubmit)}>
             {children}
