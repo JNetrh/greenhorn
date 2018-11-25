@@ -1,5 +1,5 @@
 import { Task } from '../../models/';
-import { canUserEditTask } from './tasksController';
+import { canUserEditTask, getTaskWithDetails } from './tasksController';
 
 const addTasksController = async (req, res) => {
   const {
@@ -29,7 +29,7 @@ const addTasksController = async (req, res) => {
       await createdTask.setOwners(owners);
     }
 
-    const task = await Task.findByPk(createdTask.id);
+    const task = await getTaskWithDetails(createdTask.id);
     return res.json(task);
   } catch (err) {
     console.log(err);

@@ -44,7 +44,6 @@ class Table extends PureComponent {
   render() {
     const { columns, filters, dataSource, ...rest } = this.props;
     const filteredItems = this.filterItems(dataSource);
-    console.log(columns);
     return (
       <div>
         {filters && (

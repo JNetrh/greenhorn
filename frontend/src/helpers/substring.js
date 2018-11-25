@@ -1,4 +1,7 @@
 export const substring = (string, n, useWordBoundary) => {
+  if (!string) {
+    return;
+  }
   if (string.length <= n) {
     return string;
   }
