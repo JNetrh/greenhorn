@@ -1,10 +1,10 @@
 var MidnightJob = require('cron').CronJob;
-import { checkTask } from './periodicityTaskAssigned';
+import { checkTasks } from './periodicityTaskAssigned';
 
 new MidnightJob(
-  '* * * * * *', // 00 00 00 * * *  <= set up for midnight       ////// 00 */1 * * * *
+  '00 */3 * * * *', // 00 00 00 * * *  <= set up for midnight       ////// 00 */1 * * * *
   function() {
-    checkTask();
+    checkTasks();
     // other jobs
   },
   null,

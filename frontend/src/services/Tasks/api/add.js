@@ -9,6 +9,7 @@ export const AddTask = ({
   severity,
   GroupId,
   owners,
+  periodicity,
 }) => async (dispatch, getState, { api }) => {
   const loader = message.loading('Adding task');
   try {
@@ -19,6 +20,7 @@ export const AddTask = ({
       severity,
       GroupId,
       owners,
+      periodicity,
     });
     loader();
     dispatch(addTask(data));
