@@ -1,20 +1,10 @@
-import { Task, User } from '../../models';
-
-var CronJob = require('cron').CronJob;
-new CronJob(
-  '* * * * * *', // 00 00 00 * * *  <= set up for midnight       ////// 00 */1 * * * *
-  function() {
-    checkTask();
-  },
-  null,
-  true
-);
+import { Task } from '../../models';
 
 export const checkTask = async () => {
   const allTasks = await Task.findAll({});
   const date = new Date();
   date.setHours(0, 0, 0, 0);
-  //console.log('Datum', date);
+  console.log('Datum', date);
   // console.log(allTasks);
 
   for (var i in allTasks) {
@@ -28,6 +18,10 @@ export const checkTask = async () => {
     console.log('date', date);
     if (allTasks[i].createdAt.getTime() === date.getTime()) {
       // do the job
+      try {
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };

@@ -4,8 +4,7 @@ import { app } from './server';
 import initDb from './initDb';
 
 import { setupLogging } from './logging';
-import { periodicityTask } from './services/periodicity/periodicityTask';
-
+import { CronJob } from './services/cron/jobs';
 dotenv.config();
 const { PORT = 3030 } = process.env;
 

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     severity: DataTypes.STRING,
     description: DataTypes.STRING,
     periodicity: DataTypes.INTEGER,
+    latestassigned: DataTypes.DATE,
   });
 
   Task.associate = ({ Task, AssignedTask, Group, User }) => {
