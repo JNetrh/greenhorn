@@ -9,6 +9,7 @@ const addTasksController = async (req, res) => {
     description,
     GroupId,
     owners,
+    periodicity,
   } = req.body;
   try {
     if (!title || !estimatedTime || !severity) {
@@ -23,6 +24,7 @@ const addTasksController = async (req, res) => {
       severity,
       description,
       GroupId,
+      periodicity,
       createdById: req.userId,
     });
     if (owners && owners.length) {
