@@ -6,6 +6,7 @@ import { startFetchGroups } from '../../../services/Groups/api/list';
 import { startFetchUsers } from '../../../services/Users/api/list';
 import validate from '../../../helpers/Validators/validateTaskForm';
 import Form from './view';
+import { getTaskOwners } from '../../../services/Users/selectors';
 
 export const SEVERITY_OPTIONS = [
   { value: 'high', label: 'High' },
@@ -23,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = ({ groups, users }) => ({
   groups,
-  users,
+  users: getTaskOwners(users.users),
 });
 
 const redux = connect(
