@@ -4,13 +4,21 @@ import { TaskInputs } from '../../organisms/Forms/TaskInputs';
 import { LabelLine } from '../../atoms/LabelLine';
 import { InfoLabel } from '../../atoms/InfoLabel';
 import { getLongDate, getFromNow } from '../../../helpers/dateFormat';
+import { canUserEditTask } from '../../../services/Users/selectors';
 
 const Form = props => {
   const {
     item: { createdBy, createdAt, updatedAt },
+    currentUser,
   } = props;
+  const canUserEdit = canUserEditTask(props.item, currentUser);
   return (
-    <CreateEditForm type="edit" itemName="task" {...props}>
+    <CreateEditForm
+      type="edit"
+      itemName="task"
+      canUserEdit={canUserEdit}
+      {...props}
+    >
       <LabelLine>
         <InfoLabel label="Created by" icon="user">
           {createdBy.name} {createdBy.surname}
@@ -22,7 +30,7 @@ const Form = props => {
           {getFromNow(updatedAt)}
         </InfoLabel>
       </LabelLine>
-      <TaskInputs {...props} />
+      <TaskInputs canUserEdit={canUserEdit} {...props} />
     </CreateEditForm>
   );
 };

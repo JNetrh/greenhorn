@@ -1,10 +1,5 @@
 import { Task } from '../../models/';
-import { canUserEditTask } from './tasksController';
-
-export const getTaskById = async id => {
-  const task = Task.findOne({ where: { id } });
-  return task;
-};
+import { canUserEditTask, getTaskWithDetails } from './tasksController';
 
 export const deleteTaskById = async id => {
   const deleted = await Task.destroy({ where: { id } });
@@ -19,8 +14,8 @@ const deleteTaskController = async (req, res) => {
         .status(400)
         .json({ msg: 'Please provide all mandatory fields.' });
     }
-    const task = await getTaskById(id);
-    if (canUserEditTask(req, task)) {
+    const task = await getTaskWithDetails(id);
+    if (!canUserEditTask(req, task)) {
       return res.status(401).json({
         msg: 'Cannot delete this task. You are not one of the task owners.',
       });

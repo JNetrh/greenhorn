@@ -22,7 +22,7 @@ export const taskUpdateController = async (req, res) => {
       return res.status(404).json({ msg: 'This task does not exist' });
     }
 
-    if (canUserEditTask(req, task)) {
+    if (!canUserEditTask(req, task)) {
       return res.status(401).json({
         msg: 'Cannot update this task. You are not one of the task owners.',
       });

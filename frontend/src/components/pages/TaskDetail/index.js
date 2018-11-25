@@ -11,6 +11,7 @@ import view from './view';
 import DetailPage from '../../organisms/DetailPage';
 import { startFetchGroups } from '../../../services/Groups/api/list';
 import { startFetchUsers } from '../../../services/Users/api/list';
+import { getTaskOwners } from '../../../services/Users/selectors';
 
 const TaskForm = reduxForm({
   form: 'taskDetail',
@@ -35,9 +36,10 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = ({ groups, users }) => ({
+const mapStateToProps = ({ groups, users, auth: { user } }) => ({
   groups,
-  users,
+  users: getTaskOwners(users.users),
+  currentUser: user,
 });
 
 const redux = connect(

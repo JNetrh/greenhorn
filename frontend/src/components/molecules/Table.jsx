@@ -1,30 +1,82 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Table as AntTable, Button } from 'antd';
 import history from '../../history';
+import { TableFilters } from './TableFilters';
 
-const RowActions = ({ id }) => <Button icon="edit">Edit</Button>;
+const RowActions = () => <Button icon="edit">Edit</Button>;
 
-const Table = props => (
-  <div style={{ background: 'white' }}>
-    <AntTable
-      {...props}
-      scroll={{ x: true }}
-      pagination={{
-        hideOnSinglePage: true,
-      }}
-      columns={[
-        ...props.columns,
-        {
-          title: '',
-          render: RowActions,
-          width: 100,
+class Table extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeFilters: props.defaultFilterValues || {},
+    };
+  }
+
+  getRowKey = ({ id }) => id;
+
+  onRow = record => ({
+    onClick: () => history.push(this.props.rowLink(record)),
+  });
+
+  onFilterChange = ({ filterKey, value }) => {
+    this.setState({
+      activeFilters: {
+        ...this.state.activeFilters,
+        [filterKey]: value,
+      },
+    });
+  };
+
+  filterItems = items =>
+    items.filter(item => {
+      const { activeFilters } = this.state;
+      const { filters } = this.props;
+      const filtersPassed = Object.entries(activeFilters).map(
+        ([filterKey, filterValue]) => {
+          const { filter } = filters[filterKey].options[filterValue];
+          return filter(item, this.props);
         },
-      ]}
-      onRow={record => ({
-        onClick: () => history.push(props.rowLink(record)),
-      })}
-    />
-  </div>
-);
+      );
+      return filtersPassed.every(item => item);
+    });
+
+  render() {
+    const { columns, filters, dataSource, ...rest } = this.props;
+    const filteredItems = this.filterItems(dataSource);
+    return (
+      <div>
+        {filters && (
+          <TableFilters
+            filters={filters}
+            activeFilters={this.state.activeFilters}
+            onFilterChange={this.onFilterChange}
+          />
+        )}
+        <div style={{ background: 'white' }}>
+          <AntTable
+            {...rest}
+            dataSource={filteredItems}
+            rowKey={this.getRowKey}
+            scroll={{ x: true }}
+            size="middle"
+            pagination={{
+              hideOnSinglePage: true,
+            }}
+            columns={[
+              ...columns,
+              {
+                title: '',
+                render: RowActions,
+                width: 100,
+              },
+            ]}
+            onRow={this.onRow}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Table;
