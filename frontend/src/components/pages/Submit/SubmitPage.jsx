@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { Icon, Button, Row, Col, Divider } from 'antd';
+
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Container } from '../../atoms/Container';
-import breakpoints from '../../../styles/breakpoints';
-import { DocumentsList } from '../../organisms/DocumentsList';
 import moment from 'moment';
+
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+import { Container } from '../../atoms/Container';
+import { DocumentsList } from '../../organisms/DocumentsList';
 import { UploadDocumentsForm } from './UploadDocumentsForm';
 import { TaskTimeline } from './TaskTimeline';
-import { Helmet } from 'react-helmet';
+import { getLongDate } from '../../../helpers/dateFormat';
+
+import breakpoints from '../../../styles/breakpoints';
 
 const ButtonWrapper = styled.div`
   margin-bottom: 10px;
@@ -44,12 +49,28 @@ class SubmitPage extends Component {
     super(props);
     this.state = {
       isLoading: true,
+      documents: [],
     };
   }
+
+  setDocument = doc => {
+    const { documents } = this.state;
+    this.setState({ documents: [doc, ...documents] });
+  };
 
   componentDidMount() {
     this.fetchDetail();
   }
+
+  submitTask = data => {
+    const { id } = this.props.match.params;
+    const { onTaskSubmit } = this.props;
+    const { documents } = this.state;
+    onTaskSubmit({
+      data: { ...data, status: 'submitted', assignedTask: id },
+      documents,
+    });
+  };
 
   async fetchDetail() {
     const { id } = this.props.match.params;
@@ -61,35 +82,30 @@ class SubmitPage extends Component {
     });
   }
   render() {
-    const until = moment('2018-12-01');
-    const { itemDetail, isLoading } = this.state;
+    const { itemDetail, isLoading, documents } = this.state;
+    const { Form } = this.props;
     if (isLoading) {
       return null;
     }
     return (
       <Container style={{ marginTop: 20, position: 'relative' }}>
         <Helmet>
-          <title>Great and long name</title>
+          <title>{itemDetail.Task.title}</title>
         </Helmet>
         <ButtonWrapper>
           <Link to="/">
             <Button icon="arrow-left">Back</Button>
           </Link>
         </ButtonWrapper>
-        <h1>Great and long name</h1>
+        <h1>{itemDetail.Task.title}</h1>
         <h3>Until:</h3>
         <p>
-          <Icon type="calendar-o" /> <b>due {until.from(now)}</b> - 25th
-          September 2018
+          <Icon type="calendar-o" />{' '}
+          <b>due {moment(itemDetail.until).from(now)}</b> -{' '}
+          {getLongDate(itemDetail.until)}
         </p>
         <h3>What to do:</h3>
-        <p>
-          In order to get your new notebook, you need to go through few steps.
-          First please contact Petr Klíč (petr@klic.com) so he can give you an
-          access and LDAP. Then please print out the papers and bring them to
-          the desk 2245D. After everything, please visit your manager, he will
-          tell you the next steps.
-        </p>
+        <p>{itemDetail.Task.description}</p>
         <Row gutter={45}>
           <Col xs={24} sm={12}>
             <h3>Task documents:</h3>
@@ -101,10 +117,19 @@ class SubmitPage extends Component {
           </Col>
         </Row>
         <Divider />
-        <h3>Submit your documents:</h3>
         <Row gutter={45}>
           <Col xs={24} sm={12}>
-            <UploadDocumentsForm />
+            <h3>Submit your documents:</h3>
+            <UploadDocumentsForm
+              documents={documents}
+              setDocument={this.setDocument}
+            />
+          </Col>
+        </Row>
+        <Row gutter={45}>
+          <Col xs={24} sm={12}>
+            <h3>Optional comment</h3>
+            <Form {...this.props} onSubmit={this.submitTask} />
           </Col>
         </Row>
       </Container>
