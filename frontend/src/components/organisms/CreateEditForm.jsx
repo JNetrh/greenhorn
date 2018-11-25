@@ -18,7 +18,7 @@ export class CreateEditForm extends Component {
   };
 
   renderButtons = () => {
-    const { type, itemName, pristine, canUserEdit } = this.props;
+    const { type, itemName, pristine, canUserEdit = true } = this.props;
 
     if (type === 'create') {
       return (
@@ -68,7 +68,7 @@ export class CreateEditForm extends Component {
       children,
       itemName,
       itemDescription,
-      canUserEdit,
+      canUserEdit = true,
     } = this.props;
     return (
       <PageFormWrapper>
