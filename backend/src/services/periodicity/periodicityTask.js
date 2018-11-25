@@ -9,7 +9,6 @@ new CronJob(
   null,
   true
 );
-console.log('After job instantiation');
 
 export const checkTask = () => {
   console.log('ahoj');

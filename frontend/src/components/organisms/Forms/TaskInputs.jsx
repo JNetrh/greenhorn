@@ -7,6 +7,18 @@ import { Row, Col } from 'antd';
 import { SEVERITY_OPTIONS } from '../../pages/AddTask';
 import Transfer from '../../molecules/form/Transfer';
 
+export const PERIODICITY = [
+  'Every day',
+  'Every week',
+  'Every month',
+  'Every year',
+];
+
+const PeriodicityOptions = PERIODICITY.map(time => ({
+  label: time,
+  value: time,
+}));
+
 export const TaskInputs = ({ groups, users, canUserEdit }) => {
   const groupOptions = groups.groups.map(({ id, name }) => ({
     label: name,
@@ -67,10 +79,20 @@ export const TaskInputs = ({ groups, users, canUserEdit }) => {
           <FormItemWithLabel
             label="Assign to group"
             name="GroupId"
+            placeholder="Choose group"
             component={Select}
             isLoading={groups.isLoading}
             disabled={disabled}
             options={groupOptions}
+          />
+        </Col>
+        <Col sm={12}>
+          <FormItemWithLabel
+            label="Set up periodicity (Optional)"
+            name="periodicity"
+            component={Select}
+            disabled={disabled}
+            options={PeriodicityOptions}
           />
         </Col>
       </Row>

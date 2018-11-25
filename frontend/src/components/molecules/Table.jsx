@@ -60,7 +60,7 @@ class Table extends PureComponent {
             {...rest}
             dataSource={filteredItems.map(item => ({
               ...item,
-              description: substring(item.description, 50, true),
+              //  description: substring(item.description, 50, true),
             }))}
             rowKey={this.getRowKey}
             scroll={{ x: true }}
