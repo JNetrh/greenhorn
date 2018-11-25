@@ -46,11 +46,13 @@ class Table extends PureComponent {
     const filteredItems = this.filterItems(dataSource);
     return (
       <div>
-        <TableFilters
-          filters={filters}
-          activeFilters={this.state.activeFilters}
-          onFilterChange={this.onFilterChange}
-        />
+        {filters && (
+          <TableFilters
+            filters={filters}
+            activeFilters={this.state.activeFilters}
+            onFilterChange={this.onFilterChange}
+          />
+        )}
         <div style={{ background: 'white' }}>
           <AntTable
             {...rest}

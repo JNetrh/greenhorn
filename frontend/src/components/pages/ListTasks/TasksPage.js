@@ -47,7 +47,16 @@ const filters = {
     options: {
       my: {
         name: 'My tasks',
-        filter: (item, { currentUser }) => canUserEditTask(item, currentUser),
+        filter: (item, { currentUser }) => item.createdById === currentUser.id,
+      },
+      taskowner: {
+        name: 'I am task owner',
+        filter: (item, { currentUser }) => {
+          const taskOwnersIds = item.owners.map(({ id }) => id);
+          if (taskOwnersIds.includes(currentUser.id)) {
+            return true;
+          }
+        },
       },
       all: {
         name: 'All tasks',
