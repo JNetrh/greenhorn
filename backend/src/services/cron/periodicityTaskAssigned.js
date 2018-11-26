@@ -1,32 +1,61 @@
-import { Task } from '../../models';
+import { Task, AssignedTask, Workflow } from '../../models';
 
 export const checkTasks = async () => {
-  const allTasks = await Task.findAll({});
+  const Tasks = await AssignedTask.findAll({
+    include: [
+      {
+        model: Workflow,
+        where: {
+          TaskStatusId: 4,
+        },
+      },
+      {
+        model: Task,
+        where: {
+          periodicity: {
+            $ne: null,
+          },
+        },
+      },
+    ],
+  });
   const date = new Date();
-
   date.setHours(0, 0, 0, 0, 0);
-  //console.log(allTasks);
 
-  console.log(date);
-  for (var i in allTasks) {
-    allTasks[i].createdAt.setHours(0, 0, 0, 0);
-    if (allTasks[i].periodicity == null) {
-      continue;
-    }
-    console.log('task', allTasks[i].createdAt);
-    allTasks[i].createdAt.setDate(
-      allTasks[i].createdAt.getDate() + allTasks[i].periodicity
+  console.log('length', Tasks.length);
+  for (var i in Tasks) {
+    Tasks[i].Workflows[0].createdAt.setHours(0, 0, 0, 0);
+    Tasks[i].Workflows[0].createdAt.setDate(
+      Tasks[i].Workflows[0].createdAt.getDate() + Tasks[i].Task.periodicity
     );
-    console.log('1', allTasks[i].createdAt);
-    console.log('2', date);
-    if (allTasks[i].createdAt.getTime() === date.getTime()) {
-      // do the job
-      console.log('equal => make assigned task');
 
-      try {
-      } catch (error) {
-        console.error(error);
-      }
+    if (Tasks[i].Workflows[0].createdAt.getTime() === date.getTime()) {
+      assignedTask(Tasks[i]);
     }
+  }
+};
+
+export const assignedTask = async Tasks => {
+  try {
+    const assignedTaskData = Tasks;
+    assignedTaskData.until.setDate(
+      assignedTaskData.until.getDate() + assignedTaskData.Task.periodicity
+    );
+
+    const until = assignedTaskData.until;
+    const note = assignedTaskData.note;
+    const TaskId = assignedTaskData.TaskId;
+    const UserId = assignedTaskData.UserId;
+
+    const createAssignedTask = await AssignedTask.create({
+      until,
+      note,
+      TaskId,
+      UserId,
+    });
+    return createAssignedTask;
+  } catch (err) {
+    console.log(err);
+    return 'Internal server error / Cron create assignedTask';
   }
 };
