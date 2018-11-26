@@ -23,14 +23,13 @@ export const checkTasks = async () => {
   const date = new Date();
   date.setHours(0, 0, 0, 0, 0);
 
-  console.log('length', Tasks.length);
   for (var i in Tasks) {
     Tasks[i].Workflows[0].createdAt.setHours(0, 0, 0, 0);
     Tasks[i].Workflows[0].createdAt.setDate(
       Tasks[i].Workflows[0].createdAt.getDate() + Tasks[i].Task.periodicity
     );
 
-    if (Tasks[i].Workflows[0].createdAt.getTime() === date.getTime()) {
+    if (Tasks[i].Workflows[0].createdAt.getTime() <= date.getTime()) {
       assignedTask(Tasks[i]);
     }
   }
@@ -48,17 +47,18 @@ export const assignedTask = async Tasks => {
     const TaskId = assignedTaskData.TaskId;
     const UserId = assignedTaskData.UserId;
 
-    await AssignedTask.create({
+    const createAssignedTask = await AssignedTask.create({
       until,
       note,
       TaskId,
       UserId,
     });
+    const newAssignedTask = createAssignedTask.id;
     Workflow.create({
       note,
       TaskStatusId: 1,
       SubmitedUserId: UserId,
-      AssignedTaskId: UserId,
+      AssignedTaskId: newAssignedTask,
     });
   } catch (err) {
     console.log(err);
