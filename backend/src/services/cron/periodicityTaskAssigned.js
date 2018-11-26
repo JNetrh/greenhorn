@@ -1,4 +1,5 @@
 import { Task, AssignedTask, Workflow } from '../../models';
+import { setWorkflows } from '../workflow/addWorkflow';
 
 export const checkTasks = async () => {
   const Tasks = await AssignedTask.findAll({
@@ -47,13 +48,18 @@ export const assignedTask = async Tasks => {
     const TaskId = assignedTaskData.TaskId;
     const UserId = assignedTaskData.UserId;
 
-    const createAssignedTask = await AssignedTask.create({
+    await AssignedTask.create({
       until,
       note,
       TaskId,
       UserId,
     });
-    return createAssignedTask;
+    Workflow.create({
+      note,
+      TaskStatusId: 1,
+      SubmitedUserId: UserId,
+      AssignedTaskId: UserId,
+    });
   } catch (err) {
     console.log(err);
     return 'Internal server error / Cron create assignedTask';
