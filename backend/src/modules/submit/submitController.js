@@ -1,11 +1,18 @@
 import { setWorkflow } from '../../services/workflow/addWorkflow';
+
 export const submitController = async (req, res) => {
-  console.log(req.userId);
-  console.log(req.body);
-  const entry = await setWorkflow({
-    ...req.body.data,
-    note: req.body.data.comment,
-    submitUser: req.userId,
-  });
-  return res.json(entry);
+  const { status, assignedTask, comment } = JSON.parse(req.body.data);
+  //TODO: save files into DB
+  console.log(req.files);
+  try {
+    const entry = await setWorkflow({
+      status,
+      assignedTask,
+      note: comment,
+      submitUser: req.userId,
+    });
+    return res.json(entry);
+  } catch (error) {
+    res.status(500).json({ msg: 'Submission unsuccesful' });
+  }
 };

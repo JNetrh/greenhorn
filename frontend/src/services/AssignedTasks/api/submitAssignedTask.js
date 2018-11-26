@@ -9,7 +9,13 @@ export const submitAssignedTask = task => async (
   { api },
 ) => {
   try {
-    const { data } = await api.post(`submit`, task);
+    // const { data } = await api.post(`submit`, task);
+    const { data } = await api({
+      method: 'POST',
+      headers: { 'content-type': 'multipart/form-data' },
+      data: task,
+      url: 'submit',
+    });
     history.push('/');
     message.success('Task submitted');
     return data;

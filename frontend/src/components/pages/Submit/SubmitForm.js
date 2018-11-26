@@ -4,12 +4,16 @@ import { Field } from 'redux-form';
 
 import { FormItem } from '../../../styles/Login';
 import TextArea from '../../molecules/form/TextArea';
+import { UploadField } from './UploadField';
 
 class SubmitForm extends Component {
   render() {
     const { handleSubmit, onSubmit } = this.props;
     return (
       <Form onSubmit={handleSubmit(onSubmit)} className="login-form">
+        <FormItem>
+          <UploadField />
+        </FormItem>
         <FormItem>
           <Field
             name="comment"

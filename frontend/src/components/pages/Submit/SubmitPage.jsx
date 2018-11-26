@@ -9,7 +9,6 @@ import { Helmet } from 'react-helmet';
 
 import { Container } from '../../atoms/Container';
 import { DocumentsList } from '../../organisms/DocumentsList';
-import { UploadDocumentsForm } from './UploadDocumentsForm';
 import { TaskTimeline } from './TaskTimeline';
 import { getLongDate } from '../../../helpers/dateFormat';
 
@@ -49,27 +48,36 @@ class SubmitPage extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      documents: [],
+      // documents: [],
     };
   }
 
-  setDocument = doc => {
-    const { documents } = this.state;
-    this.setState({ documents: [doc, ...documents] });
-  };
+  // setDocument = doc => {
+  //   const { documents } = this.state;
+  //   this.setState({ documents: [doc, ...documents] });
+  // };
 
   componentDidMount() {
     this.fetchDetail();
   }
 
-  submitTask = data => {
+  submitTask = formProps => {
     const { id } = this.props.match.params;
     const { onTaskSubmit } = this.props;
-    const { documents } = this.state;
-    onTaskSubmit({
-      data: { ...data, status: 'submitted', assignedTask: id },
-      documents,
-    });
+    console.log('formProps: ', formProps);
+    // const { documents } = this.state;
+    const fd = new FormData();
+    if (formProps.documents) {
+      Array.from(formProps.documents).forEach(doc =>
+        fd.append('documents', doc),
+      );
+    }
+    fd.append(
+      'data',
+      JSON.stringify({ ...formProps, status: 'submitted', assignedTask: id }),
+    );
+
+    onTaskSubmit(fd);
   };
 
   async fetchDetail() {
@@ -82,7 +90,8 @@ class SubmitPage extends Component {
     });
   }
   render() {
-    const { itemDetail, isLoading, documents } = this.state;
+    // const { itemDetail, isLoading, documents } = this.state;
+    const { itemDetail, isLoading } = this.state;
     const { Form } = this.props;
     if (isLoading) {
       return null;
@@ -110,28 +119,24 @@ class SubmitPage extends Component {
           <Col xs={24} sm={12}>
             <h3>Task documents:</h3>
             <DocumentsList items={data} />
+            <Divider />
+            <Form {...this.props} onSubmit={this.submitTask} />
           </Col>
           <Col xs={24} sm={12}>
             <h3>Workflow:</h3>
             <TaskTimeline workflow={itemDetail.Workflows} />
           </Col>
         </Row>
-        <Divider />
-        <Row gutter={45}>
+        {/* <Row gutter={45}>
           <Col xs={24} sm={12}>
-            <h3>Submit your documents:</h3>
-            <UploadDocumentsForm
-              documents={documents}
-              setDocument={this.setDocument}
-            />
+            
           </Col>
-        </Row>
-        <Row gutter={45}>
+        </Row> */}
+        {/* <Row gutter={45}>
           <Col xs={24} sm={12}>
             <h3>Optional comment</h3>
-            <Form {...this.props} onSubmit={this.submitTask} />
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     );
   }
