@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import view from './view';
 
 export const MENU_ITEMS = [
-  { title: 'To be done', to: '/' },
+  { title: 'Dashboard', to: '/' },
   { title: 'Employees', to: '/user/list', roles: ['hr'] },
   { title: 'Tasks', to: '/task/list', roles: ['hr', 'taskowner'] },
 ];
