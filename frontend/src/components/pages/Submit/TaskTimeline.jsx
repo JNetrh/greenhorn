@@ -13,17 +13,10 @@ export const TaskTimeline = ({ workflow }) => (
         {getLongDate(item.createdAt)} - {getItemText(item)}
       </Timeline.Item>
     ))}
-    {/* <Timeline.Item>Task XY assigned to you</Timeline.Item>
-    <Timeline.Item color="green">
-      25th of May - Submited 2 documents
-    </Timeline.Item>
-    <Timeline.Item color="red">Task returned by Petr Klíč</Timeline.Item>
-    <Timeline.Item>Task approved</Timeline.Item> */}
   </Timeline>
 );
 
 const getItemText = item => {
-  console.log(item);
   switch (item.TaskStatus.name) {
     case 'assigned': {
       return 'Task assigned to you';
