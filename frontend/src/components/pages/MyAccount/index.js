@@ -6,7 +6,6 @@ import Form from './Form';
 import { EditAccount } from '../../../services/Users/api/editAccount';
 //import validate from './validate';
 
-
 const MyAccount = props => <Form {...props} />;
 
 const mapDispatchToProps = dispatch => {
@@ -14,7 +13,7 @@ const mapDispatchToProps = dispatch => {
     onSubmit: payload => dispatch(EditAccount(payload)),
   };
 };
-const mapStateToProps = ({ auth }) => ({initialValues: auth.user});
+const mapStateToProps = ({ auth: { user } }) => ({ initialValues: user, user });
 
 const redux = connect(
   mapStateToProps,

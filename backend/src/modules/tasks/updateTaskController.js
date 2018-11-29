@@ -1,7 +1,15 @@
-import { Task } from '../../models';
+import { Task, User } from '../../models';
+import { getTaskWithDetails, canUserEditTask } from './tasksController';
 
 export const taskUpdateController = async (req, res) => {
-  const { title, estimatedTime, severity, description, GroupId } = req.body;
+  const {
+    title,
+    estimatedTime,
+    severity,
+    description,
+    GroupId,
+    owners,
+  } = req.body;
   const { id } = req.params;
   try {
     if (!title || !estimatedTime || !severity) {
@@ -9,11 +17,17 @@ export const taskUpdateController = async (req, res) => {
         .status(400)
         .json({ msg: 'Please provide all required attributes' });
     }
-    const task = await Task.findById(id);
+    const task = await getTaskWithDetails(id);
     if (!task) {
       return res.status(404).json({ msg: 'This task does not exist' });
     }
-    await Task.update(
+
+    if (!canUserEditTask(req, task)) {
+      return res.status(401).json({
+        msg: 'Cannot update this task. You are not one of the task owners.',
+      });
+    }
+    const updated = await Task.update(
       {
         title,
         estimatedTime,
@@ -27,8 +41,9 @@ export const taskUpdateController = async (req, res) => {
         },
       }
     );
-    const updated = await Task.findById(id);
-    return res.status(200).json(updated);
+    await task.setOwners(owners);
+    const updatedTaskWithDetails = await getTaskWithDetails(id);
+    return res.status(200).json(updatedTaskWithDetails);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Update task failed' });

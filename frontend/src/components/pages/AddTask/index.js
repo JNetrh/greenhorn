@@ -3,8 +3,10 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { AddTask } from '../../../services/Tasks/api/add';
 import { startFetchGroups } from '../../../services/Groups/api/list';
+import { startFetchUsers } from '../../../services/Users/api/list';
 import validate from '../../../helpers/Validators/validateTaskForm';
 import Form from './view';
+import { getTaskOwners } from '../../../services/Users/selectors';
 
 export const SEVERITY_OPTIONS = [
   { value: 'high', label: 'High' },
@@ -14,11 +16,16 @@ export const SEVERITY_OPTIONS = [
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: payload => dispatch(AddTask(payload)),
-  onLoad: payload => dispatch(startFetchGroups(payload)),
+  onLoad: () => {
+    dispatch(startFetchGroups());
+    dispatch(startFetchUsers());
+  },
 });
 
-const mapStateToProps = ({ groups }) => ({
+const mapStateToProps = ({ groups, users }) => ({
   groups,
+  users: getTaskOwners(users.users),
+  canUserEdit: true,
 });
 
 const redux = connect(

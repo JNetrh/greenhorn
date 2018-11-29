@@ -9,11 +9,15 @@ import { startListTasks } from '../../../services/Tasks/api/list';
 
 const Page = props => <TasksPage {...props} />;
 
-const mapStateToProps = ({ tasks: { tasks, fetched, isLoading, error } }) => ({
+const mapStateToProps = ({
+  tasks: { tasks, fetched, isLoading, error },
+  auth: { user },
+}) => ({
   tasks,
   fetched,
   isLoading,
   error,
+  currentUser: user,
 });
 
 const mapDispatchToProps = { startListTasks };

@@ -1,9 +1,11 @@
 import { User, Group, Task, AssignedTask } from '../../models';
+import { setWorkflows } from '../../services/workflow/addWorkflow';
 
 export const updateUserGroupsAndAssignTasks = async (userId, groupIds) => {
   await checkConditions(userId, groupIds);
   await updateUserGroups(userId, groupIds);
-  await asignTasksFromGroups(userId);
+  const assignedTasksToCreate = await asignTasksFromGroups(userId);
+  await createWorkflowEntry(assignedTasksToCreate);
 };
 
 // -- HELPERS -- //
@@ -57,9 +59,6 @@ const asignTasksFromGroups = async userId => {
 
   const tasksToAdd = tasks.filter(task => !userTasks.includes(task.id));
 
-  // console.log('tasksTodel:', tasksTodel.map(e => e.id));
-  // console.log('tasksToAdd:', tasksToAdd.map(e => e.id));
-
   const assignedTasksToCreate = tasksToAdd.map(task => {
     Date.prototype.addDays = function(days) {
       const date = new Date(this.valueOf());
@@ -72,6 +71,7 @@ const asignTasksFromGroups = async userId => {
     until = until.addDays(task.estimatedTime);
 
     return {
+      note: null,
       until,
       TaskId: task.id,
       UserId: user.id,
@@ -82,4 +82,17 @@ const asignTasksFromGroups = async userId => {
     where: { id: tasksToDel.map(e => e.id) },
   });
   await AssignedTask.bulkCreate(assignedTasksToCreate);
+  return assignedTasksToCreate;
+};
+
+const createWorkflowEntry = async assignedTasksToCreate => {
+  const workflowsToCreate = assignedTasksToCreate.map(
+    ({ note, TaskId, UserId }) => ({
+      note,
+      status: 'assigned',
+      assignedTask: TaskId,
+      submitUser: UserId,
+    })
+  );
+  await setWorkflows(workflowsToCreate);
 };

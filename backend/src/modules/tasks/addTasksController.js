@@ -1,7 +1,15 @@
 import { Task } from '../../models/';
+import { canUserEditTask, getTaskWithDetails } from './tasksController';
 
 const addTasksController = async (req, res) => {
-  const { title, estimatedTime, severity, description, GroupId } = req.body;
+  const {
+    title,
+    estimatedTime,
+    severity,
+    description,
+    GroupId,
+    owners,
+  } = req.body;
   try {
     if (!title || !estimatedTime || !severity) {
       return res
@@ -9,7 +17,7 @@ const addTasksController = async (req, res) => {
         .json({ msg: 'Please provide all mandatory fields.' });
     }
 
-    const createTask = await Task.create({
+    const createdTask = await Task.create({
       title,
       estimatedTime,
       severity,
@@ -17,7 +25,12 @@ const addTasksController = async (req, res) => {
       GroupId,
       createdById: req.userId,
     });
-    return res.json(createTask);
+    if (owners && owners.length) {
+      await createdTask.setOwners(owners);
+    }
+
+    const task = await getTaskWithDetails(createdTask.id);
+    return res.json(task);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Internal task create server error' });

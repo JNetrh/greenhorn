@@ -1,4 +1,5 @@
 import models from './models';
+import { TaskStatus } from './models';
 import {
   createUserWithHashedPwd,
   getUserByEmail,
@@ -13,6 +14,25 @@ const TEST_USER = {
   role: ROLES[2],
 };
 
+const TASK_STATUSES = [
+  {
+    id: 1,
+    name: 'assigned',
+  },
+  {
+    id: 2,
+    name: 'submitted',
+  },
+  {
+    id: 3,
+    name: 'returned',
+  },
+  {
+    id: 4,
+    name: 'done',
+  },
+];
+
 const initDb = async () => {
   // models.sequelize.afterSync(e => console.log('E:', e));
   await models.sequelize.sync();
@@ -26,6 +46,10 @@ const initDb = async () => {
   if (!user) {
     await createUserWithHashedPwd(TEST_USER);
     console.log('Created a test user.');
+  }
+  const testStatus = await TaskStatus.findAll();
+  if (testStatus.length === 0) {
+    await TaskStatus.bulkCreate(TASK_STATUSES);
   }
 
   models.sequelize.options.logging = console.log;

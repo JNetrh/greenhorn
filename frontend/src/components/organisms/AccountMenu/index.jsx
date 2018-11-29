@@ -47,7 +47,7 @@ const AccountMenuWrapper = styled.div`
 const MenuDropdown = ({ logOut }) => (
   <Menu>
     <Menu.Item key="myaccount">
-      <Link to="/myaccount">
+      <Link to="/me">
         <Icon type="user" /> My Account
       </Link>
     </Menu.Item>

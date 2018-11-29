@@ -10,6 +10,8 @@ import { fetchTaskById } from '../../../services/Tasks/api/fetchTaskById.js';
 import view from './view';
 import DetailPage from '../../organisms/DetailPage';
 import { startFetchGroups } from '../../../services/Groups/api/list';
+import { startFetchUsers } from '../../../services/Users/api/list';
+import { getTaskOwners } from '../../../services/Users/selectors';
 
 const TaskForm = reduxForm({
   form: 'taskDetail',
@@ -28,11 +30,16 @@ const EditTaskPage = props => (
 const mapDispatchToProps = dispatch => ({
   deleteItem: item => dispatch(startDeleteTask(item)),
   onSubmit: item => dispatch(startUpdateTask(item)),
-  onLoad: payload => dispatch(startFetchGroups(payload)),
+  onLoad: () => {
+    dispatch(startFetchGroups());
+    dispatch(startFetchUsers());
+  },
 });
 
-const mapStateToProps = ({ groups }) => ({
+const mapStateToProps = ({ groups, users, auth: { user } }) => ({
   groups,
+  users: getTaskOwners(users.users),
+  currentUser: user,
 });
 
 const redux = connect(
