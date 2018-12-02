@@ -7,6 +7,7 @@ import TaskDetail from '../components/pages/TaskDetail';
 import Submit from '../components/pages/Submit';
 
 import UserRoutes, { UserRoutesSideNav } from './users';
+import GroupsRoutes, { GroupsRoutesSideNav } from './groups';
 import TaskRoutes, { TasksRoutesSideNav } from './tasks';
 import GroupDetail from '../components/pages/GroupDetail';
 
@@ -33,10 +34,11 @@ export default [
     path: '/user/:id',
     SideNav: UserRoutesSideNav,
   },
+  ...GroupsRoutes,
   {
     Component: GroupDetail,
     path: '/group/:id',
-    SideNav: UserRoutesSideNav,
+    SideNav: GroupsRoutesSideNav,
   },
   ...TaskRoutes,
   {
