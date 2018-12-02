@@ -3,8 +3,6 @@ import { AssignedTask, Task, Workflow, User } from '../../models';
 export const listAssignedTaskForReview = async (req, res) => {
   const id = req.params;
   const OwnerId = Number(id.id);
-  console.log('id = ', id);
-  console.log('OwnerId = ', OwnerId);
   if (!OwnerId) {
     return res.status(404).json({ msg: `wrong request "${OwnerId}"` });
   }
@@ -17,10 +15,21 @@ export const listAssignedTaskForReview = async (req, res) => {
           {
             model: User,
             as: 'owners',
-            through: { attributes: [] },
+            through: {
+              attributes: [],
+            },
             where: {
               id: OwnerId,
             },
+            attributes: [
+              `id`,
+              `name`,
+              `surname`,
+              `role`,
+              `email`,
+              `createdAt`,
+              `updatedAt`,
+            ],
           },
         ],
       },
