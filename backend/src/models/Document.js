@@ -1,7 +1,10 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Doc = sequelize.define("Document", {
-    url: DataTypes.STRING
+  var Doc = sequelize.define('Document', {
+    name: DataTypes.STRING,
+    path: DataTypes.STRING,
+    type: DataTypes.STRING,
+    size: DataTypes.INTEGER,
   });
 
   Doc.associate = ({ Workflow, Document, Task }) => {

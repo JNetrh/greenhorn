@@ -15,13 +15,12 @@ export const setWorkflow = async ({
     status = await TaskStatus.findOne({ where: { name: status } });
   }
 
-  const entry = await Workflow.create({
+  return Workflow.create({
     note,
     TaskStatusId: status.id,
     SubmitedUserId: submitUser,
     AssignedTaskId: assignedTask,
   });
-  return entry;
 };
 
 export const setWorkflows = async workflows => {

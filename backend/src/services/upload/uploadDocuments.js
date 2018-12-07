@@ -1,9 +1,9 @@
 import multer from 'multer';
 import path from 'path';
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: 'tmp/',
-  filename: function(req, file, cb) {
+  filename: (req, file, cb) => {
     cb(
       null,
       `${

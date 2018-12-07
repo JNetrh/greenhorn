@@ -10,9 +10,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
 
-if (__DEV__) {
-  app.use(express.static('public'));
-}
+app.use(express.static('public'));
 
 app.use(rootRoutes);
 
