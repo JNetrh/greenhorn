@@ -4,15 +4,19 @@ import { Field } from 'redux-form';
 
 import { FormItem } from '../../../styles/Login';
 import TextArea from '../../molecules/form/TextArea';
-import { FileUpload } from '../../organisms/FileUpload';
+import { FileUploadWithDropzone } from '../../organisms/FileUpload';
 
 class SubmitForm extends Component {
   render() {
-    const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit, onSubmit, documents } = this.props;
     return (
       <Form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <FormItem>
-          <Field name="documents" component={FileUpload} />
+          <Field
+            name="documents"
+            component={FileUploadWithDropzone}
+            files={documents}
+          />
         </FormItem>
         <FormItem>
           <Field

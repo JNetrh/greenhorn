@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import getErrorMessage from '../../../helpers/getErrorMessage';
+import { reset } from 'redux-form';
 
 import history from '../../../history';
 
@@ -27,6 +28,7 @@ export const submitAssignedTask = ({ data, id }) => async (
     });
     // history.push('/');
     message.success('Task submitted');
+    dispatch(reset('submitTask'));
     return data;
   } catch (err) {
     if (err.response) {

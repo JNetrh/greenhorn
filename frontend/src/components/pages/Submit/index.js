@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 import { submitAssignedTask } from '../../../services/AssignedTasks/api/submitAssignedTask';
 import { fetchAssignedTaskById } from '../../../services/AssignedTasks/api/fetchAssignedTaskById';
 import SubmitForm from './SubmitForm';
 import SubmitPage from './SubmitPage';
+
+const selector = formValueSelector('submitTask');
 
 const SubmitTaskForm = reduxForm({
   form: 'submitTask',
@@ -26,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const redux = connect(
-  null,
+  state => ({ documents: selector(state, 'documents') }),
   mapDispatchToProps,
 );
 

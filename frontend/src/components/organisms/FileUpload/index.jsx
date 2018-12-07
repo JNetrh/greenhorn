@@ -14,10 +14,12 @@ const FileItem = ({ name, size }) => {
   );
 };
 
-export const DropZoneField = ({
+const getFilesData = files => files && Array.from(files);
+
+export const FileUploadWithDropzone = ({
   handleOnDrop,
   input,
-  imagefile,
+  files,
   meta: { error, touched },
 }) => (
   <div>
@@ -50,11 +52,11 @@ export const DropZoneField = ({
         </p> */}
       </Card>
     </DropZone>
-    {imagefile &&
-      imagefile.length > 0 && (
+    {files &&
+      files.length > 0 && (
         <List
           bordered
-          dataSource={imagefile}
+          dataSource={getFilesData(files)}
           style={{ backgroundColor: 'white', style: 'margin: 10px 0' }}
           renderItem={FileItem}
         />
