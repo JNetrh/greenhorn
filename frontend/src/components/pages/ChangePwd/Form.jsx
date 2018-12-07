@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Input from '../../molecules/form/Input';
 import { Centered } from '../../../styles/Login';
-import { PageFormWrapper } from '../../../styles/Forms';
+import { PageFormWrapper } from '../../atoms/Forms';
 
 const CenteredForm = styled.div`
   max-width: 350px;

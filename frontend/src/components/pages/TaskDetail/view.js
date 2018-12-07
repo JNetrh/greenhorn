@@ -5,11 +5,13 @@ import { LabelLine } from '../../atoms/LabelLine';
 import { InfoLabel } from '../../atoms/InfoLabel';
 import { getLongDate, getFromNow } from '../../../helpers/dateFormat';
 import { canUserEditTask } from '../../../services/Users/selectors';
+import { TaskDocuments } from './Documents';
 
 const Form = props => {
   const {
     item: { createdBy, createdAt, updatedAt },
     currentUser,
+    newDocuments,
   } = props;
   const canUserEdit = canUserEditTask(props.item, currentUser);
   return (
@@ -17,6 +19,7 @@ const Form = props => {
       type="edit"
       itemName="task"
       canUserEdit={canUserEdit}
+      rightSide={<TaskDocuments newDocuments={newDocuments} />}
       {...props}
     >
       <LabelLine>

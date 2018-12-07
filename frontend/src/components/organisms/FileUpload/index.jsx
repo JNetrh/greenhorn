@@ -33,7 +33,7 @@ export const FileUploadWithDropzone = ({
           width: '100%',
           cursor: 'pointer',
           textAlign: 'center',
-          paddingTop: '2em',
+          paddingTop: '1em',
         }}
       >
         <p className="ant-upload-drag-icon">

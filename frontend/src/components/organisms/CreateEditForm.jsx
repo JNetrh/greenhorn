@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Button, Popconfirm, Icon } from 'antd';
+import { Form, Icon } from 'antd';
 
-import { PageFormWrapper } from '../../styles/Forms';
+import { PageFormWrapper } from '../atoms/Forms';
 import { FormWrapper } from '../atoms/FormWrapper';
+import { CreateEditFormButtons } from './CreateEditFormButtons';
 
 export class CreateEditForm extends Component {
   state = {
@@ -17,55 +18,13 @@ export class CreateEditForm extends Component {
     deleteItem(item);
   };
 
-  renderButtons = () => {
-    const { type, itemName, pristine, canUserEdit = true } = this.props;
-
-    if (type === 'create') {
-      return (
-        <div>
-          <Button type="primary" htmlType="submit">
-            Create {itemName}
-          </Button>
-        </div>
-      );
-    }
-
-    if (canUserEdit) {
-      if (type === 'edit') {
-        return (
-          <div>
-            <Button
-              type="primary"
-              htmlType="submit"
-              icon="save"
-              style={{ marginRight: '10px' }}
-              disabled={pristine}
-            >
-              Save changes
-            </Button>
-            <Popconfirm
-              title={`Do you really want to delete this ${itemName}?`}
-              icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
-              onConfirm={this.confirmDelete}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button type="danger" icon="delete">
-                Delete
-              </Button>
-            </Popconfirm>
-          </div>
-        );
-      }
-    }
-    return null;
-  };
   render() {
     const {
       handleSubmit,
       onSubmit,
       type,
       children,
+      rightSide,
       itemName,
       itemDescription,
       canUserEdit = true,
@@ -91,12 +50,12 @@ export class CreateEditForm extends Component {
           </div>
         )}
 
-        <FormWrapper>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormWrapper rightSide={rightSide}>
             {children}
-            {this.renderButtons()}
-          </Form>
-        </FormWrapper>
+            <CreateEditFormButtons {...this.props} />
+          </FormWrapper>
+        </Form>
       </PageFormWrapper>
     );
   }

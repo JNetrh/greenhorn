@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router';
 import { startDeleteTask } from '../../../services/Tasks/api/delete';
@@ -12,6 +12,8 @@ import DetailPage from '../../organisms/DetailPage';
 import { startFetchGroups } from '../../../services/Groups/api/list';
 import { startFetchUsers } from '../../../services/Users/api/list';
 import { getTaskOwners } from '../../../services/Users/selectors';
+
+const selector = formValueSelector('taskDetail');
 
 const TaskForm = reduxForm({
   form: 'taskDetail',
@@ -36,11 +38,19 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = ({ groups, users, auth: { user } }) => ({
-  groups,
-  users: getTaskOwners(users.users),
-  currentUser: user,
-});
+const mapStateToProps = state => {
+  const {
+    groups,
+    users,
+    auth: { user },
+  } = state;
+  return {
+    groups,
+    users: getTaskOwners(users.users),
+    currentUser: user,
+    newDocuments: selector(state, 'documents'),
+  };
+};
 
 const redux = connect(
   mapStateToProps,
