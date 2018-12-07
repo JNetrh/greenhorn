@@ -1,11 +1,22 @@
 import { message } from 'antd';
 import { updateTask } from '../actions';
 import getErrorMessage from '../../../helpers/getErrorMessage';
+import { makeFormData } from '../../../helpers/makeFormData';
 
-export const startUpdateTask = task => async (dispatch, getState, { api }) => {
+export const startUpdateTask = ({ documents, id, ...rest }) => async (
+  dispatch,
+  getState,
+  { api },
+) => {
   const loader = message.loading('Updating task...');
+  const formData = makeFormData({ documents, data: rest });
   try {
-    const { data } = await api.put(`task/${task.id}`, task);
+    const { data } = await api({
+      method: 'PUT',
+      headers: { 'content-type': 'multipart/form-data' },
+      data: formData,
+      url: `task/${id}`,
+    });
     await dispatch(updateTask(data));
     message.success('Task updated');
   } catch (error) {

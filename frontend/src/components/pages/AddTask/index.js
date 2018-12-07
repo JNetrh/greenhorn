@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { compose } from 'recompose';
 import { AddTask } from '../../../services/Tasks/api/add';
 import { startFetchGroups } from '../../../services/Groups/api/list';
@@ -14,6 +14,8 @@ export const SEVERITY_OPTIONS = [
   { value: 'low', label: 'Low' },
 ];
 
+const selector = formValueSelector('addtask');
+
 const mapDispatchToProps = dispatch => ({
   onSubmit: payload => dispatch(AddTask(payload)),
   onLoad: () => {
@@ -22,11 +24,15 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = ({ groups, users }) => ({
-  groups,
-  users: getTaskOwners(users.users),
-  canUserEdit: true,
-});
+const mapStateToProps = state => {
+  const { groups, users } = state;
+  return {
+    groups,
+    users: getTaskOwners(users.users),
+    canUserEdit: true,
+    newDocuments: selector(state, 'documents'),
+  };
+};
 
 const redux = connect(
   mapStateToProps,

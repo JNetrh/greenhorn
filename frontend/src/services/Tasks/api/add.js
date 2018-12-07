@@ -1,24 +1,21 @@
 import { message } from 'antd';
 import { addTask } from '../actions';
 import getErrorMessage from '../../../helpers/getErrorMessage';
+import { makeFormData } from '../../../helpers/makeFormData';
 
-export const AddTask = ({
-  title,
-  description,
-  estimatedTime,
-  severity,
-  GroupId,
-  owners,
-}) => async (dispatch, getState, { api }) => {
+export const AddTask = ({ documents, ...rest }) => async (
+  dispatch,
+  getState,
+  { api },
+) => {
   const loader = message.loading('Adding task');
+  const formData = makeFormData({ documents, data: rest });
   try {
-    const { data } = await api.post('task', {
-      title,
-      description,
-      estimatedTime,
-      severity,
-      GroupId,
-      owners,
+    const { data } = await api({
+      method: 'POST',
+      headers: { 'content-type': 'multipart/form-data' },
+      data: formData,
+      url: 'task',
     });
     loader();
     dispatch(addTask(data));
