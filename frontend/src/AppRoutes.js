@@ -28,13 +28,11 @@ export const AppRoutes = () => (
         exact
         path={path}
         key={path}
-        render={function(route) {
-          return (
-            <PageWrapper {...{ SideNav, route }}>
-              <Component />
-            </PageWrapper>
-          );
-        }}
+        render={route => (
+          <PageWrapper {...{ SideNav, route }}>
+            <Component />
+          </PageWrapper>
+        )}
       />
     ))}
     <Route component={PageNotFound} />
