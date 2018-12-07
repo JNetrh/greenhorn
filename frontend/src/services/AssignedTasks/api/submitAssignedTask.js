@@ -16,7 +16,7 @@ export const submitAssignedTask = task => async (
       data: task,
       url: 'submit',
     });
-    history.push('/');
+    // history.push('/');
     message.success('Task submitted');
     return data;
   } catch (err) {

@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 import { FormItem } from '../../../styles/Login';
 import TextArea from '../../molecules/form/TextArea';
-import { UploadField } from './UploadField';
+import { FileUpload } from '../../organisms/FileUpload';
 
 class SubmitForm extends Component {
   render() {
@@ -12,7 +12,7 @@ class SubmitForm extends Component {
     return (
       <Form onSubmit={handleSubmit(onSubmit)} className="login-form">
         <FormItem>
-          <UploadField />
+          <Field name="documents" component={FileUpload} />
         </FormItem>
         <FormItem>
           <Field
@@ -20,7 +20,7 @@ class SubmitForm extends Component {
             component={TextArea}
             tabIndex={1}
             type="text"
-            placeholder="comment"
+            placeholder="Add a comment if neccessary"
           />
         </FormItem>
         <FormItem style={{ margin: '0 0 20px 0' }}>
