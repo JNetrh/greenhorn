@@ -3,17 +3,26 @@ import getErrorMessage from '../../../helpers/getErrorMessage';
 
 import history from '../../../history';
 
-export const submitAssignedTask = task => async (
+export const submitAssignedTask = ({ data, id }) => async (
   dispatch,
   getState,
   { api },
 ) => {
+  // const { documents } = this.state;
+  const fd = new FormData();
+  if (data.documents) {
+    Array.from(data.documents).forEach(doc => fd.append('documents', doc));
+  }
+  fd.append(
+    'data',
+    JSON.stringify({ ...data, status: 'submitted', assignedTaskId: id }),
+  );
   try {
     // const { data } = await api.post(`submit`, task);
     const { data } = await api({
       method: 'POST',
       headers: { 'content-type': 'multipart/form-data' },
-      data: task,
+      data: fd,
       url: 'submit',
     });
     // history.push('/');

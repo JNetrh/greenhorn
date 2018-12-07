@@ -1,11 +1,6 @@
-import {
-  AssignedTask,
-  Task,
-  Workflow,
-  TaskStatus,
-  User,
-  Document,
-} from '../../models';
+import { AssignedTask, Task } from '../../models';
+import { getAssignedTask } from './getAssignedTask';
+
 export const listAssignedTasksController = async (req, res) => {
   const assignedTask = await AssignedTask.findAll({
     where: { UserId: req.userId },
@@ -13,18 +8,10 @@ export const listAssignedTasksController = async (req, res) => {
   });
   res.json(assignedTask);
 };
-export const listAssignedTaskByIdController = async (req, res) => {
+
+export const getAssignedTaskByIdController = async (req, res) => {
   const { id } = req.params;
-  const assignedTask = await AssignedTask.findOne({
-    where: { id },
-    include: [
-      {
-        model: Workflow,
-        include: [TaskStatus, { model: User, as: 'submittedBy' }, Document],
-      },
-      Task,
-    ],
-  });
+  const assignedTask = await getAssignedTask(id);
   if (!assignedTask) {
     return res.status(404).json({ msg: `Assigned task not found` });
   }

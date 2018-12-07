@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Icon, Button, Row, Col, Divider } from 'antd';
-
-import styled from 'styled-components';
+import { Icon, Button, Row, Col, Divider, Spin } from 'antd';
 import moment from 'moment';
-
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -11,17 +8,7 @@ import { Container } from '../../atoms/Container';
 import { DocumentsList } from '../../organisms/DocumentsList';
 import { TaskTimeline } from './TaskTimeline';
 import { getLongDate } from '../../../helpers/dateFormat';
-
-import breakpoints from '../../../styles/breakpoints';
-
-const ButtonWrapper = styled.div`
-  margin-bottom: 10px;
-  @media (min-width: ${breakpoints.md}) {
-    position: absolute;
-    top: 5px;
-    left: -120px;
-  }
-`;
+import { ButtonWrapper } from './ButtonWrapper';
 
 const data = [
   {
@@ -48,36 +35,25 @@ class SubmitPage extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      // documents: [],
+      isSubmitting: false,
     };
   }
-
-  // setDocument = doc => {
-  //   const { documents } = this.state;
-  //   this.setState({ documents: [doc, ...documents] });
-  // };
 
   componentDidMount() {
     this.fetchDetail();
   }
 
-  submitTask = formProps => {
+  submitTask = async data => {
+    this.setState({
+      isSubmitting: true,
+    });
     const { id } = this.props.match.params;
     const { onTaskSubmit } = this.props;
-    console.log('formProps: ', formProps);
-    // const { documents } = this.state;
-    const fd = new FormData();
-    if (formProps.documents) {
-      Array.from(formProps.documents).forEach(doc =>
-        fd.append('documents', doc),
-      );
-    }
-    fd.append(
-      'data',
-      JSON.stringify({ ...formProps, status: 'submitted', assignedTask: id }),
-    );
-
-    onTaskSubmit(fd);
+    const itemDetail = await onTaskSubmit({ data, id });
+    this.setState({
+      isSubmitting: false,
+      itemDetail,
+    });
   };
 
   async fetchDetail() {
@@ -90,8 +66,7 @@ class SubmitPage extends Component {
     });
   }
   render() {
-    // const { itemDetail, isLoading, documents } = this.state;
-    const { itemDetail, isLoading } = this.state;
+    const { itemDetail, isLoading, isSubmitting } = this.state;
     const { Form } = this.props;
     if (isLoading) {
       return null;
@@ -106,6 +81,7 @@ class SubmitPage extends Component {
             <Button icon="arrow-left">Back</Button>
           </Link>
         </ButtonWrapper>
+
         <h1>{itemDetail.Task.title}</h1>
         <h3>Until:</h3>
         <p>
@@ -115,6 +91,7 @@ class SubmitPage extends Component {
         </p>
         <h3>What to do:</h3>
         <p>{itemDetail.Task.description}</p>
+
         <Row gutter={45}>
           <Col xs={24} sm={12}>
             <h3>Task documents:</h3>
@@ -125,18 +102,9 @@ class SubmitPage extends Component {
           <Col xs={24} sm={12}>
             <h3>Workflow:</h3>
             <TaskTimeline workflow={itemDetail.Workflows} />
+            <Spin spinning={isSubmitting} />
           </Col>
         </Row>
-        {/* <Row gutter={45}>
-          <Col xs={24} sm={12}>
-            
-          </Col>
-        </Row> */}
-        {/* <Row gutter={45}>
-          <Col xs={24} sm={12}>
-            <h3>Optional comment</h3>
-          </Col>
-        </Row> */}
       </Container>
     );
   }

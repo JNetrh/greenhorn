@@ -3,11 +3,11 @@ import { Router } from 'express';
 
 import {
   listAssignedTasksController,
-  listAssignedTaskByIdController,
+  getAssignedTaskByIdController,
 } from './listAssignedTasks';
 
 const router = expressAsyncAwait(Router());
 router.get('/', listAssignedTasksController);
-router.get('/:id', listAssignedTaskByIdController);
+router.get('/:id', getAssignedTaskByIdController);
 
 export default router;
