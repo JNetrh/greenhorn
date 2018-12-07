@@ -81,8 +81,8 @@ const asignTasksFromGroups = async userId => {
   await AssignedTask.destroy({
     where: { id: tasksToDel.map(e => e.id) },
   });
-  await AssignedTask.bulkCreate(assignedTasksToCreate);
-  return assignedTasksToCreate;
+  const write = await AssignedTask.bulkCreate(assignedTasksToCreate);
+  return write;
 };
 
 const createWorkflowEntry = async assignedTasksToCreate => {
