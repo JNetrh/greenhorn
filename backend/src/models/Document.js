@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Doc.associate = ({ Workflow, Document, Task }) => {
-    Document.belongsTo(Workflow);
+    // Document.belongsTo(Workflow);
+    Workflow.hasMany(Document);
     Document.belongsTo(Task);
   };
 
