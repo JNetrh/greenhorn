@@ -49,3 +49,8 @@ body {
 .ant-dropdown {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
 }
+
+.ant-list-item .ant-list-item-meta-description {
+  font-size: 12px;
+  margin-top: -7px;
+}

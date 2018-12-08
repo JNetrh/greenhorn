@@ -1,5 +1,6 @@
 import { Task, User } from '../../models';
 import { getTaskWithDetails, canUserEditTask } from './tasksController';
+import { saveDocumentInfo } from '../../services/upload/saveDocumentInfo';
 
 export const taskUpdateController = async (req, res) => {
   const {
@@ -9,7 +10,7 @@ export const taskUpdateController = async (req, res) => {
     description,
     GroupId,
     owners,
-  } = req.body;
+  } = JSON.parse(req.body.data);
   const { id } = req.params;
   try {
     if (!title || !estimatedTime || !severity) {
@@ -27,7 +28,8 @@ export const taskUpdateController = async (req, res) => {
         msg: 'Cannot update this task. You are not one of the task owners.',
       });
     }
-    const updated = await Task.update(
+    await saveDocumentInfo(req.files, { TaskId: id });
+    await Task.update(
       {
         title,
         estimatedTime,

@@ -16,7 +16,7 @@ const DocumentListItem = item => (
           <Icon type={`file-${item.fileType || 'text'}`} />
         </div>
       }
-      title={<a href={item.url || ''}>{item.title}</a>}
+      title={<a href={item.url}>{item.title}</a>}
       description={item.description}
     />
   </List.Item>

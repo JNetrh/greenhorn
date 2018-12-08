@@ -9,7 +9,7 @@ import { TaskDocuments } from './Documents';
 
 const Form = props => {
   const {
-    item: { createdBy, createdAt, updatedAt },
+    item: { createdBy, createdAt, updatedAt, Documents },
     currentUser,
     newDocuments,
   } = props;
@@ -19,7 +19,9 @@ const Form = props => {
       type="edit"
       itemName="task"
       canUserEdit={canUserEdit}
-      rightSide={<TaskDocuments newDocuments={newDocuments} />}
+      rightSide={
+        <TaskDocuments newDocuments={newDocuments} oldDocuments={Documents} />
+      }
       {...props}
     >
       <LabelLine>

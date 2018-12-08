@@ -1,8 +1,12 @@
-import { Task, User } from '../../models';
+import { Task, User, Document } from '../../models';
 
 export const getTaskWithDetails = id =>
   Task.findById(id, {
-    include: [{ model: User, as: 'createdBy' }, { model: User, as: 'owners' }],
+    include: [
+      { model: User, as: 'createdBy' },
+      { model: User, as: 'owners' },
+      Document,
+    ],
   });
 
 export const canUserEditTask = (req, task) => {
