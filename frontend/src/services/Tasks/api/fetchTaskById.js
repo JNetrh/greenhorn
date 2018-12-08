@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import getErrorMessage from '../../../helpers/getErrorMessage';
 import api from '../../../api';
-import moment from 'moment';
+import { transformDocuments } from '../../../helpers/transformDocuments';
 
 export const fetchTaskById = async id => {
   try {
@@ -20,14 +20,3 @@ export const fetchTaskById = async id => {
     return { error: 'Fetch failed' };
   }
 };
-
-const transformDocuments = documents =>
-  documents.map(({ name, path, type, size, createdAt }) => {
-    return {
-      title: name,
-      description: `Size: ${Math.round(size / 1024)} KB, added on: ${moment(
-        createdAt,
-      ).format('D. MMM YYYY HH:mm')}`,
-      url: path,
-    };
-  });

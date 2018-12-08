@@ -15,6 +15,6 @@ export const getAssignedTask = id =>
         model: Workflow,
         include: [TaskStatus, { model: User, as: 'submittedBy' }, Document],
       },
-      Task,
+      { model: Task, include: [Document] },
     ],
   });

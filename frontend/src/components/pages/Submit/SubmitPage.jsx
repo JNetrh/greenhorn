@@ -8,25 +8,8 @@ import { Container } from '../../atoms/Container';
 import { DocumentsList } from '../../organisms/DocumentsList';
 import { TaskTimeline } from './TaskTimeline';
 import { getLongDate } from '../../../helpers/dateFormat';
+import { transformDocuments } from '../../../helpers/transformDocuments';
 import { ButtonWrapper } from './ButtonWrapper';
-
-const data = [
-  {
-    title: 'Emergency_Contact.doc',
-    description: 'Please fill in and bring to desk C2045.',
-    url: 'http://google.com/file.pdf',
-  },
-  {
-    title: 'Employee_Handbook.pdf',
-    description: 'Print out for handbook info',
-    url: 'http://google.com/file2.pdf',
-  },
-  {
-    title: 'Expectations.pdf',
-    description: 'Copy of the offer letter and job description',
-    url: 'http://google.com/file2.pdf',
-  },
-];
 
 const now = moment();
 
@@ -71,10 +54,11 @@ class SubmitPage extends Component {
     if (isLoading) {
       return null;
     }
+    const { Task, until, Documents, Workflows } = itemDetail;
     return (
       <Container style={{ marginTop: 20, position: 'relative' }}>
         <Helmet>
-          <title>{itemDetail.Task.title}</title>
+          <title>{Task.title}</title>
         </Helmet>
         <ButtonWrapper>
           <Link to="/">
@@ -82,26 +66,25 @@ class SubmitPage extends Component {
           </Link>
         </ButtonWrapper>
 
-        <h1>{itemDetail.Task.title}</h1>
+        <h1>{Task.title}</h1>
         <h3>Until:</h3>
         <p>
-          <Icon type="calendar-o" />{' '}
-          <b>due {moment(itemDetail.until).from(now)}</b> -{' '}
-          {getLongDate(itemDetail.until)}
+          <Icon type="calendar-o" /> <b>due {moment(until).from(now)}</b> -{' '}
+          {getLongDate(until)}
         </p>
         <h3>What to do:</h3>
-        <p>{itemDetail.Task.description}</p>
+        <p>{Task.description}</p>
 
         <Row gutter={45}>
           <Col xs={24} sm={12}>
             <h3>Task documents:</h3>
-            <DocumentsList items={data} />
+            <DocumentsList items={transformDocuments(Task.Documents)} />
             <Divider />
             <Form {...this.props} onSubmit={this.submitTask} />
           </Col>
           <Col xs={24} sm={12}>
             <h3>Workflow:</h3>
-            <TaskTimeline workflow={itemDetail.Workflows} />
+            <TaskTimeline workflow={Workflows} />
             <Spin spinning={isSubmitting} />
           </Col>
         </Row>
