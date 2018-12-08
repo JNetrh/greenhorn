@@ -65,27 +65,32 @@ class SubmitPage extends Component {
             <Button icon="arrow-left">Back</Button>
           </Link>
         </ButtonWrapper>
-
         <h1>{Task.title}</h1>
-        <h3>Until:</h3>
-        <p>
-          <Icon type="calendar-o" /> <b>due {moment(until).from(now)}</b> -{' '}
-          {getLongDate(until)}
-        </p>
-        <h3>What to do:</h3>
-        <p>{Task.description}</p>
-
         <Row gutter={45}>
-          <Col xs={24} sm={12}>
+          <Col sm={12}>
+            <h3>Until:</h3>
+            <p>
+              <Icon type="calendar-o" /> <b>due {moment(until).from(now)}</b> -{' '}
+              {getLongDate(until)}
+            </p>
+            <h3>What to do:</h3>
+            <p>{Task.description}</p>
+          </Col>
+          <Col sm={12}>
             <h3>Task documents:</h3>
             <DocumentsList items={transformDocuments(Task.Documents)} />
-            <Divider />
-            <Form {...this.props} onSubmit={this.submitTask} />
           </Col>
+        </Row>
+        <Divider />
+        <Row gutter={45}>
           <Col xs={24} sm={12}>
             <h3>Workflow:</h3>
             <TaskTimeline workflow={Workflows} />
             <Spin spinning={isSubmitting} />
+          </Col>
+          <Col xs={24} sm={12}>
+            <h3>Your submission:</h3>
+            <Form {...this.props} onSubmit={this.submitTask} />
           </Col>
         </Row>
       </Container>
