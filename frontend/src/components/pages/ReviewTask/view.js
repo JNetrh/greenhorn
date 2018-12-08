@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TasksToDoList } from '../../molecules/TasksToDoList';
 import { Container } from '../../atoms/Container';
-import { Col, Row } from 'antd';
+import { Col, Row, Radio } from 'antd';
 import styled from 'styled-components';
 import emoji from '../../../static/Up_Pointing_Hand_Emoji.png';
 
@@ -32,6 +32,14 @@ export class AssignedTasks extends Component {
           additional work. Pay attention also to the severity of the task, task
           with higher severity should be prioritized over the lowest one.
         </p>
+        <Radio.Group style={{ marginBottom: 20 }} defaultValue="toreview">
+          <Radio.Button value="toreview" selected>
+            To review
+          </Radio.Button>
+          <Radio.Button value="rejected">Rejected</Radio.Button>
+          <Radio.Button value="confirmed">Confirmed</Radio.Button>
+        </Radio.Group>
+
         {nextWeekTasks.length ? (
           <Row gutter={25}>
             <Col xs={24} sm={12}>
@@ -45,7 +53,7 @@ export class AssignedTasks extends Component {
           </Row>
         ) : (
           <div>
-            <h3>Tasks to do:</h3>
+            <h3>Tasks to review:</h3>
             <TasksToDoList tasks={otherTasks} />
           </div>
         )}
