@@ -5,6 +5,7 @@ import view from './view';
 
 export const MENU_ITEMS = [
   { title: 'Dashboard', to: '/' },
+  { title: 'Tasks review', to: '/taskreview', roles: ['hr', 'taskowner'] },
   { title: 'Employees', to: '/user/list', roles: ['hr'] },
   { title: 'Tasks', to: '/task/list', roles: ['hr', 'taskowner'] },
 ];
