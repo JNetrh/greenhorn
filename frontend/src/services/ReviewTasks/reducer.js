@@ -5,7 +5,7 @@ import {
 } from './actions';
 
 const initialState = {
-  assignedTasks: [],
+  tasks: [],
   isLoading: false,
   error: null,
   fetched: false,
@@ -21,13 +21,13 @@ export const reviewTasksReducer = (state = initialState, action) => {
       };
 
     case REVIEW_TASKS_LIST_SUCC: {
-      const { assignedTasks } = action.payload;
+      const { tasks } = action.payload;
       return {
         ...state,
         isLoading: false,
         fetched: true,
         error: null,
-        assignedTasks,
+        tasks,
       };
     }
     case REVIEW_TASKS_LIST_FAIL: {
@@ -36,7 +36,6 @@ export const reviewTasksReducer = (state = initialState, action) => {
         isLoading: false,
         fetched: false,
         error,
-        assignedTasks: [],
       };
     }
     default:

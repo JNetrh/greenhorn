@@ -13,12 +13,12 @@ export const LogoWrapper = styled.div`
 
 export class AssignedTasks extends Component {
   componentDidMount = () => {
-    const { startListAssignedTasks } = this.props;
-    startListAssignedTasks();
+    const { startListReviewTasks } = this.props;
+    startListReviewTasks();
   };
 
   render() {
-    const { nextWeekTasks, otherTasks, user, ...rest } = this.props;
+    const { tasks } = this.props;
     return (
       <Container style={{ marginTop: 40 }}>
         <h2>
@@ -40,21 +40,10 @@ export class AssignedTasks extends Component {
           <Radio.Button value="confirmed">Confirmed</Radio.Button>
         </Radio.Group>
 
-        {nextWeekTasks.length ? (
-          <Row gutter={25}>
-            <Col xs={24} sm={12}>
-              <h3>Tasks due in one week:</h3>
-              <TasksToDoList tasks={nextWeekTasks} />
-            </Col>
-            <Col xs={24} sm={12}>
-              <h3>Other tasks:</h3>
-              <TasksToDoList tasks={otherTasks} />
-            </Col>
-          </Row>
-        ) : (
+        {!!tasks.length && (
           <div>
             <h3>Tasks to review:</h3>
-            <TasksToDoList tasks={otherTasks} />
+            <TasksToDoList tasks={tasks} />
           </div>
         )}
       </Container>

@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from '../services/Auth/reducer';
 import { UsersListReducer } from '../services/Users/reducer';
 import { assignedTasksReducer } from '../services/AssignedTasks/reducer';
+import { reviewTasksReducer } from '../services/ReviewTasks/reducer';
 import { tasksReducer } from '../services/Tasks/reducer';
 import { GroupsListReducer } from '../services/Groups/reducer';
 
@@ -22,6 +23,7 @@ export const createRootReducer = () => {
     groups: GroupsListReducer,
     tasks: tasksReducer,
     assignedTasks: assignedTasksReducer,
+    reviewTasks: reviewTasksReducer,
   });
 
   return persistReducer(persistConfig, rootReducer);

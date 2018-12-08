@@ -12,7 +12,7 @@ export const startListReviewTasks = () => async (
 ) => {
   try {
     dispatch(listReviewTasks());
-    const { data } = await api.get('assignedTask/${id}/review');
+    const { data } = await api.get('assignedTask/review');
     dispatch(listReviewTasksSuccess(data));
   } catch (error) {
     message.error('Loading tasks to review failed');

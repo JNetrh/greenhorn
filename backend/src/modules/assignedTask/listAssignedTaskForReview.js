@@ -15,21 +15,21 @@ export const listAssignedTaskForReview = async (req, res) => {
           {
             model: User,
             as: 'owners',
-            through: {
-              attributes: [],
-            },
-            where: {
-              id: OwnerId,
-            },
-            attributes: [
-              `id`,
-              `name`,
-              `surname`,
-              `role`,
-              `email`,
-              `createdAt`,
-              `updatedAt`,
-            ],
+            // through: {
+            //   attributes: [],
+            // },
+            // where: {
+            //   id: OwnerId,
+            // },
+            // attributes: [
+            //   `id`,
+            //   `name`,
+            //   `surname`,
+            //   `role`,
+            //   `email`,
+            //   `createdAt`,
+            //   `updatedAt`,
+            // ],
           },
         ],
       },

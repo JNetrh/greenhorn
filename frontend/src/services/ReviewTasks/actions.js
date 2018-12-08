@@ -6,9 +6,9 @@ export const listReviewTasks = () => ({
   type: REVIEW_TASKS_LIST,
 });
 
-export const listReviewTasksSuccess = reviewTasks => ({
+export const listReviewTasksSuccess = tasks => ({
   type: REVIEW_TASKS_LIST_SUCC,
-  payload: { reviewTasks },
+  payload: { tasks },
 });
 
 export const listReviewTasksFailure = error => ({

@@ -1,27 +1,21 @@
 import { connect } from 'react-redux';
-import { startListAssignedTasks } from '../../../services/AssignedTasks/api/list';
+import { startListReviewTasks } from '../../../services/ReviewTasks/api/list';
 import { AssignedTasks } from './view';
 
 import { compose } from 'recompose';
 
 const mapDispatchToProps = dispatch => {
   return {
-    startListAssignedTasks: () => dispatch(startListAssignedTasks()),
+    startListReviewTasks: () => dispatch(startListReviewTasks()),
   };
 };
 
 const mapStateToProps = ({
-  assignedTasks: { assignedTasks, fetched, isLoading, error },
+  reviewTasks: { tasks, fetched, isLoading, error },
   auth: { user },
 }) => {
-  const nextWeek = new Date().setDate(new Date().getDate() + 7),
-    nextWeekTasks = assignedTasks.filter(
-      ({ until }) => new Date(until) < nextWeek,
-    ),
-    otherTasks = assignedTasks.filter(curr => !nextWeekTasks.includes(curr));
   return {
-    nextWeekTasks,
-    otherTasks,
+    tasks,
     fetched,
     isLoading,
     error,
