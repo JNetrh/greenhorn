@@ -1,5 +1,5 @@
 import { Task } from '../../models/';
-import { canUserEditTask, getTaskWithDetails } from './tasksController';
+import { getTaskWithDetails } from './tasksController';
 import { saveDocumentInfo } from '../../services/upload/saveDocumentInfo';
 
 const addTasksController = async (req, res) => {
@@ -10,6 +10,7 @@ const addTasksController = async (req, res) => {
     description,
     GroupId,
     owners,
+    periodicity,
   } = JSON.parse(req.body.data);
   try {
     if (!title || !estimatedTime || !severity) {
@@ -24,6 +25,7 @@ const addTasksController = async (req, res) => {
       severity,
       description,
       GroupId,
+      periodicity,
       createdById: req.userId,
     });
     if (owners && owners.length) {

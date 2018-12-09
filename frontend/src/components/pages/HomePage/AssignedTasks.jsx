@@ -17,7 +17,7 @@ export class AssignedTasks extends Component {
           Hello {user.name} {user.surname}!
         </h2>
         {/* <p>
-          In the section <q>To be done</q> you can see all tasks which have been
+          In the section <q>Dashboard</q> you can see all tasks which have been
           assigned to you and the date when you should complete it. Please, do
           tasks with the closest date first. Pay attention also to the severity
           of the task, task with higher severity should be prioritized over the

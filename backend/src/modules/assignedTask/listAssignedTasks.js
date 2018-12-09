@@ -4,7 +4,7 @@ import { getAssignedTask } from './getAssignedTask';
 export const listAssignedTasksController = async (req, res) => {
   const assignedTask = await AssignedTask.findAll({
     where: { UserId: req.userId },
-    include: [Task],
+    include: [Task, Workflow],
   });
   res.json(assignedTask);
 };

@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import view from './view';
 
 export const MENU_ITEMS = [
-  { title: 'To be done', to: '/' },
-  { title: 'Tasks', to: '/task/list', roles: ['hr', 'taskowner'] },
+  { title: 'Dashboard', to: '/' },
+  { title: 'Tasks review', to: '/taskreview', roles: ['hr', 'taskowner'] },
   { title: 'Employees', to: '/user/list', roles: ['hr'] },
   { title: 'Groups', to: '/group/list', roles: ['hr'] },
+  { title: 'Tasks', to: '/task/list', roles: ['hr', 'taskowner'] },
 ];
 
 export default compose(

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var AssignedTask = sequelize.define("AssignedTask", {
+  var AssignedTask = sequelize.define('AssignedTask', {
     until: DataTypes.DATE,
-    note: DataTypes.STRING
+    note: DataTypes.STRING,
   });
 
   // AssignedTask.associate = models => {

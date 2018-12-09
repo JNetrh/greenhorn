@@ -1,4 +1,4 @@
-import { User } from '../../models/';
+import { User, Notification } from '../../models/';
 import { createInvitation } from '../../services/invitation/invitationController';
 import bcrypt from 'bcryptjs';
 import { stripPassword } from '../../services/password/stripPassword';
@@ -19,10 +19,9 @@ export const createUserWithHashedPwd = async ({
   groups,
   ...user
 }) => {
-  const hashedPwd = await bcrypt.hash(password, 8);
   const createdUser = await User.create({
     ...user,
-    password: hashedPwd,
+    password: 'cbe75ac3e21c301c948e0b3fda1b6717',
     role: user.role || ROLES[0],
   });
   await updateUserGroupsAndAssignTasks(createdUser.id, groups);
@@ -34,7 +33,7 @@ export const addUser = async user => {
   return new Promise(async (resolve, reject) => {
     const { name, surname, groups, email, password } = user.body;
     try {
-      if (!name || !surname || !email || !password) {
+      if (!name || !surname || !email) {
         reject({
           error: { msg: 'Please provide all mandatory fields.' },
           status: 400,

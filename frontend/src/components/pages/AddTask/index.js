@@ -13,6 +13,13 @@ export const SEVERITY_OPTIONS = [
   { value: 'medium', label: 'Medium' },
   { value: 'low', label: 'Low' },
 ];
+export const PERIODICITY_OPTIONS = [
+  { value: null, label: 'None' },
+  { value: 1, label: 'Every day' },
+  { value: 7, label: 'Every week' },
+  { value: 30, label: 'Every month' },
+  { value: 365, label: 'Every year' },
+];
 
 const selector = formValueSelector('addtask');
 
@@ -41,7 +48,10 @@ const redux = connect(
 
 const form = reduxForm({
   form: 'addtask',
-  initialValues: { severity: SEVERITY_OPTIONS[0].value },
+  initialValues: {
+    severity: SEVERITY_OPTIONS[0].value,
+    periodicity: PERIODICITY_OPTIONS[0].value,
+  },
   validate,
 });
 

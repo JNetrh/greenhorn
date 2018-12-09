@@ -15,7 +15,6 @@ const mapStateToProps = ({ groups }) => {
 };
 
 const mapDispatchToProps = { startFetchGroups };
-
 const redux = connect(
   mapStateToProps,
   mapDispatchToProps,

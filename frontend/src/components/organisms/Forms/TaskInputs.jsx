@@ -4,7 +4,7 @@ import Input from '../../molecules/form/Input';
 import TextArea from '../../molecules/form/TextArea';
 import Select from '../../molecules/form/Select';
 import { Row, Col } from 'antd';
-import { SEVERITY_OPTIONS } from '../../pages/AddTask';
+import { SEVERITY_OPTIONS, PERIODICITY_OPTIONS } from '../../pages/AddTask';
 import Transfer from '../../molecules/form/Transfer';
 
 export const TaskInputs = ({ groups, users, canUserEdit }) => {
@@ -67,10 +67,20 @@ export const TaskInputs = ({ groups, users, canUserEdit }) => {
           <FormItemWithLabel
             label="Assign to group"
             name="GroupId"
+            placeholder="Choose group"
             component={Select}
             isLoading={groups.isLoading}
             disabled={disabled}
             options={groupOptions}
+          />
+        </Col>
+        <Col sm={12}>
+          <FormItemWithLabel
+            label="Set up periodicity (Optional)"
+            name="periodicity"
+            component={Select}
+            disabled={disabled}
+            options={PERIODICITY_OPTIONS}
           />
         </Col>
       </Row>
