@@ -19,9 +19,13 @@ export const createUserWithHashedPwd = async ({
   groups,
   ...user
 }) => {
+  let hashedPwd = null;
+  if (password) {
+    hashedPwd = await bcrypt.hash(password, 8);
+  }
   const createdUser = await User.create({
     ...user,
-    password: 'cbe75ac3e21c301c948e0b3fda1b6717',
+    password: hashedPwd,
     role: user.role || ROLES[0],
   });
   await updateUserGroupsAndAssignTasks(createdUser.id, groups);

@@ -40,12 +40,12 @@ class MyAccount extends Component {
                 iconType="user"
                 placeholder="Last name"
               />
-              <div style={{ marginTop: 10 }}>
+              {/* <div style={{ marginTop: 10 }}>
                 <label>Your role:</label>
                 <div>
                   <b>{user.role}</b>
                 </div>
-              </div>
+              </div> */}
               <FormItem>
                 <Button
                   type="primary"

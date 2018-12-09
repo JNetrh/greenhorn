@@ -17,4 +17,5 @@ export const getAssignedTask = id =>
       },
       { model: Task, include: [Document] },
     ],
+    order: [[Workflow, 'createdAt', 'asc']],
   });

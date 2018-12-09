@@ -27,7 +27,7 @@ export const userDetailController = async (req, res) => {
     const { id } = req.params;
     const userById = await findUserById(id);
     if (!userById) {
-      res.status(404).json({ msg: 'This user does not exist' });
+      return res.status(404).json({ msg: 'This user does not exist' });
     }
     return res.json(stripPassword(userById));
   } catch (err) {

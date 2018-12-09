@@ -1,4 +1,4 @@
-import { AssignedTask, Task, Workflow, User } from '../../models';
+import { AssignedTask, Task, Workflow, User, Document } from '../../models';
 
 export const listAssignedTaskForReview = async (req, res) => {
   console.log(req.userId);
@@ -38,8 +38,10 @@ export const listAssignedTaskForReview = async (req, res) => {
         where: {
           TaskStatusId: 2,
         },
+        include: [{ model: User, as: 'submittedBy' }, Document],
       },
     ],
+    order: [[Workflow, 'createdAt', 'desc']],
   });
   console.log(listTaskToReview);
   return res.json(listTaskToReview);

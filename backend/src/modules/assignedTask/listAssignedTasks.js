@@ -1,4 +1,4 @@
-import { AssignedTask, Task } from '../../models';
+import { AssignedTask, Task, Workflow } from '../../models';
 import { getAssignedTask } from './getAssignedTask';
 
 export const listAssignedTasksController = async (req, res) => {

@@ -5,7 +5,7 @@ import MyAccount from '../components/pages/MyAccount';
 import UserDetail from '../components/pages/UserDetail';
 import TaskDetail from '../components/pages/TaskDetail';
 import Submit from '../components/pages/Submit';
-import ReviewTask from '../components/pages/ReviewTask';
+import ReviewTasks from '../components/pages/ReviewTasks';
 
 import UserRoutes, { UserRoutesSideNav } from './users';
 import GroupsRoutes, { GroupsRoutesSideNav } from './groups';
@@ -48,7 +48,7 @@ export default [
     SideNav: TasksRoutesSideNav,
   },
   {
-    Component: ReviewTask,
-    path: '/taskreview',
+    Component: ReviewTasks,
+    path: '/review',
   },
 ];
