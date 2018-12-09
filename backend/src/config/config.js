@@ -7,4 +7,7 @@ module.exports = {
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
   dialect: 'mysql',
+  awsSecretKey: process.env.AWS_SECRET_KEY,
+  awsKey: process.env.AWS_KEY,
+  s3bucket: process.env.AWS_S3_BUCKET,
 };

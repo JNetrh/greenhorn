@@ -1,9 +1,9 @@
 import { Document } from '../../models';
 export const saveDocumentInfo = (files, ids) => {
-  const documents = files.map(({ originalname, mimetype, path, size }) => ({
+  const documents = files.map(({ originalname, mimetype, location, size }) => ({
     name: originalname,
     type: mimetype,
-    path,
+    path: location,
     size,
     ...ids,
   }));
