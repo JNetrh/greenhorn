@@ -10,8 +10,8 @@ const columns = [
 
 class Page extends Component {
   componentDidMount = () => {
-    const { startFetchUsers, fetched } = this.props;
-    !fetched && startFetchUsers();
+    const { startFetchUsers } = this.props;
+    startFetchUsers();
   };
 
   render() {
