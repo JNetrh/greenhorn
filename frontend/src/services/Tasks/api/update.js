@@ -2,6 +2,7 @@ import { message } from 'antd';
 import { updateTask } from '../actions';
 import getErrorMessage from '../../../helpers/getErrorMessage';
 import { makeFormData } from '../../../helpers/makeFormData';
+import history from '../../../history';
 
 export const startUpdateTask = ({ documents, id, ...rest }) => async (
   dispatch,
@@ -18,6 +19,7 @@ export const startUpdateTask = ({ documents, id, ...rest }) => async (
       url: `task/${id}`,
     });
     await dispatch(updateTask(data));
+    history.push('/task/list');
     message.success('Task updated');
   } catch (error) {
     console.log(error);

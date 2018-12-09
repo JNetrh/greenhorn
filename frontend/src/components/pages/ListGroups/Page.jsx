@@ -8,8 +8,8 @@ const columns = [
 
 class Page extends Component {
   componentDidMount = () => {
-    const { startFetchGroups, fetched } = this.props;
-    !fetched && startFetchGroups();
+    const { startFetchGroups } = this.props;
+    startFetchGroups();
   };
 
   render() {

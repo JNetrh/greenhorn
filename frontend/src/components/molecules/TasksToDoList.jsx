@@ -11,6 +11,7 @@ export const TaskListWrapper = styled.div`
 
 export const TasksToDoList = ({ tasks }) => (
   <TaskListWrapper>
+    {console.log('tasks: ', tasks)}
     {tasks.map(task => (
       <TaskItem key={task.id} {...task} />
     ))}

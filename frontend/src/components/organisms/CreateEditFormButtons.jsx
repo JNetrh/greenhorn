@@ -5,6 +5,7 @@ export const CreateEditFormButtons = ({
   pristine,
   type,
   itemName,
+  confirmDelete,
   canUserEdit = true,
 }) => {
   if (type === 'create') {
@@ -32,7 +33,7 @@ export const CreateEditFormButtons = ({
         <Popconfirm
           title={`Do you really want to delete this ${itemName}?`}
           icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
-          onConfirm={this.confirmDelete}
+          onConfirm={confirmDelete}
           okText="Yes"
           cancelText="No"
         >

@@ -18,8 +18,7 @@ export const GroupInputs = () => (
       name="description"
       component={TextArea}
       placeholder="Add a short description of this group if neccessary"
-      minRows={2}
-      autosize
+      autosize={{ minRows: 2, maxRows: 6 }}
     />
   </div>
 );

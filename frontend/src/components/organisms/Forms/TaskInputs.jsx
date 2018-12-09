@@ -36,8 +36,7 @@ export const TaskInputs = ({ groups, users, canUserEdit }) => {
         name="description"
         component={TextArea}
         placeholder="Add a short description of this task if neccessary"
-        minRows={2}
-        autosize
+        autosize={{ minRows: 2, maxRows: 6 }}
         disabled={disabled}
       />
       <Row gutter={20}>

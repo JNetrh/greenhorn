@@ -28,8 +28,10 @@ export const createUserWithHashedPwd = async ({
     password: hashedPwd,
     role: user.role || ROLES[0],
   });
-  await updateUserGroupsAndAssignTasks(createdUser.id, groups);
-  const userWithGroups = await User.findById(createdUser.id);
+  if (groups && groups.length) {
+    await updateUserGroupsAndAssignTasks(createdUser.id, groups);
+  }
+  const userWithGroups = await User.findByPk(createdUser.id);
   return stripPassword(userWithGroups);
 };
 

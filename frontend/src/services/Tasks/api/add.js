@@ -2,6 +2,7 @@ import { message } from 'antd';
 import { addTask } from '../actions';
 import getErrorMessage from '../../../helpers/getErrorMessage';
 import { makeFormData } from '../../../helpers/makeFormData';
+import history from '../../../history';
 
 export const AddTask = ({ documents, ...rest }) => async (
   dispatch,
@@ -19,6 +20,7 @@ export const AddTask = ({ documents, ...rest }) => async (
     });
     loader();
     dispatch(addTask(data));
+    history.push('/task/list');
     message.success('Task added', 2);
   } catch (err) {
     if (err.response) {

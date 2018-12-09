@@ -68,8 +68,8 @@ const filters = {
 
 class TasksPage extends Component {
   componentDidMount = () => {
-    const { startListTasks, fetched } = this.props;
-    !fetched && startListTasks();
+    const { startListTasks } = this.props;
+    startListTasks();
   };
 
   getRowLink = ({ id }) => `/task/${id}`;
