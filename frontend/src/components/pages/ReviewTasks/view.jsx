@@ -4,7 +4,7 @@ import { getFromNow, getLongDateWithTime } from '../../../helpers/dateFormat';
 import { sortByTime } from '../../../helpers/sort';
 import { substring } from '../../../helpers/substring';
 import { Container } from '../../atoms/Container';
-import { DueOnCell, DocumentsCell } from './TableCells';
+import { DueOnCell, DocumentsCell, ActionsCell } from './TableCells';
 
 const columns = [
   {
@@ -41,6 +41,11 @@ const columns = [
     dataIndex: 'Workflows[0].Documents',
     render: DocumentsCell,
   },
+  {
+    title: '',
+    render: ActionsCell,
+    width: 200,
+  },
 ];
 
 const filters = {
@@ -74,8 +79,6 @@ class TasksPage extends Component {
     startListReviewTasks();
   };
 
-  getRowLink = ({ id }) => `/task/${id}`;
-
   render() {
     const { tasks, isLoading, currentUser } = this.props;
     return (
@@ -94,7 +97,7 @@ class TasksPage extends Component {
           filters={filters}
           defaultFilterValues={{ ownership: 'all' }}
           dataSource={tasks}
-          rowLink={this.getRowLink}
+          showDefaultActions={false}
           currentUser={currentUser}
         />
       </div>

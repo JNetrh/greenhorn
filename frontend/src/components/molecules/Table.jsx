@@ -15,9 +15,14 @@ class Table extends PureComponent {
 
   getRowKey = ({ id }) => id;
 
-  onRow = record => ({
-    onClick: () => history.push(this.props.rowLink(record)),
-  });
+  onRow = record => {
+    const { rowLink } = this.props;
+    if (rowLink) {
+      return {
+        onClick: () => history.push(this.props.rowLink(record)),
+      };
+    }
+  };
 
   onFilterChange = ({ filterKey, value }) => {
     this.setState({
@@ -42,8 +47,24 @@ class Table extends PureComponent {
     });
 
   render() {
-    const { columns, filters, dataSource, ...rest } = this.props;
+    const {
+      columns,
+      filters,
+      dataSource,
+      showDefaultActions = true,
+      ...rest
+    } = this.props;
     const filteredItems = this.filterItems(dataSource);
+    const columnsWithActions = showDefaultActions
+      ? [
+          ...columns,
+          {
+            title: '',
+            render: RowActions,
+            width: 100,
+          },
+        ]
+      : columns;
     return (
       <div>
         {filters && (
@@ -63,14 +84,7 @@ class Table extends PureComponent {
             pagination={{
               hideOnSinglePage: true,
             }}
-            columns={[
-              ...columns,
-              {
-                title: '',
-                render: RowActions,
-                width: 100,
-              },
-            ]}
+            columns={columnsWithActions}
             onRow={this.onRow}
           />
         </div>
