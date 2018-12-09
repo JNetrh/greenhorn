@@ -53,7 +53,10 @@ export class CreateEditForm extends Component {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormWrapper rightSide={rightSide}>
             {children}
-            <CreateEditFormButtons {...this.props} />
+            <CreateEditFormButtons
+              {...this.props}
+              confirmDelete={this.confirmDelete}
+            />
           </FormWrapper>
         </Form>
       </PageFormWrapper>
