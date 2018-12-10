@@ -1,6 +1,6 @@
 import React from 'react';
 import { Timeline } from 'antd';
-import { getLongDate } from '../../../helpers/dateFormat';
+import { getLongDateWithTime } from '../../../helpers/dateFormat';
 import { getWorkflowColor } from '../../../helpers/workflow';
 
 export const TaskTimeline = ({ workflow }) => (
@@ -10,7 +10,7 @@ export const TaskTimeline = ({ workflow }) => (
         key={item.id}
         color={getWorkflowColor(item.TaskStatus.name)}
       >
-        {getLongDate(item.createdAt)} - {getItemText(item)}
+        {getLongDateWithTime(item.createdAt)} - {getItemText(item)}
       </Timeline.Item>
     ))}
   </Timeline>

@@ -87,10 +87,10 @@ const asignTasksFromGroups = async userId => {
 
 const createWorkflowEntry = async assignedTasksToCreate => {
   const workflowsToCreate = assignedTasksToCreate.map(
-    ({ note, TaskId, UserId }) => ({
+    ({ note, id, UserId }) => ({
       note,
       status: 'assigned',
-      assignedTask: TaskId,
+      assignedTask: id,
       submitUser: UserId,
     })
   );
