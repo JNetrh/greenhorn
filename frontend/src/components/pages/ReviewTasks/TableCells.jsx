@@ -34,19 +34,40 @@ export const DocumentsCell = documents => {
   );
 };
 
-export const ActionsCell = task => (
+export const ActionsCell = props => (
   <div>
-    <TaskDetailModal taskDetail={task} />
+    {console.log('task', props)}
+    <TaskDetailModal
+      taskDetail={props.task}
+      rejectOrDoneAssignedTask={props.rejectOrDoneAssignedTask}
+    />
     <Tooltip title="Accept">
       <Button
         type="primary"
         size="small"
         icon={'check'}
         style={{ marginRight: 5 }}
+        onClick={e =>
+          props.rejectOrDoneAssignedTask({
+            status: 'done',
+            assignedTaskId: props.task.id,
+            comment: '',
+          })
+        }
       />
     </Tooltip>
     <Tooltip title="Reject">
-      <Button size="small" icon={'close'} />
+      <Button
+        size="small"
+        icon={'close'}
+        onClick={e =>
+          props.rejectOrDoneAssignedTask({
+            status: 'returned',
+            assignedTaskId: props.task.id,
+            comment: '',
+          })
+        }
+      />
     </Tooltip>
   </div>
 );

@@ -4,7 +4,7 @@ import { getFromNow, getLongDateWithTime } from '../../../helpers/dateFormat';
 import { sortByTime } from '../../../helpers/sort';
 import { substring } from '../../../helpers/substring';
 import { Container } from '../../atoms/Container';
-import { DueOnCell, DocumentsCell, ActionsCell } from './TableCells';
+import { DueOnCell, DocumentsCell } from './TableCells';
 
 const columns = [
   {
@@ -41,11 +41,11 @@ const columns = [
     dataIndex: 'Workflows[0].Documents',
     render: DocumentsCell,
   },
-  {
-    title: '',
-    render: ActionsCell,
-    width: 200,
-  },
+  // {
+  //   title: '',
+  //   render: ActionsCell,
+  //   width: 200,
+  // },
 ];
 
 const filters = {
@@ -80,7 +80,28 @@ class TasksPage extends Component {
   };
 
   render() {
-    const { tasks, isLoading, currentUser } = this.props;
+    const {
+      tasks,
+      isLoading,
+      currentUser,
+      ActionsCell,
+      rejectOrDoneAssignedTask,
+    } = this.props;
+
+    const columnsWithButtons = [
+      ...columns,
+      {
+        title: '',
+        render: item => (
+          <ActionsCell
+            task={item}
+            rejectOrDoneAssignedTask={rejectOrDoneAssignedTask}
+          />
+        ),
+        width: 200,
+      },
+    ];
+    console.log(columnsWithButtons);
     return (
       <div>
         <Container style={{ marginTop: 30 }}>
@@ -93,7 +114,7 @@ class TasksPage extends Component {
         </Container>
         <Table
           loading={isLoading}
-          columns={columns}
+          columns={columnsWithButtons}
           filters={filters}
           defaultFilterValues={{ ownership: 'all' }}
           dataSource={tasks}

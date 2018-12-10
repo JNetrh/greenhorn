@@ -22,11 +22,23 @@ export class TaskDetailModal extends React.Component {
     });
   };
 
-  handleOk = () => {
+  handleOk = async task => {
+    const { rejectOrDoneAssignedTask } = this.props;
+    await rejectOrDoneAssignedTask({
+      status: 'done',
+      assignedTaskId: task.id,
+      comment: '',
+    });
     this.setState({ visible: false });
   };
 
-  handleCancel = () => {
+  handleCancel = async task => {
+    const { rejectOrDoneAssignedTask } = this.props;
+    await rejectOrDoneAssignedTask({
+      status: 'returned',
+      assignedTaskId: task.id,
+      comment: '',
+    });
     this.setState({ visible: false });
   };
 
@@ -66,11 +78,15 @@ export class TaskDetailModal extends React.Component {
                     key="submit"
                     type="primary"
                     icon={'check'}
-                    onClick={this.handleOk}
+                    onClick={e => this.handleOk(this.props.taskDetail)}
                   >
                     Accept
                   </Button>
-                  <Button key="back" icon={'close'} onClick={this.handleCancel}>
+                  <Button
+                    key="back"
+                    icon={'close'}
+                    onClick={e => this.handleCancel(this.props.taskDetail)}
+                  >
                     Reject
                   </Button>
                 </Col>
