@@ -1,7 +1,7 @@
 import React from 'react';
 import { Timeline } from 'antd';
 import { getLongDate } from '../../../helpers/dateFormat';
-import { getWorkflowColor } from '../../../helpers/getColor';
+import { getWorkflowColor } from '../../../helpers/workflow';
 
 export const TaskTimeline = ({ workflow }) => (
   <Timeline style={{ marginTop: 25 }}>

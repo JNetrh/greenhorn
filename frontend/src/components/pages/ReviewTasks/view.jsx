@@ -4,20 +4,27 @@ import { getFromNow, getLongDateWithTime } from '../../../helpers/dateFormat';
 import { sortByTime } from '../../../helpers/sort';
 import { substring } from '../../../helpers/substring';
 import { Container } from '../../atoms/Container';
-import { DueOnCell, DocumentsCell } from './TableCells';
+import { DueOnCell, DocumentsCell, StatusCell } from './TableCells';
+import { getWorkflowText } from '../../../helpers/workflow';
 
 const columns = [
   {
-    title: 'Submited on',
-    dataIndex: 'Workflows[0].createdAt',
+    title: 'Status',
+    dataIndex: 'currentWorkflow.TaskStatus.name',
+    width: 100,
+    render: StatusCell,
+  },
+  {
+    title: 'When',
+    dataIndex: 'currentWorkflow.createdAt',
     render: date => getLongDateWithTime(date),
     sorter: (a, b) =>
-      sortByTime(a.Workflows[0].createdAt, b.Workflows[0].createdAt),
+      sortByTime(a.currentWorkflow.createdAt, b.currentWorkflow.createdAt),
     width: 220,
   },
   {
-    title: 'Submited by',
-    dataIndex: 'Workflows[0].submittedBy',
+    title: 'By',
+    dataIndex: 'currentWorkflow.submittedBy',
     render: ({ name, surname }) => `${name} ${surname}`,
     width: 200,
   },
@@ -33,12 +40,12 @@ const columns = [
   },
   {
     title: 'Comment',
-    dataIndex: 'Workflows[0].note',
+    dataIndex: 'currentWorkflow.note',
     render: date => substring(date, 30),
   },
   {
     title: 'Documents',
-    dataIndex: 'Workflows[0].Documents',
+    dataIndex: 'currentWorkflow.Documents',
     render: DocumentsCell,
   },
   // {
@@ -48,30 +55,24 @@ const columns = [
   // },
 ];
 
-const filters = {
+const filters = distinctStatuses => ({
   ownership: {
-    name: 'Task ownership:',
+    name: 'Task status:',
     options: {
-      my: {
-        name: 'My tasks',
-        filter: (item, { currentUser }) => item.createdById === currentUser.id,
-      },
-      taskowner: {
-        name: 'I am task owner',
-        filter: (item, { currentUser }) => {
-          const taskOwnersIds = item.owners.map(({ id }) => id);
-          if (taskOwnersIds.includes(currentUser.id)) {
-            return true;
-          }
-        },
-      },
       all: {
-        name: 'All tasks',
+        name: 'All',
         filter: () => true,
       },
+      ...distinctStatuses.reduce((acc, statusType) => {
+        acc[statusType] = {
+          name: getWorkflowText(statusType),
+          filter: item => item.currentWorkflow.TaskStatus.name === statusType,
+        };
+        return acc;
+      }, {}),
     },
   },
-};
+});
 
 class TasksPage extends Component {
   componentDidMount = () => {
@@ -81,9 +82,8 @@ class TasksPage extends Component {
 
   render() {
     const {
-      tasks,
-      isLoading,
-      currentUser,
+      reviewTasks: { tasks, isLoading },
+      distinctStatuses,
       ActionsCell,
       rejectOrDoneAssignedTask,
     } = this.props;
@@ -115,11 +115,10 @@ class TasksPage extends Component {
         <Table
           loading={isLoading}
           columns={columnsWithButtons}
-          filters={filters}
+          filters={filters(distinctStatuses)}
           defaultFilterValues={{ ownership: 'all' }}
           dataSource={tasks}
           showDefaultActions={false}
-          currentUser={currentUser}
         />
       </div>
     );

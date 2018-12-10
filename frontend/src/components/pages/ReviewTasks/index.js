@@ -9,7 +9,19 @@ import { ActionsCell } from './TableCells';
 
 const reviewPage = props => <View {...props} ActionsCell={ActionsCell} />;
 
-const mapStateToProps = ({ reviewTasks }) => reviewTasks;
+const mapStateToProps = ({ reviewTasks }) => {
+  const distinctStatuses =
+    [
+      ...new Set(
+        reviewTasks.tasks.map(
+          ({ currentWorkflow: { TaskStatus } }) => TaskStatus.name,
+        ),
+      ),
+    ] || [];
+
+  console.log(distinctStatuses);
+  return { reviewTasks, distinctStatuses };
+};
 
 const mapDispatchToProps = { startListReviewTasks, rejectOrDoneAssignedTask };
 

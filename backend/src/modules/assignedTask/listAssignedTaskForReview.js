@@ -1,47 +1,48 @@
-import { AssignedTask, Task, Workflow, User, Document } from '../../models';
+import {
+  AssignedTask,
+  Task,
+  Workflow,
+  User,
+  Document,
+  TaskStatus,
+} from '../../models';
 
 export const listAssignedTaskForReview = async (req, res) => {
-  const OwnerId = req.userId;
-
-  if (!OwnerId) {
-    return res.status(404).json({ msg: `wrong request "${OwnerId}"` });
+  if (req.roleId === 'user') {
+    return res.status(403).json({ msg: 'You cannot review tasks.' });
   }
 
-  const listTaskToReview = await AssignedTask.findAll({
-    include: [
-      {
-        model: Task,
-        include: [
-          {
-            model: User,
-            as: 'owners',
-            // through: {
-            //   attributes: [],
-            // },
-            // where: {
-            //   id: OwnerId,
-            // },
-            // attributes: [
-            //   `id`,
-            //   `name`,
-            //   `surname`,
-            //   `role`,
-            //   `email`,
-            //   `createdAt`,
-            //   `updatedAt`,
-            // ],
-          },
-        ],
-      },
-      {
-        model: Workflow,
-        where: {
-          TaskStatusId: 2,
+  const filterByRole = assignedTasks => {
+    if (req.role === 'hr') {
+      return assignedTasks;
+    }
+    return assignedTasks.filter(({ Task: { owners } }) =>
+      owners.map(({ id }) => id).includes(req.roleId)
+    );
+  };
+
+  const assignedTasks = await AssignedTask.findAll({
+      include: [
+        {
+          model: Task,
+          include: [
+            {
+              model: User,
+              as: 'owners',
+            },
+          ],
         },
-        include: [{ model: User, as: 'submittedBy' }, Document],
-      },
-    ],
-    order: [[Workflow, 'createdAt', 'desc']],
-  });
-  return res.json(listTaskToReview);
+        {
+          model: Workflow,
+          include: [{ model: User, as: 'submittedBy' }, Document, TaskStatus],
+        },
+      ],
+      order: [[Workflow, 'createdAt', 'desc']],
+    }),
+    availableTasks = filterByRole(assignedTasks),
+    assignedTasksWithCurrentWorkflow = availableTasks.map(task => ({
+      ...task.toJSON(),
+      currentWorkflow: task.Workflows[0],
+    }));
+  return res.json(assignedTasksWithCurrentWorkflow);
 };

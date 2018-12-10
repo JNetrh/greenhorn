@@ -27,7 +27,7 @@ export class TaskDetailModal extends React.Component {
     await rejectOrDoneAssignedTask({
       status: 'done',
       assignedTaskId: task.id,
-      comment: '',
+      note: this.state.note,
     });
     this.setState({ visible: false });
   };
@@ -37,13 +37,13 @@ export class TaskDetailModal extends React.Component {
     await rejectOrDoneAssignedTask({
       status: 'returned',
       assignedTaskId: task.id,
-      comment: '',
+      note: this.state.note,
     });
     this.setState({ visible: false });
   };
 
   render() {
-    const { visible } = this.state;
+    const { visible, note } = this.state;
     const {
       taskDetail: { Task, Workflows },
     } = this.props;
@@ -71,6 +71,8 @@ export class TaskDetailModal extends React.Component {
               <TextArea
                 placeholder="Add a comment if neccessary"
                 style={{ marginBottom: 10 }}
+                onChange={e => this.setState({ note: e.target.value })}
+                value={note}
               />
               <Row type="flex" justify="space-between">
                 <Col>

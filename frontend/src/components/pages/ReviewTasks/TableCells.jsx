@@ -2,6 +2,26 @@ import React from 'react';
 import { getLongDateWithTime, getFromNow } from '../../../helpers/dateFormat';
 import { Icon, Button, Tooltip } from 'antd';
 import { TaskDetailModal } from './DetailModal';
+import { getWorkflowColor, getWorkflowText } from '../../../helpers/workflow';
+
+export const StatusCell = status => {
+  const color = getWorkflowColor(status);
+  return (
+    <span style={{ color, fontSize: 12, fontWeight: 'bold' }}>
+      <span
+        style={{
+          backgroundColor: color,
+          width: 8,
+          height: 8,
+          marginRight: 5,
+          display: 'inline-block',
+          borderRadius: '100%',
+        }}
+      />
+      {getWorkflowText(status)}
+    </span>
+  );
+};
 
 export const DueOnCell = date => (
   <span>

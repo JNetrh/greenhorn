@@ -7,11 +7,12 @@ export const rejectOrDoneAssignedTask = submission => async (
 ) => {
   try {
     const { data } = await api.post(`submit/${submission.status}`, submission);
-    message.success('Task submitted');
+    message.success(`Task marked as '${submission.status}'`);
     return data;
   } catch (err) {
     if (err.response) {
-      const error = getErrorMessage(err) || 'Submit task failed';
+      const error =
+        getErrorMessage(err) || `Failed to mark task as '${submission.status}'`;
       message.error(error, 2);
       return {
         error,
