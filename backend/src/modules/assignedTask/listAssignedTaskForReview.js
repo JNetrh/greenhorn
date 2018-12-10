@@ -17,7 +17,7 @@ export const listAssignedTaskForReview = async (req, res) => {
       return assignedTasks;
     }
     return assignedTasks.filter(({ Task: { owners } }) =>
-      owners.map(({ id }) => id).includes(req.role)
+      owners.map(({ id }) => id).includes(req.userId)
     );
   };
 
