@@ -8,7 +8,7 @@ import {
 } from '../../models';
 
 export const listAssignedTaskForReview = async (req, res) => {
-  if (req.roleId === 'user') {
+  if (req.role === 'user') {
     return res.status(403).json({ msg: 'You cannot review tasks.' });
   }
 
@@ -17,7 +17,7 @@ export const listAssignedTaskForReview = async (req, res) => {
       return assignedTasks;
     }
     return assignedTasks.filter(({ Task: { owners } }) =>
-      owners.map(({ id }) => id).includes(req.roleId)
+      owners.map(({ id }) => id).includes(req.role)
     );
   };
 
