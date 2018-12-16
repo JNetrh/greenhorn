@@ -18,10 +18,12 @@ const mapStateToProps = ({
     nextWeekTasks = assignedTasks.filter(
       ({ until }) => new Date(until) < nextWeek,
     ),
-    otherTasks = assignedTasks.filter(curr => !nextWeekTasks.includes(curr));
+    otherTasks = assignedTasks.filter(curr => !nextWeekTasks.includes(curr)),
+    noTasks = assignedTasks.length > 0 ? false : true;
   return {
     nextWeekTasks,
     otherTasks,
+    noTasks,
     fetched,
     isLoading,
     error,
