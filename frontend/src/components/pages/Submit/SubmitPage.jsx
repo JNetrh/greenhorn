@@ -10,8 +10,24 @@ import { TaskTimeline } from './TaskTimeline';
 import { getLongDate } from '../../../helpers/dateFormat';
 import { transformDocuments } from '../../../helpers/transformDocuments';
 import { ButtonWrapper } from './ButtonWrapper';
+import { RenderForm } from './RenderForm';
 
 const now = moment();
+
+// const RenderForm = (props, onSubmit, workflow) => {
+//   const { Form } = props;
+//   console.log(workflow);
+//   const lastWorkflow = workflow[workflow.length - 1];
+//   const status = lastWorkflow.TaskStatus.name;
+//   if (status) {
+//     if (status === 'done') {
+//       return <p>Mission accomplished. The task has been completed </p>;
+//     } else if (status === 'submitted') {
+//       return <p>Approval pending </p>;
+//     }
+//   }
+//   return <Form {...props} onSubmit={onSubmit} />;
+// };
 
 class SubmitPage extends Component {
   constructor(props) {
@@ -58,11 +74,10 @@ class SubmitPage extends Component {
   }
   render() {
     const { itemDetail, isLoading, isSubmitting } = this.state;
-    const { Form } = this.props;
     if (isLoading) {
       return null;
     }
-    const { Task, until, Documents, Workflows } = itemDetail;
+    const { Task, until, Workflows } = itemDetail;
     return (
       <Container style={{ marginTop: 20, position: 'relative' }}>
         <Helmet>
@@ -98,7 +113,11 @@ class SubmitPage extends Component {
           </Col>
           <Col xs={24} sm={12}>
             <h3>Your submission:</h3>
-            <Form {...this.props} onSubmit={this.submitTask} />
+            <RenderForm
+              props={this.props}
+              onSubmit={this.submitTask}
+              workflow={Workflows}
+            />
           </Col>
         </Row>
       </Container>

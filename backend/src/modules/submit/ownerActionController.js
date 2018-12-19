@@ -11,9 +11,12 @@ export const ownerActionController = async (req, res) => {
       order: [['createdAt', 'desc']],
     });
 
+    allRecords.map(record => console.log(record.TaskStatus.name));
+    console.log(allRecords[0].TaskStatus.name);
+
     if (
-      allRecords[0].TaskStatus.name != 'assigned' ||
-      allRecords[0].TaskStatus.name != 'submitted'
+      allRecords[0].TaskStatus.name === 'returned' ||
+      allRecords[0].TaskStatus.name === 'done'
     ) {
       return res.status(409).json({ msg: 'record already exists' });
     }
