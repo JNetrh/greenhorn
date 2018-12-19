@@ -4,12 +4,11 @@ import { Router } from 'express';
 import { upload } from '../../services/upload/uploadDocuments';
 
 import { submitController } from './submitController';
-import { doneController } from './doneController';
-import { returnController } from './returnController';
+import { ownerActionController } from './ownerActionController';
 
 const router = expressAsyncAwait(Router());
 router.post('/', upload, submitController);
-router.post('/:done', returnController);
-router.post('/:returned', doneController);
+router.post('/:done', ownerActionController);
+router.post('/:returned', ownerActionController);
 
 export default router;

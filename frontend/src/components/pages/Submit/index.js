@@ -24,7 +24,7 @@ const EnrichedSubmitPage = props => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  onTaskSubmit: item => dispatch(submitAssignedTask(item)),
+  onTaskSubmit: item => dispatch(submitAssignedTask(item)) || [],
 });
 
 const redux = connect(

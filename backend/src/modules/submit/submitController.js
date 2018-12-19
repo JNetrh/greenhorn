@@ -2,9 +2,24 @@ import { setWorkflow } from '../../services/workflow/addWorkflow';
 import { saveDocumentInfo } from '../../services/upload/saveDocumentInfo';
 import { getAssignedTask } from '../assignedTask/getAssignedTask';
 
+import { Workflow, TaskStatus } from '../../models';
+
 export const submitController = async (req, res) => {
   const { status, assignedTaskId, comment } = JSON.parse(req.body.data);
-  //TODO: save files into DB
+
+  const allRecords = await Workflow.findAll({
+    where: { AssignedTaskId: assignedTaskId },
+    include: [TaskStatus],
+    order: [['createdAt', 'desc']],
+  });
+
+  if (
+    allRecords[0].TaskStatus.name === 'submitted' ||
+    allRecords[0].TaskStatus.name === 'done'
+  ) {
+    return res.status(409).json({ msg: 'Task already submitted' });
+  }
+
   try {
     const workflow = await setWorkflow({
       status,

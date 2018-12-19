@@ -33,6 +33,14 @@ class SubmitPage extends Component {
     const { id } = this.props.match.params;
     const { onTaskSubmit } = this.props;
     const itemDetail = await onTaskSubmit({ data, id });
+
+    if (itemDetail.error) {
+      this.setState({
+        isSubmitting: false,
+      });
+      return;
+    }
+
     this.setState({
       isSubmitting: false,
       itemDetail,
