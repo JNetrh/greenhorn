@@ -20,7 +20,7 @@ class SubmitForm extends Component {
         </FormItem>
         <FormItem>
           <Field
-            name="comment"
+            name="note"
             component={TextArea}
             tabIndex={1}
             type="text"

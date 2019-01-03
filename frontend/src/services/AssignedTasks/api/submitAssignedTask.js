@@ -8,8 +8,9 @@ export const submitAssignedTask = ({ data, id }) => async (
   getState,
   { api },
 ) => {
-  console.log(data.documents);
-  const loader = message.loading('Submitting');
+  const loader = message.loading(
+    `Submitting${data.documents && ' & uploading files...'}`,
+  );
   const formData = makeFormData({
     documents: data.documents,
     data: { ...data, status: 'submitted', assignedTaskId: id },

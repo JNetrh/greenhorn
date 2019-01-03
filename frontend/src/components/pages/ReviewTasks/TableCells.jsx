@@ -71,7 +71,7 @@ export const ActionsCell = props => (
           props.rejectOrDoneAssignedTask({
             status: 'done',
             assignedTaskId: props.task.id,
-            comment: '',
+            note: '',
           })
         }
       />
@@ -84,7 +84,7 @@ export const ActionsCell = props => (
           props.rejectOrDoneAssignedTask({
             status: 'returned',
             assignedTaskId: props.task.id,
-            comment: '',
+            note: '',
           })
         }
       />

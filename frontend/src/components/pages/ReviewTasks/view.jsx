@@ -48,11 +48,6 @@ const columns = [
     dataIndex: 'currentWorkflow.Documents',
     render: DocumentsCell,
   },
-  // {
-  //   title: '',
-  //   render: ActionsCell,
-  //   width: 200,
-  // },
 ];
 
 const filters = distinctStatuses => ({
@@ -101,7 +96,7 @@ class TasksPage extends Component {
         width: 200,
       },
     ];
-    console.log(columnsWithButtons);
+
     return (
       <div>
         <Container style={{ marginTop: 30 }}>

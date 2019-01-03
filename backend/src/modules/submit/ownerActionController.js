@@ -2,7 +2,7 @@ import { setWorkflow } from '../../services/workflow/addWorkflow';
 import { Workflow, TaskStatus } from '../../models';
 
 export const ownerActionController = async (req, res) => {
-  const { status, assignedTaskId, comment } = req.body;
+  const { status, assignedTaskId, note } = req.body;
 
   try {
     const allRecords = await Workflow.findAll({
@@ -24,7 +24,7 @@ export const ownerActionController = async (req, res) => {
     const workflow = await setWorkflow({
       status,
       assignedTask: assignedTaskId,
-      note: comment,
+      note,
       submitUser: req.userId,
     });
     return res.json(workflow);

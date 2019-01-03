@@ -9,6 +9,5 @@ import { ownerActionController } from './ownerActionController';
 const router = expressAsyncAwait(Router());
 router.post('/', upload, submitController);
 router.post('/:done', ownerActionController);
-router.post('/:returned', ownerActionController);
 
 export default router;

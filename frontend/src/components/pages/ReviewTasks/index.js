@@ -19,7 +19,6 @@ const mapStateToProps = ({ reviewTasks }) => {
       ),
     ] || [];
 
-  console.log(distinctStatuses);
   return { reviewTasks, distinctStatuses };
 };
 

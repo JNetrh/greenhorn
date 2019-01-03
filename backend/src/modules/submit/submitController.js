@@ -5,7 +5,7 @@ import { getAssignedTask } from '../assignedTask/getAssignedTask';
 import { Workflow, TaskStatus } from '../../models';
 
 export const submitController = async (req, res) => {
-  const { status, assignedTaskId, comment } = JSON.parse(req.body.data);
+  const { status, assignedTaskId, note } = JSON.parse(req.body.data);
 
   const allRecords = await Workflow.findAll({
     where: { AssignedTaskId: assignedTaskId },
@@ -24,7 +24,7 @@ export const submitController = async (req, res) => {
     const workflow = await setWorkflow({
       status,
       assignedTask: assignedTaskId,
-      note: comment,
+      note,
       submitUser: req.userId,
     });
     await saveDocumentInfo(req.files, { WorkflowId: workflow.id });
