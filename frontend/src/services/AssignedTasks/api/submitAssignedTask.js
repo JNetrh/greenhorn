@@ -8,6 +8,8 @@ export const submitAssignedTask = ({ data, id }) => async (
   getState,
   { api },
 ) => {
+  console.log(data.documents);
+  const loader = message.loading('Submitting');
   const formData = makeFormData({
     documents: data.documents,
     data: { ...data, status: 'submitted', assignedTaskId: id },
@@ -31,5 +33,6 @@ export const submitAssignedTask = ({ data, id }) => async (
       };
     }
   }
+  loader();
   return { error: 'Submit task failed' };
 };

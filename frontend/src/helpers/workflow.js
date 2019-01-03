@@ -13,13 +13,20 @@ export const getWorkflowColor = status => {
 
 export const getWorkflowText = status => {
   switch (status) {
-    case 'assigned':
-      return 'Assigned to user';
-    case 'submitted':
-      return 'To review';
-    case 'returned':
-      return 'Returned to user';
-    default:
-      return 'Done';
+    case 'assigned': {
+      return `Assigned`;
+    }
+    case 'submitted': {
+      return `To review`;
+    }
+    case 'returned': {
+      return `Returned`;
+    }
+    case 'done': {
+      return `Done`;
+    }
+    default: {
+      return 'Not known';
+    }
   }
 };
