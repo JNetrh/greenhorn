@@ -23,8 +23,8 @@ const columns = [
     width: 220,
   },
   {
-    title: 'By',
-    dataIndex: 'currentWorkflow.submittedBy',
+    title: 'Assigned to',
+    dataIndex: 'User',
     render: ({ name, surname }) => `${name} ${surname}`,
     width: 200,
   },

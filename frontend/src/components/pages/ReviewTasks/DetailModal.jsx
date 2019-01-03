@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, Row, Col } from 'antd';
+import { Modal, Button, Row, Col, Divider } from 'antd';
 import { getLongDateWithTime } from '../../../helpers/dateFormat';
 import { transformDocuments } from '../../../helpers/transformDocuments';
 import { DocumentsList } from '../../organisms/DocumentsList';
@@ -44,13 +44,13 @@ export class TaskDetailModal extends React.Component {
 
   render() {
     const { visible, note } = this.state;
+    const { taskDetail } = this.props;
     const {
-      taskDetail: { Task, Workflows },
-    } = this.props;
-    const latestWorkflow = Workflows[0],
-      {
-        submittedBy: { name, surname },
-      } = latestWorkflow;
+        User: { name, surname },
+        Task,
+        Workflows,
+      } = taskDetail,
+      latestWorkflow = Workflows[0];
     return (
       <span>
         <Button
@@ -101,16 +101,19 @@ export class TaskDetailModal extends React.Component {
         >
           <Row>
             <Col sm={12}>
-              <h4>Submited on</h4>
-              <p>{getLongDateWithTime(latestWorkflow.createdOn)}</p>
+              <h4>Assigned on</h4>
+              <p>{getLongDateWithTime(taskDetail.createdOn)}</p>
             </Col>
             <Col sm={12}>
-              <h4>Submited by</h4>
+              <h4>Assigned to</h4>
               <p>
                 {name} {surname}
               </p>
             </Col>
           </Row>
+          <Divider />
+          <h4>Submited on</h4>
+          <p>{getLongDateWithTime(latestWorkflow.createdOn)}</p>
           <h4>Comment</h4>
           <p>
             {latestWorkflow.note || <i style={{ opacity: 0.5 }}>No comment</i>}

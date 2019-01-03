@@ -36,6 +36,7 @@ export const listAssignedTaskForReview = async (req, res) => {
           model: Workflow,
           include: [{ model: User, as: 'submittedBy' }, Document, TaskStatus],
         },
+        User,
       ],
       order: [[Workflow, 'createdAt', 'desc']],
     }),

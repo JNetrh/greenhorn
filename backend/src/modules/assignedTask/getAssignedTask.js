@@ -13,7 +13,11 @@ export const getAssignedTask = id =>
     include: [
       {
         model: Workflow,
-        include: [TaskStatus, { model: User, as: 'submittedBy' }, Document],
+        include: [
+          { model: TaskStatus, where: { not: { name: 'done' } } },
+          { model: User, as: 'submittedBy' },
+          Document,
+        ],
       },
       { model: Task, include: [Document] },
     ],
