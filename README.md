@@ -1,33 +1,54 @@
-## How to run
-### frontend dev
-1. go to the frontend folder
-```
-cd frontend
-```
-2. install dependencies
-```
-yarn
-```
-3. start the project
-```
-yarn start
-```
-4. Good job! Your frontend is running default at: `localhost:3000`
+![picture](https://github.com/JNetrh/greenhorn/blob/dev_tomas/frontend/src/static/greenhorn_logo_dark_png.svg)
 
+# How to run GreenHorn?
 
-### backend dev
-1. go to the backed folder
+## Requirements
+
+- Node.js v8.9.4 or later
+- `yarn` (`npm install --global yarn`)
+
+## Install
+
+```sh
+yarn install
 ```
-cd backend
-```
-2. install dependencies
-```
-yarn
-```
-3. Rename `.env.example` to `.env` and fill it with database config (and SMTP if neccessary)
-4. start the project
-```
+
+## Run Local Dev Server
+
+Rename `.env.example` to `.env` and fill it with database config (and SMTP if neccessary)
+
+```sh
 yarn dev
 ```
-(this step should aslo create neccessary database and tables)
-5. Good job! Your backend is running default at: `localhost:3030`
+
+This should create table and associations, too.
+
+## Run Local Production Server
+
+```sh
+yarn start
+```
+
+Builds and starts the server.
+
+## Production Build
+
+```sh
+yarn build
+```
+
+## Production Build Watch
+
+```sh
+yarn build:watch
+```
+
+Runs build each time `.js` file in `./src` is changed.
+
+**Useful for `*.vse.handson.pro` hosting.**
+
+## See Server Logs
+
+```sh
+tail -F log/app.log
+```
