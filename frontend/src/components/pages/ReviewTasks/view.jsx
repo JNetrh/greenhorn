@@ -4,7 +4,11 @@ import { getFromNow, getLongDateWithTime } from '../../../helpers/dateFormat';
 import { sortByTime } from '../../../helpers/sort';
 import { substring } from '../../../helpers/substring';
 import { Container } from '../../atoms/Container';
-import { DueOnCell, DocumentsCell, StatusCell } from './TableCells';
+import {
+  DueOnCell,
+  DocumentsCell,
+  StatusCell,
+} from '../../organisms/ReviewTasksTableCells';
 import { getWorkflowText } from '../../../helpers/workflow';
 
 const columns = [

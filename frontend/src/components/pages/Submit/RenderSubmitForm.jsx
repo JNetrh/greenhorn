@@ -1,9 +1,8 @@
 import React from 'react';
 
-export const RenderForm = ({ props, onSubmit, workflow }) => {
+export const RenderSubmitForm = ({ props, onSubmit, workflows }) => {
   const Form = props.Form;
-  console.log(workflow);
-  const lastWorkflow = workflow[workflow.length - 1];
+  const lastWorkflow = workflows[workflows.length - 1];
   const status = lastWorkflow.TaskStatus.name;
   if (status) {
     if (status === 'done') {

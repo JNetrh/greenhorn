@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import View from './view';
 import { startListReviewTasks } from '../../../services/ReviewTasks/api/list';
 import { rejectOrDoneAssignedTask } from '../../../services/AssignedTasks/api/rejectOrDoneAssignedTask';
-import { ActionsCell } from './TableCells';
+import { ActionsCell } from '../../organisms/ReviewTasksTableCells';
 
 const reviewPage = props => <View {...props} ActionsCell={ActionsCell} />;
 

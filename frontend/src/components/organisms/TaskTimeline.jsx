@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'antd';
-import { getLongDateWithTime } from '../../../helpers/dateFormat';
-import { getWorkflowColor } from '../../../helpers/workflow';
-import { DocumentsList } from '../../organisms/DocumentsList';
-import { transformDocuments } from '../../../helpers/transformDocuments';
+import { getLongDateWithTime } from '../../helpers/dateFormat';
+import { getWorkflowColor } from '../../helpers/workflow';
+import { DocumentsList } from './DocumentsList';
+import { transformDocuments } from '../../helpers/transformDocuments';
 
 const SmallLabel = styled.label`
   font-size: 12px;
@@ -23,10 +23,10 @@ export class TaskTimeline extends React.PureComponent {
       submittedBy && `${submittedBy.name} ${submittedBy.surname}`;
     switch (status) {
       case 'assigned': {
-        return `Task assigned to you.`;
+        return `Task assigned.`;
       }
       case 'submitted': {
-        return `Submitted by you.`;
+        return `Submitted by ${fullName} `;
       }
       case 'returned': {
         return `Returned by ${fullName}.`;

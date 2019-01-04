@@ -1,8 +1,8 @@
 import React from 'react';
-import { getLongDateWithTime, getFromNow } from '../../../helpers/dateFormat';
+import { getLongDateWithTime, getFromNow } from '../../helpers/dateFormat';
 import { Icon, Button, Tooltip } from 'antd';
-import { TaskDetailModal } from './DetailModal';
-import { getWorkflowColor, getWorkflowText } from '../../../helpers/workflow';
+import { getWorkflowColor, getWorkflowText } from '../../helpers/workflow';
+import { TaskDetailModal } from './ReviewTaskDetailModal';
 
 export const StatusCell = status => {
   const color = getWorkflowColor(status);

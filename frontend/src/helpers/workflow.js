@@ -1,13 +1,13 @@
 export const getWorkflowColor = status => {
   switch (status.toLowerCase()) {
     case 'submitted':
-      return '#87d068';
+      return '#f9b46b';
     case 'returned':
       return '#ff7676';
     case 'done':
-      return '#f9b46b';
+      return '#87d068';
     default:
-      return '#eee';
+      return '#6e98c7';
   }
 };
 
