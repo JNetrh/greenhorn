@@ -1,12 +1,27 @@
-import { AssignedTask, Task, Workflow } from '../../models';
+import { AssignedTask, Task, Workflow, TaskStatus, User } from '../../models';
 import { getAssignedTask } from './getAssignedTask';
 
 export const listAssignedTasksController = async (req, res) => {
   const assignedTask = await AssignedTask.findAll({
     where: { UserId: req.userId },
-    include: [Task, Workflow],
+    include: [
+      Task,
+      {
+        model: Workflow,
+        include: [{ model: TaskStatus }, { model: User, as: 'submittedBy' }],
+      },
+    ],
+    order: [[Workflow, 'createdAt', 'desc']],
   });
-  res.json(assignedTask);
+  const withLastWorkflow = assignedTask.map(task => ({
+    ...task.toJSON(),
+    currentWorkflow: task.Workflows[0],
+  }));
+
+  const notDoneTasks = withLastWorkflow.filter(
+    item => item.currentWorkflow.TaskStatus.name !== 'done'
+  );
+  return res.json(notDoneTasks);
 };
 
 export const getAssignedTaskByIdController = async (req, res) => {

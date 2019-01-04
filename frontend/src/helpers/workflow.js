@@ -30,3 +30,24 @@ export const getWorkflowText = status => {
     }
   }
 };
+
+export const getWorkflowTextUser = (status, submittedBy) => {
+  const fullName = submittedBy && `${submittedBy.name} ${submittedBy.surname}`;
+  switch (status) {
+    case 'assigned': {
+      return `Task assigned.`;
+    }
+    case 'submitted': {
+      return `Submitted by ${fullName} `;
+    }
+    case 'returned': {
+      return `Returned by ${fullName}.`;
+    }
+    case 'done': {
+      return `Task done. Accepted by ${fullName}.`;
+    }
+    default: {
+      return '';
+    }
+  }
+};

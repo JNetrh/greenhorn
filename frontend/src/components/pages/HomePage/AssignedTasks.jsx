@@ -12,21 +12,23 @@ export class AssignedTasks extends Component {
   };
 
   getGreeting = () => {
-    const { user, nextWeekTasks, otherTasks } = this.props;
+    const { user, todoTasks, tasksToReview } = this.props;
     const { name, surname } = user,
       fullName = `${name} ${surname}`;
-    if (nextWeekTasks.length > 0) {
+    if (todoTasks.length > 0) {
       return (
         <h2>
-          Hello {fullName}. Time to do some paperwork{' '}
+          Hello {fullName}. Time to do some paperwork. Please focus on the tasks
+          to do.
           <img src={emoji} style={{ width: 30 }} alt="Emoji finger" />
         </h2>
       );
     }
-    if (nextWeekTasks.length === 0 && otherTasks.length > 0) {
+    if (todoTasks.length === 0 && tasksToReview.length > 0) {
       return (
         <h2>
-          Hello {fullName}. Time to do some paperwork{' '}
+          Hello {fullName}. There are no tasks to do for you now. Please wait
+          for the review.
           <img src={emoji} style={{ width: 30 }} alt="Emoji finger" />
         </h2>
       );
@@ -40,7 +42,7 @@ export class AssignedTasks extends Component {
   };
 
   render() {
-    const { nextWeekTasks, otherTasks } = this.props;
+    const { todoTasks, tasksToReview } = this.props;
     return (
       <Container style={{ marginTop: 40 }}>
         {this.getGreeting()}
@@ -52,15 +54,17 @@ export class AssignedTasks extends Component {
         <div>
           <Row gutter={25}>
             <Col xs={24} sm={12}>
-              <h3>Tasks due in one week:</h3>
-              <TasksToDoList tasks={nextWeekTasks} />
+              <div>
+                <h3>Tasks to do:</h3>
+                <TasksToDoList tasks={todoTasks} />
+              </div>
             </Col>
-            {!!otherTasks.length && (
-              <Col xs={24} sm={12}>
-                <h3>Other tasks:</h3>
-                <TasksToDoList tasks={otherTasks} />
-              </Col>
-            )}
+            <Col xs={24} sm={12}>
+              <div>
+                <h3>Tasks being reviewed:</h3>
+                <TasksToDoList tasks={tasksToReview} />
+              </div>
+            </Col>
           </Row>
         </div>
       </Container>

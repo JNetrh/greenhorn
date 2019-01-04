@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'antd';
 import { getLongDateWithTime } from '../../helpers/dateFormat';
-import { getWorkflowColor } from '../../helpers/workflow';
+import { getWorkflowColor, getWorkflowTextUser } from '../../helpers/workflow';
 import { DocumentsList } from './DocumentsList';
 import { transformDocuments } from '../../helpers/transformDocuments';
 
@@ -18,28 +18,6 @@ export class TaskTimeline extends React.PureComponent {
     return 0;
   };
 
-  getWorkflowText = (status, submittedBy) => {
-    const fullName =
-      submittedBy && `${submittedBy.name} ${submittedBy.surname}`;
-    switch (status) {
-      case 'assigned': {
-        return `Task assigned.`;
-      }
-      case 'submitted': {
-        return `Submitted by ${fullName} `;
-      }
-      case 'returned': {
-        return `Returned by ${fullName}.`;
-      }
-      case 'done': {
-        return `Task done. Accepted by ${fullName}.`;
-      }
-      default: {
-        return '';
-      }
-    }
-  };
-
   render() {
     const { workflow } = this.props;
     const sortedWorkflowItems = workflow.sort(this.sortByCreatedAt);
@@ -51,7 +29,7 @@ export class TaskTimeline extends React.PureComponent {
               <span style={{ fontSize: 12, marginRight: 5, opacity: 0.7 }}>
                 {getLongDateWithTime(createdAt)}
               </span>
-              {this.getWorkflowText(TaskStatus.name, submittedBy)}
+              {getWorkflowTextUser(TaskStatus.name, submittedBy)}
               {note &&
                 !!note.length && (
                   <div style={{ margin: '5px 0' }}>

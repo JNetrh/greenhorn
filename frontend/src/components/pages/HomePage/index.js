@@ -14,14 +14,15 @@ const mapStateToProps = ({
   assignedTasks: { assignedTasks, fetched, isLoading, error },
   auth: { user },
 }) => {
-  const nextWeek = new Date().setDate(new Date().getDate() + 7),
-    nextWeekTasks = assignedTasks.filter(
-      ({ until }) => new Date(until) < nextWeek,
+  const todoTasks = assignedTasks.filter(
+      ({ currentWorkflow }) => currentWorkflow.TaskStatus.name !== 'submitted',
     ),
-    otherTasks = assignedTasks.filter(curr => !nextWeekTasks.includes(curr));
+    tasksToReview = assignedTasks.filter(
+      ({ currentWorkflow }) => currentWorkflow.TaskStatus.name === 'submitted',
+    );
   return {
-    nextWeekTasks,
-    otherTasks,
+    todoTasks,
+    tasksToReview,
     fetched,
     isLoading,
     error,

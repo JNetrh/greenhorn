@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Icon, Button, Row, Col, Divider, Spin } from 'antd';
+import { Icon, Button, Row, Col, Divider, Spin, Tooltip } from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 
 import { Container } from '../../atoms/Container';
 import { DocumentsList } from '../../organisms/DocumentsList';
@@ -11,8 +12,31 @@ import { transformDocuments } from '../../../helpers/transformDocuments';
 import { RenderSubmitForm } from './RenderSubmitForm';
 import { ButtonPositionWrapper } from '../../atoms/ButtonWrapper';
 import { TaskTimeline } from '../../organisms/TaskTimeline';
+import { getSeverityColor } from '../../../helpers/severity';
 
 const now = moment();
+
+const H1 = styled.h1`
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  &:after {
+    opacity: 0.8;
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    margin-left: 10px;
+    background: ${({ severity }) => getSeverityColor(severity)};
+    transition: all 1s;
+  }
+  &:hover {
+    &:after {
+      opacity: 1;
+      transition: all 1s;
+    }
+  }
+`;
 
 class SubmitPage extends Component {
   constructor(props) {
@@ -73,7 +97,9 @@ class SubmitPage extends Component {
             <Button icon="arrow-left">Back</Button>
           </Link>
         </ButtonPositionWrapper>
-        <h1>{Task.title}</h1>
+        <Tooltip placement="right" title={`Severity: ${Task.severity}`}>
+          <H1 severity={Task.severity}>{Task.title}</H1>
+        </Tooltip>
         <Row gutter={45}>
           <Col sm={12}>
             <h3>Until:</h3>
