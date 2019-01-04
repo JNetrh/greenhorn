@@ -7,8 +7,8 @@ import { Field } from 'redux-form';
 
 import logo from '../../../static/greenhorn_logo_dark.svg';
 import Input from '../../molecules/form/Input';
-import { FormWrapper, FormItem } from '../../../styles/Login';
-import { Centered } from '../../../styles/Login';
+import { Centered } from '../../atoms/Centered';
+import { FormWrapper, FormItem } from '../Login/style';
 
 const LogoWrapper = styled.div`
   margin: 0 0 60px 0;

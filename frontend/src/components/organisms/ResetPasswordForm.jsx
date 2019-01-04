@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { Form, Button } from 'antd';
 import { connect } from 'react-redux';
 
-import { FormWrapper } from '../../styles/Login';
 import Input from '../molecules/form/Input';
 import Logo from '../atoms/Logo';
 import { forgotPassword } from '../../services/Auth/actions';
+import { FormWrapper } from '../pages/Login/style';
 
 const FormItem = Form.Item;
 

@@ -4,8 +4,8 @@ import { FormItemWithLabel } from '../../atoms/FormItemWithLabel';
 import styled from 'styled-components';
 
 import Input from '../../molecules/form/Input';
-import { Centered } from '../../../styles/Login';
 import { PageFormWrapper } from '../../atoms/Forms';
+import { Centered } from '../../atoms/Centered';
 
 const CenteredForm = styled.div`
   max-width: 350px;
@@ -19,7 +19,7 @@ const FormItem = Form.Item;
 
 class MyAccount extends Component {
   render() {
-    const { handleSubmit, onSubmit, user, pristine } = this.props;
+    const { handleSubmit, onSubmit, pristine } = this.props;
     return (
       <PageFormWrapper>
         <Centered>

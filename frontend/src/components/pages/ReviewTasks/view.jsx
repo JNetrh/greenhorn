@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Table from '../../molecules/Table';
-import { getFromNow, getLongDateWithTime } from '../../../helpers/dateFormat';
+import { getLongDateWithTime } from '../../../helpers/dateFormat';
 import { sortByTime } from '../../../helpers/sort';
 import { substring } from '../../../helpers/substring';
 import { Container } from '../../atoms/Container';

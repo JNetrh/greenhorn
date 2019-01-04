@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ResetPasswordForm from '../organisms/ResetPasswordForm';
-import { Centered } from '../../styles/Login';
+import { Centered } from '../atoms/Centered';
 
-export default class LoginPage extends Component {
-  render() {
-    return (
-      <Centered>
-        <ResetPasswordForm />
-      </Centered>
-    );
-  }
-}
+const ResetPasswordPage = () => (
+  <Centered>
+    <ResetPasswordForm />
+  </Centered>
+);
+
+export default ResetPasswordPage;

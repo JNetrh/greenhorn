@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import breakpoints from './breakpoints';
+import breakpoints from '../../../styles/breakpoints';
 
 export const FormWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -24,13 +24,6 @@ export const FormUserWrapper = styled.div`
 
 export const StyledLink = styled(Link)`
   float: right;
-`;
-
-export const Centered = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const FormItem = styled.div`

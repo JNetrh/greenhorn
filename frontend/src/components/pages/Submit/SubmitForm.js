@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { Field } from 'redux-form';
 
-import { FormItem } from '../../../styles/Login';
 import TextArea from '../../molecules/form/TextArea';
 import { FileUploadWithDropzone } from '../../organisms/FileUpload';
+import { FormItem } from '../Login/style';
 
 class SubmitForm extends Component {
   render() {

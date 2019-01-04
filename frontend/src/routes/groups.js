@@ -1,9 +1,8 @@
-
 import mapRouteObject from '../helpers/mapRouteObject';
 import AddGroupForm from '../components/pages/AddGroup';
 import ListGroups from '../components/pages/ListGroups';
 
-export const GroupsRoutesSideNav = { 
+export const GroupsRoutesSideNav = {
   group: {
     icon: 'team',
     title: 'Groups',
@@ -16,7 +15,7 @@ export const GroupsRoutesSideNav = {
       list: {
         title: 'List',
         icon: 'ordered-list',
-        Component: ListGroups, //TODO
+        Component: ListGroups,
       },
     },
   },

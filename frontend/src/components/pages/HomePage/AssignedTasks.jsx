@@ -19,7 +19,7 @@ export class AssignedTasks extends Component {
       return (
         <h2>
           Hello {fullName}. Time to do some paperwork{' '}
-          <img src={emoji} style={{ width: 30 }} />
+          <img src={emoji} style={{ width: 30 }} alt="Emoji finger" />
         </h2>
       );
     }
@@ -27,14 +27,14 @@ export class AssignedTasks extends Component {
       return (
         <h2>
           Hello {fullName}. Time to do some paperwork{' '}
-          <img src={emoji} style={{ width: 30 }} />
+          <img src={emoji} style={{ width: 30 }} alt="Emoji finger" />
         </h2>
       );
     }
     return (
       <h2>
         Hello {fullName}. You can chill now, you have no paperwork to do.{' '}
-        <img src={emoji2} style={{ width: 30 }} />
+        <img src={emoji2} style={{ width: 30 }} alt="Emoji smile" />
       </h2>
     );
   };

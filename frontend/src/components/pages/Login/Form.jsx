@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { Field } from 'redux-form';
 
-import {
-  FormWrapper,
-  StyledLink,
-  Centered,
-  FormItem,
-} from '../../../styles/Login';
+import { FormWrapper, StyledLink, FormItem } from './style';
 import Input from '../../molecules/form/Input';
 import Checkbox from '../../molecules/form/Checkbox';
 import Logo from '../../atoms/Logo';
+import { Centered } from '../../atoms/Centered';
 
 class LoginForm extends Component {
   render() {
