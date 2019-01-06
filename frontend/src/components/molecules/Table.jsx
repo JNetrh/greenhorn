@@ -51,7 +51,10 @@ class Table extends PureComponent {
       const { filters } = this.props;
       const filtersPassed = Object.entries(activeFilters).map(
         ([filterKey, filterValue]) => {
-          const { filter } = filters[filterKey].options[filterValue];
+          const { filter } = filters[filterKey].options[filterValue] || {};
+          if (!filter) {
+            return true;
+          }
           return filter(item, this.props);
         },
       );
