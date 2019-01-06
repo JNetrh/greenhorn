@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from '../../molecules/Table';
+import { Input } from 'antd';
 
 const columns = [
   { title: 'Name', width: 100, dataIndex: 'name' },
@@ -17,12 +18,14 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <Table
-        loading={isLoading}
-        columns={columns}
-        dataSource={users}
-        rowLink={({ id }) => `/user/${id}`}
-      />
+      <div style={{ paddingRight: '30px', paddingLeft: '30px' }}>
+        <Table
+          loading={isLoading}
+          columns={columns}
+          dataSource={users}
+          rowLink={({ id }) => `/user/${id}`}
+        />
+      </div>
     );
   }
 }

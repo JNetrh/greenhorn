@@ -79,7 +79,7 @@ class TasksPage extends Component {
   render() {
     const { tasks, isLoading, currentUser } = this.props;
     return (
-      <div>
+      <div style={{ paddingRight: '60px', paddingLeft: '60px' }}>
         <Container style={{ marginTop: 30 }}>
           <h2>Time to review tasks!</h2>
           <p>

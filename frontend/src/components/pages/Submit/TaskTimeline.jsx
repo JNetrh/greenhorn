@@ -13,8 +13,8 @@ export const TaskTimeline = ({ workflow }) => (
           key={item.id}
           color={getWorkflowColor(item.TaskStatus.name)}
         >
-          {moment(item.createdAt).format('D. MMM YYYY HH:mm')} -{' '}
-          {getItemText(item)}.
+          <strong>{moment(item.createdAt).format('D. MMM YYYY HH:mm')} </strong>
+          - {getItemText(item)}.
           <li>
             {item.note
               ? ' Commented by ' +
@@ -25,7 +25,7 @@ export const TaskTimeline = ({ workflow }) => (
                 item.note
               : ''}
           </li>
-          <li>
+          <li style>
             {item.Documents.length > 0
               ? ' Uploaded File: ' + item.Documents[0].name
               : ''}

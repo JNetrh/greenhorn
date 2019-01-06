@@ -14,13 +14,13 @@ const columns = [
     width: 150,
   },
   {
-    title: 'severity',
+    title: 'Severity',
     dataIndex: 'severity',
     key: 'severity',
     width: 150,
   },
   {
-    title: 'description',
+    title: 'Description',
     dataIndex: 'description',
     key: 'description',
     render: desc => substring(desc, 50, true),
@@ -77,15 +77,17 @@ class TasksPage extends Component {
   render() {
     const { tasks, isLoading, currentUser } = this.props;
     return (
-      <Table
-        loading={isLoading}
-        columns={columns}
-        filters={filters}
-        defaultFilterValues={{ ownership: 'my' }}
-        dataSource={tasks}
-        rowLink={this.getRowLink}
-        currentUser={currentUser}
-      />
+      <div style={{ paddingRight: '30px', paddingLeft: '30px' }}>
+        <Table
+          loading={isLoading}
+          columns={columns}
+          filters={filters}
+          defaultFilterValues={{ ownership: 'my' }}
+          dataSource={tasks}
+          rowLink={this.getRowLink}
+          currentUser={currentUser}
+        />
+      </div>
     );
   }
 }
