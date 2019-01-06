@@ -72,6 +72,19 @@ const filters = distinctStatuses => ({
       }, {}),
     },
   },
+  due: {
+    name: 'Tasks due in:',
+    options: {
+      all: {
+        name: 'All',
+        filter: () => true,
+      },
+      overdue: {
+        name: 'Overdue',
+        filter: ({ until }) => new Date(until) < new Date(),
+      },
+    },
+  },
 });
 
 class TasksPage extends Component {
@@ -115,10 +128,14 @@ class TasksPage extends Component {
           loading={isLoading}
           columns={columnsWithButtons}
           filters={filters(distinctStatuses)}
-          defaultFilterValues={{ ownership: 'all' }}
+          defaultFilterValues={{
+            ownership: distinctStatuses.includes('assigned')
+              ? 'assigned'
+              : 'all',
+            due: 'all',
+          }}
           dataSource={tasks}
           showDefaultActions={false}
-          onRowClick={console.log}
         />
       </div>
     );

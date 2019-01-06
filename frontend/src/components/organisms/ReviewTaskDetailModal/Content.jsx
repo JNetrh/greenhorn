@@ -22,6 +22,7 @@ export const DetailModalContent = ({ taskDetail }) => {
         </Col>
       </Row>
       <Divider />
+      <h4>Workflow:</h4>
       <TaskTimeline workflow={taskDetail.Workflows} />
     </div>
   );

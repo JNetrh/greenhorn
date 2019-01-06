@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { getLongDateWithTime, getFromNow } from '../../helpers/dateFormat';
 import { Icon, Button, Tooltip } from 'antd';
 import { getWorkflowColor, getWorkflowText } from '../../helpers/workflow';
@@ -23,20 +24,23 @@ export const StatusCell = status => {
   );
 };
 
-export const DueOnCell = date => (
-  <span>
-    {getLongDateWithTime(date)}
-    <i
-      style={{
-        margin: '0 5px',
-        fontSize: 12,
-        opacity: 0.5,
-      }}
-    >
-      ({getFromNow(date)})
-    </i>
-  </span>
-);
+export const DueOnCell = date => {
+  const isOverdue = moment().diff(date) > 0;
+  return (
+    <span style={{ color: isOverdue && 'red' }}>
+      {getLongDateWithTime(date)}
+      <span
+        style={{
+          margin: '0 5px',
+          fontSize: 12,
+          opacity: isOverdue ? 1 : 0.5,
+        }}
+      >
+        ({getFromNow(date)})
+      </span>
+    </span>
+  );
+};
 
 export const DocumentsCell = documents => {
   const count = documents.length;
