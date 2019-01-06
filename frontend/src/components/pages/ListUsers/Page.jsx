@@ -17,12 +17,14 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <Table
-        loading={isLoading}
-        columns={columns}
-        dataSource={users}
-        rowLink={({ id }) => `/user/${id}`}
-      />
+      <div style={{ paddingRight: '30px', paddingLeft: '30px' }}>
+        <Table
+          loading={isLoading}
+          columns={columns}
+          dataSource={users}
+          rowLink={({ id }) => `/user/${id}`}
+        />
+      </div>
     );
   }
 }

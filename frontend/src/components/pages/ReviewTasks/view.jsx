@@ -11,6 +11,7 @@ import {
 } from '../../organisms/ReviewTasksTableCells';
 import { getWorkflowText } from '../../../helpers/workflow';
 import { ReviewTasksActions } from '../../organisms/ReviewTasksTableCells';
+import { ReviewTasksContainer } from '../../atoms/ReviewTasksContainer';
 
 const columns = [
   {
@@ -124,19 +125,21 @@ class TasksPage extends Component {
             them to the specific employee.
           </p>
         </Container>
-        <Table
-          loading={isLoading}
-          columns={columnsWithButtons}
-          filters={filters(distinctStatuses)}
-          defaultFilterValues={{
-            ownership: distinctStatuses.includes('assigned')
-              ? 'assigned'
-              : 'all',
-            due: 'all',
-          }}
-          dataSource={tasks}
-          showDefaultActions={false}
-        />
+        <ReviewTasksContainer>
+          <Table
+            loading={isLoading}
+            columns={columnsWithButtons}
+            filters={filters(distinctStatuses)}
+            defaultFilterValues={{
+              ownership: distinctStatuses.includes('assigned')
+                ? 'assigned'
+                : 'all',
+              due: 'all',
+            }}
+            dataSource={tasks}
+            showDefaultActions={false}
+          />
+        </ReviewTasksContainer>
       </div>
     );
   }
