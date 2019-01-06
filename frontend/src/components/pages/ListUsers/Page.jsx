@@ -17,7 +17,7 @@ class Page extends Component {
   render() {
     const { users, isLoading } = this.props;
     return (
-      <div style={{ paddingRight: '30px', paddingLeft: '30px' }}>
+      <div>
         <Table
           loading={isLoading}
           columns={columns}

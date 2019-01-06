@@ -1,4 +1,4 @@
-import { Task } from '../../models/';
+import { Task, AssignedTask } from '../../models/';
 import { canUserEditTask, getTaskWithDetails } from './tasksController';
 
 export const deleteTaskById = async id => {
@@ -25,11 +25,11 @@ const deleteTaskController = async (req, res) => {
         .status(404)
         .json({ msg: `Task with id "${id}" does not exists.` });
     }
+    await AssignedTask.destroy({ where: { TaskId: id } });
     const deletedTask = await deleteTaskById(id);
 
     return res.json(deletedTask);
   } catch (err) {
-    
     return res.status(500).json(err);
   }
 };
