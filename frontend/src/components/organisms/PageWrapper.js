@@ -11,20 +11,20 @@ import NoAuthOverlay from '../molecules/NoAuthOverlay';
 const { Sider, Content } = Layout;
 
 const SidenavTriggerButton = styled(Icon)`
-  transition: left 0.4s, color 0.3s;
+  transition: left 0.4s, background-color 0.3s;
   margin-top: 10px;
   position: absolute;
   z-index: 1001;
   display: block;
-  background-color: #31bd79;
+  background-color: rgba(0, 0, 0, 0.1);
   opacity: 1;
   border-radius: 0 10px 10px 0;
   font-size: 18px;
-  line-height: 64px;
+  line-height: 43px;
   padding: 0 15px;
   cursor: pointer;
   &:hover {
-    color: #eee;
+    background-color: rgba(0, 0, 0, 0.15);
   }
   left: ${({ collapsed }) => (collapsed ? '0' : '200px')};
 `;

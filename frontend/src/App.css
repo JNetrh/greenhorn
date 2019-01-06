@@ -58,3 +58,13 @@ body {
 .ant-card .ant-card-body {
   padding: 0;
 }
+
+/* MOBILE MENU */
+.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-horizontal > .ant-menu-submenu {
+  visibility: visible !important;
+}
+
+.ant-menu-horizontal {
+  white-space: normal !important;
+}
