@@ -3,7 +3,8 @@ import { Form, Radio } from 'antd';
 import React from 'react';
 
 export const TableFiltersStyle = styled.div`
-  padding: 20px 35px;
+  min-height: 80px;
+  padding: 20px 50px;
   display: flex;
 `;
 

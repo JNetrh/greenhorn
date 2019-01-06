@@ -2,8 +2,15 @@ import React, { PureComponent } from 'react';
 import { Table as AntTable, Button } from 'antd';
 import history from '../../history';
 import { TableFilters } from './TableFilters';
+import styled from 'styled-components';
 
 const RowActions = () => <Button icon="edit">Edit</Button>;
+
+const IndentDiv = styled.div`
+  min-height: 80px;
+  padding: 20px 50px;
+  display: flex;
+`;
 
 class Table extends PureComponent {
   constructor(props) {
@@ -74,6 +81,8 @@ class Table extends PureComponent {
             onFilterChange={this.onFilterChange}
           />
         )}
+
+        {!filters && <IndentDiv />}
         <div style={{ background: 'white' }}>
           <AntTable
             {...rest}
