@@ -23,7 +23,6 @@ export const editMyAccountController = async (req, res) => {
       .status(200)
       .json({ msg: `Your changes have been successfully saved.` });
   } catch (err) {
-    console.log(err);
     return res.status(500).json(err);
   }
 };

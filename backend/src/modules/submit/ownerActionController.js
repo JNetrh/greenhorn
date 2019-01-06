@@ -22,17 +22,14 @@ export const ownerActionController = async (req, res) => {
       return res.status(409).json({ msg: 'Task already marked as done.' });
     }
 
-    const workflow = await setWorkflow({
+    await setWorkflow({
       status,
       assignedTask: assignedTaskId,
       note,
       submitUser: req.userId,
     });
 
-    console.log('Workflow updated', workflow.id);
-
     const assignedTask = await getAssignedTask(assignedTaskId);
-    console.log('Getting task', assignedTask.id);
     return res.json(assignedTask);
   } catch (error) {
     return res.status(500).json({ msg: 'Submission unsuccesful' });

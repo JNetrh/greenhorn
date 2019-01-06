@@ -28,7 +28,6 @@ export const groupDetailController = async (req, res) => {
     }
     return res.json(group);
   } catch (err) {
-    console.log(err);
     return res.status(500).json(err);
   }
 };
@@ -40,7 +39,6 @@ export const addGroupController = async (req, res) => {
     const createdGroup = await await Group.create({ name, description });
     res.json(createdGroup);
   } catch (error) {
-    console.log(error);
     return res.status(500).json(error);
   }
 };
@@ -70,7 +68,6 @@ export const groupUpdateController = async (req, res) => {
     const groupUpdated = await Group.findById(id);
     return res.status(200).json(groupUpdated);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ msg: 'Group update internal error' });
   }
 };

@@ -31,7 +31,6 @@ export const submitController = async (req, res) => {
     const updatedAssignedTask = await getAssignedTask(assignedTaskId);
     return res.json(updatedAssignedTask);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ msg: 'Submission unsuccesful' });
   }
 };

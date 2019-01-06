@@ -36,7 +36,7 @@ const addTasksController = async (req, res) => {
     const task = await getTaskWithDetails(createdTask.id);
     return res.json(task);
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json({ msg: 'Internal task create server error' });
   }
 };

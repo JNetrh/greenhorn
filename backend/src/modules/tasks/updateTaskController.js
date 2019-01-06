@@ -47,7 +47,7 @@ export const taskUpdateController = async (req, res) => {
     const updatedTaskWithDetails = await getTaskWithDetails(id);
     return res.status(200).json(updatedTaskWithDetails);
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json({ msg: 'Update task failed' });
   }
 };

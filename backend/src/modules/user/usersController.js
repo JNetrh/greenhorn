@@ -17,7 +17,7 @@ export const userController = async (req, res) => {
     const allUsers = await User.findAll();
     return res.json(allUsers.map(stripPassword));
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json(err);
   }
 };
@@ -31,7 +31,7 @@ export const userDetailController = async (req, res) => {
     }
     return res.json(stripPassword(userById));
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json(err);
   }
 };
@@ -69,7 +69,7 @@ export const userUpdateController = async (req, res) => {
     const userUpdated = await findUserById(UserId);
     return res.status(200).json(stripPassword(userUpdated));
   } catch (err) {
-    console.log(err);
+    
     if (err.status) {
       return res.status(err.status).json({ msg: err.msg });
     }

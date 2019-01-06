@@ -48,7 +48,6 @@ const activateUserController = async (req, res) => {
     });
     return res.json({ user: stripPassword(activatedUser), token: authToken });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ msg: 'Activate User internal Error ' });
   }
 };

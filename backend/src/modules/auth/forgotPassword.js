@@ -18,7 +18,6 @@ const ForgotPasswordController = async (req, res) => {
         'Password change requested. Please follow the instructions sent to your email.',
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ msg: 'Internal server error' });
   }
 };

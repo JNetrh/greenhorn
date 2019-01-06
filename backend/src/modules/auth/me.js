@@ -6,7 +6,6 @@ const meController = async (req, res) => {
     const user = await User.findById(req.userId, { include: [Group] });
     return res.json(stripPassword(user));
   } catch (err) {
-    console.log(err);
     return res.status(500).json(err);
   }
 };

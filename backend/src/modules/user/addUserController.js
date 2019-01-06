@@ -64,13 +64,13 @@ export const addUser = async user => {
         const token = await createInvitation(createdUser.id);
         addUserMail(createdUser, token);
       } catch (err) {
-        console.log(err);
+        
         reject({ error: 'Could not send invitation', status: 500 });
       }
 
       resolve(createdUser);
     } catch (err) {
-      console.log(err);
+      
       reject({ error: 'Could not create user', status: 500 });
     }
   });

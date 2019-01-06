@@ -61,7 +61,7 @@ export const assignedTask = async Tasks => {
       AssignedTaskId: newAssignedTask,
     });
   } catch (err) {
-    console.log(err);
+    
     return 'Internal server error / Cron create assignedTask';
   }
 };

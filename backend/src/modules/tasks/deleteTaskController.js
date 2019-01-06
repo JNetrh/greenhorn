@@ -29,7 +29,7 @@ const deleteTaskController = async (req, res) => {
 
     return res.json(deletedTask);
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json(err);
   }
 };

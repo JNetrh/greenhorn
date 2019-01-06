@@ -41,7 +41,7 @@ export const listTasksController = async (req, res) => {
     });
     return res.json(allTasks);
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json(err);
   }
 };
@@ -55,7 +55,7 @@ export const taskDetailController = async (req, res) => {
     }
     return res.json(taskById);
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json(err);
   }
 };

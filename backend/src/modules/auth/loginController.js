@@ -36,7 +36,6 @@ const LoginController = async (req, res) => {
       token,
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ msg: 'Internal login Error' });
   }
 };
