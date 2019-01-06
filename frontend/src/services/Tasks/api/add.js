@@ -27,6 +27,5 @@ export const AddTask = ({ documents, ...rest }) => async (
       message.error(getErrorMessage(err), 2);
       await loader();
     }
-    console.log(err);
   }
 };

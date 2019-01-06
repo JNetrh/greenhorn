@@ -22,7 +22,6 @@ export const startUpdateTask = ({ documents, id, ...rest }) => async (
     history.push('/task/list');
     message.success('Task updated');
   } catch (error) {
-    console.log(error);
     const msg = getErrorMessage(error);
     message.error(msg || 'Failed updating a task');
   }

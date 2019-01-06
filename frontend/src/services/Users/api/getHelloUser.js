@@ -10,7 +10,6 @@ export const getHelloUser = invitationToken => async (
     const { data } = await api.get(`/auth/byinvitation/${invitationToken}`);
     return data;
   } catch (err) {
-    console.log(err);
     if (err.response) {
       const error = getErrorMessage(err) || 'Token validation failed.';
       message.error(error, 2);

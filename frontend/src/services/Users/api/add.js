@@ -16,6 +16,5 @@ export const AddUser = user => async (dispatch, getState, { api }) => {
       message.error(getErrorMessage(err), 2);
       await loader();
     }
-    console.log(err);
   }
 };

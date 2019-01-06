@@ -14,7 +14,6 @@ export const UserInputs = ({ groups }) => {
     key: id,
     title: name,
   }));
-  console.log('data ', data);
   return (
     <div>
       <Row gutter={20}>

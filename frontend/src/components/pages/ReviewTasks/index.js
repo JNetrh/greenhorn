@@ -1,13 +1,9 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import View from './view';
+import view from './view';
 import { startListReviewTasks } from '../../../services/ReviewTasks/api/list';
 import { rejectOrDoneAssignedTask } from '../../../services/AssignedTasks/api/rejectOrDoneAssignedTask';
-import { ActionsCell } from '../../organisms/ReviewTasksTableCells';
-
-const reviewPage = props => <View {...props} ActionsCell={ActionsCell} />;
 
 const mapStateToProps = ({ reviewTasks }) => {
   const distinctStatuses =
@@ -29,4 +25,4 @@ const redux = connect(
   mapDispatchToProps,
 );
 
-export default compose(redux)(reviewPage);
+export default compose(redux)(view);

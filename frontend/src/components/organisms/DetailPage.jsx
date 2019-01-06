@@ -15,7 +15,6 @@ class DetailPage extends Component {
     const { id } = this.props.match.params;
     const { fetchDetailById } = this.props;
     const itemDetail = await fetchDetailById(id);
-    console.log('testdetail: ', itemDetail);
     this.setState({
       isLoading: false,
       itemDetail,

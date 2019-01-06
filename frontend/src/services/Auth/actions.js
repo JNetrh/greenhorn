@@ -10,9 +10,9 @@ export const setActiveUser = user => ({
   type: SET_ACTIVE_USER,
   user,
 });
-export const updateUser = ({name, surname}) => ({
+export const updateUser = ({ name, surname }) => ({
   type: USER_UPDATE,
-  payload: {name, surname},
+  payload: { name, surname },
 });
 
 export const logIn = payload => async (dispatch, getState, { api }) => {
@@ -35,7 +35,6 @@ export const logIn = payload => async (dispatch, getState, { api }) => {
       message.error(getErrorMessage(err), 2);
       await loader();
     }
-    console.log(err);
   }
 };
 
@@ -68,7 +67,6 @@ export const submitHello = ({
       await loader();
       message.error(getErrorMessage(err), 2);
     }
-    console.log(err);
   }
 };
 
@@ -82,7 +80,6 @@ export const checkLoggedUser = () => async (dispatch, getState, { api }) => {
       dispatch(setActiveUser(data));
     }
   } catch (err) {
-    console.log(err);
     history.push('/login');
   }
 };

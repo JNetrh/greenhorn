@@ -54,9 +54,8 @@ export const DocumentsCell = documents => {
   );
 };
 
-export const ActionsCell = props => (
+export const ReviewTasksActions = props => (
   <div>
-    {console.log('task', props)}
     <TaskDetailModal
       taskDetail={props.task}
       rejectOrDoneAssignedTask={props.rejectOrDoneAssignedTask}

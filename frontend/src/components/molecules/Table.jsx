@@ -23,10 +23,15 @@ class Table extends PureComponent {
   getRowKey = ({ id }) => id;
 
   onRow = record => {
-    const { rowLink } = this.props;
+    const { rowLink, onRowClick } = this.props;
     if (rowLink) {
       return {
         onClick: () => history.push(this.props.rowLink(record)),
+      };
+    }
+    if (onRowClick) {
+      return {
+        onClick: () => onRowClick(record),
       };
     }
   };

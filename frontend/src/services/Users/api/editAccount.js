@@ -21,6 +21,5 @@ export const EditAccount = ({ name, surname }) => async (
       message.error(getErrorMessage(err), 2);
       await loader();
     }
-    console.log(err);
   }
 };

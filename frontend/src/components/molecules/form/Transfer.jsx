@@ -4,7 +4,6 @@ import { Transfer as AntTransfer } from 'antd';
 class Transfer extends Component {
   handleChange = movedKeys => {
     const { input } = this.props;
-    console.log(movedKeys);
     input.onChange(movedKeys);
   };
   render() {

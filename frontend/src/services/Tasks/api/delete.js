@@ -11,7 +11,6 @@ export const startDeleteTask = task => async (dispatch, getState, { api }) => {
     message.success('Task deleted');
     history.push('/task/list');
   } catch (error) {
-    console.log(error);
     const msg = getErrorMessage(error);
     message.error(msg || 'Failed deleting a task');
   }

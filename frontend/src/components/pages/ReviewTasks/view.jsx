@@ -10,6 +10,7 @@ import {
   StatusCell,
 } from '../../organisms/ReviewTasksTableCells';
 import { getWorkflowText } from '../../../helpers/workflow';
+import { ReviewTasksActions } from '../../organisms/ReviewTasksTableCells';
 
 const columns = [
   {
@@ -83,7 +84,6 @@ class TasksPage extends Component {
     const {
       reviewTasks: { tasks, isLoading },
       distinctStatuses,
-      ActionsCell,
       rejectOrDoneAssignedTask,
     } = this.props;
 
@@ -92,7 +92,7 @@ class TasksPage extends Component {
       {
         title: '',
         render: item => (
-          <ActionsCell
+          <ReviewTasksActions
             task={item}
             rejectOrDoneAssignedTask={rejectOrDoneAssignedTask}
           />
@@ -118,6 +118,7 @@ class TasksPage extends Component {
           defaultFilterValues={{ ownership: 'all' }}
           dataSource={tasks}
           showDefaultActions={false}
+          onRowClick={console.log}
         />
       </div>
     );

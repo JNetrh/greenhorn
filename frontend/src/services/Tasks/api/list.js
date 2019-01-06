@@ -5,7 +5,6 @@ export const startListTasks = () => async (dispatch, getState, { api }) => {
   dispatch(listTasks());
   // const loader = message.loading('Loading tasks');
   try {
-    console.log('Getting tasks list');
     const { data } = await api.get('task');
     await dispatch(listTasksSuccess(data));
   } catch (error) {
