@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 import { FormItemWithLabel } from '../../atoms/FormItemWithLabel';
 import Input from '../../molecules/form/Input';
 import Select from '../../molecules/form/Select';
@@ -72,6 +72,10 @@ export const UserInputs = ({ groups }) => {
             titles={['All groups', 'Picked groups']}
             render={item => item.title}
           />
+          <p style={{ marginTop: 10, opacity: 0.5 }}>
+            <Icon type="info-circle" /> By assigning a user into group, he will
+            get assigned all of the tasks belonging to these groups.
+          </p>
         </Col>
       </Row>
     </div>

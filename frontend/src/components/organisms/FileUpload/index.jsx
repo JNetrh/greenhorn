@@ -1,15 +1,13 @@
 import React from 'react';
 import DropZone from 'react-dropzone';
 import { Icon, List, Card } from 'antd';
-import { substring } from '../../../helpers/substring';
 
 const FileItem = ({ name, size }) => {
-  const shortName = substring(name, 20, false),
-    fileSize = Math.round((size / 1024) * 100) / 100;
+  const fileSize = Math.round((size / 1024) * 100) / 100;
   return (
     <div style={{ padding: '1em' }}>
       <Icon type="file" style={{ paddingRight: '2em' }} />
-      {shortName} - {fileSize} KB
+      {name} <span style={{ opacity: 0.5 }}>- {fileSize} KB</span>
     </div>
   );
 };
@@ -54,12 +52,13 @@ export const FileUploadWithDropzone = ({
     </DropZone>
     {files &&
       files.length > 0 && (
-        <List
-          bordered
-          dataSource={getFilesData(files)}
-          style={{ backgroundColor: 'white', style: 'margin: 10px 0' }}
-          renderItem={FileItem}
-        />
+        <div style={{ backgroundColor: 'white', margin: '10px 0' }}>
+          <List
+            bordered
+            dataSource={getFilesData(files)}
+            renderItem={FileItem}
+          />
+        </div>
       )}
     {touched && error && <div style={{ color: 'red' }}>{error}</div>}
   </div>

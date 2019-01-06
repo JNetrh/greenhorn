@@ -66,6 +66,7 @@ export class TaskDetailModal extends React.Component {
               handleOk={this.handleOk}
               handleCancel={this.handleCancel}
               hideModal={this.hideModal}
+              taskDetail={taskDetail}
             />
           }
         >

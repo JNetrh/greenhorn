@@ -2,6 +2,7 @@ import {
   REVIEW_TASKS_LIST,
   REVIEW_TASKS_LIST_SUCC,
   REVIEW_TASKS_LIST_FAIL,
+  REVIEW_TASKS_UPDATE_ITEM,
 } from './actions';
 
 const initialState = {
@@ -36,6 +37,14 @@ export const reviewTasksReducer = (state = initialState, action) => {
         isLoading: false,
         fetched: false,
         error,
+      };
+    }
+    case REVIEW_TASKS_UPDATE_ITEM: {
+      const { item } = action.payload;
+      return {
+        tasks: state.tasks.map(
+          currentItem => (item.id === currentItem.id ? item : currentItem),
+        ),
       };
     }
     default:

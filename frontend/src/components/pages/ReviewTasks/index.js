@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 
 import view from './view';
 import { startListReviewTasks } from '../../../services/ReviewTasks/api/list';
-import { rejectOrDoneAssignedTask } from '../../../services/AssignedTasks/api/rejectOrDoneAssignedTask';
+import { rejectOrDoneAssignedTask } from '../../../services/ReviewTasks/api/rejectOrDoneAssignedTask';
 
 const mapStateToProps = ({ reviewTasks }) => {
   const distinctStatuses =

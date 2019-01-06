@@ -1,5 +1,7 @@
 import { message } from 'antd';
 import getErrorMessage from '../../../helpers/getErrorMessage';
+import { listReviewTasksUpdateItem } from '../actions';
+import { getWorkflowText } from '../../../helpers/workflow';
 export const rejectOrDoneAssignedTask = submission => async (
   dispatch,
   getState,
@@ -7,7 +9,8 @@ export const rejectOrDoneAssignedTask = submission => async (
 ) => {
   try {
     const { data } = await api.post(`submit/${submission.status}`, submission);
-    message.success(`Task marked as '${submission.status}'`);
+    message.success(`Task marked as: ${getWorkflowText(submission.status)}`);
+    dispatch(listReviewTasksUpdateItem(data));
     return data;
   } catch (err) {
     if (err.response) {

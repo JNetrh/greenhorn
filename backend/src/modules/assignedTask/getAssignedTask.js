@@ -7,19 +7,25 @@ import {
   Document,
 } from '../../models';
 
-export const getAssignedTask = id =>
-  AssignedTask.findOne({
+export const getAssignedTask = async id => {
+  const assignedTask = await AssignedTask.findOne({
     where: { id },
     include: [
       {
         model: Workflow,
         include: [
-          { model: TaskStatus, where: { not: { name: 'done' } } },
+          { model: TaskStatus },
           { model: User, as: 'submittedBy' },
           Document,
         ],
       },
       { model: Task, include: [Document] },
+      User,
     ],
-    order: [[Workflow, 'createdAt', 'asc']],
+    order: [[Workflow, 'createdAt', 'desc']],
   });
+  return {
+    ...assignedTask.toJSON(),
+    currentWorkflow: assignedTask.Workflows[0],
+  };
+};

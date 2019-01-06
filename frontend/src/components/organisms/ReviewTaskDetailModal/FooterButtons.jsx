@@ -7,6 +7,7 @@ export const FooterButtons = ({
   handleOk,
   handleCancel,
   hideModal,
+  taskDetail,
 }) => (
   <div>
     <TextArea
@@ -21,14 +22,14 @@ export const FooterButtons = ({
           key="submit"
           type="primary"
           icon={'check'}
-          onClick={e => handleOk(this.props.taskDetail)}
+          onClick={e => handleOk(taskDetail)}
         >
           Accept
         </Button>
         <Button
           key="back"
           icon={'close'}
-          onClick={e => handleCancel(this.props.taskDetail)}
+          onClick={e => handleCancel(taskDetail)}
         >
           Reject
         </Button>
